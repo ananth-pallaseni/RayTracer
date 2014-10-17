@@ -2,8 +2,7 @@ CC = g++
 RM = /bin/rm -f
 
 
-all:
-	$(CC) 
+all: main
 
 main: Raytracer.o
 	$(CC) RayTracer.0 -o as2
