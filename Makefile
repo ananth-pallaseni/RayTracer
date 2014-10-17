@@ -4,11 +4,11 @@ RM = /bin/rm -f
 
 all: main
 
-main: Raytracer.o
+main: RayTracer.o
 	$(CC) RayTracer.o -o as2
 
-RayTracer.o: Raytracer.cpp
-	$(CC) -c Raytracer.cpp -o Raytracer.o
+RayTracer.o: RayTracer.cpp
+	$(CC) -c RayTracer.cpp -o RayTracer.o
 
 clean: 
 	rm -f *.o as2
