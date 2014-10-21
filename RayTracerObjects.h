@@ -76,40 +76,66 @@ struct transform
 {
 	int type; // 0: translation, 1: rotation, 2: scaling
 	int x, y, z;
-	Vector3d matrix;
+	//Vector3d matrix;
 	void createMatrix(int x, int y, int z);
+};
+
+struct transform2d : transform
+{
+	Matrix3d matrix;
+	friend Matrix3d operator+(const transform2d &mat1, Matrix3d mat2) {
+		return mat1.matrix * mat2;
+	}
+
+	friend Matrix3d operator+(Matrix3d mat1, const transform2d &mat2) {
+		return mat1 * mat2.matrix;
+	}
+};
+
+struct transform3d : transform
+{
+	Matrix4d matrix;
+	friend Matrix4d operator+(const transform3d &mat1, Matrix4d mat2) {
+		return mat1.matrix * mat2;
+	}
+
+	friend Matrix4d operator+(Matrix4d mat1, const transform3d &mat2) {
+		return mat1 * mat2.matrix;
+	}
 };
 
 // Transforms have instatiators that call the create matrix function and assign them to the matrix variable.
 // TODO: overload the arithmetic operators on these to enable easy arithmatic with matrices. Eg: allow (matrix * translate) = (matrix * translate.matrix) etc
 
-struct translate : transform
+struct translate2d : transform2d
 {
 
 	void createMatrix() {
-		// TODO: fill in transform matrix
+		matrix << 1, 0, translate2d::x,
+				  0, 1, translate2d::y, 
+				  0, 0, 1;
 	}
 
-	translate(int tx, int ty, int tz) {
-		type = TRANSLATION;
-		x = tx;
-		y = ty;
-		z = tz;
+	translate2d(int tx, int ty, int tz) {
+		translate2d::type = TRANSLATION;
+		translate2d::x = tx;
+		translate2d::y = ty;
+		translate2d::z = tz;
 		createMatrix();
 	}
 };
 
-struct rotation: transform
+struct rotation2d: transform2d
 {
 	void createMatrix() {
 		// TODO: fill in transform matrix
 	}
 
-	rotation(int rx, int ry, int rz) {
-		type = ROTATION;
-		x = rx;
-		y = ry;
-		z = rz;
+	rotation2d(int rx, int ry, int rz) {
+		rotation2d::type = ROTATION;
+		rotation2d::x = rx;
+		rotation2d::y = ry;
+		rotation2d::z = rz;
 		createMatrix();
 	}
 

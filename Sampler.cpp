@@ -6,8 +6,8 @@
 using namespace Eigen;
 
 // Returns a point representing a sample for pixel at currX, currY
-Vector2d Sampler::getSample() {
-	if (currX > numPixX) {
+Vector2f Sampler::getSample() {
+	if (Sampler::currX >= Sampler::numPixX - 1) {
 		Sampler::currX = 0;
 		Sampler::currY++;
 	}
@@ -18,11 +18,11 @@ Vector2d Sampler::getSample() {
 }
 
 // Returns the center of the rectangle in WORLD SPACE that corresponds to the pixel at x, y
-Vector2d Sampler::center(int x, int y) {
+Vector2f Sampler::center(int x, int y) {
 	//Assuming u and v  go from 0 to 1:
-	float u = x / numPixX;
-	float v = y / numPixY;
-	return u*(v*LL + (1 - v)*UL) + (1 - u)*(v*LR + (1 - v)*UR);
+	Vector2f v(float(x*Sampler::unitX), float(y*Sampler::unitY));
+	return Sampler::UL + v + Vector2f(0.5f*Sampler::unitX, 0.5f*Sampler::unitY);
+	//return u*(v*LL + (1 - v)*UL) + (1 - u)*(v*LR + (1 - v)*UR);
 }
 
 
