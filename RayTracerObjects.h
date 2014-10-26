@@ -26,6 +26,23 @@ struct camera {
 	}
 };
 
+struct color
+{
+	unsigned char r, g, b;
+
+	color(int red, int green, int blue) {
+		r = red;
+		g = green;
+		b = blue;
+	}
+
+	color() {
+		r = 0;
+		g = 0;
+		b = 0;
+	}
+};
+
 // Objects : //////////////////////////////////////////////////////////////////////////////
 
 struct object 

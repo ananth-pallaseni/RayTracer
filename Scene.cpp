@@ -6,9 +6,16 @@
 
 #include "Sampler.h"
 #include "Canvas.h"
+#include "RayTracer.h"
 #include "RayTracerObjects.h"
 
 using namespace std;
+
+sphere* spheres;
+triangle* triangles;
+int numSpheres;
+int numTriangles;
+
 
 // Read Arguments and do something with them
 void parseArgs(char* filename) {

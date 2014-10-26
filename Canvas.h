@@ -23,6 +23,7 @@ public:
 	}
 
 	void addPixel(unsigned char r, unsigned char g, unsigned char b);
+	void addPixel(color c);
 	void encode(char* filename);
 
 };
