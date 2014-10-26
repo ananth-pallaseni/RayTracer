@@ -62,12 +62,12 @@ struct triangle : object
 
 struct ray
 {
-	Vector3f eye;
+	Vector3f e;
 	//Vector3f sample;
 	Vector3f sMinusE;
 
-	ray(Vector3f e, Vector3f s) {
-		eye = e;
+	ray(Vector3f eye, Vector3f s) {
+		e = eye;
 		//sample = s;
 		sMinusE = s - e;
 	}
@@ -78,11 +78,12 @@ struct ray
 
 	bool intersect(object o, Vector3f* point) {
 		switch(o.type) {
-			case SPHERE:
+			case SPHERE: 
+			{
 				// Check Discriminant:
 				Vector3f c = ((sphere) o).center;
 				// A = sMinusE . sMinusE
-				float A = (sMinusE.dot(sMinusE);
+				float A = sMinusE.dot(sMinusE);
 				// B = 2 * sMinusE . (e - c)
 				float B = 2 * sMinusE .dot(( e - c ));
 				// C = (e - c) . (e - c) - r^2
@@ -96,8 +97,10 @@ struct ray
 				}
 				return false;
 				break;
+			}
 
 			case TRIANGLE:
+			{
 				triangle t = (triangle) o;
 
 				// Set up matrix A:
@@ -142,6 +145,7 @@ struct ray
 				*point = p(t);
 				return true;
 				break;
+			}
 
 			default:
 				return false;
