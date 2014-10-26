@@ -101,27 +101,27 @@ struct ray
 
 			case TRIANGLE:
 			{
-				triangle t = (triangle) o;
+				triangle tri = (triangle) o;
 
 				// Set up matrix A:
 				Matrix3f A;
-				A(0, 0) = t.a(0) - t.b(0);
-				A(0, 1) = t.a(0) - t.c(0);
+				A(0, 0) = tri.a(0) - tri.b(0);
+				A(0, 1) = tri.a(0) - tri.c(0);
 				A(0, 2) = sMinusE(0);
 
-				A(1, 0) = t.a(1) - t.b(1);
-				A(1, 1) = t.a(1) - t.c(1);
+				A(1, 0) = tri.a(1) - tri.b(1);
+				A(1, 1) = tri.a(1) - tri.c(1);
 				A(1, 2) = sMinusE(1);
 
-				A(2, 0) = t.a(2) - t.b(2);
-				A(2, 1) = t.a(2) - t.c(2);
+				A(2, 0) = tri.a(2) - tri.b(2);
+				A(2, 1) = tri.a(2) - tri.c(2);
 				A(2, 2) = sMinusE(2);
 
-				// Set up matrix B:
-				Vector3f B;
-				B(0) = t.a(0) - e(0);
-				B(1) = t.a(1) - e(1);
-				B(2) = t.a(2) - e(2);
+				// Setri up matririx B:
+				Vectrior3f B;
+				B(0) = tri.a(0) - e(0);
+				B(1) = tri.a(1) - e(1);
+				B(2) = tri.a(2) - e(2);
 
 				// Store these vals to save computation:
 				float eihf = A(1, 1) * A(2, 2) - A(1, 2) * A(2, 1);
@@ -134,7 +134,7 @@ struct ray
 				// By Cramers Rule:
 				float M = A(0, 0) * eihf + A(1, 0) * gfdi + A(2, 0) * dheg;
 				float gamma = (A(2, 2) * akjb + A(1, 2) * jcal + A(0, 2) * blkc) / M;
-				if (gamma < 0 || gama > 1) {
+				if (gamma < 0 || gamma > 1) {
 					return false;
 				}
 				float beta = (B(0) * eihf + B(1) * gfdi + B(2) * dheg) / M;

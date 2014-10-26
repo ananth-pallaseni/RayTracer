@@ -14,14 +14,14 @@
 class RayTracer {
 public:
 	RayTracer() {}
-	RayTracer(Vector3f e)
+	RayTracer(Vector3f e) {}
 
 	ray createRay(Vector3f s) {
 		return ray(e, s);
 	}
 
 	void trace(ray r) {
-		
+
 	}
 };
 
