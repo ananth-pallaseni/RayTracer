@@ -16,13 +16,6 @@ ray RayTracer::createRay(Vector3f s) {
 }
 
 Vector3f RayTracer::closest(Vector3f v1, Vector3f v2) {
-	if(v1 == NULL) {
-		return v2;
-	}
-	if(v2 == NULL) {
-		return v1;
-	}
-
 	float d1 = (v1 - e).norm();
 	float d2 = (v2 - e).norm();
 	if(d1 < d2) {
@@ -42,7 +35,7 @@ color RayTracer::shade(Vector3f p) {
 
 // Simple ray trace function, no shadows or anything fancy
 color RayTracer::trace(ray r) {
-	Vector3f point = NULL; 
+	Vector3f point(std::numeric_limits<float>::max(), std::numeric_limits<float>::max(), std::numeric_limits<float>::max()); // init to max value
 	Vector3f temp;
 	bool hit = false;
 	// Check all Spheres
