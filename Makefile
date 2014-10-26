@@ -9,7 +9,7 @@ main: Scene.o RayTracer.o Sampler.o Canvas.o lodepng.o
 	$(CC) $(CFLAGS) Scene.o Sampler.o RayTracer.o Canvas.o lodepng.o -o as2
 
 Scene.o: Scene.cpp
-	$(CC) $(CFLAGS) -c Scene.cpp Scene.o
+	$(CC) $(CFLAGS) -c Scene.cpp -o Scene.o
 
 RayTracer.o: RayTracer.cpp 
 	$(CC) $(CFLAGS) -c RayTracer.cpp -o RayTracer.o
