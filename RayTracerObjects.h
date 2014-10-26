@@ -35,12 +35,12 @@ struct object
 
 struct sphere : object
 {
-	int radius;
-	Vector3d center;
+	float radius;
+	Vector3f center;
 
-	sphere(int cx, int cy, int cz, int r) {
+	sphere(float cx, float cy, float cz, float r) {
 		radius = r;
-		center = Vector3d(cx, cy, cz);
+		center = Vector3f(cx, cy, cz);
 		type = SPHERE;
 	}
 
@@ -48,12 +48,12 @@ struct sphere : object
 
 struct triangle : object
 {
-	Vector3d a, b, c;
+	Vector3f a, b, c;
 
-	triangle(int ax, int ay, int az, int bx, int by, int bz, int cx, int cy, int cz) {
-		a = Vector3d(ax, ay, az);
-		b = Vector3d(bx, by, bz);
-		c = Vector3d(cx, cy, cz);
+	triangle(float ax, float ay, float az, float bx, float by, float bz, float cx, float cy, float cz) {
+		a = Vector3f(ax, ay, az);
+		b = Vector3f(bx, by, bz);
+		c = Vector3f(cx, cy, cz);
 		type = TRIANGLE;
 	}
 };
@@ -109,14 +109,14 @@ struct ray
 		Vector3f B;
 		B(0) = tri.a(0) - e(0);
 		B(1) = tri.a(1) - e(1);
-		B(2) = tri.a(2) - e(2)
+		B(2) = tri.a(2) - e(2);
 		// Store these vals to save computation:
 		float eihf = A(1, 1) * A(2, 2) - A(1, 2) * A(2, 1);
 		float gfdi = A(0, 2) * A(2, 1) - A(0, 1) * A(2, 2);
 		float dheg = A(0, 1) * A(1, 2) - A(1, 1) * A(0, 2);
 		float akjb = A(0, 0) * B(1) - B(0) * A(1, 0);
 		float jcal = B(0) * A(2, 0) - A(0, 0) * B(2);
-		float blkc = A(1, 0) * B(2) - B(1) * A(2, 0)
+		float blkc = A(1, 0) * B(2) - B(1) * A(2, 0);
 		// By Cramers Rule:
 		float M = A(0, 0) * eihf + A(1, 0) * gfdi + A(2, 0) * dheg;
 		float gamma = (A(2, 2) * akjb + A(1, 2) * jcal + A(0, 2) * blkc) / M;
