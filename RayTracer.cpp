@@ -11,8 +11,3 @@
 
 using namespace std;
 
-class RayTracer {
-public: 
-	RayTracer() {}
-
-}
