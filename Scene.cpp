@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
 	Vector3f e(0, 0, 0);
 	Vector3f s(1, 1, 0);
 	ray r(e, s);
-	sphere sph(3, 3, 3, 1);
+	sphere sph(3, 3, 0, 1);
 	Vector3f result;
 	if(r.intersect(sph, &result)) {
 		cout << result << endl;
@@ -60,6 +60,17 @@ int main(int argc, char* argv[])
 	}
 	else {
 		cout << "NO INTERSECT 2" << endl;
+	}
+
+	Vector3f e(0, 0, 0);
+	Vector3f s(1, 1, 0);
+	ray r(e, s);
+	sphere sph(3, 3, 3, 1);
+	Vector3f result;
+	if(!r.intersect(sph, &result)) {
+	}
+	else {
+		cout << "FOUND INTERSECT WHERE THERE WAS NONE" << endl;
 	}
 
 
