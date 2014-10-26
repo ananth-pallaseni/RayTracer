@@ -35,17 +35,27 @@ void parseArgs(char* filename) {
 
 int main(int argc, char* argv[])
 {
-	//int size = 255;
-	//Sampler s(400, 400, 0, 0, 400, 0, 400, 400, 0, 400);
-	//Canvas c(size, size);
+	int size = 255;
+	Sampler s(400, 400, 0, 0, 400, 0, 400, 400, 0, 400);
+	Canvas c(size, size);
 
 	//char* inFile = "input.txt";
 	//if(argc > 1) {
 	//	inFile = argv[1];
 	//}
 
+	color cl(255, 255, 0);
+	for(int i = 0; i < size; i++) {
+		for(int j = 0; j < size; j++) {
+			c.addPixel(cl);
+		}
+	}
 
-	Vector3f e(0, 0, 0);
+	c.encode("image.png");
+
+
+	// Intersect Tests
+	/*Vector3f e(0, 0, 0);
 	Vector3f s(1, 1, 0);
 	ray r(e, s);
 	sphere sph(3, 3, 0, 1);
@@ -78,7 +88,7 @@ int main(int argc, char* argv[])
 	}
 	else {
 		cout << "FOUND INTERSECT WHERE THERE WAS NONE" << endl;
-	}
+	}*/
 
 
 
