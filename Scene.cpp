@@ -62,12 +62,12 @@ int main(int argc, char* argv[])
 		cout << "NO INTERSECT 2" << endl;
 	}
 
-	Vector3f e(0, 0, 0);
-	Vector3f s(1, 1, 0);
-	ray r(e, s);
-	sphere sph(3, 3, 3, 1);
-	Vector3f result;
-	if(!r.intersect(sph, &result)) {
+	Vector3f e3(0, 0, 0);
+	Vector3f s3(1, 1, 0);
+	ray r3(e3, s3);
+	sphere sph3(3, 3, 3, 1);
+	Vector3f result3;
+	if(!r.intersect(sph3, &result3)) {
 	}
 	else {
 		cout << "FOUND INTERSECT WHERE THERE WAS NONE" << endl;
