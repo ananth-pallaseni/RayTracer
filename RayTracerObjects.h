@@ -81,7 +81,8 @@ struct ray
 			case SPHERE: 
 			{
 				// Check Discriminant:
-				Vector3f c = ((sphere) o).center;
+				//Vector3f c = ((sphere) o).center;
+				Vector3f c = (static_cast<sphere>(o)).center;
 				// A = sMinusE . sMinusE
 				float A = sMinusE.dot(sMinusE);
 				// B = 2 * sMinusE . (e - c)
