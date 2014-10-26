@@ -13,6 +13,8 @@
 
 class RayTracer {
 public:
+	Vector3f e;
+
 	RayTracer() {}
 	RayTracer(Vector3f e) {}
 

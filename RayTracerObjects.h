@@ -98,13 +98,13 @@ struct ray
 		Matrix3f A;
 		A(0, 0) = tri.a(0) - tri.b(0);
 		A(0, 1) = tri.a(0) - tri.c(0);
-		A(0, 2) = sMinusE(0)
+		A(0, 2) = sMinusE(0);
 		A(1, 0) = tri.a(1) - tri.b(1);
 		A(1, 1) = tri.a(1) - tri.c(1);
-		A(1, 2) = sMinusE(1)
+		A(1, 2) = sMinusE(1);
 		A(2, 0) = tri.a(2) - tri.b(2);
 		A(2, 1) = tri.a(2) - tri.c(2);
-		A(2, 2) = sMinusE(2)
+		A(2, 2) = sMinusE(2);
 		// Setri up matririx B:
 		Vector3f B;
 		B(0) = tri.a(0) - e(0);
