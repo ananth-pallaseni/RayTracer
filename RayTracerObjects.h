@@ -26,6 +26,40 @@ struct camera {
 	}
 };
 
+// Objects : //////////////////////////////////////////////////////////////////////////////
+
+struct object 
+{
+	int type;
+};
+
+struct sphere : object
+{
+	int radius;
+	Vector3d center;
+
+	sphere(int cx, int cy, int cz, int r) {
+		radius = r;
+		center = Vector3d(cx, cy, cz);
+		type = SPHERE;
+	}
+
+};
+
+struct triangle : object
+{
+	Vector3d a, b, c;
+
+	triangle(int ax, int ay, int az, int bx, int by, int bz, int cx, int cy, int cz) {
+		a = Vector3d(ax, ay, az);
+		b = Vector3d(bx, by, bz);
+		c = Vector3d(cx, cy, cz);
+		type = TRIANGLE;
+	}
+};
+
+// End Objects /////////////////////////////////////////////////////////////////////////////
+
 struct ray
 {
 	Vector3f eye;
@@ -113,36 +147,6 @@ struct ray
 				return false;
 
 		}
-	}
-};
-
-struct object 
-{
-	int type;
-};
-
-struct sphere : object
-{
-	int radius;
-	Vector3d center;
-
-	sphere(int cx, int cy, int cz, int r) {
-		radius = r;
-		center = Vector3d(cx, cy, cz);
-		type = SPHERE;
-	}
-
-};
-
-struct triangle : object
-{
-	Vector3d a, b, c;
-
-	triangle(int ax, int ay, int az, int bx, int by, int bz, int cx, int cy, int cz) {
-		a = Vector3d(ax, ay, az);
-		b = Vector3d(bx, by, bz);
-		c = Vector3d(cx, cy, cz);
-		type = TRIANGLE;
 	}
 };
 
