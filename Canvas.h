@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include "RayTracerObjects.h"
 #include "lodepng.h"
 
 using namespace std;
