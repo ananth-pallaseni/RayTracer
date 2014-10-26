@@ -38,24 +38,42 @@ int main(int argc, char* argv[])
 	}
 
 
+	Vector3f e(0, 0, 0);
+	Vector3f s(1, 1, 0);
+	ray r(e, s);
+	sphere sph(3, 3, 3, 1);
+	Vector3f result;
+	if(r.intersect(sph, result)) {
+		cout << result << endl;
+	}
+	else {
+		cout << "NO INTERSECT 1" << endl;
+	}
 
-	for(int i = 0; i < size; i++) {
+	Vector3f e2(0, 1, 0);
+	Vector3f s2(1, 1, 0);
+	ray r2(e2, s2);
+	sphere sph2( 3, 0, 0, 1);
+	Vector3f result2;
+	if(r2.intersect(sph2, result2)) {
+		cout << result2 << endl;
+	}
+	else {
+		cout << "NO INTERSECT 2" << endl;
+	}
+
+
+
+
+
+
+	/*for(int i = 0; i < size; i++) {
 		for(int j = 0; j < size; j++) {
 			c.addPixel(255 - i, 0, j);
 		}
 	}
 
-	c.encode("image.png");
-
-
-
-
-
-
-
-
-
-
+	c.encode("image.png");*/
 
 
 	/*cout << " ------ Input Parse Test ------ " << endl;
