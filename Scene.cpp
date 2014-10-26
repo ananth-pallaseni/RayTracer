@@ -28,14 +28,14 @@ void parseArgs(char* filename) {
 
 int main(int argc, char* argv[])
 {
-	int size = 255;
-	Sampler s(400, 400, 0, 0, 400, 0, 400, 400, 0, 400);
-	Canvas c(size, size);
+	//int size = 255;
+	//Sampler s(400, 400, 0, 0, 400, 0, 400, 400, 0, 400);
+	//Canvas c(size, size);
 
-	char* inFile = "input.txt";
-	if(argc > 1) {
-		inFile = argv[1];
-	}
+	//char* inFile = "input.txt";
+	//if(argc > 1) {
+	//	inFile = argv[1];
+	//}
 
 
 	Vector3f e(0, 0, 0);
@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
 	ray r(e, s);
 	sphere sph(3, 3, 3, 1);
 	Vector3f result;
-	if(r.intersect(sph, result)) {
+	if(r.intersect(sph, &result)) {
 		cout << result << endl;
 	}
 	else {
@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
 	ray r2(e2, s2);
 	sphere sph2( 3, 0, 0, 1);
 	Vector3f result2;
-	if(r2.intersect(sph2, result2)) {
+	if(r2.intersect(sph2, &result2)) {
 		cout << result2 << endl;
 	}
 	else {
