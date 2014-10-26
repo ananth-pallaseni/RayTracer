@@ -40,7 +40,6 @@ color RayTracer::trace(ray r) {
 	bool hit = false;
 	// Check all Spheres
 	for(int i = 0; i < numSpheres; i++) {
-		Vector3f 
 		if(r.intersect(spheres[i], &temp)) {
 			hit = true;
 			point = closest(point, temp);
@@ -49,7 +48,6 @@ color RayTracer::trace(ray r) {
 
 	// Check all Triangles
 	for(int i = 0; i < numTriangles; i++) {
-		Vector3f 
 		if(r.intersect(triangles[i], &temp)) {
 			hit = true;
 			point = closest(point, temp);
