@@ -32,10 +32,10 @@ public:
 	}
 
 	// Returns a point representing a sample for pixel at currX, currY
-	Vector2f getSample();
+	Vector3f getSample();
 
 	// Returns the center of the rectangle in WORLD SPACE that corresponds to the pixel at x, y
-	Vector2f center(int x, int y);
+	Vector3f center(int x, int y);
 
 };
 
