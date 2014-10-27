@@ -4,7 +4,7 @@
 #include <fstream>
 #include <string>
 
-
+#include <math.h>
 #include "Sampler.h"
 #include "Canvas.h"
 #include "RayTracerObjects.h"
@@ -71,8 +71,6 @@ Vector3f diffuse(Vector3f n, Vector3f l, Vector3f k_diffuse, Vector3f k_light) {
 	if(cosine < 0) {
 		cosine = 0;
 	}
-	//cout << n << endl;
-	//cout << l << endl << endl;
 	Vector3f v = cosine * k_light;
 	Vector3f v1 = vMul(k_diffuse, v);
 	clamp(v1);
@@ -83,12 +81,16 @@ Vector3f diffuse(Vector3f n, Vector3f l, Vector3f k_diffuse, Vector3f k_light) {
 	return vMul(k_light, k_ambient);
 }*/
 
-/*Vector3f specular(Vector3f n, Vector3f l, Vector3f e, Vector3f k_specular, Vector3f k_light, float p) {
+Vector3f specular(Vector3f n, Vector3f l, Vector3f e, Vector3f k_specular, Vector3f k_light, float p) {
 	Vector3f notL = negate(l);
-	Vector3f r = vAdd(notL, sMul(n, 2 * dot(n, l)));
-	Vector3f v = sMul(k_light, pow(max(dot(r, e), 0), p));
+	Vector3f r = notL + (2 * n.dot(l) * n);
+	float dotRE = r.dot(e)
+	if(dotRE < 0) {
+		dotRE = 0;
+	}
+	Vector3f v = pow(dotRE, p) * k_light;
 	return vMul(k_specular, v);
-}*/
+}
 
 
 
@@ -100,10 +102,16 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 		Vector3f lightDirection = unit(pl.point - pointOnShape);
 
 		rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, pl.l());
+		rgb = rgb + specular(normalAtPoint, lightDirection, e, shape.mat.spec, pl.l(), 16);
 	}
 
 	for(int i = 0; i < numDirectionalLights; i++) {
-		
+		directionalLight dl = directionalLights[i];
+		// l is unit vector pointing TO light
+		Vector3f lightDirection = -unit(dl.direction);
+
+		rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, dl.l());
+		rgb = rgb + specular(normalAtPoint, lightDirection, e, shape.mat.spec, dl.l(), 16);
 	}
 
 	clamp(rgb);
