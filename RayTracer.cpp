@@ -72,7 +72,7 @@ Vector3f diffuse(Vector3f n, Vector3f l, Vector3f k_diffuse, Vector3f k_light) {
 	}
 	Vector3f v = cosine * k_light;
 	Vector3f v1 = vMul(k_diffuse, v);
-	clamp(v1);
+	clamp(&v1);
 	return v1;
 }
 
@@ -117,7 +117,7 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 		rgb = rgb + specular(normalAtPoint, lightDirection, e, shape.mat.spec, dl.l(), 16);
 	}*/
 
-	clamp(rgb);
+	clamp(&rgb);
 	cout << rgb << endl << endl;
 	return color(rgb);
 }
