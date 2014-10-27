@@ -40,11 +40,8 @@ int main(int argc, char* argv[])
 {
 
 	Vector3f vv(1, 1, 1);
-	cout << vv.norm() << endl;
-	cout << vv / vv.norm() << endl << endl;
-
-	Vector3f vv1(2, 2, 2);
-	cout << vv1 / vv1.norm() << endl << endl;
+	Vector3f vv1(1, 1, 1);
+	cout << vv == vv1 << endl << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

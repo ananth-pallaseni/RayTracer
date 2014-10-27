@@ -174,17 +174,31 @@ struct ray
 struct light
 {
 	float r, g, b;
+
+	Vector3f l() {
+		Vector3f v(r, g, b);
+		return v;
+	}
 };
 
 struct pointLight : light 
 {
-	Vector3d point;
+	Vector3f point;
 	int falloff;
+
+	pointLight(Vector3f p, int fall) {
+		point = p;
+		falloff = fall;
+	}
 };
 
 struct directionalLight : light
 {
-	Vector3d direction;
+	Vector3f direction;
+
+	directionalLight(Vector3f d) {
+		direction = d;
+	}
 };
 
 struct ambientLight : light {}; // this exists purely for naming convenience

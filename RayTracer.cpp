@@ -27,31 +27,69 @@ Vector3f RayTracer::closest(Vector3f v1, Vector3f v2) {
 
 }
 
-/*Vector3f diffuse(Vector3f n, Vector3f l, Vector3f k_diffuse, Vector3f k_light) {
-	float cosine = dot(n, l);
-	Vector3f v = sMul(k_light, max(0, cosine));
+Vector3f unit(Vector3f v) {
+	return v / v.norm();
+}
+
+Vector3f vMul(Vector3f v1, Vector3f v2) {
+	Vector3f vv(v1(0) * v2(0), v1(1) * v2(1), v1(2) * v2(2));
+	return vv;
+}
+
+void clamp(Vector3f v) {
+	for(int i = 0; i < 3; i++) {
+		if(v(i) > 1) {
+			v(i) = 1;
+		}
+	}
+}
+
+Vector3f sphereNormal(Vector3f pointOnShape, Vector3f shape) {
+	return unit(pointOnShape - shape.center);
+}
+
+// Generic triangle normal
+Vector3f triangleNormal(Vector3f pointOnShape, Vector3f shape, ray r) {
+	Vector3f side1 = shape.a - shape.b;
+	Vector3f side2 = shape.a - shape.c;
+	Vector3f normal(side1(1) * side2(2) - side1(2) * side2(1), 
+					side1(2) * side2(0) - side1(0) * side2(2),
+					side1(0) * side2(1) - side1(1) * side2(0));
+	Vector3f unitNormal = unit(normal);
+	if(unit(r.sMinusE).dot(unitNormal) < 0) {
+		unitNormal = -unitNormal;
+	}
+	return unitNormal;
+
+}
+
+Vector3f diffuse(Vector3f n, Vector3f l, Vector3f k_diffuse, Vector3f k_light) {
+	float cosine = n.dot(l);
+	Vector3f v = cosine * k_light;
 	Vector3f v1 = vMul(k_diffuse, v);
 	clamp(v1);
 	return v1;
 }
 
-Vector3f ambient(Vector3f k_light, Vector3f k_ambient) {
+/*Vector3f ambient(Vector3f k_light, Vector3f k_ambient) {
 	return vMul(k_light, k_ambient);
-}
+}*/
 
-Vector3f specular(Vector3f n, Vector3f l, Vector3f e, Vector3f k_specular, Vector3f k_light, float p) {
+/*Vector3f specular(Vector3f n, Vector3f l, Vector3f e, Vector3f k_specular, Vector3f k_light, float p) {
 	Vector3f notL = negate(l);
 	Vector3f r = vAdd(notL, sMul(n, 2 * dot(n, l)));
 	Vector3f v = sMul(k_light, pow(max(dot(r, e), 0), p));
 	return vMul(k_specular, v);
 }*/
 
-color RayTracer::shade(Vector3f p) {
-	int r = 0;
-	int g = 0;
-	int b = 0;
-	for(int i = 0; i < numPointLights; i++) {
 
+
+color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint) {
+	Vector3f rgb(0, 0, 0);
+	for(int i = 0; i < numPointLights; i++) {
+		pointLight pl = pointLights[i];
+		Vector3f n = unit()
+		rgb = rgb + diffuse()
 	}
 
 	for(int i = 0; i < numDirectionalLights; i++) {
@@ -65,11 +103,16 @@ color RayTracer::traceRay(ray r) {
 	Vector3f point(std::numeric_limits<float>::max(), std::numeric_limits<float>::max(), std::numeric_limits<float>::max()); // init to max value
 	Vector3f temp;
 	bool hit = false;
+	Vector3f normal;
 	// Check all Spheres
 	for(int i = 0; i < numSpheres; i++) {
 		if(r.intersect(spheres[i], &temp)) {
 			hit = true;
-			point = closest(point, temp);
+			temp = closest(point, temp);
+			if(point == temp) {
+
+			}
+			normal = sphereNormal(point, spheres[i]);
 		}
 	}
 
