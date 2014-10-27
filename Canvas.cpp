@@ -21,7 +21,17 @@ void Canvas::addPixel(unsigned char r, unsigned char g, unsigned char b) {
 }
 
 void Canvas::addPixel(color c) {
-	
+	if(Canvas::currX >= Canvas::width - 1) {
+		Canvas::currX = 0;
+		Canvas::currY++;
+	}
+	else {
+		Canvas::currX++;
+	}
+	Canvas::image[4 * Canvas::width * currY + 4 * currX + 0] = c.r;
+	Canvas::image[4 * Canvas::width * currY + 4 * currX + 1] = c.g;
+	Canvas::image[4 * Canvas::width * currY + 4 * currX + 2] = c.b;
+	Canvas::image[4 * Canvas::width * currY + 4 * currX + 3] = 255;
 }
 
 void Canvas::encode(char* filename) {
