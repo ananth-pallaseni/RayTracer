@@ -47,16 +47,21 @@ int main(int argc, char* argv[])
 	int size = 100;
 	Sampler s(size, size, -size/2, size/2, size/2, size/2, size/2, -size/2, -size/2, -size/2);
 	Canvas c(size, size);
+	// amb = (0.6, 0.6, 0.6), diff = (0, 0.8, 0.1) spec = (0, 0, 0)
 	material mat1(0.6f, 0.6f, 0.6f, 0, 0.8f, 0.1f, 0, 0, 0);
 	Vector3f eye(0, 0, -100);
 	sphere sph1(-21, 21, 0, 10, mat1); // top left, smaller
 	sphere sph2(21, -21, 0, 20, mat1); // bottom right, larger
 	triangle tri1(21, 21, 0, 21, 15, 0, 10, 18, 0, mat1); // top right, longer
 	triangle tri2(-21, -21, 0, -21, -15, 0, -15, -18, 0, mat1); // bottom left, shorter
+	Vector3f plpoint(0, 0, 0);
+	Vector3f plcolor(1, 1, 1);
+	pointLight ppll(plpoint, 1, plcolor);
 	spheres.push_back(sph1);
 	spheres.push_back(sph2);
 	triangles.push_back(tri1);
 	triangles.push_back(tri2);
+	pointLights.push_back(ppll);
 	RayTracer rt(eye, spheres, triangles, pointLights, directionalLights);
 	for(int i = 0; i < size; i++) {
 		for(int j = 0; j < size; j++) {

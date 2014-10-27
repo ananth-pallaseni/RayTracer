@@ -199,11 +199,14 @@ struct light
 struct pointLight : light 
 {
 	Vector3f point;
-	int falloff;
+	float falloff;
 
-	pointLight(Vector3f p, int fall) {
+	pointLight(Vector3f p, float fall, Vector3f rgb) {
 		point = p;
 		falloff = fall;
+		r = rgb(0);
+		g = rgb(1);
+		b = rgb(2);
 	}
 };
 
@@ -211,8 +214,11 @@ struct directionalLight : light
 {
 	Vector3f direction;
 
-	directionalLight(Vector3f d) {
+	directionalLight(Vector3f d, Vector3f rgb) {
 		direction = d;
+		r = rgb(0);
+		g = rgb(1);
+		b = rgb(2);
 	}
 };
 
