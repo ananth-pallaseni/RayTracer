@@ -52,9 +52,15 @@ struct color
 
 struct material
 {
-	float ambR, ambG, ambB;
-	float diffR, diffG, diffB;
-	float specR, specG, specB;
+	Vector3f diff, amb, spec;
+
+	material(float ambR, float ambG, float ambB, float diffR, float diffG, float diffB, 
+		     float specR, float specG, float specB) {
+
+		diff << diffR, diffG, diffB;
+		amb << ambR, ambG, ambB;
+		spec << specR, specG, specB;
+	}
 
 };
 

@@ -84,12 +84,14 @@ Vector3f diffuse(Vector3f n, Vector3f l, Vector3f k_diffuse, Vector3f k_light) {
 
 
 
-color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint) {
+color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object shape) {
 	Vector3f rgb(0, 0, 0);
 	for(int i = 0; i < numPointLights; i++) {
 		pointLight pl = pointLights[i];
-		/*Vector3f n = unit();
-		rgb = rgb + diffuse()*/
+		// l is unit vector pointing TO light
+		Vector3f lightDirection = unit(pl.point - pointOnShape);
+
+		rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, pl.l())
 	}
 
 	for(int i = 0; i < numDirectionalLights; i++) {
@@ -109,10 +111,10 @@ color RayTracer::traceRay(ray r) {
 		if(r.intersect(spheres[i], &temp)) {
 			hit = true;
 			temp = closest(point, temp);
-			if(point == temp) {
-
+			if(point != temp) {
+				normal = sphereNormal(point, spheres[i]);
 			}
-			normal = sphereNormal(point, spheres[i]);
+			point = temp;
 		}
 	}
 
@@ -120,7 +122,11 @@ color RayTracer::traceRay(ray r) {
 	for(int i = 0; i < numTriangles; i++) {
 		if(r.intersect(triangles[i], &temp)) {
 			hit = true;
-			point = closest(point, temp);
+			temp = closest(point, temp);
+			if(point != temp) {
+				normal = triangleNormal(point, triangles[i], r);
+			}
+			point = temp;
 		}
 	}
 

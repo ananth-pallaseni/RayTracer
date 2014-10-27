@@ -39,20 +39,12 @@ void parseArgs(char* filename) {
 int main(int argc, char* argv[])
 {
 
-	Vector3f vv(1, 1, 1);
-	Vector3f vv1(1, 1, 1);
-	bool tt = vv == vv1;
-	string mm = "match";
-	if(!tt) {
-		mm = "no match";
-	}
-	cout << mm << endl << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// spheres and triangles on each corner to test alignment
 
-	/*int size = 100;
+	int size = 100;
 	Sampler s(size, size, -size/2, size/2, size/2, size/2, size/2, -size/2, -size/2, -size/2);
 	Canvas c(size, size);
 	Vector3f eye(0, 0, -100);
@@ -70,7 +62,7 @@ int main(int argc, char* argv[])
 			c.addPixel(rt.trace(s.getSample()));
 		}
 	}
-	c.encode("image.png");*/
+	c.encode("image.png");
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
