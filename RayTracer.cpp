@@ -46,7 +46,7 @@ Vector3f sphereNormal(Vector3f pointOnShape, sphere shape) {
 	return unit(pointOnShape - shape.center);
 }
 
-// Generic triangle normal
+// Flat Shading:
 Vector3f triangleNormal(Vector3f pointOnShape, triangle shape, ray r) {
 	Vector3f side1 = shape.a - shape.b;
 	Vector3f side2 = shape.a - shape.c;
@@ -72,9 +72,9 @@ Vector3f diffuse(Vector3f n, Vector3f l, Vector3f k_diffuse, Vector3f k_light) {
 	return v1;
 }
 
-/*Vector3f ambient(Vector3f k_light, Vector3f k_ambient) {
+Vector3f ambient(Vector3f k_light, Vector3f k_ambient) {
 	return vMul(k_light, k_ambient);
-}*/
+}
 
 Vector3f specular(Vector3f n, Vector3f l, Vector3f e, Vector3f k_specular, Vector3f k_light, float p) {
 	Vector3f notL = -l;
@@ -87,7 +87,6 @@ Vector3f specular(Vector3f n, Vector3f l, Vector3f e, Vector3f k_specular, Vecto
 		cout << dotRE << endl << endl;
 	}
 	Vector3f v = pow(dotRE, p) * k_light;
-	//cout << vMul(k_specular, v) << endl << endl;
 	return vMul(k_specular, v);
 }
 
@@ -97,19 +96,19 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 	Vector3f rgb(0, 0, 0);
 	for(int i = 0; i < numPointLights; i++) {
 		pointLight pl = pointLights[i];
-		// l is unit vector pointing TO light
+		// lightDirection is unit vector pointing TO light
 		Vector3f lightDirection = unit(pl.point - pointOnShape);
 
-		//test:
 		Vector3f ttt(50, 50, 50);
 		rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, pl.l());
 		rgb = rgb + specular(normalAtPoint, lightDirection, e, shape.mat.spec, pl.l(), 16);
+		rgb = rgb + ambient(pl.l(), shape.mat.amb);
 		
 	}
 
 	/*for(int i = 0; i < numDirectionalLights; i++) {
 		directionalLight dl = directionalLights[i];
-		// l is unit vector pointing TO light
+		// lightDirection is unit vector pointing TO light
 		Vector3f lightDirection = -unit(dl.direction);
 
 		rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, dl.l());

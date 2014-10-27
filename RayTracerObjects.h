@@ -3,6 +3,7 @@
 
 
 #include "Eigen/Dense"
+#include <math.h>
 #include <iostream>
 
 using namespace std;
@@ -228,31 +229,31 @@ struct ambientLight : light {}; // this exists purely for naming convenience
 struct transform
 {
 	int type; // 0: translation, 1: rotation, 2: scaling
-	int x, y, z;
+	float x, y, z;
 	//Vector3d matrix;
-	void createMatrix(int x, int y, int z);
+	void createMatrix(float x, float y, float z);
 };
 
 struct transform2d : transform
 {
-	Matrix3d matrix;
-	friend Matrix3d operator+(const transform2d &mat1, Matrix3d mat2) {
+	Matrix3f matrix;
+	friend Matrix3f operator+(const transform2d &mat1, Matrix3f mat2) {
 		return mat1.matrix * mat2;
 	}
 
-	friend Matrix3d operator+(Matrix3d mat1, const transform2d &mat2) {
+	friend Matrix3f operator+(Matrix3f mat1, const transform2d &mat2) {
 		return mat1 * mat2.matrix;
 	}
 };
 
 struct transform3d : transform
 {
-	Matrix4d matrix;
-	friend Matrix4d operator+(const transform3d &mat1, Matrix4d mat2) {
+	Matrix4f matrix;
+	friend Matrix4f operator*(const transform3d &mat1, Matrix4f mat2) {
 		return mat1.matrix * mat2;
 	}
 
-	friend Matrix4d operator+(Matrix4d mat1, const transform3d &mat2) {
+	friend Matrix4f operator*(Matrix4f mat1, const transform3d &mat2) {
 		return mat1 * mat2.matrix;
 	}
 };
@@ -264,12 +265,12 @@ struct translate2d : transform2d
 {
 
 	void createMatrix() {
-		matrix << 1, 0, translate2d::x,
-				  0, 1, translate2d::y, 
+		matrix << 1, 0, x,
+				  0, 1, y, 
 				  0, 0, 1;
 	}
 
-	translate2d(int tx, int ty, int tz) {
+	translate2d(float tx, float ty, float tz) {
 		translate2d::type = TRANSLATION;
 		translate2d::x = tx;
 		translate2d::y = ty;
@@ -278,30 +279,35 @@ struct translate2d : transform2d
 	}
 };
 
-struct rotation2d: transform2d
+struct translate : transform3d
 {
 	void createMatrix() {
-		// TODO: fill in transform matrix
+		matrix << 1, 0, 0, x,
+				  0, 1, 0, y, 
+				  0, 0, 1, z,
+				  0, 0, 0, 1;
 	}
 
-	rotation2d(int rx, int ry, int rz) {
-		rotation2d::type = ROTATION;
-		rotation2d::x = rx;
-		rotation2d::y = ry;
-		rotation2d::z = rz;
+	translate(float tx, ty, tz) {
+		type = TRANSLATION;
+		x = tx;
+		y = ty;
+		z = tz;
 		createMatrix();
 	}
-
-	
 };
 
-struct scaling: transform
+
+struct scale : transform3d
 {
 	void createMatrix() {
-		// TODO: fill in transform matrix
+		matrix << x, 0, 0, 0,
+				  0, y, 0, 0,
+				  0, 0, z, 0, 
+				  0, 0, 0, 1;
 	}
 
-	scaling(int sx, int sy, int sz) {
+	scaling(float sx, float sy, float sz) {
 		type = SCALING;
 		x = sx;
 		y = sy;
@@ -309,6 +315,62 @@ struct scaling: transform
 		createMatrix();
 	}
 };
+
+
+struct rotation: transform3d
+{
+
+	Matrix3f rCross(Vector3f rHat) {
+		Matrix3f m;
+		m << 0, -rHat(2), rHat(1),
+		     rHat(2), 0, -rHat(0),
+		     rHat(1), rHat(0), 0;
+		return m;
+	}
+
+	void createMatrix() {
+		Vector3f r(x, y, z);
+		float theta = r.norm();
+		rHat = r / theta;
+		Matrix3f rc = rCross(rHat);
+		Matrix3f matrix3 = rHat * rHat.transpose() + sin(theta) * rc - cos(theta) * rc * rc ;
+		
+		matrix(0, 0) = matrix3(0, 0);
+		matrix(1, 0) = matrix3(1, 0);
+		matrix(2, 0) = matrix3(2, 0);
+		
+		matrix(0, 1) = matrix3(0, 1);
+		matrix(1, 1) = matrix3(1, 1);
+		matrix(2, 1) = matrix3(2, 1);
+
+		matrix(0, 2) = matrix3(0, 2);
+		matrix(1, 2) = matrix3(1, 2);
+		matrix(2, 2) = matrix3(2, 2);
+
+		matrix(0, 3) = 0;
+		matrix(1, 3) = 0;
+		matrix(2, 3) = 0;
+
+		matrix(3, 0) = 0;
+		matrix(3, 1) = 0;
+		matrix(3, 2) = 0;
+		matrix(3, 3) = 1;
+
+	}
+
+	rotation(float rx, float ry, float rz) {
+		type = ROTATION;
+		x = rx;
+		y = ry;
+		z = rz;
+		createMatrix();
+	}
+
+	
+};
+
+
+
 
 #endif  /* RAY_TRACER_OBJECTS_H */
 
