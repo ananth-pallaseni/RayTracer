@@ -22,7 +22,7 @@ public:
 	int numTriangles;
 
 	RayTracer() {}
-	RayTracer(Vector3f eye, vector<sphere> v sphList, int numSph, vector<triangle> v triList, int numTri) {
+	RayTracer(Vector3f eye, vector<sphere> sphList, int numSph, vector<triangle> triList, int numTri) {
 		spheres = sphList;
 		triangles = triList;
 		e = eye;
