@@ -37,14 +37,15 @@ void parseArgs(char* filename) {
 
 int main(int argc, char* argv[])
 {
-	/*int size = 100;
+	// spheres and triangles on each corner:
+	int size = 100;
 	Sampler s(size, size, -size/2, size/2, size/2, size/2, size/2, -size/2, -size/2, -size/2);
 	Canvas c(size, size);
 	Vector3f eye(0, 0, -100);
-	sphere sph1(-70, 70, 2, 10); // top left
-	sphere sph2(70, -70, 2, 50); // bottom right
-	triangle tri1(70, 70, 2, 70, 50, 2, 50, 60, 2); // top right
-	triangle tri2(-70, -70, 2, -70, -50, 2, -50, -60, 2); // bottom left
+	sphere sph1(-21, 21, 0, 10); // top left
+	sphere sph2(21, -21, 0, 10); // bottom right
+	triangle tri1(21, 21, 0, 21, 15, 0, 15, 18, 0); // top right
+	triangle tri0(-21, -21, 0, -21, -15, 0, -15, -18, 0); // bottom left
 	spheres.push_back(sph1);
 	spheres.push_back(sph2);
 	triangles.push_back(tri1);
@@ -55,9 +56,10 @@ int main(int argc, char* argv[])
 			c.addPixel(rt.trace(s.getSample()));
 		}
 	}
-	c.encode("image.png");*/
+	c.encode("image.png");
 
-	int size = 100;
+	// Single sphere, centre
+	/*int size = 100;
 	Sampler s(size, size, -size/2, size/2, size/2, size/2, size/2, -size/2, -size/2, -size/2);
 	Canvas c(size, size);
 	Vector3f eye(0, 0, -100);
@@ -69,7 +71,8 @@ int main(int argc, char* argv[])
 			c.addPixel(rt.trace(s.getSample()));
 		}
 	}
-	c.encode("image.png");
+	c.encode("image.png");*/
+
 
 
 
