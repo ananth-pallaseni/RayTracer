@@ -45,7 +45,7 @@ struct color
 	}
 
 	friend ostream& operator<<(ostream& os, const color& c) {
-		os << c.r << ", " << c.g << ", " << c.b;
+		os << (int)c.r << ", " << (int)c.g << ", " << (int)c.b;
 		return os;
 	}
 };

@@ -62,7 +62,7 @@ int main(int argc, char* argv[])
 	RayTracer rt(eye, spheres, spheres.size(), triangles, triangles.size());
 	ray rr = rt.createRay(pp);
 	cout << "RAY TEST, should equal 2, 2, 2 :" << endl;
-	cout << rr.p(1) << endl << endl;
+	cout << rr.p(2) << endl << endl;
 	Vector3f vv1(2, 2, 2);
 	Vector3f vv2(1, 1, 0);
 	cout << "CLOSEST TEST, should equal 1, 1, 0 :" << endl;
