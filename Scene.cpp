@@ -37,38 +37,25 @@ void parseArgs(char* filename) {
 
 int main(int argc, char* argv[])
 {
-	int size = 255;
-	Sampler s(400, 400, 0, 0, 400, 0, 400, 400, 0, 400);
+	int size = 100;
+	Sampler s(size, size, -size/2, size/2, size/2, size/2, size/2, -size/2, -size/2, -size/2);
 	Canvas c(size, size);
-
-	//char* inFile = "input.txt";
-	//if(argc > 1) {
-	//	inFile = argv[1];
-	//}
-
-	color cl(255, 255, 0);
+	Vector3f eye(0, 0, -10);
+	sphere sph1(-70, 70, 2, 10); // top left
+	sphere sph2(70, -70, 2, 50); // bottom right
+	triangle tri1(70, 70, 2, 70, 50, 2, 50, 60, 2); // top right
+	triangle tri2(-70, -70, 2, -70, -50, 2, -50, -60, 2); // bottom left
+	spheres.push_back(sph1);
+	spheres.push_back(sph2);
+	triangles.push_back(tri1);
+	triangles.push_back(tri2);
+	RayTracer rt(eye, spheres, spheres.size(), triangles, triangles.size());
 	for(int i = 0; i < size; i++) {
 		for(int j = 0; j < size; j++) {
-			c.addPixel(cl);
+			c.addPixel(rt.trace(s.getSample()));
 		}
 	}
-
 	c.encode("image.png");
-
-	Vector3f eye(0, 0, 0);
-	Vector3f pp(1, 1, 1);
-	sphere sph1(3, 3, 3, 1);
-	spheres.push_back(sph1);
-	RayTracer rt(eye, spheres, spheres.size(), triangles, triangles.size());
-	ray rr = rt.createRay(pp);
-	cout << "RAY TEST, should equal 2, 2, 2 :" << endl;
-	cout << rr.p(2) << endl << endl;
-	Vector3f vv1(2, 2, 2);
-	Vector3f vv2(1, 1, 0);
-	cout << "CLOSEST TEST, should equal 1, 1, 0 :" << endl;
-	cout << rt.closest(vv1, vv2) << endl << endl;
-	cout << "TRACE TEST, should equal 255, 0, 0 (red) :" << endl;
-	cout << rt.trace(pp) << endl << endl;
 
 
 
