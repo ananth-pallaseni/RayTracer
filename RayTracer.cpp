@@ -4,7 +4,7 @@
 #include <fstream>
 #include <string>
 
-#include <math.h>
+
 #include "Sampler.h"
 #include "Canvas.h"
 #include "RayTracerObjects.h"
@@ -67,7 +67,10 @@ Vector3f triangleNormal(Vector3f pointOnShape, triangle shape, ray r) {
 }
 
 Vector3f diffuse(Vector3f n, Vector3f l, Vector3f k_diffuse, Vector3f k_light) {
-	float cosine = max(0, n.dot(l));
+	float cosine = n.dot(l);
+	if(cosine < 0) {
+		cosine = 0;
+	}
 	//cout << n << endl;
 	//cout << l << endl << endl;
 	Vector3f v = cosine * k_light;
