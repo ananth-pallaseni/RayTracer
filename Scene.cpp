@@ -45,7 +45,7 @@ int main(int argc, char* argv[])
 	sphere sph1(-21, 21, 0, 10); // top left
 	sphere sph2(21, -21, 0, 10); // bottom right
 	triangle tri1(21, 21, 0, 21, 15, 0, 15, 18, 0); // top right
-	triangle tri0(-21, -21, 0, -21, -15, 0, -15, -18, 0); // bottom left
+	triangle tri2(-21, -21, 0, -21, -15, 0, -15, -18, 0); // bottom left
 	spheres.push_back(sph1);
 	spheres.push_back(sph2);
 	triangles.push_back(tri1);
