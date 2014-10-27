@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
 	Sampler s(size, size, -size/2, size/2, size/2, size/2, size/2, -size/2, -size/2, -size/2);
 	Canvas c(size, size);
 	Vector3f eye(0, 0, -100);
-	sphere sph1(0, 0, 0, 70);
+	sphere sph1(0, 0, 0, 20);
 	spheres.push_back(sph1);
 	RayTracer rt(eye, spheres, spheres.size(), triangles, triangles.size());
 	for(int i = 0; i < size; i++) {
