@@ -40,7 +40,7 @@ int main(int argc, char* argv[])
 	int size = 100;
 	Sampler s(size, size, -size/2, size/2, size/2, size/2, size/2, -size/2, -size/2, -size/2);
 	Canvas c(size, size);
-	Vector3f eye(0, 0, -10);
+	Vector3f eye(0, 0, -100);
 	sphere sph1(-70, 70, 2, 10); // top left
 	sphere sph2(70, -70, 2, 50); // bottom right
 	triangle tri1(70, 70, 2, 70, 50, 2, 50, 60, 2); // top right
