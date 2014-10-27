@@ -50,11 +50,20 @@ struct color
 	}
 };
 
+struct material
+{
+	float ambR, ambG, ambB;
+	float diffR, diffG, diffB;
+	float specR, specG, specB;
+
+};
+
 // Objects : //////////////////////////////////////////////////////////////////////////////
 
 struct object 
 {
 	int type;
+	material mat;
 };
 
 struct sphere : object
@@ -62,10 +71,11 @@ struct sphere : object
 	float radius;
 	Vector3f center;
 
-	sphere(float cx, float cy, float cz, float r) {
+	sphere(float cx, float cy, float cz, float r, material m) {
 		radius = r;
 		center = Vector3f(cx, cy, cz);
 		type = SPHERE;
+		mat = m;
 	}
 
 };
@@ -74,11 +84,12 @@ struct triangle : object
 {
 	Vector3f a, b, c;
 
-	triangle(float ax, float ay, float az, float bx, float by, float bz, float cx, float cy, float cz) {
+	triangle(float ax, float ay, float az, float bx, float by, float bz, float cx, float cy, float cz, material m) {
 		a = Vector3f(ax, ay, az);
 		b = Vector3f(bx, by, bz);
 		c = Vector3f(cx, cy, cz);
 		type = TRIANGLE;
+		mat = m;
 	}
 };
 
@@ -177,14 +188,6 @@ struct directionalLight : light
 };
 
 struct ambientLight : light {}; // this exists purely for naming convenience
-
-struct material
-{
-	float ambR, ambG, ambB;
-	float diffR, diffG, diffB;
-	float specR, specG, specB;
-
-};
 
 
 struct transform

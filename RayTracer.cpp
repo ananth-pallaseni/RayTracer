@@ -27,9 +27,36 @@ Vector3f RayTracer::closest(Vector3f v1, Vector3f v2) {
 
 }
 
+/*Vector3f diffuse(Vector3f n, Vector3f l, Vector3f k_diffuse, Vector3f k_light) {
+	float cosine = dot(n, l);
+	Vector3f v = sMul(k_light, max(0, cosine));
+	Vector3f v1 = vMul(k_diffuse, v);
+	clamp(v1);
+	return v1;
+}
+
+Vector3f ambient(Vector3f k_light, Vector3f k_ambient) {
+	return vMul(k_light, k_ambient);
+}
+
+Vector3f specular(Vector3f n, Vector3f l, Vector3f e, Vector3f k_specular, Vector3f k_light, float p) {
+	Vector3f notL = negate(l);
+	Vector3f r = vAdd(notL, sMul(n, 2 * dot(n, l)));
+	Vector3f v = sMul(k_light, pow(max(dot(r, e), 0), p));
+	return vMul(k_specular, v);
+}*/
 
 color RayTracer::shade(Vector3f p) {
-	return color(255, 0, 0);
+	int r = 0;
+	int g = 0;
+	int b = 0;
+	for(int i = 0; i < numPointLights; i++) {
+
+	}
+
+	for(int i = 0; i < numDirectionalLights; i++) {
+		
+	}
 }
 
 
