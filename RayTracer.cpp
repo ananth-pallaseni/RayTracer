@@ -101,7 +101,10 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 		Vector3f ttt(50, 50, 50);
 		rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, pl.l());
 		rgb = rgb + specular(normalAtPoint, lightDirection, e, shape.mat.spec, pl.l(), 16);
-		//cout << specular(normalAtPoint, lightDirection, e, shape.mat.spec, pl.l(), 16) << endl << endl;
+		if(specular(normalAtPoint, lightDirection, e, shape.mat.spec, pl.l(), 16) > 1) {
+			cout << specular(normalAtPoint, lightDirection, e, shape.mat.spec, pl.l(), 16) << endl << endl;
+		}
+		
 	}
 
 	/*for(int i = 0; i < numDirectionalLights; i++) {
