@@ -14,7 +14,7 @@ Vector3f Sampler::getSample() {
 	else {
 		Sampler::currX++;
 	}
-	return Sampler::center(currX, currY, 0);
+	return Sampler::center(currX, currY);
 }
 
 // Returns the center of the rectangle in WORLD SPACE that corresponds to the pixel at x, y
