@@ -20,7 +20,7 @@ Vector3f Sampler::getSample() {
 // Returns the center of the rectangle in WORLD SPACE that corresponds to the pixel at x, y
 Vector3f Sampler::center(int x, int y) {
 	//Assuming u and v  go from 0 to 1:
-	Vector2f v(float(x*Sampler::unitX), float(y*Sampler::unitY));
+	Vector3f v(float(x*Sampler::unitX), float(y*Sampler::unitY), 0);
 	return Sampler::UL + v + Vector3f(0.5f*Sampler::unitX, 0.5f*Sampler::unitY, 0);
 	//return u*(v*LL + (1 - v)*UL) + (1 - u)*(v*LR + (1 - v)*UR);
 }
