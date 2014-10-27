@@ -41,7 +41,12 @@ int main(int argc, char* argv[])
 
 	Vector3f vv(1, 1, 1);
 	Vector3f vv1(1, 1, 1);
-	cout << vv == vv1 << endl << endl;
+	bool tt = vv == vv1;
+	string mm = "match";
+	if(!tt) {
+		mm = "no match";
+	}
+	cout << mm << endl << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
