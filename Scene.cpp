@@ -37,7 +37,7 @@ void parseArgs(char* filename) {
 
 int main(int argc, char* argv[])
 {
-	int size = 100;
+	/*int size = 100;
 	Sampler s(size, size, -size/2, size/2, size/2, size/2, size/2, -size/2, -size/2, -size/2);
 	Canvas c(size, size);
 	Vector3f eye(0, 0, -100);
@@ -49,6 +49,20 @@ int main(int argc, char* argv[])
 	spheres.push_back(sph2);
 	triangles.push_back(tri1);
 	triangles.push_back(tri2);
+	RayTracer rt(eye, spheres, spheres.size(), triangles, triangles.size());
+	for(int i = 0; i < size; i++) {
+		for(int j = 0; j < size; j++) {
+			c.addPixel(rt.trace(s.getSample()));
+		}
+	}
+	c.encode("image.png");*/
+
+	int size = 100;
+	Sampler s(size, size, -size/2, size/2, size/2, size/2, size/2, -size/2, -size/2, -size/2);
+	Canvas c(size, size);
+	Vector3f eye(0, 0, -100);
+	sphere sph1(0, 0, 0, 70);
+	spheres.push_back(sph1);
 	RayTracer rt(eye, spheres, spheres.size(), triangles, triangles.size());
 	for(int i = 0; i < size; i++) {
 		for(int j = 0; j < size; j++) {
