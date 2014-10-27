@@ -66,9 +66,10 @@ int main(int argc, char* argv[])
 	Vector3f vv1(2, 2, 2);
 	Vector3f vv2(1, 1, 0);
 	cout << "CLOSEST TEST, should equal 1, 1, 0 :" << endl;
-	cout << rr.closest(vv1, vv2) << endl << endl;
+	cout << rt.closest(vv1, vv2) << endl << endl;
 	cout << "TRACE TEST, should equal 255, 0, 0 (red) :" << endl;
-	cout << rt.trace(rr) << endl << endl;
+	color cc = rt.trace(rr);
+	cout << cc.r << ", " << cc.g << ",  " << cc.b << endl << endl;
 
 
 
