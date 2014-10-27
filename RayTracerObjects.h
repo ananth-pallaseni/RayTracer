@@ -41,6 +41,11 @@ struct color
 		g = 0;
 		b = 0;
 	}
+
+	friend ostream& operator<<(ostream& os, const Color& c) {
+		os << c.r << ", " << c.g << ", " << c.b;
+		return os;
+	}
 };
 
 // Objects : //////////////////////////////////////////////////////////////////////////////

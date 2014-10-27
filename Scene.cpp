@@ -68,8 +68,7 @@ int main(int argc, char* argv[])
 	cout << "CLOSEST TEST, should equal 1, 1, 0 :" << endl;
 	cout << rt.closest(vv1, vv2) << endl << endl;
 	cout << "TRACE TEST, should equal 255, 0, 0 (red) :" << endl;
-	color cc = rt.trace(rr);
-	cout << cc.r << ", " << cc.g << ",  " << cc.b << endl << endl;
+	cout << rt.trace(rr) << endl << endl;
 
 
 
