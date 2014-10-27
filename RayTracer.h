@@ -11,16 +11,18 @@
 #include "Canvas.h"
 #include "RayTracerObjects.h"
 
+using namespace std;
+
 class RayTracer {
 public:
 	Vector3f e;
-	sphere* spheres;
-	triangle* triangles;
+	vector<sphere> spheres;
+	vector<triangle> triangles;
 	int numSpheres;
 	int numTriangles;
 
 	RayTracer() {}
-	RayTracer(Vector3f eye, sphere* sphList, int numSph, triangle* triList, int numTri) {
+	RayTracer(Vector3f eye, vector<sphere> v sphList, int numSph, vector<triangle> v triList, int numTri) {
 		spheres = sphList;
 		triangles = triList;
 		e = eye;

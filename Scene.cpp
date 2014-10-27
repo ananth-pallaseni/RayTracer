@@ -11,8 +11,8 @@
 
 using namespace std;
 
-sphere* spheres;
-triangle* triangles;
+vector<sphere> spheres;
+vector<triangle> triangles;
 int numSpheres;
 int numTriangles;
 
@@ -24,6 +24,8 @@ void parseArgs(char* filename) {
 	if(f.is_open()) {
 		while(getline(f, line)) {
 			cout << line << endl;
+			// if sphere: spheres.push_back(sphere(x, y, z))
+			// if triangle: triangles.push_back(triangle(x, y, z))
 		}
 		f.close();
 	}
@@ -52,6 +54,22 @@ int main(int argc, char* argv[])
 	}
 
 	c.encode("image.png");
+
+	Vector3f eye(0, 0, 0);
+	Vector3f pp(1, 1, 1);
+	sphere sph1(3, 3, 3, 1);
+	spheres.push_back(sph1);
+	RayTracer rt(eye, spheres, spheres.size(), triangles, triangles.size());
+	ray rr = rt.createRay(pp);
+	cout << "RAY TEST, should equal 2, 2, 2 :" << endl:
+	cout << rr.p(1) << endl << endl;
+	Vector3f vv1(2, 2, 2);
+	Vector3f vv2(1, 1, 0);
+	cout << "CLOSEST TEST, should equal 1, 1, 0 :" << endl:
+	cout << rr.closest(vv1, vv2) << endl << endl;
+	cout << "TRACE TEST, should equal 255, 0, 0 (red) :" << endl:
+	cout << rt.trace(rr) << endl << endl;
+
 
 
 	// Intersect Tests
