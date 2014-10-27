@@ -39,12 +39,42 @@ void parseArgs(char* filename) {
 int main(int argc, char* argv[])
 {
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	// Single sphere for shading:
+
+
+	int size = 100;
+	Vector3f eye(0, 0, 100);
+	Sampler s(size, size, -50, 50, 0,  50, 50, 0 ,  50, -50, 0, -50, -50, 0);
+	Canvas c(size, size);
+	// amb = (0.6, 0.6, 0.6), diff = (0, 0.8, 0.1) spec = (0, 0, 0)
+	material mat1(0.1f, 0.1f, 0, 
+				  1, 1, 0, 
+				  0.8, 0.8, 0.8);
+
+	Vector3f pldir(200, 200, 200)
+	Vector3f plrgb(0.6, 0.6, 0.6);
+	pointLight ppll(pldir, 1,  plrgb);
+	pointLights.push_back(ppll);
+	sphere sph1(0, 0, -50, 45, mat1);
+	spheres.push_back(sph1);
+	RayTracer rt(eye, spheres, triangles, pointLights, directionalLights);
+	for(int i = 0; i < size; i++) {
+		for(int j = 0; j < size; j++) {
+			c.addPixel(rt.trace(s.getSample()));
+		}
+	}
+	c.encode("image.png");
+
+
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// spheres and triangles on each corner to test alignment
 
-	int size = 100;
+	/*int size = 100;
 	Sampler s(size, size, -size/2, size/2, size/2, size/2, size/2, -size/2, -size/2, -size/2);
 	Canvas c(size, size);
 	// amb = (0.6, 0.6, 0.6), diff = (0, 0.8, 0.1) spec = (0, 0, 0)
@@ -68,7 +98,7 @@ int main(int argc, char* argv[])
 			c.addPixel(rt.trace(s.getSample()));
 		}
 	}
-	c.encode("image.png");
+	c.encode("image.png");*/
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
