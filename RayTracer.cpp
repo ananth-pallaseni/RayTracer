@@ -38,7 +38,7 @@ Vector3f vMul(Vector3f v1, Vector3f v2) {
 }
 
 Vector3f clamp(Vector3f v) {
-	Vector3f vv(v(0) < 0 ? 0 : v(0), v(1) < 0 ? 0 : v(1), v(2) < 0 ? 0 : v(2));
+	Vector3f vv(v(0) > 1 ? 1 : v(0), v(1) > 1 ? 1 : v(1), v(2) > 1 ? 1 : v(2));
 	return vv;
 }
 
