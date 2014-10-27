@@ -97,6 +97,8 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 	for(int i = 0; i < numDirectionalLights; i++) {
 		
 	}
+
+	return color(0, 255, 0);
 }
 
 
@@ -105,16 +107,24 @@ color RayTracer::traceRay(ray r) {
 	Vector3f point(std::numeric_limits<float>::max(), std::numeric_limits<float>::max(), std::numeric_limits<float>::max()); // init to max value
 	Vector3f temp;
 	bool hit = false;
+	////// new
 	Vector3f normal;
+	object shape;
+	////// endnew
+
 	// Check all Spheres
 	for(int i = 0; i < numSpheres; i++) {
 		if(r.intersect(spheres[i], &temp)) {
 			hit = true;
+			//point = closest(point, temp); OLD
+			///////////////////////new
 			temp = closest(point, temp);
 			if(point != temp) {
 				normal = sphereNormal(point, spheres[i]);
+				shape = spheres[i];
 			}
 			point = temp;
+			//////////////////////endnew
 		}
 	}
 
@@ -122,16 +132,20 @@ color RayTracer::traceRay(ray r) {
 	for(int i = 0; i < numTriangles; i++) {
 		if(r.intersect(triangles[i], &temp)) {
 			hit = true;
+			//point = closest(point, temp); OLD
+			///////////////////////new
 			temp = closest(point, temp);
 			if(point != temp) {
 				normal = triangleNormal(point, triangles[i], r);
+				shape = triangles[i];
 			}
 			point = temp;
+			//////////////////////endnew
 		}
 	}
 
 	if(hit) {
-		return shade(point, normal);
+		return shade(point, normal, shape);
 	}
 	else {
 		return color();

@@ -54,6 +54,8 @@ struct material
 {
 	Vector3f diff, amb, spec;
 
+	material() {};
+
 	material(float ambR, float ambG, float ambB, float diffR, float diffG, float diffB, 
 		     float specR, float specG, float specB) {
 

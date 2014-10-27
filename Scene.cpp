@@ -47,11 +47,12 @@ int main(int argc, char* argv[])
 	int size = 100;
 	Sampler s(size, size, -size/2, size/2, size/2, size/2, size/2, -size/2, -size/2, -size/2);
 	Canvas c(size, size);
+	material mat1(0.6f, 0.6f, 0.6f, 0, 0.8f, 0.1f, 0, 0, 0);
 	Vector3f eye(0, 0, -100);
-	sphere sph1(-21, 21, 0, 10); // top left, smaller
-	sphere sph2(21, -21, 0, 20); // bottom right, larger
-	triangle tri1(21, 21, 0, 21, 15, 0, 10, 18, 0); // top right, longer
-	triangle tri2(-21, -21, 0, -21, -15, 0, -15, -18, 0); // bottom left, shorter
+	sphere sph1(-21, 21, 0, 10, mat1); // top left, smaller
+	sphere sph2(21, -21, 0, 20, mat1); // bottom right, larger
+	triangle tri1(21, 21, 0, 21, 15, 0, 10, 18, 0, mat1); // top right, longer
+	triangle tri2(-21, -21, 0, -21, -15, 0, -15, -18, 0, mat1); // bottom left, shorter
 	spheres.push_back(sph1);
 	spheres.push_back(sph2);
 	triangles.push_back(tri1);
