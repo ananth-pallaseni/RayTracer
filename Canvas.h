@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include "RayTracerObjects.h"
 #include "lodepng.h"
 
 using namespace std;
@@ -23,6 +24,7 @@ public:
 	}
 
 	void addPixel(unsigned char r, unsigned char g, unsigned char b);
+	void addPixel(color c);
 	void encode(char* filename);
 
 };

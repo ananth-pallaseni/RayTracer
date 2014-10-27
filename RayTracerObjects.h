@@ -3,7 +3,9 @@
 
 
 #include "Eigen/Dense"
+#include <iostream>
 
+using namespace std;
 using namespace Eigen;
 
 const int TRANSLATION = 0;
@@ -26,14 +28,96 @@ struct camera {
 	}
 };
 
+struct color
+{
+	unsigned char r, g, b;
+
+	color(int red, int green, int blue) {
+		r = red;
+		g = green;
+		b = blue;
+	}
+
+	color() {
+		r = 0;
+		g = 0;
+		b = 0;
+	}
+
+	color(Vector3f rgb) {
+		r = rgb(0) * 255;
+		g = rgb(1) * 255;
+		b = rgb(2) * 255;
+	}
+
+
+	friend ostream& operator<<(ostream& os, const color& c) {
+		os << (int)c.r << ", " << (int)c.g << ", " << (int)c.b;
+		return os;
+	}
+};
+
+struct material
+{
+	Vector3f diff, amb, spec;
+
+	material() {};
+
+	material(float ambR, float ambG, float ambB, float diffR, float diffG, float diffB, 
+		     float specR, float specG, float specB) {
+
+		diff << diffR, diffG, diffB;
+		amb << ambR, ambG, ambB;
+		spec << specR, specG, specB;
+	}
+
+};
+
+// Objects : //////////////////////////////////////////////////////////////////////////////
+
+struct object 
+{
+	int type;
+	material mat;
+};
+
+struct sphere : object
+{
+	float radius;
+	Vector3f center;
+
+	sphere(float cx, float cy, float cz, float r, material m) {
+		radius = r;
+		center = Vector3f(cx, cy, cz);
+		type = SPHERE;
+		mat = m;
+	}
+
+};
+
+struct triangle : object
+{
+	Vector3f a, b, c;
+
+	triangle(float ax, float ay, float az, float bx, float by, float bz, float cx, float cy, float cz, material m) {
+		a = Vector3f(ax, ay, az);
+		b = Vector3f(bx, by, bz);
+		c = Vector3f(cx, cy, cz);
+		type = TRIANGLE;
+		mat = m;
+	}
+};
+
+// End Objects /////////////////////////////////////////////////////////////////////////////
+
 struct ray
 {
-	Vector3f eye;
+	Vector3f e;
 	//Vector3f sample;
 	Vector3f sMinusE;
 
-	ray(Vector3f e, Vector3f s) {
-		eye = e;
+	ray(Vector3f eye, Vector3f s) {
+		e = eye;
 		//sample = s;
 		sMinusE = s - e;
 	}
@@ -42,135 +126,103 @@ struct ray
 		return e + t * (sMinusE);
 	}
 
-	bool intersect(object o, Vector3f* point) {
-		switch(o.type) {
-			case SPHERE:
-				// Check Discriminant:
-				Vector3f c = ((sphere) o).center;
-				// A = sMinusE . sMinusE
-				float A = (sMinusE.dot(sMinusE);
-				// B = 2 * sMinusE . (e - c)
-				float B = 2 * sMinusE .dot(( e - c ));
-				// C = (e - c) . (e - c) - r^2
-				float C = ( e - c ).dot( ( e - c ) ) - ( ((sphere) o).radius * ((sphere) o).radius );
-				float discriminant = B*B - 4*A*C;
-				if (discriminant >= 0) {
-					// Only use negative value of discriminant, as this will be closer to the plane
-					float t = (-B - sqrt(discriminant)) / (2 * A);
-					*point = p(t);
-					return true;
-				}
-				return false;
-				break;
-
-			case TRIANGLE:
-				triangle t = (triangle) o;
-
-				// Set up matrix A:
-				Matrix3f A;
-				A(0, 0) = t.a(0) - t.b(0);
-				A(0, 1) = t.a(0) - t.c(0);
-				A(0, 2) = sMinusE(0);
-
-				A(1, 0) = t.a(1) - t.b(1);
-				A(1, 1) = t.a(1) - t.c(1);
-				A(1, 2) = sMinusE(1);
-
-				A(2, 0) = t.a(2) - t.b(2);
-				A(2, 1) = t.a(2) - t.c(2);
-				A(2, 2) = sMinusE(2);
-
-				// Set up matrix B:
-				Vector3f B;
-				B(0) = t.a(0) - e(0);
-				B(1) = t.a(1) - e(1);
-				B(2) = t.a(2) - e(2);
-
-				// Store these vals to save computation:
-				float eihf = A(1, 1) * A(2, 2) - A(1, 2) * A(2, 1);
-				float gfdi = A(0, 2) * A(2, 1) - A(0, 1) * A(2, 2);
-				float dheg = A(0, 1) * A(1, 2) - A(1, 1) * A(0, 2);
-				float akjb = A(0, 0) * B(1) - B(0) * A(1, 0);
-				float jcal = B(0) * A(2, 0) - A(0, 0) * B(2);
-				float blkc = A(1, 0) * B(2) - B(1) * A(2, 0);
-
-				// By Cramers Rule:
-				float M = A(0, 0) * eihf + A(1, 0) * gfdi + A(2, 0) * dheg;
-				float gamma = (A(2, 2) * akjb + A(1, 2) * jcal + A(0, 2) * blkc) / M;
-				if (gamma < 0 || gama > 1) {
-					return false;
-				}
-				float beta = (B(0) * eihf + B(1) * gfdi + B(2) * dheg) / M;
-				if (beta < 0 || beta > 1 - gamma) {
-					return false;
-				}
-				float t = (A(2, 1) * akjb + A(1, 1) * jcal + A(0, 1) * blkc) / M;
-				*point = p(t);
-				return true;
-				break;
-
-			default:
-				return false;
-
+	bool intersect(sphere sph, Vector3f* point) {
+		// Check Discriminant:
+		// A = sMinusE . sMinusE
+		float A = sMinusE.dot(sMinusE);
+		// B = 2 * sMinusE . (e - c)
+		float B = 2 * sMinusE .dot(( e - sph.center ));
+		// C = (e - c) . (e - c) - r^2
+		float C = ( e - sph.center ).dot( ( e - sph.center ) ) - ( sph.radius * sph.radius );
+		float discriminant = B*B - 4*A*C;
+		if (discriminant >= 0) {
+			// Only use negative value of discriminant, as this will be closer to the plane
+			float t = (-B - sqrt(discriminant)) / (2 * A);
+			*point = p(t);
+			return true;
 		}
-	}
-};
-
-struct object 
-{
-	int type;
-};
-
-struct sphere : object
-{
-	int radius;
-	Vector3d center;
-
-	sphere(int cx, int cy, int cz, int r) {
-		radius = r;
-		center = Vector3d(cx, cy, cz);
-		type = SPHERE;
+		return false;
 	}
 
-};
-
-struct triangle : object
-{
-	Vector3d a, b, c;
-
-	triangle(int ax, int ay, int az, int bx, int by, int bz, int cx, int cy, int cz) {
-		a = Vector3d(ax, ay, az);
-		b = Vector3d(bx, by, bz);
-		c = Vector3d(cx, cy, cz);
-		type = TRIANGLE;
+	bool intersect(triangle tri, Vector3f* point) {
+		Matrix3f A;
+		A(0, 0) = tri.a(0) - tri.b(0);
+		A(0, 1) = tri.a(0) - tri.c(0);
+		A(0, 2) = sMinusE(0);
+		A(1, 0) = tri.a(1) - tri.b(1);
+		A(1, 1) = tri.a(1) - tri.c(1);
+		A(1, 2) = sMinusE(1);
+		A(2, 0) = tri.a(2) - tri.b(2);
+		A(2, 1) = tri.a(2) - tri.c(2);
+		A(2, 2) = sMinusE(2);
+		// Setri up matririx B:
+		Vector3f B;
+		B(0) = tri.a(0) - e(0);
+		B(1) = tri.a(1) - e(1);
+		B(2) = tri.a(2) - e(2);
+		// Store these vals to save computation:
+		float eihf = A(1, 1) * A(2, 2) - A(1, 2) * A(2, 1);
+		float gfdi = A(0, 2) * A(2, 1) - A(0, 1) * A(2, 2);
+		float dheg = A(0, 1) * A(1, 2) - A(1, 1) * A(0, 2);
+		float akjb = A(0, 0) * B(1) - B(0) * A(1, 0);
+		float jcal = B(0) * A(2, 0) - A(0, 0) * B(2);
+		float blkc = A(1, 0) * B(2) - B(1) * A(2, 0);
+		// By Cramers Rule:
+		float M = A(0, 0) * eihf + A(1, 0) * gfdi + A(2, 0) * dheg;
+		float gamma = (A(2, 2) * akjb + A(1, 2) * jcal + A(0, 2) * blkc) / M;
+		if (gamma < 0 || gamma > 1) {
+			return false;
+		}
+		float beta = (B(0) * eihf + B(1) * gfdi + B(2) * dheg) / M;
+		if (beta < 0 || beta > 1 - gamma) {
+			return false;
+		}
+		float t = (A(2, 1) * akjb + A(1, 1) * jcal + A(0, 1) * blkc) / M;
+		*point = p(t);
+		return true;
 	}
+
+	
+	
 };
 
 struct light
 {
 	float r, g, b;
+
+	Vector3f l() {
+		Vector3f v(r, g, b);
+		return v;
+	}
 };
 
 struct pointLight : light 
 {
-	Vector3d point;
-	int falloff;
+	Vector3f point;
+	float falloff;
+
+	pointLight(Vector3f p, float fall, Vector3f rgb) {
+		point = p;
+		falloff = fall;
+		r = rgb(0);
+		g = rgb(1);
+		b = rgb(2);
+	}
 };
 
 struct directionalLight : light
 {
-	Vector3d direction;
+	Vector3f direction;
+
+	directionalLight(Vector3f d, Vector3f rgb) {
+		direction = d;
+		r = rgb(0);
+		g = rgb(1);
+		b = rgb(2);
+	}
 };
 
 struct ambientLight : light {}; // this exists purely for naming convenience
-
-struct material
-{
-	float ambR, ambG, ambB;
-	float diffR, diffG, diffB;
-	float specR, specG, specB;
-
-};
 
 
 struct transform
