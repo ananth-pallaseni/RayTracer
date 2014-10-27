@@ -98,7 +98,8 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 		
 	}
 
-	return color(0, 255, 0);
+	clamp(rgb);
+	return color(rgb);
 }
 
 

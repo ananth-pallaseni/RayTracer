@@ -44,6 +44,13 @@ struct color
 		b = 0;
 	}
 
+	color(Vector3f rgb) {
+		r = rgb(0) * 255;
+		g = rgb(1) * 255;
+		b = rgb(2) * 255;
+	}
+
+
 	friend ostream& operator<<(ostream& os, const color& c) {
 		os << (int)c.r << ", " << (int)c.g << ", " << (int)c.b;
 		return os;
