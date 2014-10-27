@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
 	Vector3f eye(0, 0, 100);
 	Sampler s(size, size, -50, 50,  50, 50,   50, -50, -50, -50);
 	Canvas c(size, size);
-	// amb = (0.6, 0.6, 0.6), diff = (0, 0.8, 0.1) spec = (0, 0, 0)
+	// amb, diffuse, spec
 	material mat1(0.1f, 0.1f, 0, 
 				  1, 1, 0, 
 				  0.8, 0.8, 0.8);
