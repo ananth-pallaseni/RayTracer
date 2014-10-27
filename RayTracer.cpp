@@ -3,8 +3,8 @@
 #include "Eigen/Dense"
 #include <fstream>
 #include <string>
-#include <cmath>
 
+#include <math.h>
 #include "Sampler.h"
 #include "Canvas.h"
 #include "RayTracerObjects.h"
