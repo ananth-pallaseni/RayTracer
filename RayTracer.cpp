@@ -62,7 +62,7 @@ color RayTracer::traceRay(ray r) {
 	}
 }
 
-color trace(Vector3f s) {
+color RayTracer::trace(Vector3f s) {
 	ray r = createRay(s);
 	return traceRay(r);
 }

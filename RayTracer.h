@@ -38,7 +38,7 @@ public:
 
 
 	// Simple ray trace function, no shadows or anything fancy
-	color trace_ray(ray r);
+	color traceRay(ray r);
 
 	// Combined trace function
 	color trace(Vector3f s);
