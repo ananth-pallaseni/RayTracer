@@ -37,13 +37,9 @@ Vector3f vMul(Vector3f v1, Vector3f v2) {
 	return vv;
 }
 
-void clamp(Vector3f* vec) {
-	Vector3f v = *vec;
-	for(int i = 0; i < 3; i++) {
-		if(v(i) > 1) {
-			v(i) = 1;
-		}
-	}
+Vector3f clamp(Vector3f v) {
+	Vector3f vv(v(0) < 0 ? 0 : v(0), v(1) < 0 ? 0 : v(1), v(2) < 0 ? 0 : v(2));
+	return vv;
 }
 
 Vector3f sphereNormal(Vector3f pointOnShape, sphere shape) {
@@ -72,7 +68,7 @@ Vector3f diffuse(Vector3f n, Vector3f l, Vector3f k_diffuse, Vector3f k_light) {
 	}
 	Vector3f v = cosine * k_light;
 	Vector3f v1 = vMul(k_diffuse, v);
-	clamp(&v1);
+	v1 = clamp(v1);
 	return v1;
 }
 
@@ -117,7 +113,7 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 		rgb = rgb + specular(normalAtPoint, lightDirection, e, shape.mat.spec, dl.l(), 16);
 	}*/
 
-	clamp(&rgb);
+	rgb = clamp(rgb);
 	cout << rgb << endl << endl;
 	return color(rgb);
 }
