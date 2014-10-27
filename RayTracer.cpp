@@ -68,6 +68,7 @@ Vector3f diffuse(Vector3f n, Vector3f l, Vector3f k_diffuse, Vector3f k_light) {
 	Vector3f v = cosine * k_light;
 	Vector3f v1 = vMul(k_diffuse, v);
 	clamp(v1);
+	cout << v1 << endl << endl;;
 	return v1;
 }
 
