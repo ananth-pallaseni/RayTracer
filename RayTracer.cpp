@@ -100,19 +100,21 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 		// l is unit vector pointing TO light
 		Vector3f lightDirection = unit(pl.point - pointOnShape);
 
+		//test:
+		Vector3f ttt(0, 0, 0);
 		rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, pl.l());
-		//rgb = rgb + specular(normalAtPoint, lightDirection, e, shape.mat.spec, pl.l(), 16);
-		cout << specular(normalAtPoint, lightDirection, e, shape.mat.spec, pl.l(), 16) << endl << endl;
+		rgb = rgb + ttt;
+		//cout << specular(normalAtPoint, lightDirection, e, shape.mat.spec, pl.l(), 16) << endl << endl;
 	}
 
-	for(int i = 0; i < numDirectionalLights; i++) {
+	/*for(int i = 0; i < numDirectionalLights; i++) {
 		directionalLight dl = directionalLights[i];
 		// l is unit vector pointing TO light
 		Vector3f lightDirection = -unit(dl.direction);
 
 		rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, dl.l());
 		rgb = rgb + specular(normalAtPoint, lightDirection, e, shape.mat.spec, dl.l(), 16);
-	}
+	}*/
 
 	clamp(rgb);
 	return color(rgb);
