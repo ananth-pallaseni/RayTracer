@@ -46,8 +46,6 @@ void clamp(Vector3f v) {
 }
 
 Vector3f sphereNormal(Vector3f pointOnShape, sphere shape) {
-	cout << pointOnShape << endl;
-	cout << shape.center << endl << endl;
 	return unit(pointOnShape - shape.center);
 }
 
@@ -89,6 +87,7 @@ Vector3f specular(Vector3f n, Vector3f l, Vector3f e, Vector3f k_specular, Vecto
 		dotRE = 0;
 	}
 	Vector3f v = pow(dotRE, p) * k_light;
+	cout << vMul(k_specular, v) << endl << endl;
 	return vMul(k_specular, v);
 }
 
