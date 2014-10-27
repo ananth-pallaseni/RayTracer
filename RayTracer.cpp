@@ -44,12 +44,12 @@ void clamp(Vector3f v) {
 	}
 }
 
-Vector3f sphereNormal(Vector3f pointOnShape, Vector3f shape) {
+Vector3f sphereNormal(Vector3f pointOnShape, sphere shape) {
 	return unit(pointOnShape - shape.center);
 }
 
 // Generic triangle normal
-Vector3f triangleNormal(Vector3f pointOnShape, Vector3f shape, ray r) {
+Vector3f triangleNormal(Vector3f pointOnShape, triangle shape, ray r) {
 	Vector3f side1 = shape.a - shape.b;
 	Vector3f side2 = shape.a - shape.c;
 	Vector3f normal(side1(1) * side2(2) - side1(2) * side2(1), 

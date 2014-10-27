@@ -42,7 +42,7 @@ public:
 
 	Vector3f closest(Vector3f v1, Vector3f v2);
 
-	color shade(Vector3f p);
+	color shade(Vector3f pointOnShape, Vector3f normalAtPoint) ;
 
 
 	// Simple ray trace function, no shadows or anything fancy
