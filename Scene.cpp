@@ -46,14 +46,14 @@ int main(int argc, char* argv[])
 
 	int size = 100;
 	Vector3f eye(0, 0, 100);
-	Sampler s(size, size, -50, 50, 0,  50, 50, 0 ,  50, -50, 0, -50, -50, 0);
+	Sampler s(size, size, -50, 50,  50, 50,   50, -50, -50, -50);
 	Canvas c(size, size);
 	// amb = (0.6, 0.6, 0.6), diff = (0, 0.8, 0.1) spec = (0, 0, 0)
 	material mat1(0.1f, 0.1f, 0, 
 				  1, 1, 0, 
 				  0.8, 0.8, 0.8);
 
-	Vector3f pldir(200, 200, 200)
+	Vector3f pldir(200, 200, 200);
 	Vector3f plrgb(0.6, 0.6, 0.6);
 	pointLight ppll(pldir, 1,  plrgb);
 	pointLights.push_back(ppll);
