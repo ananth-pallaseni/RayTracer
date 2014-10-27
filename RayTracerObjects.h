@@ -288,7 +288,7 @@ struct translate : transform3d
 				  0, 0, 0, 1;
 	}
 
-	translate(float tx, ty, tz) {
+	translate(float tx, float ty, float tz) {
 		type = TRANSLATION;
 		x = tx;
 		y = ty;
@@ -307,7 +307,7 @@ struct scale : transform3d
 				  0, 0, 0, 1;
 	}
 
-	scaling(float sx, float sy, float sz) {
+	scale(float sx, float sy, float sz) {
 		type = SCALING;
 		x = sx;
 		y = sy;
@@ -331,7 +331,7 @@ struct rotation: transform3d
 	void createMatrix() {
 		Vector3f r(x, y, z);
 		float theta = r.norm();
-		rHat = r / theta;
+		Vector3f rHat = r / theta;
 		Matrix3f rc = rCross(rHat);
 		Matrix3f matrix3 = rHat * rHat.transpose() + sin(theta) * rc - cos(theta) * rc * rc ;
 		
