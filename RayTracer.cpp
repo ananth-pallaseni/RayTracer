@@ -125,10 +125,11 @@ color RayTracer::traceRay(ray r) {
 			///////////////////////new
 			temp = closest(point, temp);
 			if(point != temp) {
-				normal = sphereNormal(point, spheres[i]);
+				normal = sphereNormal(temp, spheres[i]);
 				shape = spheres[i];
+				point = temp;
 			}
-			point = temp;
+			
 			//////////////////////endnew
 		}
 	}
@@ -141,10 +142,11 @@ color RayTracer::traceRay(ray r) {
 			///////////////////////new
 			temp = closest(point, temp);
 			if(point != temp) {
-				normal = triangleNormal(point, triangles[i], r);
+				normal = triangleNormal(temp, triangles[i], r);
 				shape = triangles[i];
+				point = temp;
 			}
-			point = temp;
+			
 			//////////////////////endnew
 		}
 	}
