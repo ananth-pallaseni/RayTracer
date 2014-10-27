@@ -82,7 +82,7 @@ Vector3f diffuse(Vector3f n, Vector3f l, Vector3f k_diffuse, Vector3f k_light) {
 }*/
 
 Vector3f specular(Vector3f n, Vector3f l, Vector3f e, Vector3f k_specular, Vector3f k_light, float p) {
-	Vector3f notL = negate(l);
+	Vector3f notL = -l;
 	Vector3f r = notL + (2 * n.dot(l) * n);
 	float dotRE = r.dot(e)
 	if(dotRE < 0) {
