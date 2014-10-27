@@ -91,7 +91,7 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 		// l is unit vector pointing TO light
 		Vector3f lightDirection = unit(pl.point - pointOnShape);
 
-		rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, pl.l())
+		rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, pl.l());
 	}
 
 	for(int i = 0; i < numDirectionalLights; i++) {
