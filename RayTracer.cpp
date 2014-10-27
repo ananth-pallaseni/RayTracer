@@ -34,7 +34,7 @@ color RayTracer::shade(Vector3f p) {
 
 
 // Simple ray trace function, no shadows or anything fancy
-color RayTracer::trace_ray(ray r) {
+color RayTracer::traceRay(ray r) {
 	Vector3f point(std::numeric_limits<float>::max(), std::numeric_limits<float>::max(), std::numeric_limits<float>::max()); // init to max value
 	Vector3f temp;
 	bool hit = false;
@@ -63,7 +63,7 @@ color RayTracer::trace_ray(ray r) {
 }
 
 color trace(Vector3f s) {
-	ray r = RayTracer::createRay(s);
-	return trace_ray(r);
+	ray r = createRay(s);
+	return traceRay(r);
 }
 
