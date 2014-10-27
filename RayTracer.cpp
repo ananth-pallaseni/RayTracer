@@ -37,7 +37,8 @@ Vector3f vMul(Vector3f v1, Vector3f v2) {
 	return vv;
 }
 
-void clamp(Vector3f v) {
+void clamp(Vector3f* vec) {
+	Vector3f v = *vec;
 	for(int i = 0; i < 3; i++) {
 		if(v(i) > 1) {
 			v(i) = 1;
