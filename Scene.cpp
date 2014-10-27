@@ -57,7 +57,7 @@ int main(int argc, char* argv[])
 	spheres.push_back(sph2);
 	triangles.push_back(tri1);
 	triangles.push_back(tri2);
-	RayTracer rt(eye, spheres, spheres.size(), triangles, triangles.size());
+	RayTracer rt(eye, spheres, triangles, pointLights, directionalLights);
 	for(int i = 0; i < size; i++) {
 		for(int j = 0; j < size; j++) {
 			c.addPixel(rt.trace(s.getSample()));
