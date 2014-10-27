@@ -83,7 +83,9 @@ Vector3f specular(Vector3f n, Vector3f l, Vector3f e, Vector3f k_specular, Vecto
 	if(dotRE < 0) {
 		dotRE = 0;
 	}
-	cout << dotRE << endl << endl;
+	if (dotRE > 0) {
+		cout << dotRE << endl << endl;
+	}
 	Vector3f v = pow(dotRE, p) * k_light;
 	//cout << vMul(k_specular, v) << endl << endl;
 	return vMul(k_specular, v);
