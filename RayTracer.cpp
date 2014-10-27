@@ -88,8 +88,8 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint) {
 	Vector3f rgb(0, 0, 0);
 	for(int i = 0; i < numPointLights; i++) {
 		pointLight pl = pointLights[i];
-		Vector3f n = unit()
-		rgb = rgb + diffuse()
+		/*Vector3f n = unit();
+		rgb = rgb + diffuse()*/
 	}
 
 	for(int i = 0; i < numDirectionalLights; i++) {
@@ -125,7 +125,7 @@ color RayTracer::traceRay(ray r) {
 	}
 
 	if(hit) {
-		return shade(point);
+		return shade(point, normal);
 	}
 	else {
 		return color();
