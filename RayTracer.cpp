@@ -114,6 +114,7 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 	}
 
 	for(int i = 0; i < numAmbientLights; i++) {
+		ambientLight al = ambientLights[i];
 		rgb = rgb + ambient(al.l(), shape.mat.amb);
 	}
 
