@@ -23,41 +23,41 @@ vector<directionalLight> directionalLights;
 // Read Arguments and do something with them
 void parseArgs(char* filename) {
 	fstream f(filename);
-	string line;
-	if(f.is_open()) {
+	if(!f.is_open()) {
+		cout << "Unable to open file " << filename << endl;
+	}
+	else {
+
 		const int MAX_CHARS_PER_LINE = 50;
 		const int MAX_TOKENS_PER_LINE = 16;
 		const char* const DELIMITER = " ";
 		while(!f.eof()) {
 			// read an entire line into memory
-    		char buf[MAX_CHARS_PER_LINE];
-    		f.getline(buf, MAX_CHARS_PER_LINE);
-    		
-    		// parse the line into blank-delimited tokens
-    		int n = 0; // a for-loop index
-    		
-    		// array to store memory addresses of the tokens in buf
-    		const char* token[MAX_TOKENS_PER_LINE] = {}; // initialize to 0
-    		
-    		// parse the line
-    		token[0] = strtok(buf, DELIMITER); // first token
-    		if (token[0]) // zero if line is blank
-    		{
-    		  for (n = 1; n < MAX_TOKENS_PER_LINE; n++)
-    		  {
-    		    token[n] = strtok(0, DELIMITER); // subsequent tokens
-    		    if (!token[n]) break; // no more tokens
-    		  }
-    		}
-
-    		for (int i = 0; i < n; i++) // n = #of tokens
-      			cout << "Token[" << i << "] = " << token[i] << endl;
-   			cout << endl;
+	    	char buf[MAX_CHARS_PER_LINE];
+	    	f.getline(buf, MAX_CHARS_PER_LINE);
+	    	
+	    	// parse the line into blank-delimited tokens
+	    	int n = 0; // a for-loop index
+	    	
+	    	// array to store memory addresses of the tokens in buf
+	    	const char* token[MAX_TOKENS_PER_LINE] = {}; // initialize to 0
+	    	
+	    	// parse the line
+	    	token[0] = strtok(buf, DELIMITER); // first token
+	    	if (token[0]) // zero if line is blank
+	    	{
+	    	  for (n = 1; n < MAX_TOKENS_PER_LINE; n++)
+	    	  {
+	    	    token[n] = strtok(0, DELIMITER); // subsequent tokens
+	    	    if (!token[n]) break; // no more tokens
+	    	  }
+	    	}
+	    	for (int i = 0; i < n; i++) // n = #of tokens
+	      		cout << "Token[" << i << "] = " << token[i] << endl;
+	   		cout << endl;
 		}
 		f.close();
-	}
-	else {
-		cout << "Unable to open file " << filename << endl;
+
 	}
 
 
