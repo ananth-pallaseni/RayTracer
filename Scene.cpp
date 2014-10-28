@@ -17,6 +17,8 @@ vector<triangle> triangles;
 vector<pointLight> pointLights;
 vector<directionalLight> directionalLights;
 
+const char* const DELIMITER = " ";
+
 
 // Read Arguments and do something with them
 void parseArgs(char* filename) {
@@ -25,6 +27,31 @@ void parseArgs(char* filename) {
 	if(f.is_open()) {
 		while(getline(f, line)) {
 			cout << line << endl;
+			const char* token[17] = {}; // initialize to 0
+    
+    		// parse the line
+    		token[0] = strtok(line, DELIMITER); // first token
+    		if (token[0]) // zero if line is blank
+    		{
+    		  for (int n = 1; n < 17; n++)
+    		  {
+    		    token[n] = strtok(0, DELIMITER); // subsequent tokens
+    		    if (!token[n]) break; // no more tokens
+    		  }
+    		}
+
+    		for (int i = 0; i < n; i++) {// n = #of tokens
+      			cout << "Token[" << i << "] = " << token[i] << endl;
+      		}
+    		cout << endl;
+
+
+    		/*if(token[0]) {
+    			char* start = token[0];
+    			if (start == "cam") {
+
+    			}
+    		}*/
 			// if sphere: spheres.push_back(sphere(x, y, z))
 			// if triangle: triangles.push_back(triangle(x, y, z))
 		}
