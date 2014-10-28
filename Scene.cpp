@@ -64,10 +64,6 @@ void parseArgs(char* filename) {
   	  	  	}
   	  	}
 		
-  	  	// process (print) the tokens
-  	  	for (int i = 0; i < n; i++) { // n = #of tokens
-  	  	  	cout << "Token[" << i << "] = " << token[i] << endl;
-  	  	}
 
   	  	if(strcmp(token[0], "cam") == 0) {
   	  		eye << atof(token[1]), atof(token[2]), atof(token[3]);
