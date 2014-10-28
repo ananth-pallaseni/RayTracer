@@ -28,7 +28,7 @@ public:
 	int numAmbientLights;
 
 	RayTracer() {}
-	RayTracer(Vector3f eye, vector<sphere> sphList, vector<triangle> triList, vector<pointLight> plList, vector<directionalLight> dlList
+	RayTracer(Vector3f eye, vector<sphere> sphList, vector<triangle> triList, vector<pointLight> plList, vector<directionalLight> dlList,
 			  vector<ambientLight> alList ) {
 		e = eye;
 		spheres = sphList;

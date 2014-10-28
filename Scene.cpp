@@ -129,8 +129,8 @@ int main(int argc, char* argv[])
 	char* inFile = "input.txt";
 	parseArgs(inFile);
 
-	Sampler Sampler(size, size, LL, LR, UL, UR);
-	Canvas Canvas(size, size);
+	Sampler s(size, size, LL, LR, UL, UR);
+	Canvas c(size, size);
 	RayTracer rt(eye, spheres, triangles, pointLights, directionalLights, ambientLights);
 	for(int i = 0; i < size; i++) {
 		for(int j = 0; j < size; j++) {
