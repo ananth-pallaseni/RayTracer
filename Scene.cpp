@@ -27,7 +27,7 @@ void parseArgs(char* filename) {
 	if(f.is_open()) {
 		while(getline(f, line)) {
 			cout << line << endl;
-			
+
 			istringstream iss(line);
 			do
 		    {
@@ -50,7 +50,7 @@ void parseArgs(char* filename) {
 int main(int argc, char* argv[])
 {
 
-	string inFile = "input.txt";
+	char* inFile = "input.txt";
 
 	parseArgs(inFile);
 	cout << endl;
