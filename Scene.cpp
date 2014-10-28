@@ -25,8 +25,8 @@ void parseArgs(char* filename) {
 	fstream f(filename);
 	string line;
 	if(f.is_open()) {
-		int MAX_CHARS_PER_LINE = 50;
-		int MAX_TOKENS_PER_LINE = 16;
+		const int MAX_CHARS_PER_LINE = 50;
+		const int MAX_TOKENS_PER_LINE = 16;
 		while(!f.eof()) {
 			// read an entire line into memory
     		char buf[MAX_CHARS_PER_LINE];
@@ -36,7 +36,7 @@ void parseArgs(char* filename) {
     		int n = 0; // a for-loop index
     		
     		// array to store memory addresses of the tokens in buf
-    		char* token[MAX_TOKENS_PER_LINE] = {}; // initialize to 0
+    		const char* token[MAX_TOKENS_PER_LINE] = {}; // initialize to 0
     		
     		// parse the line
     		token[0] = strtok(buf, DELIMITER); // first token
