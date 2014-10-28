@@ -23,7 +23,7 @@ const char* const DELIMITER = " ";
 // Read Arguments and do something with them
 void parseArgs(char* filename) {
 	fstream f(filename);
-	string line;
+	char* line;
 	if(f.is_open()) {
 		while(getline(f, line)) {
 			cout << line << endl;
