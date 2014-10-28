@@ -30,7 +30,7 @@ void parseArgs(char* filename) {
 		while(!f.eof()) {
 			// read an entire line into memory
     		char buf[MAX_CHARS_PER_LINE];
-    		fin.getline(buf, MAX_CHARS_PER_LINE);
+    		f.getline(buf, MAX_CHARS_PER_LINE);
     		
     		// parse the line into blank-delimited tokens
     		int n = 0; // a for-loop index
