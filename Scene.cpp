@@ -17,98 +17,63 @@ vector<triangle> triangles;
 vector<pointLight> pointLights;
 vector<directionalLight> directionalLights;
 
+Vector3f eye;
+// Coordinates of the image plane
+Vector3f LL, LR, UL, UR;
+
+
 
 
 
 // Read Arguments and do something with them
 void parseArgs(char* filename) {
-	/*fstream f(filename);
-	if(!f.is_open()) {
-		cout << "Unable to open file " << filename << endl;
-	}
-	else {
 
-		const int MAX_CHARS_PER_LINE = 50;
-		const int MAX_TOKENS_PER_LINE = 16;
-		const char* const DELIMITER = " ";
-		while(!f.eof()) {
-			// read an entire line into memory
-	    	char buf[MAX_CHARS_PER_LINE];
-	    	f.getline(buf, MAX_CHARS_PER_LINE);
-	    	
-	    	// parse the line into blank-delimited tokens
-	    	int n = 0; // a for-loop index
-	    	
-	    	// array to store memory addresses of the tokens in buf
-	    	const char* token[MAX_TOKENS_PER_LINE] = {}; // initialize to 0
-	    	
-	    	// parse the line
-	    	token[0] = strtok(buf, DELIMITER); // first token
-	    	if (token[0]) // zero if line is blank
-	    	{
-	    	  for (n = 1; n < MAX_TOKENS_PER_LINE; n++)
-	    	  {
-	    	    token[n] = strtok(0, DELIMITER); // subsequent tokens
-	    	    if (!token[n]) break; // no more tokens
-	    	  }
-	    	}
+	const int MAX_CHARS_PER_LINE = 512;
+	const int MAX_TOKENS_PER_LINE = 20;
+	const char* const DELIMITER = " ";
 
-	    	for (int i = 0; i < n; i++) { // n = #of tokens
-	      		cout << "Token[" << i << "] = " << token[i] << endl;
-	      	}
-		}
-		f.close();
-
-	}*/
-
-		const int MAX_CHARS_PER_LINE = 512;
-const int MAX_TOKENS_PER_LINE = 20;
-const char* const DELIMITER = " ";
-
-		// create a file-reading object
-  ifstream fin;
-  fin.open("input.txt"); // open a file
-  
-  // read each line of the file
-  while (!fin.eof())
-  {
-    // read an entire line into memory
-    char buf[MAX_CHARS_PER_LINE];
-    fin.getline(buf, MAX_CHARS_PER_LINE);
-    
-    // parse the line into blank-delimited tokens
-    int n = 0; // a for-loop index
-    
-    // array to store memory addresses of the tokens in buf
-    const char* token[MAX_TOKENS_PER_LINE] = {}; // initialize to 0
-    
-    // parse the line
-    token[0] = strtok(buf, DELIMITER); // first token
-    if (token[0]) // zero if line is blank
-    {
-      for (n = 1; n < MAX_TOKENS_PER_LINE; n++)
-      {
-        token[n] = strtok(0, DELIMITER); // subsequent tokens
-        if (!token[n]) break; // no more tokens
-      }
-    }
-
-    // process (print) the tokens
-    for (int i = 0; i < n; i++) // n = #of tokens
-      cout << "Token[" << i << "] = " << token[i] << endl;
-    cout << endl;
-  }
-
-
+	// create a file-reading object
+  	ifstream fin;
+  	fin.open("input.txt"); // open a file
+  	
+  	// read each line of the file
+  	while (!fin.eof())
+  	{
+  	  	// read an entire line into memory
+  	  	char buf[MAX_CHARS_PER_LINE];
+  	  	fin.getline(buf, MAX_CHARS_PER_LINE);
+  	  	
+  	  	// parse the line into blank-delimited tokens
+  	  	int n = 0; // a for-loop index
+  	  	
+  	  	// array to store memory addresses of the tokens in buf
+  	  	const char* token[MAX_TOKENS_PER_LINE] = {}; // initialize to 0
+  	  	
+  	  	// parse the line
+  	  	token[0] = strtok(buf, DELIMITER); // first token
+  	  	if (token[0]) // zero if line is blank
+  	  	{
+  	  	  	for (n = 1; n < MAX_TOKENS_PER_LINE; n++)
+  	  	  	{
+  	  	  	  	token[n] = strtok(0, DELIMITER); // subsequent tokens
+  	  	  	  	if (!token[n]) break; // no more tokens
+  	  	  	}
+  	  	}
 		
+  	  	// process (print) the tokens
+  	  	for (int i = 0; i < n; i++) { // n = #of tokens
+  	  	  	cout << "Token[" << i << "] = " << token[i] << endl;
+  	  	}
 
+  	  	if(token[0] == "cam") {
+  	  		eye << atof(token[1]), atof(token[2]), atof(token[3]);
+  	  		LL << atof(token[4]), atof(token[5]), atof(token[6]);
+  	  		LR << atof(token[7]), atof(token[8]), atof(token[9]);
+  	  		UL << atof(token[10]), atof(token[11]), atof(token[12]);
+  	  		UR << atof(token[13]), atof(token[14]), atof(token[15]);
+  	  	}
 
-	
-
-
-
-
-
+  	}
 
 
 }
@@ -119,7 +84,8 @@ int main(int argc, char* argv[])
 	char* inFile = "input.txt";
 
 	parseArgs(inFile);
-	cout << endl;
+
+	cout << endl << eye << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
