@@ -98,19 +98,24 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 
 		Vector3f ttt(50, 50, 50);
 		rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, pl.l());
-		rgb = rgb + specular(normalAtPoint, lightDirection, e, shape.mat.spec, pl.l(), 16);
+		rgb = rgb + specular(normalAtPoint, lightDirection, e, shape.mat.spec, pl.l(), shape.mat.phongExp);
 		rgb = rgb + ambient(pl.l(), shape.mat.amb);
 		
 	}
 
-	/*for(int i = 0; i < numDirectionalLights; i++) {
+	for(int i = 0; i < numDirectionalLights; i++) {
 		directionalLight dl = directionalLights[i];
 		// lightDirection is unit vector pointing TO light
 		Vector3f lightDirection = -unit(dl.direction);
 
 		rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, dl.l());
-		rgb = rgb + specular(normalAtPoint, lightDirection, e, shape.mat.spec, dl.l(), 16);
-	}*/
+		rgb = rgb + specular(normalAtPoint, lightDirection, e, shape.mat.spec, dl.l(), shape.mat.phongExp);
+		rgb = rgb + ambient(dl.l(), shape.mat.amb);
+	}
+
+	for(int i = 0; i < numAmbientLights; i++) {
+		rgb = rgb + ambient(al.l(), shape.mat.amb);
+	}
 
 	rgb = clamp(rgb);
 	//cout << rgb << endl << endl;
