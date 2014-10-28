@@ -20,13 +20,16 @@ public:
 	vector<triangle> triangles;
 	vector<pointLight> pointLights;
 	vector<directionalLight> directionalLights;
+	vector<ambientLight> ambientLights;
 	int numSpheres;
 	int numTriangles;
 	int numPointLights;
 	int numDirectionalLights;
+	int numAmbientLights;
 
 	RayTracer() {}
-	RayTracer(Vector3f eye, vector<sphere> sphList, vector<triangle> triList, vector<pointLight> plList, vector<directionalLight> dlList ) {
+	RayTracer(Vector3f eye, vector<sphere> sphList, vector<triangle> triList, vector<pointLight> plList, vector<directionalLight> dlList
+			  vector<ambientLight> alList ) {
 		e = eye;
 		spheres = sphList;
 		triangles = triList;
@@ -34,8 +37,10 @@ public:
 		numTriangles = triangles.size();
 		pointLights = plList;
 		directionalLights = dlList;
+		ambientLights = alList;
 		numPointLights = pointLights.size();
 		numDirectionalLights = directionalLights.size(); 
+		numAmbientLights = ambientLights.size();
 	}
 
 	ray createRay(Vector3f s);

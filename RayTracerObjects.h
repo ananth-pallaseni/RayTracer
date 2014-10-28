@@ -60,16 +60,19 @@ struct color
 
 struct material
 {
-	Vector3f diff, amb, spec;
+	Vector3f diff, amb, spec, refl;
+	float phongExp;
 
 	material() {};
 
 	material(float ambR, float ambG, float ambB, float diffR, float diffG, float diffB, 
-		     float specR, float specG, float specB) {
+		     float specR, float specG, float specB, float phongExponent, float reflR, float reflG, float reflB) {
 
 		diff << diffR, diffG, diffB;
 		amb << ambR, ambG, ambB;
 		spec << specR, specG, specB;
+		refl << reflR, reflG, reflB;
+		phongExp = phongExponent;
 	}
 
 };
@@ -223,7 +226,13 @@ struct directionalLight : light
 	}
 };
 
-struct ambientLight : light {}; // this exists purely for naming convenience
+struct ambientLight : light {  // this exists purely for naming convenience
+	ambientLight(Vector3f rgb) {
+		r = rgb(0);
+		g = rgb(1);
+		b = rgb(2);
+	}
+};
 
 
 struct transform

@@ -16,6 +16,7 @@ vector<sphere> spheres;
 vector<triangle> triangles;
 vector<pointLight> pointLights;
 vector<directionalLight> directionalLights;
+vector<ambientLight> ambientLights;
 
 Vector3f eye;
 // Coordinates of the image plane
@@ -35,6 +36,9 @@ void parseArgs(char* filename) {
 	// create a file-reading object
   	ifstream fin;
   	fin.open("input.txt"); // open a file
+
+  	material mat;
+  	Matrix4f cumulativeTransform;
   	
   	// read each line of the file
   	while (!fin.eof())
@@ -66,12 +70,51 @@ void parseArgs(char* filename) {
   	  	}
 
   	  	if(strcmp(token[0], "cam") == 0) {
-  	  		cout << "CAM" << endl;
   	  		eye << atof(token[1]), atof(token[2]), atof(token[3]);
   	  		LL << atof(token[4]), atof(token[5]), atof(token[6]);
   	  		LR << atof(token[7]), atof(token[8]), atof(token[9]);
   	  		UL << atof(token[10]), atof(token[11]), atof(token[12]);
   	  		UR << atof(token[13]), atof(token[14]), atof(token[15]);
+  	  	}
+  	  	else if(strcmp(token[0], "sph") == 0) {
+  	  		sphere sph(atof(token[1]), atof(token[2]), atof(token[3]), atof(token[4]), mat);
+  	  		spheres.push_back(sph);
+  	  	}
+  	  	else if(strcmp(token[0], "tri") == 0) {
+  	  		triangle tri(atof(token[1]), atof(token[2]), atof(token[3]), atof(token[4]), atof(token[5]), atof(token[6]), atof(token[7]), atof(token[8]), atof(token[9]), mat);
+  	  		triangles.push_back(tri);
+  	  	}
+  	  	else if(strcmp(token[0], "ltp") == 0) {
+  	  		Vector3f point(atof(token[1]), atof(token[2]), atof(token[3]));
+  	  		Vector3f rgb(atof(token[4]), atof(token[5]), atof(token[6]));
+  	  		int falloff = 0;
+  	  		if (token[7]) {
+  	  			falloff = atof(token[7]);
+  	  		}
+  	  		pointLight pl(point, falloff, rgb);
+  	  		pointLights.push_back(pl);
+  	  	}
+  	  	else if(strcmp(token[0], "ltd") == 0) {
+  	  		Vector3f dir(atof(token[1]), atof(token[2]), atof(token[3]));
+  	  		Vector3f rgb(atof(token[4]), atof(token[5]), atof(token[6]));
+  	  		directionalLight dl(dir, rgb);
+  	  		directionalLights.push_back(dl);
+  	  	}
+  	  	else if(strcmp(token[0], "lta") == 0) {
+  	  		Vector3f rgb(atof(token[1]), atof(token[2]), atof(token[3]));
+  	  		ambientLight al(rgb);
+  	  		ambientLights.push_back(al);
+  	  	}
+  	  	else if(strcmp(token[0], "mat") == 0) {
+  	  		material mm(atof(token[1]), atof(token[2]), atof(token[3]), 
+  	  					atof(token[4]), atof(token[5]), atof(token[6]), 
+  	  					atof(token[7]), atof(token[8]), atof(token[9]), atof(token[10]),
+  	  					atof(token[11]), atof(token[12]), atof(token[13]));
+
+  	  		mat = mm;
+  	  	}
+  	  	else {
+  	  		cout << "UNRECOGNIZED TYPE: " << token[0] << endl;
   	  	}
 
   	}
@@ -81,12 +124,20 @@ void parseArgs(char* filename) {
 
 int main(int argc, char* argv[])
 {
+	int size = 400;
 
 	char* inFile = "input.txt";
-
 	parseArgs(inFile);
 
-	cout << endl << eye << endl;
+	Sampler Sampler(size, size, LL, LR, UL, UR);
+	Canvas Canvas(size, size);
+	RayTracer rt(eye, spheres, triangles, pointLights, directionalLights, ambientLights);
+	for(int i = 0; i < size; i++) {
+		for(int j = 0; j < size; j++) {
+			c.addPixel(rt.trace(s.getSample()));
+		}
+	}
+	c.encode("image.png");
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
