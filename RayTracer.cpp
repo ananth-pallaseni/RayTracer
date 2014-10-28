@@ -88,9 +88,9 @@ Vector3f specular(Vector3f n, Vector3f l, Vector3f e, Vector3f k_specular, Vecto
 }
 
 // Creates a shadow ray, and compares it with all objects 
-bool RayTracer::shadowRay(Vector3f point, Vector3f light) {
+bool RayTracer::shadowRay(Vector3f point, Vector3f lightOrigin) {
 
-	ray r(point, light);
+	ray r(point, lightOrigin);
 	float t;
 	for(int i = 0; i < numSpheres; i++) {
 		if(r.intersect(spheres[i], &t)) {
@@ -116,7 +116,7 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 	Vector3f rgb(0, 0, 0);
 	for(int i = 0; i < numPointLights; i++) {
 		pointLight pl = pointLights[i];
-		if(!shadowRay(pl.point)) {
+		if(!shadowRay(pointOnShape, pl.point)) {
 			// lightDirection is unit vector pointing TO light
 			Vector3f lightDirection = unit(pl.point - pointOnShape);
 	
@@ -129,7 +129,7 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 
 	for(int i = 0; i < numDirectionalLights; i++) {
 		directionalLight dl = directionalLights[i];
-		if(!shadowRay(dl.direction)) {
+		if(!shadowRay(pointOnShape, dl.direction)) {
 			// lightDirection is unit vector pointing TO light
 			Vector3f lightDirection = -unit(dl.direction);
 
