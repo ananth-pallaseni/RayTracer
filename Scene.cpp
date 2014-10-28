@@ -2,7 +2,7 @@
 #include <iostream>
 #include "Eigen/Dense"
 #include <fstream>
-#include <string>
+#include <string.h>
 
 #include "Sampler.h"
 #include "Canvas.h"
@@ -65,7 +65,7 @@ void parseArgs(char* filename) {
   	  	  	cout << "Token[" << i << "] = " << token[i] << endl;
   	  	}
 
-  	  	if(token[0] == "cam") {
+  	  	if(strcmp(token[0], "cam") == 0) {
   	  		cout << "CAM" << endl;
   	  		eye << atof(token[1]), atof(token[2]), atof(token[3]);
   	  		LL << atof(token[4]), atof(token[5]), atof(token[6]);
