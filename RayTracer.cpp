@@ -92,7 +92,7 @@ bool RayTracer::shadowRay(Vector3f point, Vector3f light) {
 
 	ray r(point, light);
 	float t;
-	for(int i = 0; i < numSpheres) {
+	for(int i = 0; i < numSpheres; i++) {
 		if(r.intersect(spheres[i], &t)) {
 			if(t > 0) { // only return if the object intersects the ray in the posiive direction.
 				return true;
