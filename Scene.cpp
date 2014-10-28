@@ -25,25 +25,51 @@ void parseArgs(char* filename) {
 	fstream f(filename);
 	string line;
 	if(f.is_open()) {
-		while(getline(f, line)) {
-			cout << line << endl;
+		int MAX_CHARS_PER_LINE = 50;
+		int MAX_TOKENS_PER_LINE = 16;
+		while(!f.eof()) {
+			// read an entire line into memory
+    		char buf[MAX_CHARS_PER_LINE];
+    		fin.getline(buf, MAX_CHARS_PER_LINE);
+    		
+    		// parse the line into blank-delimited tokens
+    		int n = 0; // a for-loop index
+    		
+    		// array to store memory addresses of the tokens in buf
+    		const char* token[MAX_TOKENS_PER_LINE] = {}; // initialize to 0
+    		
+    		// parse the line
+    		token[0] = strtok(buf, DELIMITER); // first token
+    		if (token[0]) // zero if line is blank
+    		{
+    		  for (n = 1; n < MAX_TOKENS_PER_LINE; n++)
+    		  {
+    		    token[n] = strtok(0, DELIMITER); // subsequent tokens
+    		    if (!token[n]) break; // no more tokens
+    		  }
+    		}
 
-			istringstream iss(line);
-			do
-		    {
-		        string sub;
-		        iss >> sub;
-		        cout <<  sub << endl;
-		    } while (iss);
-		    cout << endl ;
-			// if sphere: spheres.push_back(sphere(x, y, z))
-			// if triangle: triangles.push_back(triangle(x, y, z))
+    		for (int i = 0; i < n; i++) // n = #of tokens
+      			cout << "Token[" << i << "] = " << token[i] << endl;
+   			cout << endl;
 		}
 		f.close();
 	}
 	else {
 		cout << "Unable to open file " << filename << endl;
 	}
+
+
+		
+
+
+	
+
+
+
+
+
+
 
 }
 
