@@ -66,6 +66,7 @@ void parseArgs(char* filename) {
   	  	}
 
   	  	if(token[0] == "cam") {
+  	  		cout << "CAM" << endl;
   	  		eye << atof(token[1]), atof(token[2]), atof(token[3]);
   	  		LL << atof(token[4]), atof(token[5]), atof(token[6]);
   	  		LR << atof(token[7]), atof(token[8]), atof(token[9]);
