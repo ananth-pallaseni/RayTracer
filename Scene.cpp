@@ -33,6 +33,7 @@ void parseArgs(char* filename) {
 		const char* const DELIMITER = " ";
 		while(!f.eof()) {
 			// read an entire line into memory
+			cout << "co" << endl;
 	    	char buf[MAX_CHARS_PER_LINE];
 	    	f.getline(buf, MAX_CHARS_PER_LINE);
 	    	
