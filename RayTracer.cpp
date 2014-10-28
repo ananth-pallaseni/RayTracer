@@ -87,30 +87,56 @@ Vector3f specular(Vector3f n, Vector3f l, Vector3f e, Vector3f k_specular, Vecto
 	return vMul(k_specular, v);
 }
 
+// Creates a shadow ray, and compares it with all objects 
+bool shadowRay(Vector3f point, Vector3f light) {
+
+	ray r(point, light);
+	float t;
+	for(int i = 0; i < numSpheres) {
+		if(r.intersect(spheres[i], &t)) {
+			if(t > 0) { // only return if the object intersects the ray in the posiive direction.
+				return true;
+			}
+		}
+	}
+	for(int i = 0; i < numTriangles; i++) {
+		if(r.intersect(triangles[i], &t)) {
+			if(t > 0) { // only return if the object intersects the ray in the posiive direction.
+				return true;
+			}
+		}
+	}
+	return false;
+
+}
+
 
 
 color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object shape) {
 	Vector3f rgb(0, 0, 0);
 	for(int i = 0; i < numPointLights; i++) {
 		pointLight pl = pointLights[i];
-		// lightDirection is unit vector pointing TO light
-		Vector3f lightDirection = unit(pl.point - pointOnShape);
-
-		Vector3f ttt(50, 50, 50);
-		rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, pl.l());
-		rgb = rgb + specular(normalAtPoint, lightDirection, e, shape.mat.spec, pl.l(), shape.mat.phongExp);
-		rgb = rgb + ambient(pl.l(), shape.mat.amb);
-		
+		if(!shadowRay(pl.point)) {
+			// lightDirection is unit vector pointing TO light
+			Vector3f lightDirection = unit(pl.point - pointOnShape);
+	
+			Vector3f ttt(50, 50, 50);
+			rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, pl.l());
+			rgb = rgb + specular(normalAtPoint, lightDirection, e, shape.mat.spec, pl.l(), shape.mat.phongExp);
+			rgb = rgb + ambient(pl.l(), shape.mat.amb);
+		}
 	}
 
 	for(int i = 0; i < numDirectionalLights; i++) {
 		directionalLight dl = directionalLights[i];
-		// lightDirection is unit vector pointing TO light
-		Vector3f lightDirection = -unit(dl.direction);
+		if(!shadowRay(dl.direction)) {
+			// lightDirection is unit vector pointing TO light
+			Vector3f lightDirection = -unit(dl.direction);
 
-		rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, dl.l());
-		rgb = rgb + specular(normalAtPoint, lightDirection, e, shape.mat.spec, dl.l(), shape.mat.phongExp);
-		rgb = rgb + ambient(dl.l(), shape.mat.amb);
+			rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, dl.l());
+			rgb = rgb + specular(normalAtPoint, lightDirection, e, shape.mat.spec, dl.l(), shape.mat.phongExp);
+			rgb = rgb + ambient(dl.l(), shape.mat.amb);
+		}
 	}
 
 	for(int i = 0; i < numAmbientLights; i++) {

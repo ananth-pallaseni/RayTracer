@@ -148,6 +148,23 @@ struct ray
 		return false;
 	}
 
+	bool intersect(sphere sph, float* t) {
+		// Check Discriminant:
+		// A = sMinusE . sMinusE
+		float A = sMinusE.dot(sMinusE);
+		// B = 2 * sMinusE . (e - c)
+		float B = 2 * sMinusE .dot(( e - sph.center ));
+		// C = (e - c) . (e - c) - r^2
+		float C = ( e - sph.center ).dot( ( e - sph.center ) ) - ( sph.radius * sph.radius );
+		float discriminant = B*B - 4*A*C;
+		if (discriminant >= 0) {
+			// Only use negative value of discriminant, as this will be closer to the plane
+			*t = (-B - sqrt(discriminant)) / (2 * A);
+			return true;
+		}
+		return false;
+	}
+
 	bool intersect(triangle tri, Vector3f* point) {
 		Matrix3f A;
 		A(0, 0) = tri.a(0) - tri.b(0);
