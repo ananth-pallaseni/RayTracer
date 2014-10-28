@@ -23,14 +23,15 @@ const char* const DELIMITER = " ";
 // Read Arguments and do something with them
 void parseArgs(char* filename) {
 	fstream f(filename);
-	char* line;
+	string line;
 	if(f.is_open()) {
 		while(getline(f, line)) {
 			cout << line << endl;
 			const char* token[17] = {}; // initialize to 0
     
     		// parse the line
-    		token[0] = strtok(line, DELIMITER); // first token
+    		char* ll = line;
+    		token[0] = strtok(ll, DELIMITER); // first token
     		if (token[0]) // zero if line is blank
     		{
     		  for (int n = 1; n < 17; n++)
