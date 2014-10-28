@@ -66,12 +66,17 @@ void parseArgs(char* filename) {
 int main(int argc, char* argv[])
 {
 
+	string inFile = "input.txt";
+
+	parseArgs(inFile);
+	cout << endl;
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// Single sphere for shading:
 
 
-	int size = 100;
+	/*int size = 100;
 	Vector3f eye(0, 0, 100);
 	Sampler s(size, size, -50, 50,  50, 50,   50, -50, -50, -50);
 	Canvas c(size, size);
@@ -92,7 +97,7 @@ int main(int argc, char* argv[])
 			c.addPixel(rt.trace(s.getSample()));
 		}
 	}
-	c.encode("image.png");
+	c.encode("image.png");*/
 
 
 
