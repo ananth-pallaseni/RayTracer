@@ -47,6 +47,8 @@ public:
 
 	Vector3f closest(Vector3f v1, Vector3f v2);
 
+	bool shadowRay(Vector3f point, Vector3f light);
+
 	color shade(Vector3f pointOnShape, Vector3f normalAtPoint, object shape) ;
 
 
