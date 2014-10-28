@@ -68,8 +68,6 @@ const char* const DELIMITER = " ";
 		// create a file-reading object
   ifstream fin;
   fin.open("data.txt"); // open a file
-  if (!fin.good()) 
-    return 1; // exit if file not found
   
   // read each line of the file
   while (!fin.eof())
