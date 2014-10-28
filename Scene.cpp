@@ -27,6 +27,7 @@ void parseArgs(char* filename) {
 	if(f.is_open()) {
 		const int MAX_CHARS_PER_LINE = 50;
 		const int MAX_TOKENS_PER_LINE = 16;
+		const char* const DELIMITER = " ";
 		while(!f.eof()) {
 			// read an entire line into memory
     		char buf[MAX_CHARS_PER_LINE];
