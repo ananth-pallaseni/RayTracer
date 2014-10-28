@@ -88,7 +88,7 @@ Vector3f specular(Vector3f n, Vector3f l, Vector3f e, Vector3f k_specular, Vecto
 }
 
 // Creates a shadow ray, and compares it with all objects 
-bool shadowRay(Vector3f point, Vector3f light) {
+bool RayTracer::shadowRay(Vector3f point, Vector3f light) {
 
 	ray r(point, light);
 	float t;
