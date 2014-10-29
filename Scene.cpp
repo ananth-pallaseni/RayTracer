@@ -122,6 +122,12 @@ void parseArgs(char* filename) {
 int main(int argc, char* argv[])
 {
 
+	Vector4f vv(1, 1, 1, 1);
+	translate trans(3, 4, 5);
+	scale sc(1, 2, 3);
+	rotation rr(0, 180, 0);
+	cout << rr.inverse * rr * vv << endl;
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -145,7 +151,9 @@ int main(int argc, char* argv[])
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// Transform test:
-	Vector4f vv(1, 1, 1, 1);
+
+
+/*	Vector4f vv(1, 1, 1, 1);
 	translate trans(3, 4, 5);
 	scale sc(1, 2, 3);
 	rotation rr(0, 180, 0);
@@ -162,12 +170,12 @@ int main(int argc, char* argv[])
 	cout << "operator test:" << endl;
 	cout << rr.matrix * vv << endl << endl;
 
-	cout << "combined ops:" << endl;
+	cout << "combined operations:" << endl;
 	Vector4f q(3, 3, 3, 1);
 	translate qq(-1, -1, -1);
 	scale qqq(2, 2, 2);
 	rotation qqqq(0, 180, 0);
-	cout << qqqq * qqq * qq * q<< endl;
+	cout << qqqq * qqq * qq * q<< endl;*/
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

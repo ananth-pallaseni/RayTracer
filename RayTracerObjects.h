@@ -83,6 +83,7 @@ struct object
 {
 	int type;
 	material mat;
+	Matrix4f transformMatrix;
 };
 
 struct sphere : object
@@ -90,11 +91,12 @@ struct sphere : object
 	float radius;
 	Vector3f center;
 
-	sphere(float cx, float cy, float cz, float r, material m) {
+	sphere(float cx, float cy, float cz, float r, material m, Matrix4f transMatrix) {
 		radius = r;
 		center = Vector3f(cx, cy, cz);
 		type = SPHERE;
 		mat = m;
+		transformMatrix = transMatrix;
 	}
 
 };
@@ -103,12 +105,13 @@ struct triangle : object
 {
 	Vector3f a, b, c;
 
-	triangle(float ax, float ay, float az, float bx, float by, float bz, float cx, float cy, float cz, material m) {
+	triangle(float ax, float ay, float az, float bx, float by, float bz, float cx, float cy, float cz, material m, Matrix4f transMatrix) {
 		a = Vector3f(ax, ay, az);
 		b = Vector3f(bx, by, bz);
 		c = Vector3f(cx, cy, cz);
 		type = TRIANGLE;
 		mat = m;
+		transformMatrix = transMatrix;
 	}
 };
 
@@ -130,6 +133,26 @@ struct ray
 		return e + t * (sMinusE);
 	}
 
+	// OLD:
+	/*bool intersect(sphere sph, Vector3f* point) {
+		// Check Discriminant:
+		// A = sMinusE . sMinusE
+		float A = sMinusE.dot(sMinusE);
+		// B = 2 * sMinusE . (e - c)
+		float B = 2 * sMinusE .dot(( e - sph.center ));
+		// C = (e - c) . (e - c) - r^2
+		float C = ( e - sph.center ).dot( ( e - sph.center ) ) - ( sph.radius * sph.radius );
+		float discriminant = B*B - 4*A*C;
+		if (discriminant >= 0) {
+			// Only use negative value of discriminant, as this will be closer to the plane
+			float t = (-B - sqrt(discriminant)) / (2 * A);
+			*point = p(t);
+			return true;
+		}
+		return false;
+	}*/
+
+	// NEW:
 	bool intersect(sphere sph, Vector3f* point) {
 		// Check Discriminant:
 		// A = sMinusE . sMinusE
@@ -312,6 +335,7 @@ struct transform2d : transform
 struct transform3d : transform
 {
 	Matrix4f matrix;
+	Matrix4f inverse;
 	friend Matrix4f operator*(const transform3d &mat1, Matrix4f mat2) {
 		return mat1.matrix * mat2;
 	}
@@ -353,6 +377,11 @@ struct translate : transform3d
 				  0, 1, 0, y, 
 				  0, 0, 1, z,
 				  0, 0, 0, 1;
+
+		inverse << 1, 0, 0, -x,
+				   0, 1, 0, -y, 
+				   0, 0, 1, -z,
+				   0, 0, 0, 1;
 	}
 
 	translate(float tx, float ty, float tz) {
@@ -372,6 +401,11 @@ struct scale : transform3d
 				  0, y, 0, 0,
 				  0, 0, z, 0, 
 				  0, 0, 0, 1;
+
+		inverse << 1.0/x, 0, 0, 0,
+				   0, 1.0/y, 0, 0,
+				   0, 0, 1.0/z, 0, 
+				   0, 0, 0, 1;
 	}
 
 	scale(float sx, float sy, float sz) {
@@ -426,6 +460,8 @@ struct rotation: transform3d
 		matrix(3, 1) = 0;
 		matrix(3, 2) = 0;
 		matrix(3, 3) = 1;
+
+		inverse = matrix.transpose();
 
 	}
 
