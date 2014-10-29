@@ -158,6 +158,7 @@ bool intersect(sphere sph, Vector3f* point, Vector3f e, Vector3f sMinusE) {
 		sMinusEObj = trans * sMinusEObj; // take ray to obj space
 		eObj(3) = 0;
 		sMinusEObj(3) = 0;
+		cout << "OBJ RAY: " << eObj << " +  t * " << sMinusEObj << endl << endl;
 
 		float A = sMinusEObj.dot(sMinusEObj);
 		cout << "A: " << A << endl;
