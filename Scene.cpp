@@ -168,11 +168,13 @@ int main(int argc, char* argv[])
 	Matrix4f inv = sph.transformMatrix;
 	Vector3f pp;
 	cout << sph.inverseTransformMatrix << endl << endl;
-	if(r.intersect(sph, &pp, true)) {
+	float tcheck;
+	if(r.intersect(sph, &pp, true, &tcheck)) {
 		cout << "INTERSECT" << endl;
 		cout << "e :" << endl << r.e << endl << endl;
 		cout << "sminuse :" << endl << r.sMinusE << endl << endl;
-		cout << pp << endl;
+		cout << pp << endl << endl;
+		cout << "t: " << tcheck << endl;
 	}
 	else {
 		cout << "NOOOOOOOOOOOOOOOO" << endl;
