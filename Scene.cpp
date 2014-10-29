@@ -115,7 +115,6 @@ void parseArgs(char* filename) {
   	  					atof(token[4]), atof(token[5]), atof(token[6]), 
   	  					atof(token[7]), atof(token[8]), atof(token[9]), atof(token[10]),
   	  					atof(token[11]), atof(token[12]), atof(token[13]));
-  	  		cout << atof(token[10]) << endl;
   	  		mat = mm;
   	  	}
   	  	else if(strcmp(token[0], "xft") == 0) {
@@ -148,12 +147,36 @@ void parseArgs(char* filename) {
 int main(int argc, char* argv[])
 {
 
+	Vector3f e(0, 0, 0);
+	Vector3f p(0, 0, 1);
+
+	Vector4f I;
+	I < 1, 0, 0, 0,
+		0, 1, 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1;
+
+	Matrix3f I3;
+	I3 << 1, 0, 0,
+		     0, 1, 0,
+		     0, 0, 1;
+
+	ray r(e, p);
+	sphere sph(0, 0, 50, 1);
+	Vector3f p;
+	if(r.intersect(sph, &p)) {
+		cout << "INTERSECT" << endl;
+	}
+	else {
+		cout << "NOOOOOOOOOOOOOOOO" << endl;
+	}
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// General Purpose - renders input file
 
-	int size = 400;
+	/*int size = 400;
 
 	char* inFile = "input.txt";
 	parseArgs(inFile);
@@ -168,7 +191,7 @@ int main(int argc, char* argv[])
 			c.addPixel(rt.trace(s.getSample()));
 		}
 	}
-	c.encode("image.png");
+	c.encode("image.png");*/
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
