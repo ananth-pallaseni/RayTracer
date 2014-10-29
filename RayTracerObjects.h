@@ -394,6 +394,7 @@ struct rotation: transform3d
 	void createMatrix() {
 		Vector3f r(x, y, z);
 		float theta = r.norm();
+		cout << theta << endl;
 		Vector3f rHat = r / theta;
 		Matrix3f rc = rCross(rHat);
 		Matrix3f matrix3 = rHat * rHat.transpose() + sin(theta) * rc - cos(theta) * rc * rc ;
