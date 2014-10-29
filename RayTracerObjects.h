@@ -396,7 +396,7 @@ struct rotation: transform3d
 		float theta = r.norm();
 		Vector3f rHat = r / theta;
 		Matrix3f rc = rCross(rHat);
-		Matrix3f matrix3 = rc * rc.transpose() + sin(theta) * rc - cos(theta) * rc * rc ;
+		Matrix3f matrix3 = rHat * rHat.transpose() + sin(theta) * rc - cos(theta) * rc * rc ;
 		
 		matrix(0, 0) = matrix3(0, 0);
 		matrix(1, 0) = matrix3(1, 0);
