@@ -228,8 +228,9 @@ int main(int argc, char* argv[])
 		cout << "sminuse :" << endl << r.sMinusE << endl << endl;
 		cout << "POINT : " << endl << pp << endl << endl;
 		cout << inv * trans << endl << endl;
-		bool cq = r.intersect(sph, &pp, true);
-		cout << "OLD POINT : " << endl << pp << endl << endl;
+		Vector3f ppp(-101, -101, -101);
+		bool cq = r.intersect(sph, &ppp, true);
+		cout << "OLD POINT : " << endl << ppp << endl << endl;
 	}
 	else {
 		cout << "NOOOOOOOOOOOOOOOO" << endl;
