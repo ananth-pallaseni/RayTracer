@@ -147,6 +147,7 @@ int main(int argc, char* argv[])
 	Vector4f vv(1, 1, 1, 1);
 	translate trans(3, 4, 5);
 	scale sc(1, 2, 3);
+	rotation rr(0, 180, 0);
 	cout << "Transform MAtrix" << endl;
 	cout << trans.matrix << endl << endl;
 	cout << "operator test:" << endl;
@@ -155,6 +156,10 @@ int main(int argc, char* argv[])
 	cout << sc.matrix << endl << endl;
 	cout << "operator test:" << endl;
 	cout << sc.matrix * vv << endl << endl;
+	cout << "Rotation MAtrix" << endl;
+	cout << rr.matrix << endl << endl;
+	cout << "operator test:" << endl;
+	cout << rr.matrix * vv << endl << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
