@@ -302,7 +302,7 @@ struct ray
 		return e + t * (sMinusE);
 	}
 
-	Vector3f p(Vector3f eye, Vector3f sMinE, float t) {
+	Vector4f p(Vector4f eye, Vector4f sMinE, float t) {
 		return eye + t * sMinE;
 	}
 
@@ -348,7 +348,10 @@ struct ray
 		if (discriminant >= 0) {
 			// Only use negative value of discriminant, as this will be closer to the plane
 			float t = (-B - sqrt(discriminant)) / (2 * A);
-			*point = inv * p(eObj, sMinusEObj, t); // transform back into world coordinates
+			Vector4f pointInWorldSpace = inv * p(eObj, sMinusEObj, t);
+			*point(0) = pointInWorldSpace(0); // transform back into world coordinates
+			*point(1) = pointInWorldSpace(1);
+			*point(2) = pointInWorldSpace(2);
 			return true;
 		}
 		return false;
