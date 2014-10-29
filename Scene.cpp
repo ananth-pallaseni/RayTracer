@@ -151,7 +151,7 @@ int main(int argc, char* argv[])
 	Vector3f p(0, 0, 1);
 
 	Matrix4f I;
-	I < 1, 0, 0, 0,
+	I << 1, 0, 0, 0,
 		0, 1, 0, 0,
 		0, 0, 1, 0,
 		0, 0, 0, 1;
