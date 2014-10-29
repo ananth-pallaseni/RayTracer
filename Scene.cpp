@@ -161,7 +161,7 @@ int main(int argc, char* argv[])
 	cout << "operator test:" << endl;
 	cout << rr.matrix * vv << endl << endl;
 	Vector3f qq(0, 180, 0);
-	cout << rr.rcross(rr / rr.norm()) << endl;
+	cout << rr.rCross(qq / qq.norm()) << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
