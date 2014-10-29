@@ -332,7 +332,7 @@ struct ray
 		// Check Discriminant:
 		// A = sMinusE . sMinusE
 		Matrix4f trans = sph.inverseTransformMatrix;
-		Matrix4f inv = sph.inverseTransformMatrix;
+		Matrix4f inv = sph.TransformMatrix;
 		Vector4f eObj(e(0), e(1), e(2), 1);
 		Vector4f sMinusEObj(sMinusE(0), sMinusE(1), sMinusE(2), 1);
 		eObj = trans * eObj;
