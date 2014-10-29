@@ -147,7 +147,7 @@ int main(int argc, char* argv[])
 	translate trans(3, 4, 5);
 	scale sc(1, 2, 3);
 	rotation rr(0, 180, 0);
-	cout <<  trans.inverse * sc.inverse * rr.inverse * rr * sc * tt * vv << endl;
+	cout <<  trans.inverse * sc.inverse * rr.inverse * rr * sc * trans * vv << endl;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
