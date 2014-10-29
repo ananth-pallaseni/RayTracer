@@ -3,6 +3,7 @@
 #include "Eigen/Dense"
 #include <fstream>
 #include <string.h>
+#include <math.h>
 
 #include "Sampler.h"
 #include "Canvas.h"
@@ -162,6 +163,7 @@ int main(int argc, char* argv[])
 	cout << rr.matrix * vv << endl << endl;
 	Vector3f qq(0, 180, 0);
 	cout << rr.rCross(qq / qq.norm()) * rr.rCross(qq / qq.norm()) << endl;
+	cout << sin(180) << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
