@@ -263,8 +263,10 @@ struct sphere : object
 		center = Vector3f(cx, cy, cz);
 		type = SPHERE;
 		mat = m;
-		transformMatrix = transMatrix;
-		inverseTransformMatrix = invTransMatrix;
+		translate initTrans(cx, cy, cz);
+		scale initScale(r, r, r);
+		transformMatrix = transMatrix * scale * initTrans; // takes a sphere from obj space to world space
+		inverseTransformMatrix = initTrans.inverse * scale.inverse * invTransMatrix; // takes a sphere from world space to obj space
 	}
 
 };
