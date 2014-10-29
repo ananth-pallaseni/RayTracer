@@ -184,7 +184,7 @@ int main(int argc, char* argv[])
 		ray newr(ne, np + ne);
 		sphere newsphsph(0, 0, 0, 1, mm, I, I);
 		cout << "new ray: " << endl << endl << newr.e << endl << endl << newr.sMinusE << endl << endl;
-		cout << newr.intersect(newsphsph, &pp) << endl;
+		cout << "intersect = " << newr.intersect(newsphsph, &pp) << endl << endl;
 		cout << pp << endl << endl;
 		Vector4f ppp(pp(0), pp(1), pp(2), 1);
 		cout << inv * ppp << endl;
