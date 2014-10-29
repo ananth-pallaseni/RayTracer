@@ -114,7 +114,7 @@ bool RayTracer::shadowRay(Vector3f point, Vector3f lightOrigin) {
 
 
 color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object shape) {
-	Vector3f rgb(0.03f, 0.015f, 0);
+	Vector3f rgb(0.3f, 0.15f, 0);
 	/*for(int i = 0; i < numPointLights; i++) {
 		pointLight pl = pointLights[i];
 		if(!shadowRay(pointOnShape, pl.point)) {
