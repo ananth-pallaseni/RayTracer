@@ -173,8 +173,8 @@ int main(int argc, char* argv[])
 	}
 	else {
 		cout << "NOOOOOOOOOOOOOOOO" << endl;
-		Vector4f ee(0, 0, 0, 0);
-		Vector4f ss(r.sMinusE(0), r.sMinusE(1), r.sMinusE(2));
+		Vector4f ee(0, 0, 0, 1);
+		Vector4f ss(r.sMinusE(0), r.sMinusE(1), r.sMinusE(2), 1);
 		ee = trans * ee;
 		ss = trans * ss;
 		cout << ee << endl << endl;
