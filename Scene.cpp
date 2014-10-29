@@ -120,7 +120,13 @@ void parseArgs(char* filename) {
 
 int main(int argc, char* argv[])
 {
-	int size = 400;
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	// General Purpose - renders input file
+
+	/*int size = 400;
 
 	char* inFile = "input.txt";
 	parseArgs(inFile);
@@ -133,7 +139,14 @@ int main(int argc, char* argv[])
 			c.addPixel(rt.trace(s.getSample()));
 		}
 	}
-	c.encode("image.png");
+	c.encode("image.png");*/
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	// Transform test:
+	Vector3f vv(1, 1, 1, 0);
+	translate trans(3, 4, 5);
+	cout << trans.matrix << endl << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
