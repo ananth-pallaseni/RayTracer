@@ -160,6 +160,8 @@ int main(int argc, char* argv[])
 	cout << rr.matrix << endl << endl;
 	cout << "operator test:" << endl;
 	cout << rr.matrix * vv << endl << endl;
+	Vector3f qq(0, 180, 0);
+	cout << qq.norm() << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
