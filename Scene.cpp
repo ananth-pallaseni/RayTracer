@@ -146,9 +146,15 @@ int main(int argc, char* argv[])
 	// Transform test:
 	Vector4f vv(1, 1, 1, 1);
 	translate trans(3, 4, 5);
+	scale sc(1, 2, 3);
+	cout << "Transform MAtrix" << endl;
 	cout << trans.matrix << endl << endl;
 	cout << "operator test:" << endl;
 	cout << trans.matrix * vv << endl << endl;
+	cout << "Scale MAtrix" << endl;
+	cout << sc.matrix << endl << endl;
+	cout << "operator test:" << endl;
+	cout << sc.matrix * vv << endl << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
