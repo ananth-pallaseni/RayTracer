@@ -148,7 +148,7 @@ int main(int argc, char* argv[])
 {
 
 	Vector3f e(0, 0, 0);
-	Vector3f p(0, 0, 1);
+	Vector3f p(0, 0, 49);
 
 	Matrix4f I;
 	I << 1, 0, 0, 0,
