@@ -343,7 +343,7 @@ struct ray
 		// B = 2 * sMinusEObj . (eObj - c)
 		float B = 2 * sMinusEObj .dot(( eObj - centerObj ));
 		// C = (eObj - c) . (eObj - c) - r^2
-		float C = ( eObj - centerObj ).dot( ( eObj - centerObj ) ) - (sph.radius * sph.radius);
+		float C = ( eObj - centerObj ).dot( ( eObj - centerObj ) ) - 1;
 		float discriminant = B*B - 4*A*C;
 		if (discriminant >= 0) {
 			// Only use negative value of discriminant, as this will be closer to the plane
