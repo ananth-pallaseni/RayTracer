@@ -305,6 +305,8 @@ struct ray
 	}
 
 	Vector4f p(Vector4f eye, Vector4f sMinE, float t) {
+		eye(3) = 1;
+		sMinE(3) = 0;
 		return eye + t * sMinE;
 	}
 
@@ -371,15 +373,13 @@ struct ray
 				t = (-B + sqrt(discriminant)) / (2 * A);
 			}
 			eObj(3) = 1;
-			Vector4f pointInWorldSpace = ( eObj + t * sMinusEObj);
-			sMinusEObj(3) = 1;
-			pointInWorldSpace = inv * pointInWorldSpace;
+			Vector4f pointInWorldSpace = inv * ( eObj + t * sMinusEObj);
 
 			(*point)(0) = pointInWorldSpace(0); // transform back into world coordinates
 			(*point)(1) = pointInWorldSpace(1);
 			(*point)(2) = pointInWorldSpace(2);
 			*tt = t;
-			
+
 			return true;
 		}
 		return false;
