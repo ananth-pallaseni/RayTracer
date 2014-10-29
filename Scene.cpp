@@ -213,7 +213,7 @@ int main(int argc, char* argv[])
 
 	ray r(e, p);
 	material mm;
-	sphere sph(50, 50, 50, 10, mm, I, I);
+	sphere sph(0, 0, 50, 10, mm, I, I);
 	Matrix4f trans = sph.worldToObj;
 	Matrix4f inv = sph.objToWorld;
 	Vector3f pp;
