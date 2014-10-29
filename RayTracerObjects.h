@@ -311,7 +311,7 @@ struct ray
 	}
 
 	// OLD:
-	bool intersect(sphere sph, Vector3f* point) {
+	/*bool intersect(sphere sph, Vector3f* point) {
 		// Check Discriminant:
 		// A = sMinusE . sMinusE
 		float A = sMinusE.dot(sMinusE);
@@ -334,10 +334,10 @@ struct ray
 			return true;
 		}
 		return false;
-	}
+	}*/
 
 	// NEW:
-	bool intersect(sphere sph, Vector3f* point, bool qqqq, float* tt) {
+	bool intersect(sphere sph, Vector3f* point) {
 		// Check Discriminant:
 		// A = sMinusE . sMinusE
 		Matrix4f trans = sph.inverseTransformMatrix;
@@ -364,7 +364,7 @@ struct ray
 		float C = ( eObj ).dot( ( eObj ) ) - 1;
 		float discriminant = B*B - 4*A*C;
 		if (discriminant >= 0) {
-			// Only use negative value of discriminant, as this will be closer to the plane
+			// Use positive or negative value of discriminant depending on which results in the smallest t.
 			float t;
 			if(B < 0) {
 				t = (-B - sqrt(discriminant)) / (2 * A);
@@ -378,7 +378,6 @@ struct ray
 			(*point)(0) = pointInWorldSpace(0); // transform back into world coordinates
 			(*point)(1) = pointInWorldSpace(1);
 			(*point)(2) = pointInWorldSpace(2);
-			*tt = t;
 
 			return true;
 		}

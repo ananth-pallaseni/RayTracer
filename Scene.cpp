@@ -147,7 +147,34 @@ void parseArgs(char* filename) {
 int main(int argc, char* argv[])
 {
 
-	Vector3f e(0, 0, 0);
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	// General Purpose - renders input file
+
+	int size = 400;
+
+	char* inFile = "input.txt";
+	parseArgs(inFile);
+
+	cout << spheres[0].transformMatrix << endl;
+
+	Sampler s(size, size, LL, LR, UL, UR);
+	Canvas c(size, size);
+	RayTracer rt(eye, spheres, triangles, pointLights, directionalLights, ambientLights);
+	for(int i = 0; i < size; i++) {
+		for(int j = 0; j < size; j++) {
+			c.addPixel(rt.trace(s.getSample()));
+		}
+	}
+	c.encode("image.png");
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	// Test for moving between object and world space
+
+
+	/*Vector3f e(0, 0, 0);
 	Vector3f p(0, 0, 1);
 
 	Matrix4f I;
@@ -193,29 +220,9 @@ int main(int argc, char* argv[])
 		cout << pp << endl << endl;
 		Vector4f ppp(pp(0), pp(1), pp(2), 1);
 		cout << inv * ppp << endl;
-	}
+	}*/
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	// General Purpose - renders input file
-
-	/*int size = 400;
-
-	char* inFile = "input.txt";
-	parseArgs(inFile);
-
-	cout << spheres[0].transformMatrix << endl;
-
-	Sampler s(size, size, LL, LR, UL, UR);
-	Canvas c(size, size);
-	RayTracer rt(eye, spheres, triangles, pointLights, directionalLights, ambientLights);
-	for(int i = 0; i < size; i++) {
-		for(int j = 0; j < size; j++) {
-			c.addPixel(rt.trace(s.getSample()));
-		}
-	}
-	c.encode("image.png");*/
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
