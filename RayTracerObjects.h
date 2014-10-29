@@ -3,7 +3,7 @@
 
 
 #include "Eigen/Dense"
-#include <math.h>
+#include <cmath>
 #include <iostream>
 
 using namespace std;
@@ -393,7 +393,7 @@ struct rotation: transform3d
 
 	void createMatrix() {
 		Vector3f r(x, y, z);
-		float theta = r.norm();
+		float theta = r.norm() * M_PI / 180.0;
 		Vector3f rHat = r / theta;
 		Matrix3f rc = rCross(rHat);
 		Matrix3f I;
