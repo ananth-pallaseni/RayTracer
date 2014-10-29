@@ -161,10 +161,13 @@ int main(int argc, char* argv[])
 	cout << rr.matrix << endl << endl;
 	cout << "operator test:" << endl;
 	cout << rr.matrix * vv << endl << endl;
-	Vector3f qq(0, 180, 0);
-	cout << rr.rCross(qq / qq.norm()) * rr.rCross(qq / qq.norm()) << endl;
-	cout << sin(180 * M_PI / 180.0) << endl;
-	cout << cos(180 * M_PI / 180.0) << endl;
+
+	cout << "combined ops:" << endl;
+	Vector4f q(3, 3, 3, 1);
+	translate qq(-1, -1, -1);
+	scale qqq(2, 2, 2);
+	rotate qqqq(0, 180, 0);
+	cout << qqqq * qqq * qq << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
