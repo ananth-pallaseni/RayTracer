@@ -160,11 +160,15 @@ bool intersect(sphere sph, Vector3f* point, Vector3f e, Vector3f sMinusE) {
 		sMinusEObj(3) = 0;
 
 		float A = sMinusEObj.dot(sMinusEObj);
+		cout << "A: " << A << endl;
 		// B = 2 * sMinusEObj . (eObj - c)
 		float B = 2 * sMinusEObj .dot(( eObj ));
+		cout << "B: " << B << endl;
 		// C = (eObj - c) . (eObj - c) - r^2
 		float C = ( eObj ).dot( ( eObj ) ) - 1;
+		cout << "C: " << C << endl;
 		float discriminant = B*B - 4*A*C;
+		cout << "Discriminant: " << discriminant << endl;
 		if (discriminant >= 0) {
 			// Use positive or negative value of discriminant depending on which results in the smallest t.
 			float t;
