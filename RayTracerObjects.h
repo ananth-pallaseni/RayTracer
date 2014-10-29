@@ -29,6 +29,172 @@ struct camera {
 	}
 };
 
+
+struct transform
+{
+	int type; // 0: translation, 1: rotation, 2: scaling
+	float x, y, z;
+	//Vector3d matrix;
+	void createMatrix(float x, float y, float z);
+};
+
+struct transform2d : transform
+{
+	Matrix3f matrix;
+	friend Matrix3f operator+(const transform2d &mat1, Matrix3f mat2) {
+		return mat1.matrix * mat2;
+	}
+
+	friend Matrix3f operator+(Matrix3f mat1, const transform2d &mat2) {
+		return mat1 * mat2.matrix;
+	}
+};
+
+struct transform3d : transform
+{
+	Matrix4f matrix;
+	Matrix4f inverse;
+	friend Matrix4f operator*(const transform3d &mat1, Matrix4f mat2) {
+		return mat1.matrix * mat2;
+	}
+
+	friend Matrix4f operator*(Matrix4f mat1, const transform3d &mat2) {
+		return mat1 * mat2.matrix;
+	}
+	friend Matrix4f operator*(const transform3d &mat1, const transform3d &mat2) {
+		return mat1.matrix * mat2.matrix;
+	}
+
+};
+
+// Transforms have instatiators that call the create matrix function and assign them to the matrix variable.
+// TODO: overload the arithmetic operators on these to enable easy arithmatic with matrices. Eg: allow (matrix * translate) = (matrix * translate.matrix) etc
+
+struct translate2d : transform2d
+{
+
+	void createMatrix() {
+		matrix << 1, 0, x,
+				  0, 1, y, 
+				  0, 0, 1;
+	}
+
+	translate2d(float tx, float ty, float tz) {
+		translate2d::type = TRANSLATION;
+		translate2d::x = tx;
+		translate2d::y = ty;
+		translate2d::z = tz;
+		createMatrix();
+	}
+};
+
+struct translate : transform3d
+{
+	void createMatrix() {
+		matrix << 1, 0, 0, x,
+				  0, 1, 0, y, 
+				  0, 0, 1, z,
+				  0, 0, 0, 1;
+
+		inverse << 1, 0, 0, -x,
+				   0, 1, 0, -y, 
+				   0, 0, 1, -z,
+				   0, 0, 0, 1;
+	}
+
+	translate(float tx, float ty, float tz) {
+		type = TRANSLATION;
+		x = tx;
+		y = ty;
+		z = tz;
+		createMatrix();
+	}
+};
+
+
+struct scale : transform3d
+{
+	void createMatrix() {
+		matrix << x, 0, 0, 0,
+				  0, y, 0, 0,
+				  0, 0, z, 0, 
+				  0, 0, 0, 1;
+
+		inverse << 1.0/x, 0, 0, 0,
+				   0, 1.0/y, 0, 0,
+				   0, 0, 1.0/z, 0, 
+				   0, 0, 0, 1;
+	}
+
+	scale(float sx, float sy, float sz) {
+		type = SCALING;
+		x = sx;
+		y = sy;
+		z = sz;
+		createMatrix();
+	}
+};
+
+
+struct rotation: transform3d
+{
+
+	Matrix3f rCross(Vector3f rHat) {
+		Matrix3f m;
+		m << 0, -rHat(2), rHat(1),
+		     rHat(2), 0, -rHat(0),
+		     -rHat(1), rHat(0), 0;
+		return m;
+	}
+
+	void createMatrix() {
+		Vector3f r(x, y, z);
+		float theta = r.norm() * M_PI / 180.0;
+		Vector3f rHat = r / r.norm();
+		Matrix3f rc = rCross(rHat);
+		Matrix3f I;
+		I << 1, 0, 0,
+		     0, 1, 0,
+		     0, 0, 1;
+		Matrix3f matrix3 = I + sin(theta) * rc + (1- cos(theta)) * rc * rc ;
+		
+		matrix(0, 0) = matrix3(0, 0);
+		matrix(1, 0) = matrix3(1, 0);
+		matrix(2, 0) = matrix3(2, 0);
+		
+		matrix(0, 1) = matrix3(0, 1);
+		matrix(1, 1) = matrix3(1, 1);
+		matrix(2, 1) = matrix3(2, 1);
+
+		matrix(0, 2) = matrix3(0, 2);
+		matrix(1, 2) = matrix3(1, 2);
+		matrix(2, 2) = matrix3(2, 2);
+
+		matrix(0, 3) = 0;
+		matrix(1, 3) = 0;
+		matrix(2, 3) = 0;
+
+		matrix(3, 0) = 0;
+		matrix(3, 1) = 0;
+		matrix(3, 2) = 0;
+		matrix(3, 3) = 1;
+
+		inverse = matrix.transpose();
+
+	}
+
+	rotation(float rx, float ry, float rz) {
+		type = ROTATION;
+		x = rx;
+		y = ry;
+		z = rz;
+		createMatrix();
+	}
+
+	
+};
+
+
 struct color
 {
 	unsigned char r, g, b;
@@ -311,170 +477,6 @@ struct ambientLight : light {  // this exists purely for naming convenience
 	}
 };
 
-
-struct transform
-{
-	int type; // 0: translation, 1: rotation, 2: scaling
-	float x, y, z;
-	//Vector3d matrix;
-	void createMatrix(float x, float y, float z);
-};
-
-struct transform2d : transform
-{
-	Matrix3f matrix;
-	friend Matrix3f operator+(const transform2d &mat1, Matrix3f mat2) {
-		return mat1.matrix * mat2;
-	}
-
-	friend Matrix3f operator+(Matrix3f mat1, const transform2d &mat2) {
-		return mat1 * mat2.matrix;
-	}
-};
-
-struct transform3d : transform
-{
-	Matrix4f matrix;
-	Matrix4f inverse;
-	friend Matrix4f operator*(const transform3d &mat1, Matrix4f mat2) {
-		return mat1.matrix * mat2;
-	}
-
-	friend Matrix4f operator*(Matrix4f mat1, const transform3d &mat2) {
-		return mat1 * mat2.matrix;
-	}
-	friend Matrix4f operator*(const transform3d &mat1, const transform3d &mat2) {
-		return mat1.matrix * mat2.matrix;
-	}
-
-};
-
-// Transforms have instatiators that call the create matrix function and assign them to the matrix variable.
-// TODO: overload the arithmetic operators on these to enable easy arithmatic with matrices. Eg: allow (matrix * translate) = (matrix * translate.matrix) etc
-
-struct translate2d : transform2d
-{
-
-	void createMatrix() {
-		matrix << 1, 0, x,
-				  0, 1, y, 
-				  0, 0, 1;
-	}
-
-	translate2d(float tx, float ty, float tz) {
-		translate2d::type = TRANSLATION;
-		translate2d::x = tx;
-		translate2d::y = ty;
-		translate2d::z = tz;
-		createMatrix();
-	}
-};
-
-struct translate : transform3d
-{
-	void createMatrix() {
-		matrix << 1, 0, 0, x,
-				  0, 1, 0, y, 
-				  0, 0, 1, z,
-				  0, 0, 0, 1;
-
-		inverse << 1, 0, 0, -x,
-				   0, 1, 0, -y, 
-				   0, 0, 1, -z,
-				   0, 0, 0, 1;
-	}
-
-	translate(float tx, float ty, float tz) {
-		type = TRANSLATION;
-		x = tx;
-		y = ty;
-		z = tz;
-		createMatrix();
-	}
-};
-
-
-struct scale : transform3d
-{
-	void createMatrix() {
-		matrix << x, 0, 0, 0,
-				  0, y, 0, 0,
-				  0, 0, z, 0, 
-				  0, 0, 0, 1;
-
-		inverse << 1.0/x, 0, 0, 0,
-				   0, 1.0/y, 0, 0,
-				   0, 0, 1.0/z, 0, 
-				   0, 0, 0, 1;
-	}
-
-	scale(float sx, float sy, float sz) {
-		type = SCALING;
-		x = sx;
-		y = sy;
-		z = sz;
-		createMatrix();
-	}
-};
-
-
-struct rotation: transform3d
-{
-
-	Matrix3f rCross(Vector3f rHat) {
-		Matrix3f m;
-		m << 0, -rHat(2), rHat(1),
-		     rHat(2), 0, -rHat(0),
-		     -rHat(1), rHat(0), 0;
-		return m;
-	}
-
-	void createMatrix() {
-		Vector3f r(x, y, z);
-		float theta = r.norm() * M_PI / 180.0;
-		Vector3f rHat = r / r.norm();
-		Matrix3f rc = rCross(rHat);
-		Matrix3f I;
-		I << 1, 0, 0,
-		     0, 1, 0,
-		     0, 0, 1;
-		Matrix3f matrix3 = I + sin(theta) * rc + (1- cos(theta)) * rc * rc ;
-		
-		matrix(0, 0) = matrix3(0, 0);
-		matrix(1, 0) = matrix3(1, 0);
-		matrix(2, 0) = matrix3(2, 0);
-		
-		matrix(0, 1) = matrix3(0, 1);
-		matrix(1, 1) = matrix3(1, 1);
-		matrix(2, 1) = matrix3(2, 1);
-
-		matrix(0, 2) = matrix3(0, 2);
-		matrix(1, 2) = matrix3(1, 2);
-		matrix(2, 2) = matrix3(2, 2);
-
-		matrix(0, 3) = 0;
-		matrix(1, 3) = 0;
-		matrix(2, 3) = 0;
-
-		matrix(3, 0) = 0;
-		matrix(3, 1) = 0;
-		matrix(3, 2) = 0;
-		matrix(3, 3) = 1;
-
-		inverse = matrix.transpose();
-
-	}
-
-	rotation(float rx, float ry, float rz) {
-		type = ROTATION;
-		x = rx;
-		y = ry;
-		z = rz;
-		createMatrix();
-	}
-
-	
-};
 
 
 

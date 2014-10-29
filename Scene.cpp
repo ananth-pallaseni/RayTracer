@@ -40,6 +40,12 @@ void parseArgs(char* filename) {
 
   	material mat;
   	Matrix4f cumulativeTransform;
+  	Matrix4f I;
+  	I << 1, 0, 0, 0,
+		 0, 1, 0, 0,
+		 0, 0, 1, 0,
+		 0, 0, 0, 1;
+	cumulativeTransform = I;
   	
   	// read each line of the file
   	while (!fin.eof())
@@ -74,7 +80,7 @@ void parseArgs(char* filename) {
   	  		UR << atof(token[13]), atof(token[14]), atof(token[15]);
   	  	}
   	  	else if(strcmp(token[0], "sph") == 0) {
-  	  		sphere sph(atof(token[1]), atof(token[2]), atof(token[3]), atof(token[4]), mat);
+  	  		sphere sph(atof(token[1]), atof(token[2]), atof(token[3]), atof(token[4]), mat, cumulativeTransform);
   	  		spheres.push_back(sph);
   	  	}
   	  	else if(strcmp(token[0], "tri") == 0) {
@@ -109,6 +115,21 @@ void parseArgs(char* filename) {
   	  					atof(token[11]), atof(token[12]), atof(token[13]));
   	  		cout << atof(token[10]) << endl;
   	  		mat = mm;
+  	  	}
+  	  	else if(strcmp(token[0], "xft") == 0) {
+  	  		translate tMat(atof(token[1]), atof(token[2]), atof(token[3]);
+  	  		cumulativeTransform = tMat.inverse * cumulativeTransform;
+  	  	}
+  	  	else if(strcmp(token[0], "xfr") == 0) {
+  	  		rotation rMat(atof(token[1]), atof(token[2]), atof(token[3]);
+  	  		cumulativeTransform = rMat.inverse * cumulativeTransform;
+  	  	}
+  	  	else if(strcmp(token[0], "xfs") == 0) {
+  	  		scale sMat(atof(token[1]), atof(token[2]), atof(token[3]);
+  	  		cumulativeTransform = sMat.inverse * cumulativeTransform;
+  	  	}
+  	  	else if(strcmp(token[0], "xfz") == 0) {
+  	  		cumulativeTransform = I;
   	  	}
   	  	else {
   	  		cout << "UNRECOGNIZED TYPE: " << token[0] << endl;
