@@ -144,6 +144,48 @@ void parseArgs(char* filename) {
 
 }
 
+
+
+
+bool intersect(sphere sph, Vector3f* point, Vector3f e, Vector3f sMinusE) {
+		// Check Discriminant:
+		// A = sMinusE . sMinusE
+		Matrix4f trans = sph.worldToObj;
+		Matrix4f inv = sph.objToWorld;
+		Vector4f eObj(e(0), e(1), e(2), 1); // eye in homogenized coords
+		Vector4f sMinusEObj(sMinusE(0), sMinusE(1), sMinusE(2), 1); // sMinusE in homogenized coords
+		eObj = trans * eObj; // take ray to obj space
+		sMinusEObj = trans * sMinusEObj; // take ray to obj space
+		eObj(3) = 0;
+		sMinusEObj(3) = 0;
+
+		float A = sMinusEObj.dot(sMinusEObj);
+		// B = 2 * sMinusEObj . (eObj - c)
+		float B = 2 * sMinusEObj .dot(( eObj ));
+		// C = (eObj - c) . (eObj - c) - r^2
+		float C = ( eObj ).dot( ( eObj ) ) - 1;
+		float discriminant = B*B - 4*A*C;
+		if (discriminant >= 0) {
+			// Use positive or negative value of discriminant depending on which results in the smallest t.
+			float t;
+			if(B < 0) {
+				t = (-B - sqrt(discriminant)) / (2 * A);
+			}
+			else {
+				t = (-B + sqrt(discriminant)) / (2 * A);
+			}
+			eObj(3) = 1;
+			Vector4f pointInWorldSpace = inv * ( eObj + t * sMinusEObj); // take point to world space
+
+			(*point)(0) = pointInWorldSpace(0); // transform back into world coordinates
+			(*point)(1) = pointInWorldSpace(1);
+			(*point)(2) = pointInWorldSpace(2);
+
+			return true;
+		}
+		return false;
+	}
+
 int main(int argc, char* argv[])
 {
 
@@ -217,39 +259,13 @@ int main(int argc, char* argv[])
 	Matrix4f trans = sph.worldToObj;
 	Matrix4f inv = sph.objToWorld;
 	Vector3f pp(-100, -100, -100);
-	cout << "TRANSFORM FOR SPHERE: " << endl;
+	cout << "WORLD TO OBJ: " << endl;
 	cout << sph.worldToObj << endl << endl;
-	cout << "INVERSE FOR SPHERE: " << endl;
+	cout << "OBJ TO WORLD: " << endl;
 	cout << sph.objToWorld << endl << endl;
-	float tcheck;
-	if(r.intersect(sph, &pp)) {
-		cout << "INTERSECT" << endl;
-		cout << "e :" << endl << r.e << endl << endl;
-		cout << "sminuse :" << endl << r.sMinusE << endl << endl;
-		cout << "POINT : " << endl << pp << endl << endl;
-		cout << inv * trans << endl << endl;
-		Vector3f ppp(-101, -101, -101);
-		bool cq = r.intersect(sph, &ppp, true);
-		cout << "OLD POINT : " << endl << ppp << endl << endl;
-	}
-	else {
-		cout << "NOOOOOOOOOOOOOOOO" << endl;
-		/*Vector4f ee(0, 0, 0, 1);
-		Vector4f ss(r.sMinusE(0), r.sMinusE(1), r.sMinusE(2), 1);
-		ee = trans * ee;	
-		ss = trans * ss;
-		cout << ee << endl << endl;
-		cout << ss << endl << endl;
-		Vector3f ne(ee(0), ee(1), ee(2));
-		Vector3f np(ss(0), ss(1), ss(2));
-		ray newr(ne, np + ne);
-		sphere newsphsph(0, 0, 0, 1, mm, I, I);
-		cout << "new ray: " << endl << endl << newr.e << endl << endl << newr.sMinusE << endl << endl;
-		cout << "intersect = " << newr.intersect(newsphsph, &pp) << endl << endl;
-		cout << pp << endl << endl;
-		Vector4f ppp(pp(0), pp(1), pp(2), 1);
-		cout << inv * ppp << endl;*/
-	}
+	bool test1 = intersect(sph, &pp, e, r.sMinusE);
+	cout << pp << endl << endl;
+	
 
 
 
