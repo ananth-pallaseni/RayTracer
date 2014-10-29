@@ -153,7 +153,7 @@ int main(int argc, char* argv[])
 	Matrix4f mmm = spheres[0].transformMatrix;
 	Matrix4f inv = spheres[0].inverseTransformMatrix;
 	Vector4f vv(1, 1, 1, 1);
-	cout << inv * mmm * vv << endl;
+	cout << mmm * vv << endl;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
