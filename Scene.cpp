@@ -148,7 +148,7 @@ int main(int argc, char* argv[])
 	translate trans(3, 4, 5);
 	cout << trans.matrix << endl << endl;
 	cout << "operator test:" << endl;
-	cout << trans * vv << endl << endl;
+	cout << trans.matrix * vv << endl << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
