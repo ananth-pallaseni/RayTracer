@@ -166,7 +166,7 @@ int main(int argc, char* argv[])
 	Vector4f q(3, 3, 3, 1);
 	translate qq(-1, -1, -1);
 	scale qqq(2, 2, 2);
-	rotate qqqq(0, 180, 0);
+	rotation qqqq(0, 180, 0);
 	cout << qqqq * qqq * qq << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
