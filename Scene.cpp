@@ -40,12 +40,14 @@ void parseArgs(char* filename) {
 
   	material mat;
   	Matrix4f cumulativeTransform;
+  	Matrix4f inverseCumulativeTransform;
   	Matrix4f I;
   	I << 1, 0, 0, 0,
 		 0, 1, 0, 0,
 		 0, 0, 1, 0,
 		 0, 0, 0, 1;
 	cumulativeTransform = I;
+	inverseCumulativeTransform = I;
   	
   	// read each line of the file
   	while (!fin.eof())
@@ -118,15 +120,18 @@ void parseArgs(char* filename) {
   	  	}
   	  	else if(strcmp(token[0], "xft") == 0) {
   	  		translate tMat(atof(token[1]), atof(token[2]), atof(token[3]));
-  	  		cumulativeTransform = tMat.inverse * cumulativeTransform;
+  	  		cumulativeTransform = tMat * cumulativeTransform;
+  	  		inverseCumulativeTransform = inverseCumulativeTransform * tMat.inverse;
   	  	}
   	  	else if(strcmp(token[0], "xfr") == 0) {
   	  		rotation rMat(atof(token[1]), atof(token[2]), atof(token[3]));
-  	  		cumulativeTransform = rMat.inverse * cumulativeTransform;
+  	  		cumulativeTransform = rMat * cumulativeTransform;
+  	  		inverseCumulativeTransform = inverseCumulativeTransform * rMat.inverse;
   	  	}
   	  	else if(strcmp(token[0], "xfs") == 0) {
   	  		scale sMat(atof(token[1]), atof(token[2]), atof(token[3]));
-  	  		cumulativeTransform = sMat.inverse * cumulativeTransform;
+  	  		cumulativeTransform = sMat * cumulativeTransform;
+  	  		inverseCumulativeTransform = inverseCumulativeTransform * sMat.inverse;
   	  	}
   	  	else if(strcmp(token[0], "xfz") == 0) {
   	  		cumulativeTransform = I;
