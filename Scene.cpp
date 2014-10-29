@@ -220,7 +220,7 @@ int main(int argc, char* argv[])
 	cout << "TRANSFORM FOR SPHERE: " << endl;
 	cout << sph.inverseTransformMatrix << endl << endl;
 	float tcheck;
-	if(r.intersect(sph, &pp, true, &tcheck)) {
+	if(r.intersect(sph, &pp)) {
 		cout << "INTERSECT" << endl;
 		cout << "e :" << endl << r.e << endl << endl;
 		cout << "sminuse :" << endl << r.sMinusE << endl << endl;
@@ -229,7 +229,7 @@ int main(int argc, char* argv[])
 	}
 	else {
 		cout << "NOOOOOOOOOOOOOOOO" << endl;
-		Vector4f ee(0, 0, 0, 1);
+		/*Vector4f ee(0, 0, 0, 1);
 		Vector4f ss(r.sMinusE(0), r.sMinusE(1), r.sMinusE(2), 1);
 		ee = trans * ee;	
 		ss = trans * ss;
@@ -243,7 +243,7 @@ int main(int argc, char* argv[])
 		cout << "intersect = " << newr.intersect(newsphsph, &pp) << endl << endl;
 		cout << pp << endl << endl;
 		Vector4f ppp(pp(0), pp(1), pp(2), 1);
-		cout << inv * ppp << endl;
+		cout << inv * ppp << endl;*/
 	}
 
 
