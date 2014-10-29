@@ -349,9 +349,9 @@ struct ray
 			// Only use negative value of discriminant, as this will be closer to the plane
 			float t = (-B - sqrt(discriminant)) / (2 * A);
 			Vector4f pointInWorldSpace = inv * p(eObj, sMinusEObj, t);
-			*point(0) = pointInWorldSpace(0); // transform back into world coordinates
-			*point(1) = pointInWorldSpace(1);
-			*point(2) = pointInWorldSpace(2);
+			(*point)(0) = pointInWorldSpace(0); // transform back into world coordinates
+			(*point)(1) = pointInWorldSpace(1);
+			(*point)(2) = pointInWorldSpace(2);
 			return true;
 		}
 		return false;
