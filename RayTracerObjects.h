@@ -387,7 +387,7 @@ struct rotation: transform3d
 		Matrix3f m;
 		m << 0, -rHat(2), rHat(1),
 		     rHat(2), 0, -rHat(0),
-		     rHat(1), rHat(0), 0;
+		     -rHat(1), rHat(0), 0;
 		return m;
 	}
 
