@@ -3,7 +3,7 @@
 #include "Eigen/Dense"
 #include <fstream>
 #include <string.h>
-#include <math.h>
+#include <cmath>
 
 #include "Sampler.h"
 #include "Canvas.h"
