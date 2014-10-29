@@ -319,6 +319,10 @@ struct transform3d : transform
 	friend Matrix4f operator*(Matrix4f mat1, const transform3d &mat2) {
 		return mat1 * mat2.matrix;
 	}
+	friend Matrix4f operator*(const transform3d &mat1, const transform3d &mat2) {
+		return mat1.matrix * mat2.matrix;
+	}
+
 };
 
 // Transforms have instatiators that call the create matrix function and assign them to the matrix variable.
