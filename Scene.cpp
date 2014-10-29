@@ -174,7 +174,8 @@ int main(int argc, char* argv[])
 				}
 			}
 			else if(newm != oldm){
-				cout << "MISMATCH, methods did not both return true" << endl;
+				cout << "MISMATCH, methods did not both return the same" << endl;
+				cout << "NEW: " << newm << "	 OLD: " << oldm << endl; 
 				return 0;
 			}
 		}
