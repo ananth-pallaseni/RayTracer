@@ -325,11 +325,21 @@ struct ray
 	bool intersect(sphere sph, Vector3f* point) {
 		// Check Discriminant:
 		// A = sMinusE . sMinusE
-		float A = sMinusE.dot(sMinusE);
-		// B = 2 * sMinusE . (e - c)
-		float B = 2 * sMinusE .dot(( e - sph.center ));
-		// C = (e - c) . (e - c) - r^2
-		float C = ( e - sph.center ).dot( ( e - sph.center ) ) - ( sph.radius * sph.radius );
+		Matrix4f trans = sph.inverseTransformMatrix;
+		Matrix4f inv = sph.inverseTransformMatrix;
+		Vector4f eObj(e(0), e(1), e(2), 1);
+		Vector4f sMinusEObj(sMinusE(0), sMinusE(1), sMinusE(2), 1);
+		eObj = trans * eObj;
+		sMinusEObj = trans * sMinusEObj;
+		Vector4f centerObj(0, 0, 0, 1);
+
+
+
+		float A = sMinusEObj.dot(sMinusEObj);
+		// B = 2 * sMinusEObj . (eObj - c)
+		float B = 2 * sMinusEObj .dot(( eObj - centerObj ));
+		// C = (eObj - c) . (eObj - c) - r^2
+		float C = ( eObj - centerObj ).dot( ( eObj - centerObj ) ) - (sph.radius * sph.radius);
 		float discriminant = B*B - 4*A*C;
 		if (discriminant >= 0) {
 			// Only use negative value of discriminant, as this will be closer to the plane

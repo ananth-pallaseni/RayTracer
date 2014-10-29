@@ -148,19 +148,12 @@ void parseArgs(char* filename) {
 int main(int argc, char* argv[])
 {
 
-	char* inFile = "input.txt";
-	parseArgs(inFile);
-	Matrix4f mmm = spheres[0].transformMatrix;
-	Matrix4f inv = spheres[0].inverseTransformMatrix;
-	Vector4f vv(1, 1, 1, 1);
-	cout << mmm * vv << endl;
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// General Purpose - renders input file
 
-	/*int size = 400;
+	int size = 400;
 
 	char* inFile = "input.txt";
 	parseArgs(inFile);
@@ -173,7 +166,7 @@ int main(int argc, char* argv[])
 			c.addPixel(rt.trace(s.getSample()));
 		}
 	}
-	c.encode("image.png");*/
+	c.encode("image.png");
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
