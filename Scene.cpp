@@ -180,7 +180,7 @@ int main(int argc, char* argv[])
 		cout << ee << endl << endl;
 		cout << ss << endl << endl;
 		Vector3f ne(ee(0), ee(1), ee(2));
-		Vector3f np(ss(0), ss(0), ss(0));
+		Vector3f np(ss(0), ss(1), ss(2));
 		ray newr(ne, np + ne);
 		cout << "new ray: " << endl << endl << newr.e << endl << endl << newr.sMinusE << endl << endl;
 		cout << newr.intersect(sph, &pp) << endl;
