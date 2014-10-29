@@ -320,7 +320,7 @@ struct ray
 		float discriminant = B*B - 4*A*C;
 		if (discriminant >= 0) {
 			// Use positive or negative value of discriminant depending on which results in the smallest t.
-			float t
+			float t;
 			if(B < 0) {
 				t = (-B - sqrt(discriminant)) / (2 * A);
 			}
