@@ -250,6 +250,7 @@ struct object
 	int type;
 	material mat;
 	Matrix4f transformMatrix;
+	Matrix4f inverseTransformMatrix;
 };
 
 struct sphere : object
@@ -257,12 +258,13 @@ struct sphere : object
 	float radius;
 	Vector3f center;
 
-	sphere(float cx, float cy, float cz, float r, material m, Matrix4f transMatrix) {
+	sphere(float cx, float cy, float cz, float r, material m, Matrix4f transMatrix, Matrix4f invTransMatrix) {
 		radius = r;
 		center = Vector3f(cx, cy, cz);
 		type = SPHERE;
 		mat = m;
 		transformMatrix = transMatrix;
+		inverseTransformMatrix = invTransMatrix;
 	}
 
 };
@@ -271,13 +273,14 @@ struct triangle : object
 {
 	Vector3f a, b, c;
 
-	triangle(float ax, float ay, float az, float bx, float by, float bz, float cx, float cy, float cz, material m, Matrix4f transMatrix) {
+	triangle(float ax, float ay, float az, float bx, float by, float bz, float cx, float cy, float cz, material m, Matrix4f transMatrix, Matrix4f invTransMatrix) {
 		a = Vector3f(ax, ay, az);
 		b = Vector3f(bx, by, bz);
 		c = Vector3f(cx, cy, cz);
 		type = TRIANGLE;
 		mat = m;
 		transformMatrix = transMatrix;
+		inverseTransformMatrix = invTransMatrix;
 	}
 };
 

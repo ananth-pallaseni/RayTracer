@@ -82,11 +82,11 @@ void parseArgs(char* filename) {
   	  		UR << atof(token[13]), atof(token[14]), atof(token[15]);
   	  	}
   	  	else if(strcmp(token[0], "sph") == 0) {
-  	  		sphere sph(atof(token[1]), atof(token[2]), atof(token[3]), atof(token[4]), mat, cumulativeTransform);
+  	  		sphere sph(atof(token[1]), atof(token[2]), atof(token[3]), atof(token[4]), mat, cumulativeTransform, inverseCumulativeTransform);
   	  		spheres.push_back(sph);
   	  	}
   	  	else if(strcmp(token[0], "tri") == 0) {
-  	  		triangle tri(atof(token[1]), atof(token[2]), atof(token[3]), atof(token[4]), atof(token[5]), atof(token[6]), atof(token[7]), atof(token[8]), atof(token[9]), mat, cumulativeTransform);
+  	  		triangle tri(atof(token[1]), atof(token[2]), atof(token[3]), atof(token[4]), atof(token[5]), atof(token[6]), atof(token[7]), atof(token[8]), atof(token[9]), mat, cumulativeTransform, inverseCumulativeTransform);
   	  		triangles.push_back(tri);
   	  	}
   	  	else if(strcmp(token[0], "ltp") == 0) {
@@ -148,11 +148,12 @@ void parseArgs(char* filename) {
 int main(int argc, char* argv[])
 {
 
+	char* inFile = "input.txt";
+	parseArgs(inFile);
+	Matrix4f mmm = spheres[0].transformMatrix;
+	Matrix4f inv = spheres[0].inverseTransformMatrix;
 	Vector4f vv(1, 1, 1, 1);
-	translate trans(3, 4, 5);
-	scale sc(1, 2, 3);
-	rotation rr(0, 180, 0);
-	cout <<  trans.inverse * sc.inverse * rr.inverse * rr * sc * trans * vv << endl;
+	cout << inv * mmm * vv << endl;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
