@@ -90,7 +90,7 @@ Vector3f specular(Vector3f n, Vector3f l, Vector3f e, Vector3f k_specular, Vecto
 // Creates a shadow ray, and compares it with all objects 
 bool RayTracer::shadowRay(Vector3f point, Vector3f lightOrigin) {
 	// ray from point -> lightOrigin
-	/*ray r(point, lightOrigin);
+	ray r(point, lightOrigin);
 	float t;
 	for(int i = 0; i < numSpheres; i++) {
 		if(r.intersect(spheres[i], &t)) {
@@ -106,7 +106,6 @@ bool RayTracer::shadowRay(Vector3f point, Vector3f lightOrigin) {
 			}
 		}
 	}
-	return false;*/
 	return false;
 
 }
