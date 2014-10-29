@@ -226,8 +226,10 @@ int main(int argc, char* argv[])
 		cout << "INTERSECT" << endl;
 		cout << "e :" << endl << r.e << endl << endl;
 		cout << "sminuse :" << endl << r.sMinusE << endl << endl;
-		cout << pp << endl << endl;
-		cout << inv * trans << endl;
+		cout << << "POINT : " << endl << pp << endl << endl;
+		cout << inv * trans << endl << endl;
+		bool cq = r.intersect(sph, &pp, true);
+		cout << << "OLD POINT : " << endl << pp << endl << endl;
 	}
 	else {
 		cout << "NOOOOOOOOOOOOOOOO" << endl;
