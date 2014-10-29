@@ -249,8 +249,8 @@ struct object
 {
 	int type;
 	material mat;
-	Matrix4f transformMatrix;
-	Matrix4f inverseTransformMatrix;
+	Matrix4f objToWorld;
+	Matrix4f worldToObj;
 };
 
 struct sphere : object
@@ -265,8 +265,8 @@ struct sphere : object
 		mat = m;
 		translate initTrans(cx, cy, cz);
 		scale initScale(r, r, r);
-		transformMatrix = initScale * transMatrix *  initTrans; // takes a sphere from obj space to world space
-		inverseTransformMatrix = initTrans.inverse * initScale.inverse * invTransMatrix; // takes a sphere from world space to obj space
+		objToWorld =  initTrans * initScale * transMatrix; // takes a sphere from obj space to world space
+		worldToObj = invTransMatrix * initTrans.inverse * initScale.inverse; // takes a sphere from world space to obj space
 	}
 
 };
@@ -281,8 +281,8 @@ struct triangle : object
 		c = Vector3f(cx, cy, cz);
 		type = TRIANGLE;
 		mat = m;
-		transformMatrix = transMatrix;
-		inverseTransformMatrix = invTransMatrix;
+		objToWorld = transMatrix;
+		worldToObj = invTransMatrix;
 	}
 };
 
@@ -340,12 +340,12 @@ struct ray
 	bool intersect(sphere sph, Vector3f* point) {
 		// Check Discriminant:
 		// A = sMinusE . sMinusE
-		Matrix4f trans = sph.inverseTransformMatrix;
-		Matrix4f inv = sph.transformMatrix;
-		Vector4f eObj(e(0), e(1), e(2), 1);
-		Vector4f sMinusEObj(sMinusE(0), sMinusE(1), sMinusE(2), 1);
-		eObj = trans * eObj;
-		sMinusEObj = trans * sMinusEObj;
+		Matrix4f trans = sph.worldToObj;
+		Matrix4f inv = sph.objToWorld;
+		Vector4f eObj(e(0), e(1), e(2), 1); // eye in homogenized coords
+		Vector4f sMinusEObj(sMinusE(0), sMinusE(1), sMinusE(2), 1); // sMinusE in homogenized coords
+		eObj = trans * eObj; // take ray to obj space
+		sMinusEObj = trans * sMinusEObj; // take ray to obj space
 		eObj(3) = 0;
 		sMinusEObj(3) = 0;
 
@@ -373,7 +373,7 @@ struct ray
 				t = (-B + sqrt(discriminant)) / (2 * A);
 			}
 			eObj(3) = 1;
-			Vector4f pointInWorldSpace = inv * ( eObj + t * sMinusEObj);
+			Vector4f pointInWorldSpace = inv * ( eObj + t * sMinusEObj); // take point to world space
 
 			(*point)(0) = pointInWorldSpace(0); // transform back into world coordinates
 			(*point)(1) = pointInWorldSpace(1);
