@@ -182,8 +182,12 @@ int main(int argc, char* argv[])
 		Vector3f ne(ee(0), ee(1), ee(2));
 		Vector3f np(ss(0), ss(1), ss(2));
 		ray newr(ne, np + ne);
+		sphere newsphsph(0, 0, 0, 1, mm, I, I);
 		cout << "new ray: " << endl << endl << newr.e << endl << endl << newr.sMinusE << endl << endl;
-		cout << newr.intersect(sph, &pp) << endl;
+		cout << newr.intersect(newsphsph, &pp) << endl;
+		cout << pp << endl << endl;
+		Vector4f ppp(pp(0), pp(1), pp(2), 1);
+		cout << inv * ppp << endl;
 	}
 
 
