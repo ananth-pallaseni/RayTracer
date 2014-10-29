@@ -152,34 +152,34 @@ int main(int argc, char* argv[])
 
 	// General Purpose - renders input file
 
-	int size = 400;
+	/*int size = 400;
 
 	char* inFile = "input.txt";
-	parseArgs(inFile);
+	parseArgs(inFile);*/
 
 
-	Sampler s(size, size, LL, LR, UL, UR);
-	Canvas c(size, size);
-	sphere toTest = spheres[0];
-	for(int i = 0; i < size; i++) {
-		for(int j = 0; j < size; j++) {
-			ray r(eye, s.getSample());
-			Vector3f p1, p2;
-			bool newm = r.intersect(toTest, &p1);
-			bool oldm = r.intersect(toTest, &p2, true);
-			if(newm && oldm) {
-				if(p1 != p2) {
-					cout << "NEW METHOD: " << endl << p1 << endl << endl;
-					cout << "OLD METHOD: " << endl << p2 << endl << endl;
+			/*Sampler s(size, size, LL, LR, UL, UR);
+			Canvas c(size, size);
+			sphere toTest = spheres[0];
+			for(int i = 0; i < size; i++) {
+				for(int j = 0; j < size; j++) {
+					ray r(eye, s.getSample());
+					Vector3f p1, p2;
+					bool newm = r.intersect(toTest, &p1);
+					bool oldm = r.intersect(toTest, &p2, true);
+					if(newm && oldm) {
+						if(p1 != p2) {
+							cout << "NEW METHOD: " << endl << p1 << endl << endl;
+							cout << "OLD METHOD: " << endl << p2 << endl << endl;
+						}
+					}
+					else if(newm != oldm){
+						cout << "MISMATCH, methods did not both return the same" << endl;
+						cout << "NEW: " << newm << "	 OLD: " << oldm << endl; 
+						return 0;
+					}
 				}
-			}
-			else if(newm != oldm){
-				cout << "MISMATCH, methods did not both return the same" << endl;
-				cout << "NEW: " << newm << "	 OLD: " << oldm << endl; 
-				return 0;
-			}
-		}
-	}
+			}*/
 
 
 	/*Sampler s(size, size, LL, LR, UL, UR);
@@ -197,8 +197,8 @@ int main(int argc, char* argv[])
 	// Test for moving between object and world space
 
 
-	/*Vector3f e(0, 0, 0);
-	Vector3f p(0, 0, 1);
+	Vector3f e(0, 0, 0);
+	Vector3f p(1, 1, 1);
 
 	Matrix4f I;
 	I << 1, 0, 0, 0,
@@ -213,10 +213,11 @@ int main(int argc, char* argv[])
 
 	ray r(e, p);
 	material mm;
-	sphere sph(0, 0, 50, 1, mm, I, I);
+	sphere sph(50, 50, 50, 10, mm, I, I);
 	Matrix4f trans = sph.inverseTransformMatrix;
 	Matrix4f inv = sph.transformMatrix;
 	Vector3f pp;
+	cout << "TRANSFORM FOR SPHERE: " << endl;
 	cout << sph.inverseTransformMatrix << endl << endl;
 	float tcheck;
 	if(r.intersect(sph, &pp, true, &tcheck)) {
@@ -243,7 +244,7 @@ int main(int argc, char* argv[])
 		cout << pp << endl << endl;
 		Vector4f ppp(pp(0), pp(1), pp(2), 1);
 		cout << inv * ppp << endl;
-	}*/
+	}
 
 
 
