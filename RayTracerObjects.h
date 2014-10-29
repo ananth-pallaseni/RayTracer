@@ -368,9 +368,6 @@ struct ray
 			if(B < 0) {
 				t = (-B - sqrt(discriminant)) / (2 * A);
 			}
-			else if(B == 0) {
-				t = 1717;
-			}
 			else {
 				t = (-B + sqrt(discriminant)) / (2 * A);
 			}
@@ -380,6 +377,10 @@ struct ray
 			(*point)(2) = pointInWorldSpace(2);*/
 			*point = p(t);
 			*tt = t;
+
+			if(discriminant == 0) {
+				*tt = 2020;
+			}
 			return true;
 		}
 		return false;
