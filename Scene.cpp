@@ -163,7 +163,7 @@ int main(int argc, char* argv[])
 	cout << rr.matrix * vv << endl << endl;
 	Vector3f qq(0, 180, 0);
 	cout << rr.rCross(qq / qq.norm()) * rr.rCross(qq / qq.norm()) << endl;
-	cout << sin(180) << endl;
+	cout << sin(180 * M_PI / 180) << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
