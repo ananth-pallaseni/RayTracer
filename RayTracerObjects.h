@@ -309,7 +309,7 @@ struct ray
 	}
 
 	// OLD:
-	/*bool intersect(sphere sph, Vector3f* point) {
+	bool intersect(sphere sph, Vector3f* point) {
 		// Check Discriminant:
 		// A = sMinusE . sMinusE
 		float A = sMinusE.dot(sMinusE);
@@ -325,10 +325,10 @@ struct ray
 			return true;
 		}
 		return false;
-	}*/
+	}
 
 	// NEW:
-	bool intersect(sphere sph, Vector3f* point) {
+	bool intersect(sphere sph, Vector3f* point, bool qqqq) {
 		// Check Discriminant:
 		// A = sMinusE . sMinusE
 		Matrix4f trans = sph.inverseTransformMatrix;

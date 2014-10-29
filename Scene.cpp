@@ -168,7 +168,7 @@ int main(int argc, char* argv[])
 	Matrix4f inv = sph.transformMatrix;
 	Vector3f pp;
 	cout << sph.inverseTransformMatrix << endl << endl;
-	if(r.intersect(sph, &pp)) {
+	if(r.intersect(sph, &pp, true)) {
 		cout << "INTERSECT" << endl;
 	}
 	else {
@@ -179,6 +179,11 @@ int main(int argc, char* argv[])
 		ss = trans * ss;
 		cout << ee << endl << endl;
 		cout << ss << endl << endl;
+		Vector3f ne(ee(0), ee(1), ee(2));
+		Vector3f np(ss(0), ss(0), ss(0));
+		ray newr(ne, np + ne);
+		cout << "new ray: " << endl << endl << newr.e << endl << endl << newr.sMinusE << endl << endl;
+		cout << newr.intersect(sph, &pp) << endl;
 	}
 
 
