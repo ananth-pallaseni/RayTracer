@@ -162,8 +162,10 @@ int main(int argc, char* argv[])
 		     0, 0, 1;
 
 	ray r(e, p);
-	sphere sph(0, 0, 50, 1);
+	material mm;
+	sphere sph(0, 0, 50, 1, mm, I);
 	Vector3f p;
+	cout << sph.inverseTransformMatrix << endl << endl;
 	if(r.intersect(sph, &p)) {
 		cout << "INTERSECT" << endl;
 	}
