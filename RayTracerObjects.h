@@ -344,17 +344,19 @@ struct ray
 		Vector4f sMinusEObj(sMinusE(0), sMinusE(1), sMinusE(2), 1);
 		eObj = trans * eObj;
 		sMinusEObj = trans * sMinusEObj;
+		eObj(3) = 0;
+		sMinusEObj(3) = 0;
 		Vector4f centerObj(0, 0, 0, 1);
 
-		Vector3f ne(eObj(0), eObj(1), eObj(2));
+		/*Vector3f ne(eObj(0), eObj(1), eObj(2));
 		Vector3f ns(sMinusEObj(0), sMinusEObj(1), sMinusEObj(2));
 		ray nray(ne, ns + ne);
 		Matrix4f ii;
 		material iim;
 		sphere nsph(0, 0, 0, 1, iim, ii, ii );
-		return nray.intersect(nsph, point);
+		return nray.intersect(nsph, point);*/
 
-		/*float A = sMinusEObj.dot(sMinusEObj);
+		float A = sMinusEObj.dot(sMinusEObj);
 		// B = 2 * sMinusEObj . (eObj - c)
 		float B = 2 * sMinusEObj .dot(( eObj - centerObj ));
 		// C = (eObj - c) . (eObj - c) - r^2
@@ -369,7 +371,7 @@ struct ray
 			(*point)(2) = pointInWorldSpace(2);
 			return true;
 		}
-		return false;*/
+		return false;
 	}
 
 	bool intersect(sphere sph, float* t) {
