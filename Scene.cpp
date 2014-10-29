@@ -158,6 +158,8 @@ int main(int argc, char* argv[])
 	char* inFile = "input.txt";
 	parseArgs(inFile);
 
+	cout << spheres[0].transformMatrix << endl;
+
 	Sampler s(size, size, LL, LR, UL, UR);
 	Canvas c(size, size);
 	RayTracer rt(eye, spheres, triangles, pointLights, directionalLights, ambientLights);
