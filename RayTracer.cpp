@@ -123,7 +123,6 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 			Vector3f ttt(50, 50, 50);
 			rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, pl.l());
 			rgb = rgb + specular(normalAtPoint, lightDirection, e, shape.mat.spec, pl.l(), shape.mat.phongExp);
-			cout << shape.mat.phongExp << endl;
 			rgb = rgb + ambient(pl.l(), shape.mat.amb);
 		}
 	}

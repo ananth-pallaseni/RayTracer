@@ -106,7 +106,7 @@ void parseArgs(char* filename) {
   	  					atof(token[4]), atof(token[5]), atof(token[6]), 
   	  					atof(token[7]), atof(token[8]), atof(token[9]), atof(token[10]),
   	  					atof(token[11]), atof(token[12]), atof(token[13]));
-
+  	  		cout << atof(token[10]) << endl;
   	  		mat = mm;
   	  	}
   	  	else {
