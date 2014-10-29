@@ -219,6 +219,8 @@ int main(int argc, char* argv[])
 	Vector3f pp;
 	cout << "TRANSFORM FOR SPHERE: " << endl;
 	cout << sph.inverseTransformMatrix << endl << endl;
+	cout << "INVERSE FOR SPHERE: " << endl;
+	cout << sph.transformMatrix << endl << endl;
 	float tcheck;
 	if(r.intersect(sph, &pp)) {
 		cout << "INTERSECT" << endl;
