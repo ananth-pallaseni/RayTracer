@@ -170,6 +170,7 @@ int main(int argc, char* argv[])
 	cout << sph.inverseTransformMatrix << endl << endl;
 	if(r.intersect(sph, &pp, true)) {
 		cout << "INTERSECT" << endl;
+		cout << pp << endl;
 	}
 	else {
 		cout << "NOOOOOOOOOOOOOOOO" << endl;
