@@ -144,7 +144,7 @@ int main(int argc, char* argv[])
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// Transform test:
-	Vector3f vv(1, 1, 1, 0);
+	Vector4f vv(1, 1, 1, 0);
 	translate trans(3, 4, 5);
 	cout << trans.matrix << endl << endl;
 
