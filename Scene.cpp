@@ -227,7 +227,7 @@ int main(int argc, char* argv[])
 		cout << "e :" << endl << r.e << endl << endl;
 		cout << "sminuse :" << endl << r.sMinusE << endl << endl;
 		cout << pp << endl << endl;
-		//cout << "t: " << tcheck << endl;
+		cout << inv * trans << endl;
 	}
 	else {
 		cout << "NOOOOOOOOOOOOOOOO" << endl;
