@@ -73,6 +73,7 @@ Vector3f diffuse(Vector3f n, Vector3f l, Vector3f k_diffuse, Vector3f k_light) {
 }
 
 Vector3f ambient(Vector3f k_light, Vector3f k_ambient) {
+	cout << vMul(k_light, k_ambient) << endl << endl;
 	return vMul(k_light, k_ambient);
 }
 
