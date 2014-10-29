@@ -266,7 +266,7 @@ struct sphere : object
 		translate initTrans(cx, cy, cz);
 		scale initScale(r, r, r);
 		transformMatrix = transMatrix * initScale * initTrans; // takes a sphere from obj space to world space
-		inverseTransformMatrix = initTrans.inverse * initScale.inverse * invTransMatrix; // takes a sphere from world space to obj space
+		inverseTransformMatrix = initScale.inverse * initTrans.inverse *  invTransMatrix; // takes a sphere from world space to obj space
 	}
 
 };
