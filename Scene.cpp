@@ -148,7 +148,7 @@ int main(int argc, char* argv[])
 {
 
 	Vector3f e(0, 0, 0);
-	Vector3f p(0, 0, 49);
+	Vector3f p(0, 0, 1);
 
 	Matrix4f I;
 	I << 1, 0, 0, 0,
@@ -175,7 +175,7 @@ int main(int argc, char* argv[])
 		cout << "NOOOOOOOOOOOOOOOO" << endl;
 		Vector4f ee(0, 0, 0, 1);
 		Vector4f ss(r.sMinusE(0), r.sMinusE(1), r.sMinusE(2), 1);
-		ee = trans * ee;
+		ee = trans * ee;	
 		ss = trans * ss;
 		cout << ee << endl << endl;
 		cout << ss << endl << endl;
