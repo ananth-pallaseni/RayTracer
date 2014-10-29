@@ -214,13 +214,13 @@ int main(int argc, char* argv[])
 	ray r(e, p);
 	material mm;
 	sphere sph(50, 50, 50, 10, mm, I, I);
-	Matrix4f trans = sph.inverseTransformMatrix;
-	Matrix4f inv = sph.transformMatrix;
+	Matrix4f trans = sph.worldToObj;
+	Matrix4f inv = sph.objToWorld;
 	Vector3f pp;
 	cout << "TRANSFORM FOR SPHERE: " << endl;
-	cout << sph.inverseTransformMatrix << endl << endl;
+	cout << sph.worldToObj << endl << endl;
 	cout << "INVERSE FOR SPHERE: " << endl;
-	cout << sph.transformMatrix << endl << endl;
+	cout << sph.objToWorld << endl << endl;
 	float tcheck;
 	if(r.intersect(sph, &pp)) {
 		cout << "INTERSECT" << endl;
