@@ -164,6 +164,8 @@ int main(int argc, char* argv[])
 	ray r(e, p);
 	material mm;
 	sphere sph(0, 0, 50, 1, mm, I, I);
+	Matrix4f trans = sph.inverseTransformMatrix;
+	Matrix4f inv = sph.transformMatrix;
 	Vector3f pp;
 	cout << sph.inverseTransformMatrix << endl << endl;
 	if(r.intersect(sph, &pp)) {
@@ -171,6 +173,12 @@ int main(int argc, char* argv[])
 	}
 	else {
 		cout << "NOOOOOOOOOOOOOOOO" << endl;
+		Vector4f ee(0, 0, 0, 0);
+		Vector4f ss(r.sMinusE(0), r.sMinusE(1), r.sMinusE(2));
+		ee = trans * ee;
+		ss = trans * ss;
+		cout << ee << endl << endl;
+		cout << ss << endl << endl;
 	}
 
 
