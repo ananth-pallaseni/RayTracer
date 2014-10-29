@@ -167,7 +167,7 @@ int main(int argc, char* argv[])
 	translate qq(-1, -1, -1);
 	scale qqq(2, 2, 2);
 	rotation qqqq(0, 180, 0);
-	cout << qqqq * qqq * qq << endl;
+	cout << qqqq * qqq * qq * q<< endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
