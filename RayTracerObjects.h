@@ -347,15 +347,15 @@ struct ray
 		eObj(3) = 0;
 		sMinusEObj(3) = 0;
 
-		Vector3f ne(eObj(0), eObj(1), eObj(2));
+		/*Vector3f ne(eObj(0), eObj(1), eObj(2));
 		Vector3f ns(sMinusEObj(0), sMinusEObj(1), sMinusEObj(2));
 		ray nray(ne, ns + ne);
 		Matrix4f ii;
 		material iim;
 		sphere nsph(0, 0, 0, 1, iim, ii, ii );
-		return nray.intersect(nsph, point);
+		return nray.intersect(nsph, point);*/
 
-		/*float A = sMinusEObj.dot(sMinusEObj);
+		float A = sMinusEObj.dot(sMinusEObj);
 		// B = 2 * sMinusEObj . (eObj - c)
 		float B = 2 * sMinusEObj .dot(( eObj ));
 		// C = (eObj - c) . (eObj - c) - r^2
@@ -370,18 +370,19 @@ struct ray
 			else {
 				t = (-B + sqrt(discriminant)) / (2 * A);
 			}
-			Vector4f pointInWorldSpace = inv * p(eObj, sMinusEObj, t);
+			eObj(3) = 1;
+			Vector4f pointInWorldSpace = ( eObj + t * sMinusEObj);
+			sMinusEObj(3) = 1;
+			pointInWorldSpace = inv * pointInWorldSpace;
+
 			(*point)(0) = pointInWorldSpace(0); // transform back into world coordinates
 			(*point)(1) = pointInWorldSpace(1);
 			(*point)(2) = pointInWorldSpace(2);
 			*tt = t;
-
-			if(discriminant == 0) {
-				*tt = 2020;
-			}
+			
 			return true;
 		}
-		return false;*/
+		return false;
 	}
 
 	bool intersect(sphere sph, float* t) {
