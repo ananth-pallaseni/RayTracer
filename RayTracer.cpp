@@ -114,8 +114,8 @@ bool RayTracer::shadowRay(Vector3f point, Vector3f lightOrigin) {
 
 
 color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object shape) {
-	Vector3f rgb(0.3f, 0.15f, 0);
-	/*for(int i = 0; i < numPointLights; i++) {
+	Vector3f rgb(0, 0, 0);
+	for(int i = 0; i < numPointLights; i++) {
 		pointLight pl = pointLights[i];
 		if(!shadowRay(pointOnShape, pl.point)) {
 			// lightDirection is unit vector pointing TO light
@@ -145,7 +145,7 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 		rgb = rgb + ambient(al.l(), shape.mat.amb);
 	}
 
-	rgb = clamp(rgb);*/
+	rgb = clamp(rgb);
 	//cout << rgb << endl << endl;
 	return color(rgb);
 }
