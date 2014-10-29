@@ -302,6 +302,10 @@ struct ray
 		return e + t * (sMinusE);
 	}
 
+	Vector3f p(Vector3f eye, Vector3f sMinE, float t) {
+		return eye + t * sMinE;
+	}
+
 	// OLD:
 	/*bool intersect(sphere sph, Vector3f* point) {
 		// Check Discriminant:
@@ -344,7 +348,7 @@ struct ray
 		if (discriminant >= 0) {
 			// Only use negative value of discriminant, as this will be closer to the plane
 			float t = (-B - sqrt(discriminant)) / (2 * A);
-			*point = p(t);
+			*point = inv * p(eObj, sMinusEObj, t); // transform back into world coordinates
 			return true;
 		}
 		return false;
