@@ -276,30 +276,6 @@ int main(int argc, char* argv[])
 	parseArgs(inFile);
 
 
-			/*Sampler s(size, size, LL, LR, UL, UR);
-			Canvas c(size, size);
-			sphere toTest = spheres[0];
-			for(int i = 0; i < size; i++) {
-				for(int j = 0; j < size; j++) {
-					ray r(eye, s.getSample());
-					Vector3f p1, p2;
-					bool newm = r.intersect(toTest, &p1);
-					bool oldm = r.intersect(toTest, &p2, true);
-					if(newm && oldm) {
-						if(p1 != p2) {
-							cout << "NEW METHOD: " << endl << p1 << endl << endl;
-							cout << "OLD METHOD: " << endl << p2 << endl << endl;
-						}
-					}
-					else if(newm != oldm){
-						cout << "MISMATCH, methods did not both return the same" << endl;
-						cout << "NEW: " << newm << "	 OLD: " << oldm << endl; 
-						return 0;
-					}
-				}
-			}*/
-
-
 	Sampler s(size, size, LL, LR, UL, UR);
 	Canvas c(size, size);
 	RayTracer rt(eye, spheres, triangles, pointLights, directionalLights, ambientLights);

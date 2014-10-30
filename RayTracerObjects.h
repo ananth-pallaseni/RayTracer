@@ -349,14 +349,6 @@ struct ray
 		eObj(3) = 0;
 		sMinusEObj(3) = 0;
 
-		/*Vector3f ne(eObj(0), eObj(1), eObj(2));
-		Vector3f ns(sMinusEObj(0), sMinusEObj(1), sMinusEObj(2));
-		ray nray(ne, ns + ne);
-		Matrix4f ii;
-		material iim;
-		sphere nsph(0, 0, 0, 1, iim, ii, ii );
-		return nray.intersect(nsph, point);*/
-
 		float A = sMinusEObj.dot(sMinusEObj);
 		// B = 2 * sMinusEObj . (eObj - c)
 		float B = 2 * sMinusEObj .dot(( eObj ));
