@@ -277,8 +277,8 @@ int main(int argc, char* argv[])
 	// Test for moving between object and world space
 
 
-	Vector3f e(0, 0, 0);
-	Vector3f p(1, 1, 1);
+	Vector3f e(50, 0, 0);
+	Vector3f p(50, 1, 0);
 
 	Matrix4f I;
 	I << 1, 0, 0, 0,
@@ -293,7 +293,7 @@ int main(int argc, char* argv[])
 
 	ray r(e, p);
 	material mm;
-	sphere sph(10, 50, 50, 10, mm, I, I);
+	sphere sph(50, 50, 0, 10, mm, I, I);
 	Matrix4f trans = sph.worldToObj;
 	Matrix4f inv = sph.objToWorld;
 	Vector3f pp(-100, -100, -100);
