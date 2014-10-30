@@ -151,6 +151,7 @@ Vector3f pointOnRay(float t, Vector3f e, Vector3f sMinusE) {
 bool intersect(sphere sph, Vector3f* point, bool qqq, Vector3f e, Vector3f sMinusE) {
 		// Check Discriminant:
 		// A = sMinusE . sMinusE
+		cout << "E: " << endl << e << endl << endl << "sMinusE: " << endl << sMinusE << endl << endl;
 		float A = sMinusE.dot(sMinusE);
 		cout << "A: " << A << endl;
 		// B = 2 * sMinusE . (e - c)
