@@ -177,7 +177,7 @@ color RayTracer::traceRay(ray r, int depth) {
 
 	// Check all Spheres
 	for(int i = 0; i < numSpheres; i++) {
-		if(r.intersect(spheres[i], &temp, true)) {
+		if(r.intersect(spheres[i], &temp)) {
 			hit = true;
 			//point = closest(point, temp); OLD
 			///////////////////////new
