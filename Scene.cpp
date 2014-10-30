@@ -46,8 +46,7 @@ void parseArgs(char* filename) {
 		 0, 1, 0, 0,
 		 0, 0, 1, 0,
 		 0, 0, 0, 1;
-	cumulativeTransform = I;
-	inverseCumulativeTransform = I;
+		 
 	worldToObj = I;
   	objToWorld = I;
   	
