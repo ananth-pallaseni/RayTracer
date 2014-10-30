@@ -43,7 +43,7 @@ Vector3f clamp(Vector3f v) {
 }
 
 Vector3f sphereNormal(Vector3f pointOnShape, sphere shape) {
-	return unit(pointOnShape - shape.center);
+	return unit(pointOnShape - shape.objToWorld * shape.center);
 }
 
 // Flat Shading:
