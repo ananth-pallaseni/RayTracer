@@ -16,8 +16,7 @@ const int SCALING = 2;
 const int SPHERE = 0;
 const int TRIANGLE = 1;
 
-//const float EPSILON = 0.025f;
-const float EPSILON = 0.0001f;
+const float EPSILON = 0.025f;
 
 struct camera {
 	Vector3d e;
