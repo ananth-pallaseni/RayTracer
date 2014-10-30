@@ -43,7 +43,6 @@ Vector3f clamp(Vector3f v) {
 }
 
 Vector3f sphereNormal(Vector3f pointOnShape, sphere shape) {
-	cout << shape.center << endl << endl;
 	return unit(pointOnShape - shape.center);
 }
 
