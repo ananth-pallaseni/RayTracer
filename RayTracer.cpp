@@ -114,7 +114,7 @@ Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray in
 	color cTemp = traceRay(refl, depth + 1);
 	Vector3f c(cTemp.r * k_refl(0), cTemp.g * k_refl(1), cTemp.b * k_refl(2) );
 	if((cTemp.b > 0 || cTemp.r > 0 || cTemp.g > 0) && k_refl(2) > 0) {
-		cout << c << endl << endl;
+		cout << cTemp << endl << c << endl << endl;
 	}
 	return c;
 }
