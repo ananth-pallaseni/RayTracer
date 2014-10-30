@@ -260,15 +260,15 @@ struct sphere : object
 	float radius;
 	Vector3f center;
 
-	sphere(float cx, float cy, float cz, float r, material m, Matrix4f transMatrix, Matrix4f invTransMatrix) {
+	sphere(float cx, float cy, float cz, float r, material m, Matrix4f objectToWorld, Matrix4f worldToObject) {
 		radius = r;
 		center = Vector3f(cx, cy, cz);
 		type = SPHERE;
 		mat = m;
 		translate initTrans(cx, cy, cz);
 		scale initScale(r, r, r);
-		objToWorld =   transMatrix * initTrans * initScale ; // takes a sphere from obj space to world space
-		worldToObj = initScale.inverse * initTrans.inverse * invTransMatrix; // takes a sphere from world space to obj space
+		objToWorld =   objectToWorld * initTrans * initScale ; // takes a sphere from obj space to world space
+		worldToObj = initScale.inverse * initTrans.inverse * worldToObject; // takes a sphere from world space to obj space
 	}
 
 };

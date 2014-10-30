@@ -39,8 +39,8 @@ void parseArgs(char* filename) {
   	fin.open("input.txt"); // open a file
 
   	material mat;
-  	Matrix4f cumulativeTransform;
-  	Matrix4f inverseCumulativeTransform;
+  	Matrix4f worldToObj;
+  	Matrix4f objToWorld;
   	Matrix4f I;
   	I << 1, 0, 0, 0,
 		 0, 1, 0, 0,
@@ -48,6 +48,8 @@ void parseArgs(char* filename) {
 		 0, 0, 0, 1;
 	cumulativeTransform = I;
 	inverseCumulativeTransform = I;
+	worldToObj = I;
+  	objToWorld = I;
   	
   	// read each line of the file
   	while (!fin.eof())
@@ -82,11 +84,11 @@ void parseArgs(char* filename) {
   	  		UR << atof(token[13]), atof(token[14]), atof(token[15]);
   	  	}
   	  	else if(strcmp(token[0], "sph") == 0) {
-  	  		sphere sph(atof(token[1]), atof(token[2]), atof(token[3]), atof(token[4]), mat, cumulativeTransform, inverseCumulativeTransform);
+  	  		sphere sph(atof(token[1]), atof(token[2]), atof(token[3]), atof(token[4]), mat, objToWorld, worldToObj);
   	  		spheres.push_back(sph);
   	  	}
   	  	else if(strcmp(token[0], "tri") == 0) {
-  	  		triangle tri(atof(token[1]), atof(token[2]), atof(token[3]), atof(token[4]), atof(token[5]), atof(token[6]), atof(token[7]), atof(token[8]), atof(token[9]), mat, cumulativeTransform, inverseCumulativeTransform);
+  	  		triangle tri(atof(token[1]), atof(token[2]), atof(token[3]), atof(token[4]), atof(token[5]), atof(token[6]), atof(token[7]), atof(token[8]), atof(token[9]), mat, , objToWorld, worldToObj);
   	  		triangles.push_back(tri);
   	  	}
   	  	else if(strcmp(token[0], "ltp") == 0) {
@@ -119,21 +121,23 @@ void parseArgs(char* filename) {
   	  	}
   	  	else if(strcmp(token[0], "xft") == 0) {
   	  		translate tMat(atof(token[1]), atof(token[2]), atof(token[3]));
-  	  		cumulativeTransform = tMat * cumulativeTransform;
-  	  		inverseCumulativeTransform = inverseCumulativeTransform * tMat.inverse;
+  	  		worldToObj = tMat.inverse * worldToObj;
+  			objToWorld = objToWorld * tMat;
+
   	  	}
   	  	else if(strcmp(token[0], "xfr") == 0) {
   	  		rotation rMat(atof(token[1]), atof(token[2]), atof(token[3]));
-  	  		cumulativeTransform = rMat * cumulativeTransform;
-  	  		inverseCumulativeTransform = inverseCumulativeTransform * rMat.inverse;
+  	  		worldToObj = rMat.inverse * worldToObj;
+  			objToWorld = objToWorld * rMat;
   	  	}
   	  	else if(strcmp(token[0], "xfs") == 0) {
   	  		scale sMat(atof(token[1]), atof(token[2]), atof(token[3]));
-  	  		cumulativeTransform = sMat * cumulativeTransform;
-  	  		inverseCumulativeTransform = inverseCumulativeTransform * sMat.inverse;
+  	  		worldToObj = sMat.inverse * worldToObj;
+  			objToWorld = objToWorld * sMat;
   	  	}
   	  	else if(strcmp(token[0], "xfz") == 0) {
-  	  		cumulativeTransform = I;
+  	  		worldToObj = I;
+  			objToWorld = I;
   	  	}
   	  	else {
   	  		cout << "UNRECOGNIZED TYPE: " << token[0] << endl;
