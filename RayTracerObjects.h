@@ -298,6 +298,7 @@ struct ray
 		e = eye;
 		//sample = s;
 		sMinusE = s - e;
+		sMinusE = sMinusE / sMinusE.norm();
 	}
 
 	Vector3f p(float t) {
