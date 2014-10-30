@@ -13,6 +13,8 @@
 
 using namespace std;
 
+const int MAX_DEPTH = 3;
+
 class RayTracer {
 public:
 	Vector3f e;
@@ -26,7 +28,6 @@ public:
 	int numPointLights;
 	int numDirectionalLights;
 	int numAmbientLights;
-	const int MAX_DEPTH = 3;
 
 	RayTracer() {}
 	RayTracer(Vector3f eye, vector<sphere> sphList, vector<triangle> triList, vector<pointLight> plList, vector<directionalLight> dlList,
