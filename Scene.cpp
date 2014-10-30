@@ -235,7 +235,7 @@ int main(int argc, char* argv[])
 	Vector3f to(0, 0, 0);
 	Vector3f n(0, 1, 0);
 	ray r1(start, to);
-	ray refl(to, start.sMinusE - 2 * n * (start.sMinusE.dot(n)));
+	ray refl(to, r1.sMinusE - 2 * n * (r1.sMinusE.dot(n)));
 	cout << refl << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
