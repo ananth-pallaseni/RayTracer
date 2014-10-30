@@ -144,6 +144,10 @@ void parseArgs(char* filename) {
 
 }
 
+Vector3f pointOnRay(float t) {
+		return e + t * (sMinusE);
+	}
+
 bool intersect(sphere sph, Vector3f* point, bool qqq, Vector3f e, Vector3f sMinusE) {
 		// Check Discriminant:
 		// A = sMinusE . sMinusE
@@ -166,7 +170,7 @@ bool intersect(sphere sph, Vector3f* point, bool qqq, Vector3f e, Vector3f sMinu
 				t = (-B + sqrt(discriminant)) / (2 * A);
 			}
 			
-			*point = p(t);
+			*point = pointOnRay(t);
 			return true;
 		}
 		return false;
