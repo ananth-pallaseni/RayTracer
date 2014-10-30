@@ -111,7 +111,6 @@ bool RayTracer::shadowRay(Vector3f point, Vector3f lightOrigin) {
 Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray incoming, Vector3f k_refl, int depth) {
 	// Reflect ray about normal:
 	ray refl(point, incoming.sMinusE - 2 * normalAtPoint * (incoming.sMinusE.dot(normalAtPoint)));
-	cout << incoming.sMinusE << endl << "--" << endl << normalAtPoint << endl << "--" << endl << refl.sMinusE << endl << endl;
 	color cTemp = traceRay(refl, depth + 1);
 	Vector3f c(cTemp.r * k_refl(0), cTemp.g * k_refl(1), cTemp.b * k_refl(2) );
 	if(cTemp.b > 0) {
@@ -134,7 +133,7 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 			rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, pl.l());
 			rgb = rgb + specular(normalAtPoint, lightDirection, e, shape.mat.spec, pl.l(), shape.mat.phongExp);
 		}
-		if(depth < DEPTH_MAX) {
+		if(depth < DEPTH_MAX  && shape.mat.refl(0) > 0 && shape.mat.refl(1) > 0 && shape.mat.refl(2) > 0) {
 			rgb = rgb + reflectionRay(pointOnShape, normalAtPoint, incoming, shape.mat.refl, depth);
 		}
 		rgb = rgb + ambient(pl.l(), shape.mat.amb);

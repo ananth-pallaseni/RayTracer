@@ -230,14 +230,6 @@ bool intersect(sphere sph, Vector3f* point, Vector3f e, Vector3f sMinusE) {
 int main(int argc, char* argv[])
 {
 
-	// Reflection testing:
-	Vector3f start(-1, 0, 0);
-	Vector3f to(0, 0, 0);
-	Vector3f n(0, 1, 0);
-	ray r1(start, to);
-	ray refl(to, r1.sMinusE - 2 * n * (r1.sMinusE.dot(n)));
-	cout << refl.e << endl << endl << refl.sMinusE << endl;
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// Test for moving between object and world space
@@ -281,7 +273,7 @@ int main(int argc, char* argv[])
 
 	// General Purpose - renders input file
 
-	/*int size = 600;
+	int size = 600;
 
 	char* inFile = "input.txt";
 	parseArgs(inFile);
@@ -296,7 +288,7 @@ int main(int argc, char* argv[])
 		}
 	}
 	c.encode("image.png");
-*/
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
