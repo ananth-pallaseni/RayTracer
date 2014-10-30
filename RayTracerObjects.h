@@ -386,8 +386,12 @@ struct ray
 		float C = ( e - sph.center ).dot( ( e - sph.center ) ) - ( sph.radius * sph.radius );
 		float discriminant = B*B - 4*A*C;
 		if (discriminant >= 0) {
-			// Only use negative value of discriminant, as this will be closer to the plane
-			*t = (-B - sqrt(discriminant)) / (2 * A);
+			if(B < 0) {
+				*t = (-B - sqrt(discriminant)) / (2 * A);
+			}
+			else {
+				*t = (-B + sqrt(discriminant)) / (2 * A);
+			}
 			return true;
 		}
 		return false;
