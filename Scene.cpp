@@ -117,6 +117,7 @@ void parseArgs(char* filename) {
   	  					atof(token[7]), atof(token[8]), atof(token[9]), atof(token[10]),
   	  					atof(token[11]), atof(token[12]), atof(token[13]));
   	  		mat = mm;
+  	  		cout << mm.refl << endl;
   	  	}
   	  	else if(strcmp(token[0], "xft") == 0) {
   	  		translate tMat(atof(token[1]), atof(token[2]), atof(token[3]));
