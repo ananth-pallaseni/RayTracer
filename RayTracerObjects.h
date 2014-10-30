@@ -302,7 +302,7 @@ struct ray
 		e = eye;
 		//sample = s;
 		sMinusE = s - e;
-		sMinusE = sMinusE / sMinusE.norm();
+		sMinusE = sMinusE / sMinusE.norm(); // normalize the direction
 	}
 
 	Vector3f p(float t) {
