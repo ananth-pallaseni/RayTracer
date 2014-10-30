@@ -9,3 +9,4 @@ xfz
 xft 40 0 0
 mat 0 0.3 0.3 0 1 1 0.8 0.8 0.8 10 0 0 0
 sph 0 0 -100 30
+TRACEUSESOLDINTERSECT
