@@ -134,6 +134,7 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 			rgb = rgb + specular(normalAtPoint, lightDirection, e, shape.mat.spec, pl.l(), shape.mat.phongExp);
 		}
 		if(depth < DEPTH_MAX  && shape.mat.refl(0) > 0 && shape.mat.refl(1) > 0 && shape.mat.refl(2) > 0) {
+			cout << "CO" << endl;
 			rgb = rgb + reflectionRay(pointOnShape, normalAtPoint, incoming, shape.mat.refl, depth);
 		}
 		rgb = rgb + ambient(pl.l(), shape.mat.amb);
