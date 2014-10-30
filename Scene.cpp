@@ -231,7 +231,7 @@ int main(int argc, char* argv[])
 {
 
 	// Reflection testing:
-	Vector3f start(0, 3, 0);
+	Vector3f start(-1, 0, 0);
 	Vector3f to(0, 0, 0);
 	Vector3f n(0, 1, 0);
 	ray r1(start, to);
