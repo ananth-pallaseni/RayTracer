@@ -267,8 +267,8 @@ struct sphere : object
 		mat = m;
 		translate initTrans(cx, cy, cz);
 		scale initScale(r, r, r);
-		objToWorld =   initTrans * initScale * transMatrix; // takes a sphere from obj space to world space
-		worldToObj = invTransMatrix  * initScale.inverse * initTrans.inverse; // takes a sphere from world space to obj space
+		objToWorld =   transMatrix * initTrans * initScale ; // takes a sphere from obj space to world space
+		worldToObj = initScale.inverse * initTrans.inverse * invTransMatrix; // takes a sphere from world space to obj space
 	}
 
 };
@@ -439,7 +439,7 @@ struct ray
 			if(t < EPSILON) {
 				return false;
 			}
-			
+
 			return true;
 		}
 		return false;
