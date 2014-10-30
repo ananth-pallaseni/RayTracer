@@ -232,7 +232,7 @@ int main(int argc, char* argv[])
 	// Test for moving between object and world space
 
 
-	Vector3f e(0, 0, 0);
+	/*Vector3f e(0, 0, 0);
 	Vector3f p(1, 1, 1);
 
 	Matrix4f I;
@@ -265,15 +265,15 @@ int main(int argc, char* argv[])
 	cout << "???????????????????????  END INSIDE OLD INTERSECT ??????????????????????????????" << endl << endl;
 	cout << "POINT, NEW: " << endl << pp << endl << endl;
 	cout << "POINT, OLD: " << endl << ppp << endl << endl;
-	
+	*/
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// General Purpose - renders input file
 
-	/*int size = 400;
+	int size = 400;
 
 	char* inFile = "input.txt";
-	parseArgs(inFile);*/
+	parseArgs(inFile);
 
 
 			/*Sampler s(size, size, LL, LR, UL, UR);
@@ -300,7 +300,7 @@ int main(int argc, char* argv[])
 			}*/
 
 
-	/*Sampler s(size, size, LL, LR, UL, UR);
+	Sampler s(size, size, LL, LR, UL, UR);
 	Canvas c(size, size);
 	RayTracer rt(eye, spheres, triangles, pointLights, directionalLights, ambientLights);
 	for(int i = 0; i < size; i++) {
@@ -308,7 +308,7 @@ int main(int argc, char* argv[])
 			c.addPixel(rt.trace(s.getSample()));
 		}
 	}
-	c.encode("image.png");*/
+	c.encode("image.png");
 
 
 

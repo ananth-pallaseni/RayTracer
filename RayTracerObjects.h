@@ -343,7 +343,7 @@ struct ray
 		Matrix4f trans = sph.worldToObj;
 		Matrix4f inv = sph.objToWorld;
 		Vector4f eObj(e(0), e(1), e(2), 1); // eye in homogenized coords
-		Vector4f sMinusEObj(sMinusE(0), sMinusE(1), sMinusE(2), 1); // sMinusE in homogenized coords
+		Vector4f sMinusEObj(sMinusE(0), sMinusE(1), sMinusE(2), 0); // sMinusE in homogenized coords, last val is 0 as it is a scalar
 		eObj = trans * eObj; // take ray to obj space
 		sMinusEObj = trans * sMinusEObj; // take ray to obj space
 		eObj(3) = 0;
