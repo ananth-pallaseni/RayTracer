@@ -262,7 +262,9 @@ struct sphere : object
 
 	sphere(float cx, float cy, float cz, float r, material m, Matrix4f objectToWorld, Matrix4f worldToObject) {
 		radius = r;
-		center = Vector3f(cx, cy, cz);
+		Vector4f tmpCenter(cx, cy, cz, 1);
+		tmpCenter = objectToWorld * tmpCenter;
+		center = Vector3f(tmpCenter(0), tmpCenter(1), tmpCenter(2));
 		type = SPHERE;
 		mat = m;
 		translate initTrans(cx, cy, cz);
