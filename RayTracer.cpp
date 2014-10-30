@@ -46,6 +46,7 @@ Vector3f sphereNormal(Vector3f pointOnShape, sphere shape) {
 	Vector4f newCenter(shape.center(0), shape.center(1), shape.center(2), 1);
 	newCenter = shape.objToWorld * newCenter;
 	Vector3f center(newCenter(0), newCenter(1), newCenter(2));
+	cout << center << endl << endl;
 	return unit(pointOnShape - center);
 }
 
