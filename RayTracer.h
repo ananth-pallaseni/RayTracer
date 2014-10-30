@@ -26,6 +26,7 @@ public:
 	int numPointLights;
 	int numDirectionalLights;
 	int numAmbientLights;
+	const int MAX_DEPTH = 3;
 
 	RayTracer() {}
 	RayTracer(Vector3f eye, vector<sphere> sphList, vector<triangle> triList, vector<pointLight> plList, vector<directionalLight> dlList,
@@ -55,7 +56,7 @@ public:
 
 
 	// Simple ray trace function, no shadows or anything fancy
-	color traceRay(ray r);
+	color traceRay(ray r, int depth);
 
 	// Combined trace function
 	color trace(Vector3f s);
