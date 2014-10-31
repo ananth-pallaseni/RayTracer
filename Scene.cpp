@@ -24,7 +24,68 @@ Vector3f eye;
 // Coordinates of the image plane
 Vector3f LL, LR, UL, UR;
 
+  // Read Arguments and do something with them
+void parseObj(char* filename, vector<triangle> triangles, material mat, Matrix4f objToWorld, Matrix4f worldToObj) {
 
+  const int MAX_CHARS_PER_LINE = 512;
+  const int MAX_TOKENS_PER_LINE = 20;
+  const char* const DELIMITER = " ";
+
+  // create a file-reading object
+    ifstream fin;
+    fin.open(filename); // open a file
+
+    vector<Vector3f> vertices;
+    Vector3f first;
+    vertices.push_back(first);
+
+
+    
+    // read each line of the file
+    while (!fin.eof())
+    {
+        // read an entire line into memory
+        char buf[MAX_CHARS_PER_LINE];
+        fin.getline(buf, MAX_CHARS_PER_LINE);
+        
+        // parse the line into blank-delimited tokens
+        int n = 0; // a for-loop index
+        
+        // array to store memory addresses of the tokens in buf
+        const char* token[MAX_TOKENS_PER_LINE] = {}; // initialize to 0
+        
+        // parse the line
+        token[0] = strtok(buf, DELIMITER); // first token
+        if (token[0]) // zero if line is blank
+        {
+            for (n = 1; n < MAX_TOKENS_PER_LINE; n++)
+            {
+                token[n] = strtok(0, DELIMITER); // subsequent tokens
+                if (!token[n]) break; // no more tokens
+            }
+        }
+    
+
+        if(strcmp(token[0], "v") == 0) {
+          Vector3f vertex(atof(token[1]), atof(token[2]), atof(token[3]));
+          vertices.push_back(vertex); // assuming push back adds to end
+        }
+        else if(strcmp(token[0], "f") == 0) {
+          Vector3f v1 = vertices[atoi(token[1])];
+          Vector3f v2 = vertices[atoi(token[2])];
+          Vector3f v3 = vertices[atoi(token[3])];
+          triangle tri(v1(0), v1(1), v1(2), v2(0), v2(1), v2(2), v3(0), v3(1), v3(2), mat, trans);
+          triangles.push_back(tri);
+        }
+        
+        else {
+          cout << "UNRECOGNIZED TYPE: " << token[0] << endl;
+        }
+
+    }
+
+
+}
 
 
 
