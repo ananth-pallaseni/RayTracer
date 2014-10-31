@@ -173,7 +173,7 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 			rgb = rgb + specular(normalAtPoint, lightDirection, incoming.sMinusE, shape.mat.spec, dl.l(), shape.mat.phongExp);
 		}
 		if(depth < DEPTH_MAX) {
-			rgb = rgb + reflectionRay(pointOnShape, normalAtPoint, incoming, shape.mat.refl, depth);
+			//rgb = rgb + reflectionRay(pointOnShape, normalAtPoint, incoming, shape.mat.refl, depth);
 		}
 		rgb = rgb + ambient(dl.l(), shape.mat.amb);
 	}
