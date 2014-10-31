@@ -113,9 +113,9 @@ Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray in
 	ray refl(point, incoming.sMinusE - 2 * normalAtPoint * (incoming.sMinusE.dot(normalAtPoint)));
 	color cTemp = traceRay(refl, depth + 1, point);
 	Vector3f c(cTemp.r * k_refl(0), cTemp.g * k_refl(1), cTemp.b * k_refl(2) );
-	if((cTemp.b > 0 || cTemp.r > 0 || cTemp.g > 0) && k_refl(2) > 0) {
+	/*if((cTemp.b > 0 || cTemp.r > 0 || cTemp.g > 0) && k_refl(2) > 0) {
 		cout << cTemp << endl << c << endl << k_refl << endl << endl;
-	}
+	}*/
 	return c;
 }
 
@@ -210,7 +210,15 @@ color RayTracer::traceRay(ray r, int depth, Vector3f source) {
 	}
 
 	if(hit) {
-		return shade(point, normal, shape, depth, r);
+		// NEW:
+		color cq = shade(point, normal, shape, depth, r);
+		if ( depth == 1) {
+			cout << "HIT ON RELECTION: " << cq << endl;
+		}
+		return cq;
+		// ENDNEW
+		
+		//return shade(point, normal, shape, depth, r); // OLD
 	}
 	else {
 		return color(); // BLACK

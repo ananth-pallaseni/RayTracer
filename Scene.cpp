@@ -147,88 +147,30 @@ void parseArgs(char* filename) {
 
 }
 
-Vector3f pointOnRay(float t, Vector3f e, Vector3f sMinusE) {
-		return e + t * (sMinusE);
-	}
-
-bool intersect(sphere sph, Vector3f* point, bool qqq, Vector3f e, Vector3f sMinusE) {
-		// Check Discriminant:
-		// A = sMinusE . sMinusE
-		cout << "E: " << endl << e << endl << endl << "sMinusE: " << endl << sMinusE << endl << endl;
-		float A = sMinusE.dot(sMinusE);
-		cout << "A: " << A << endl;
-		// B = 2 * sMinusE . (e - c)
-		float B = 2 * sMinusE .dot(( e - sph.center ));
-		cout << "B: " << B << endl;
-		// C = (e - c) . (e - c) - r^2
-		float C = ( e - sph.center ).dot( ( e - sph.center ) ) - ( sph.radius * sph.radius );
-		cout << "C: " << C << endl;
-		float discriminant = B*B - 4*A*C;
-		cout << "Discriminant: " << discriminant << endl;
-		if (discriminant >= 0) {
-			// Use positive or negative value of discriminant depending on which results in the smallest t.
-			float t;
-			if(B < 0) {
-				t = (-B - sqrt(discriminant)) / (2 * A);
-			}
-			else {
-				t = (-B + sqrt(discriminant)) / (2 * A);
-			}
-			
-			*point = pointOnRay(t, e, sMinusE);
-			return true;
-		}
-		return false;
-	}
-
-
-
-bool intersect(sphere sph, Vector3f* point, Vector3f e, Vector3f sMinusE) {
-		// Check Discriminant:
-		// A = sMinusE . sMinusE
-		Matrix4f trans = sph.worldToObj;
-		Matrix4f inv = sph.objToWorld;
-		Vector4f eObj(e(0), e(1), e(2), 1); // eye in homogenized coords
-		Vector4f sMinusEObj(sMinusE(0), sMinusE(1), sMinusE(2), 0); // sMinusE in homogenized coords
-		eObj = trans * eObj; // take ray to obj space
-		sMinusEObj = trans * sMinusEObj; // take ray to obj space
-		eObj(3) = 0;
-		sMinusEObj(3) = 0;
-		cout << "OBJ RAY: " << endl << eObj << endl << " +  t * " << endl << sMinusEObj << endl << endl;
-
-		float A = sMinusEObj.dot(sMinusEObj);
-		cout << "A: " << A << endl;
-		// B = 2 * sMinusEObj . (eObj - c)
-		float B = 2 * sMinusEObj .dot(( eObj ));
-		cout << "B: " << B << endl;
-		// C = (eObj - c) . (eObj - c) - r^2
-		float C = ( eObj ).dot( ( eObj ) ) - 1;
-		cout << "C: " << C << endl;
-		float discriminant = B*B - 4*A*C;
-		cout << "Discriminant: " << discriminant << endl;
-		if (discriminant >= 0) {
-			// Use positive or negative value of discriminant depending on which results in the smallest t.
-			float t;
-			if(B < 0) {
-				t = (-B - sqrt(discriminant)) / (2 * A);
-			}
-			else {
-				t = (-B + sqrt(discriminant)) / (2 * A);
-			}
-			eObj(3) = 1;
-			Vector4f pointInWorldSpace = inv * ( eObj + t * sMinusEObj); // take point to world space
-
-			(*point)(0) = pointInWorldSpace(0); // transform back into world coordinates
-			(*point)(1) = pointInWorldSpace(1);
-			(*point)(2) = pointInWorldSpace(2);
-
-			return true;
-		}
-		return false;
-	}
 
 int main(int argc, char* argv[])
 {
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	// General Purpose - renders input file
+
+	int size = 600;
+
+	char* inFile = "input.txt";
+	parseArgs(inFile);
+
+
+	Sampler s(size, size, LL, LR, UL, UR);
+	Canvas c(size, size);
+	RayTracer rt(eye, spheres, triangles, pointLights, directionalLights, ambientLights);
+	for(int i = 0; i < size; i++) {
+		for(int j = 0; j < size; j++) {
+			c.addPixel(rt.trace(s.getSample()));
+		}
+	}
+	c.encode("image.png");
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -270,24 +212,6 @@ int main(int argc, char* argv[])
 	cout << "POINT, OLD: " << endl << ppp << endl << endl;
 	*/
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	// General Purpose - renders input file
-
-	int size = 600;
-
-	char* inFile = "input.txt";
-	parseArgs(inFile);
-
-
-	Sampler s(size, size, LL, LR, UL, UR);
-	Canvas c(size, size);
-	RayTracer rt(eye, spheres, triangles, pointLights, directionalLights, ambientLights);
-	for(int i = 0; i < size; i++) {
-		for(int j = 0; j < size; j++) {
-			c.addPixel(rt.trace(s.getSample()));
-		}
-	}
-	c.encode("image.png");
 
 
 
