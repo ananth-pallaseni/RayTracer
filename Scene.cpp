@@ -332,17 +332,9 @@ else {
 	Sampler s(size, size, LL, LR, UL, UR);
 	Canvas c(size, size);
 	RayTracer rt(eye, spheres, triangles, pointLights, directionalLights, ambientLights);
-	for(int i = 0.52*size; i < 0.53*size; i++) {
-		for(int j = 0.2*size; j < 0.21*size; j++) {
-			Vector3f tttemp = s.getSample();
-			color cc(0, 0, 0);
-			
-			if(i >= 0.52*size && i <= 0.53*size && j >= 0.9*size && j <= 0.91*size) {
-				c.addPixel(rt.trace(tttemp));
-			}
-			else {
-				c.addPixel(cc);
-			}
+	for(int i = 0 ; i < size; i++) {
+		for(int j = 0 ; j < size; j++) {
+			c.addPixel(rt.trace(s.getSample()));
 			
 		}
 	}
