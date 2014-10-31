@@ -118,12 +118,14 @@ bool RayTracer::shadowRay(ray sRay) {
 
 bool RayTracer::pointShadowRay(Vector3f point, Vector3f lightOrigin) {
 	ray r(point, lightOrigin);
-	return shadowRay(r);
+	//return shadowRay(r);
+	return false;
 }
 
 bool RayTracer::directionalShadowRay(Vector3f point, Vector3f directionToLight) {
 	ray r(point, directionToLight, true);
-	return shadowRay(r);
+	//return shadowRay(r);
+	return false;
 }	
 
 Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray incoming, Vector3f k_refl, int depth) {
