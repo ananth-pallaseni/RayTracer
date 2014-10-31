@@ -48,7 +48,7 @@ Vector3f sphereNormal(Vector3f pointOnShape, sphere shape) {
 
 // Flat Shading:
 Vector3f triangleNormal(Vector3f pointOnShape, triangle shape, ray r) {
-	Vector3f side1 = shape.a - shape.b;
+	/*Vector3f side1 = shape.a - shape.b;
 	Vector3f side2 = shape.a - shape.c;
 	Vector3f normal(side1(1) * side2(2) - side1(2) * side2(1), 
 					side1(2) * side2(0) - side1(0) * side2(2),
@@ -57,7 +57,15 @@ Vector3f triangleNormal(Vector3f pointOnShape, triangle shape, ray r) {
 	if(unit(r.sMinusE).dot(unitNormal) < 0) {
 		unitNormal = -unitNormal;
 	}
-	return unitNormal;
+	return unitNormal;*/
+	Vector3f side1 = shape.a - shape.b;
+	Vector3f side2 = shape.a = shape.c;
+	Vector3f planeNormal = side1.cross(side2);
+	if((-r.sMinusE).dot(planeNormal) < 0) {
+		planeNormal = -planeNormal;
+	}
+	planeNormal = planeNormal / planeNormal.norm();
+	return planeNormal;
 
 }
 
