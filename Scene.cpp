@@ -46,7 +46,7 @@ void parseObj(char* filename, material mat, Matrix4f objToWorld, Matrix4f worldT
     {
     	cout << "2" << endl;
         // read an entire line into memory
-        char buf[MAX_CHARS_PER_LINE];
+        char* buf[MAX_CHARS_PER_LINE];
         fin.getline(buf, MAX_CHARS_PER_LINE);
         
         // parse the line into blank-delimited tokens
@@ -124,7 +124,7 @@ void parseArgs(char* filename) {
   	while (!fin.eof())
   	{
   	  	// read an entire line into memory
-  	  	char buf[MAX_CHARS_PER_LINE];
+  	  	char* buf[MAX_CHARS_PER_LINE];
   	  	fin.getline(buf, MAX_CHARS_PER_LINE);
   	  	
   	  	// parse the line into blank-delimited tokens
