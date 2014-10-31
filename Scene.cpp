@@ -260,7 +260,7 @@ int main(int argc, char* argv[])
 	char* inFile = "input.txt";
 	clock_t startTime;
 	double duration;
-	start = clock();
+	startTime = clock();
 
 	parseArgs(inFile);
 
