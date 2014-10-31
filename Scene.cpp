@@ -355,7 +355,7 @@ matr << 1, 0, 0, 0,
 		0, 0, 0, 1;
 
 	char* name = "scene12.obj";
-	parseObj(name, mat, I, I);
+	parseObj(name, mat, matr, matr);
 
 /*material mm;
 Matrix4f matr;
