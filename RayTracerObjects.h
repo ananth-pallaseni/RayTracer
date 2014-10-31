@@ -306,6 +306,11 @@ struct ray
 		sMinusE = sMinusE / sMinusE.norm(); // normalize the direction
 	}
 
+	ray(Vector3f start, Vector3f direction, bool differentiator) {
+		e = start;
+		sMinusE = direction / direction.norm();
+	}
+
 	Vector3f p(float t) {
 		return e + t * (sMinusE);
 	}
