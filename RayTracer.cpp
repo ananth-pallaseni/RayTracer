@@ -137,7 +137,7 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 		if(depth < DEPTH_MAX ) {
 			rgb = rgb + reflectionRay(pointOnShape, normalAtPoint, incoming, shape.mat.refl, depth);
 		}
-		rgb = rgb + ambient(pl.l(), shape.mat.amb);
+		//rgb = rgb + ambient(pl.l(), shape.mat.amb);
 	}
 
 	for(int i = 0; i < numDirectionalLights; i++) {
