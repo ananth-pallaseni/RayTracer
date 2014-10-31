@@ -74,7 +74,7 @@ void parseObj(char* filename, vector<triangle> triangles, material mat, Matrix4f
           Vector3f v1 = vertices[atoi(token[1])];
           Vector3f v2 = vertices[atoi(token[2])];
           Vector3f v3 = vertices[atoi(token[3])];
-          triangle tri(v1(0), v1(1), v1(2), v2(0), v2(1), v2(2), v3(0), v3(1), v3(2), mat, trans);
+          triangle tri(v1(0), v1(1), v1(2), v2(0), v2(1), v2(2), v3(0), v3(1), v3(2), mat, objToWorld);
           triangles.push_back(tri);
         }
         
