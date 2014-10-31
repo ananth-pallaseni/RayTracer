@@ -183,14 +183,17 @@ bool intersect11(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
 		// By Cramers Rule:
 		float M = A(0, 0) * eihf + A(1, 0) * gfdi + A(2, 0) * dheg;
 		float gamma = (A(2, 2) * akjb + A(1, 2) * jcal + A(0, 2) * blkc) / M;
+		cout << "GAMMA: " << endl << gamma << endl << endl;
 		if (gamma < 0 || gamma > 1) {
 			return false;
 		}
 		float beta = (B(0) * eihf + B(1) * gfdi + B(2) * dheg) / M;
+		cout << "BETA: " << endl << beta << endl << endl;
 		if (beta < 0 || beta > 1 - gamma) {
 			return false;
 		}
 		float t = (A(2, 1) * akjb + A(1, 1) * jcal + A(0, 1) * blkc) / M;
+		cout << "T: " << endl << t << endl << endl;
 		*point = p11(t, sMinusE, e);
 		return true;
 	}
