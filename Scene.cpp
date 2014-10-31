@@ -270,8 +270,9 @@ Vector3f triangleNormal11(Vector3f pointOnShape, triangle shape, ray r) {
 
 int main(int argc, char* argv[])
 {
-
-triangle tri(0, 50, 0, -50, -50, 0, 50, -50, 0);
+material mm;
+Matrix4f matr;
+triangle tri(0, 50, 0, -50, -50, 0, 50, -50, 0, mm, matr, matr);
 Vector3f eye(0, 0, 150);
 Vector3f point(0, 0, 0);
 // ray should be in 0, 0, -1 direction
