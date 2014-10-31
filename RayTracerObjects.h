@@ -498,7 +498,7 @@ struct ray
 	bool intersect(triangle tri, Vector3f* point) {
 		// check if it intersects a plane:
 		Vector3f side1 = tri.a - tri.b;
-		Vector3f side2 = tri.a = tri.c;
+		Vector3f side2 = tri.a - tri.c;
 		Vector3f planeNormal = side1.cross(side2);
 		planeNormal = planeNormal / planeNormal.norm();
 		float numerator = planeNormal.dot(tri.a - e);
@@ -571,7 +571,7 @@ struct ray
 	bool intersect(triangle tri, float* t) {
 		// check if it intersects a plane:
 		Vector3f side1 = tri.a - tri.b;
-		Vector3f side2 = tri.a = tri.c;
+		Vector3f side2 = tri.a - tri.c;
 		Vector3f planeNormal = side1.cross(side2);
 		planeNormal = planeNormal / planeNormal.norm();
 		float numerator = planeNormal.dot(tri.a - e);
