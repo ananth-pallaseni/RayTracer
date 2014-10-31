@@ -39,7 +39,7 @@ void parseObj(char* filename, material mat, Matrix4f objToWorld, Matrix4f worldT
     Vector3f first;
     vertices.push_back(first);
 
-
+    cout << "!" << endl;
     
     // read each line of the file
     while (!fin.eof())
