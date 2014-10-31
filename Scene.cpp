@@ -253,7 +253,7 @@ int main(int argc, char* argv[])
 	Matrix4f matr;
 	triangle tri(0, 5, 0, 5, -5, 0, -5, -5, 0, mm, matr, matr);
 	Vector3f eye(0, 0, -100);
-	Vector3f point(0, 0, 3);
+	Vector3f point(-5, -5, 100);
 	ray r(eye, point);
 	Vector3f pointOfInter;
 	float t;
