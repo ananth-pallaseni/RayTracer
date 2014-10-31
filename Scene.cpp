@@ -205,6 +205,15 @@ bool intersect11(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
 		return true;
 	}
 
+	bool intersect22(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
+		// check if it intersects a plane:
+		Vector3f side1 = tri.a - tri.b;
+		Vector3f side2 = tri.a = tri.c;
+		Vector3f planeNormal = side1.cross(side2);
+		planeNormal = planeNormal / planeNormal.norm();
+		cout << planeNormal;
+	}
+
 
 int main(int argc, char* argv[])
 {
@@ -213,7 +222,7 @@ int main(int argc, char* argv[])
 	Matrix4f matr;
 	triangle tri(0, 5, 0, 5, -5, 0, -5, -5, 0, mm, matr, matr);
 	Vector3f eye(0, 0, -100);
-	Vector3f point(-5, -5, 0);
+	Vector3f point(0, 0, 0);
 	ray r(eye, point);
 	Vector3f pointOfInter;
 	float t;
