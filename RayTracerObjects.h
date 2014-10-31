@@ -285,6 +285,9 @@ struct triangle : object
 		Vector4f a4(ax, ay, az, 1);
 		Vector4f b4(bx, by, bz, 1);
 		Vector4f c4(cx, cy, cz, 1);
+		cout << "init A: " << endl << a4 << endl << endl;
+		cout << "init B: " << endl << b4 << endl << endl;
+		cout << "init C: " << endl << c4 << endl << endl;
 
 		type = TRIANGLE;
 		mat = m;
@@ -296,9 +299,9 @@ struct triangle : object
 		a << a4(0), a4(1), a4(2);
 		a << b4(0), b4(1), b4(2);
 		a << c4(0), c4(1), c4(2);
-		cout << "A: " << endl << a << endl << endl;
-		cout << "B: " << endl << b << endl << endl;
-		cout << "C: " << endl << c << endl << endl;
+		cout << "A: " << endl << a4 << endl << endl;
+		cout << "B: " << endl << b4 << endl << endl;
+		cout << "C: " << endl << c4 << endl << endl;
 	}
 };
 
