@@ -96,25 +96,35 @@ Vector3f specular(Vector3f n, Vector3f l, Vector3f e, Vector3f k_specular, Vecto
 }
 
 // Creates a shadow ray, and compares it with all objects 
-bool RayTracer::shadowRay(Vector3f point, Vector3f lightOrigin) {
+//bool RayTracer::shadowRay(Vector3f point, Vector3f lightOrigin) {
+bool RayTracer::shadowRay(ray sRay) {
 	// ray from point -> lightOrigin
-	ray r(point, lightOrigin);
+	//ray r(point, lightOrigin);
 	float t;
 	for(int i = 0; i < numSpheres; i++) {
-		if(r.intersect(spheres[i])) {
+		if(sRay.intersect(spheres[i])) {
 			return true;
 		}
 	}
 	for(int i = 0; i < numTriangles; i++) {
-		if(r.intersect(triangles[i], &t)) {
+		if(sRay.intersect(triangles[i], &t)) {
 			if(t > 0.01f) { // only return if the object intersects the ray in the positive direction.
 				return true;
 			}
 		}
 	}
 	return false;
-
 }
+
+bool pointShadowRay(Vector3f point, Vector3f lightOrigin) {
+	ray r(point, lightOrigin);
+	return shadowRay(r)
+}
+
+bool directionalShadowRay(Vector3f point, Vector3f directionToLight) {
+	ray r(point, directionToLight, true);
+	return shadowRay(r);
+}	
 
 Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray incoming, Vector3f k_refl, int depth) {
 	// Reflect ray about normal:
@@ -136,7 +146,7 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 	Vector3f rgb(0, 0, 0);
 	for(int i = 0; i < numPointLights; i++) {
 		pointLight pl = pointLights[i];
-		if(!shadowRay(pointOnShape, pl.point)) {
+		if(!pointShadowRay(pointOnShape, pl.point)) {
 			// lightDirection is unit vector pointing TO light
 			Vector3f lightDirection = unit(pl.point - pointOnShape);
 	
@@ -152,7 +162,7 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 
 	for(int i = 0; i < numDirectionalLights; i++) {
 		directionalLight dl = directionalLights[i];
-		if(!shadowRay(pointOnShape, -dl.direction)) {
+		if(!directionalShadowRay(pointOnShape, -dl.direction)) {
 			// lightDirection is unit vector pointing TO light
 			Vector3f lightDirection = -unit(dl.direction);
 
