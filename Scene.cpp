@@ -273,17 +273,17 @@ Vector3f triangleNormal11(Vector3f pointOnShape, triangle shape, ray r) {
 	Vector3f side1 = shape.a - shape.b;
 	Vector3f side2 = shape.a - shape.c;
 	Vector3f planeNormal = side1.cross(side2);
-	/*if((-r.sMinusE).dot(planeNormal) < 0) {
+	if((-r.sMinusE).dot(planeNormal) < 0) {
 		planeNormal = -planeNormal;
 	}
-	planeNormal = planeNormal / planeNormal.norm();*/
+	planeNormal = planeNormal / planeNormal.norm();
 	return planeNormal;
 
 }
 
 int main(int argc, char* argv[])
 {
-material mm;
+/*material mm;
 Matrix4f matr;
 matr << 1, 0, 0, 0,
 		0, 1, 0, 0, 
@@ -295,7 +295,7 @@ Vector3f point(50, -95, 50);
 ray r(eye, point);
 Vector3f n = triangleNormal11(point, tri, r);
 
-cout << "NORMAL: " << n(0) << ", " << n(1) << ", " << n(2) << endl;
+cout << "NORMAL: " << n(0) << ", " << n(1) << ", " << n(2) << endl;*/
 
 /*Vector3f eye(0, 0, 150);
 Vector3f point(0, 0, 0);
@@ -320,7 +320,7 @@ else {
 
 	// General Purpose - renders input file
 
-	/*int size = 500;
+	int size = 500;
 
 	char* inFile = "input.txt";
 	clock_t startTime;
@@ -341,7 +341,7 @@ else {
 
 	duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
 	cout << "DONE" << endl;
-	cout << "TIME: " << duration << " seconds" << endl;*/
+	cout << "TIME: " << duration << " seconds" << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
