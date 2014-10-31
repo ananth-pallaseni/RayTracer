@@ -574,23 +574,18 @@ struct ray
 		Vector3f side2 = tri.a = tri.c;
 		Vector3f planeNormal = side1.cross(side2);
 		planeNormal = planeNormal / planeNormal.norm();
-		cout << "NORMAL TO PLANE: " << planeNormal << endl << endl;
 		float numerator = planeNormal.dot(tri.a - e);
 		float denominator = planeNormal.dot(sMinusE);
-		cout << "NUMERATOR: " << numerator << endl;
-		cout << "DENOMINATOR: " << denominator << endl;
 		if(denominator == 0) {
 			// ray is parallel to plane:
 			return false;
 		}
 		float r1 = numerator / denominator;
-		cout << "r1: " << r1 << endl;
 		if(r1 < 0) {
 			// means ray does not intersect plane:
 			return false;
 		}
 		Vector3f pointToTest = p(r1);
-		cout << "POINT TO TEST: " << endl << pointToTest << endl << endl;
 
 		// Now check if the point lies within the triangle:
 		Vector3f u = tri.b - tri.a;
