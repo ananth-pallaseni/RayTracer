@@ -150,7 +150,7 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 		rgb = rgb + ambient(pl.l(), shape.mat.amb);
 	}
 
-	for(int i = 0; i < numDirectionalLights; i++) {
+	/*for(int i = 0; i < numDirectionalLights; i++) {
 		directionalLight dl = directionalLights[i];
 		if(!shadowRay(pointOnShape, dl.direction)) {
 			// lightDirection is unit vector pointing TO light
@@ -163,7 +163,7 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 			rgb = rgb + reflectionRay(pointOnShape, normalAtPoint, incoming, shape.mat.refl, depth);
 		}
 		rgb = rgb + ambient(dl.l(), shape.mat.amb);
-	}
+	}*/
 
 	for(int i = 0; i < numAmbientLights; i++) {
 		ambientLight al = ambientLights[i];
