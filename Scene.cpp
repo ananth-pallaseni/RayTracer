@@ -147,12 +147,12 @@ void parseArgs(char* filename) {
 
 }
 
-Vector3f unit(Vector3f v) {
+Vector3f unit11(Vector3f v) {
 	return v / v.norm();
 }
 
-Vector3f sphereNormal(Vector3f pointOnShape, sphere shape) {
-	return unit(pointOnShape - shape.center);
+Vector3f sphereNormal11(Vector3f pointOnShape, sphere shape) {
+	return unit11(pointOnShape - shape.center);
 }
 
 
@@ -171,7 +171,7 @@ int size = 600;
 	RayTracer rt(eye, spheres, triangles, pointLights, directionalLights, ambientLights);
 	// sph[0] is at -40, 0, -100 with radius 30
 	Vector3f start(-10, 0, -100);
-	Vector3f n = sphereNormal(start, spheres[0]);
+	Vector3f n = sphereNormal11(start, spheres[0]);
 	cout << n << endl;
 
 
