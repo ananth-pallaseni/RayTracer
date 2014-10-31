@@ -190,6 +190,7 @@ bool intersect11(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
 		}
 		float beta = (B(0) * eihf + B(1) * gfdi + B(2) * dheg) / M;
 		cout << "BETA: " << endl << beta << endl << endl;
+		cout << "T : " << endl << (A(2, 1) * akjb + A(1, 1) * jcal + A(0, 1) * blkc) / M << endl << endl;
 		if (beta < 0 || beta > 1 - gamma) {
 			return false;
 		}
