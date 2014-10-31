@@ -118,7 +118,7 @@ bool RayTracer::shadowRay(ray sRay) {
 
 bool pointShadowRay(Vector3f point, Vector3f lightOrigin) {
 	ray r(point, lightOrigin);
-	return shadowRay(r)
+	return shadowRay(r);
 }
 
 bool directionalShadowRay(Vector3f point, Vector3f directionToLight) {

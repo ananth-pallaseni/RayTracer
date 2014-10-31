@@ -49,7 +49,7 @@ public:
 
 	Vector3f closest(Vector3f v1, Vector3f v2, Vector3f p);
 
-	bool shadowRay(Vector3f point, Vector3f light);
+	bool shadowRay(ray sRay);
 
 	Vector3f reflectionRay(Vector3f point, Vector3f normalAtPoint, ray incoming, Vector3f k_refl, int depth);
 
