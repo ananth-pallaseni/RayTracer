@@ -217,7 +217,9 @@ color RayTracer::traceRay(ray r, int depth, Vector3f source) {
 		color cq = shade(point, normal, shape, depth, r);
 		if ( depth == 1) {
 			color adjC(cq.r * shape.mat.refl(0), cq.g * shape.mat.refl(1), cq.b * shape.mat.refl(2));
-			cout << "HIT ON RELECTION, POINT: " << endl << point << endl << "t : " << tempT << endl << "RAW COLOR: " << cq << endl << "FINAL COLOR: " << adjC << endl;
+			cout << "HIT ON RELECTION, POINT: " << endl << point << endl << "t : " << tempT << endl;
+			cout << "MATERIAL REFL PROPS: " << shape.mat.refl(0) << ", " << shape.mat.refl(1) << ", " << shape.mat.refl(2) << endl;
+			cout << "RAW COLOR: " << cq << endl << "FINAL COLOR: " << adjC << endl;
 			cout << "RAY START: " << endl << r.e << endl << "RAY DIR: " << endl << r.sMinusE << endl << endl; 
 		}
 		return cq;
