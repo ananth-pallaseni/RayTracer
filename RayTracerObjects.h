@@ -595,7 +595,7 @@ struct ray
 			return false;
 		}
 		float r1 = numerator / denominator;
-		if(r1 < 0) {
+		if(r1 < EPSILON) {
 			// means ray does not intersect plane:
 			return false;
 		}
