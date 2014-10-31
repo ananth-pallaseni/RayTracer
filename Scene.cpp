@@ -162,7 +162,7 @@ int main(int argc, char* argv[])
 
 int size = 600;
 
-	char* inFile = "input.txt";
+	/*char* inFile = "input.txt";
 	parseArgs(inFile);
 
 
@@ -188,8 +188,7 @@ int size = 600;
 	}
 	else {
 		cout << "NOO" << endl << endl;
-	}
-	//cout << spheres[0].center << endl << endl;
+	}*/
 
 
 
@@ -199,7 +198,7 @@ int size = 600;
 
 	// General Purpose - renders input file
 
-	/*int size = 600;
+	int size = 600;
 
 	char* inFile = "input.txt";
 	parseArgs(inFile);
@@ -213,7 +212,7 @@ int size = 600;
 			c.addPixel(rt.trace(s.getSample()));
 		}
 	}
-	c.encode("image.png");*/
+	c.encode("image.png");
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
