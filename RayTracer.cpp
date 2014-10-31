@@ -129,12 +129,12 @@ bool RayTracer::directionalShadowRay(Vector3f point, Vector3f directionToLight) 
 Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray incoming, Vector3f k_refl, int depth) {
 	// Reflect ray about normal:
 	ray refl(point, incoming.sMinusE - 2 * normalAtPoint * (incoming.sMinusE.dot(normalAtPoint)), true);
-	if(point(1) == -95) {
+	/*if(point(1) == -95) {
 		cout << "REFL RAY: " << endl << refl.sMinusE << endl ;
 		cout << "NORMAL: " << endl << normalAtPoint << endl ;
-	}
+	}*/
 	color cTemp = traceRay(refl, depth + 1, point);
-	cout << "CTEMP: " << cTemp.r << ", " << cTemp.g << ", " << cTemp.b << endl;
+	cout << "CTEMP: " << (int)cTemp.r << ", " << (int)cTemp.g << ", " << (int)cTemp.b << endl;
 	Vector3f c(cTemp.r * k_refl(0), cTemp.g * k_refl(1), cTemp.b * k_refl(2) );
 	cout << "CTEMP AFER: " << c(0) << ", " << c(1) << ", " << c(2) << endl;
 	c = c / 255; // as color rgb values are (0->255)
