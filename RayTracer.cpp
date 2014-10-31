@@ -197,7 +197,7 @@ color RayTracer::traceRay(ray r, int depth, Vector3f source) {
 
 	// Check all Triangles
 	for(int i = 0; i < numTriangles; i++) {
-		if(r.intersect(triangles[i], &temp, &tempT)) {
+		if(r.intersect(triangles[i], &temp)) {
 			hit = true;
 			//point = closest(point, temp); OLD
 			///////////////////////new
