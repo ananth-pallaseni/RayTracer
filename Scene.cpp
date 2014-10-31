@@ -172,7 +172,8 @@ int size = 600;
 	// sph[0] is at -40, 0, -100 with radius 30
 	Vector3f start(-10, 0, -100);
 	Vector3f n = sphereNormal11(start, spheres[0]);
-	cout << n << endl;
+	cout << n << endl << endl;
+	cout << spheres[0].center << endl << endl;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
