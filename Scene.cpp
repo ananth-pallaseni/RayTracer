@@ -190,7 +190,6 @@ bool intersect11(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
 		}
 		float beta = (B(0) * eihf + B(1) * gfdi + B(2) * dheg) / M;
 		cout << "BETA: " << endl << beta << endl << endl;
-		cout << "T : " << endl << (A(2, 1) * akjb + A(1, 1) * jcal + A(0, 1) * blkc) / M << endl << endl;
 		if (beta < 0 || beta > 1 - gamma) {
 			return false;
 		}
@@ -208,7 +207,7 @@ int main(int argc, char* argv[])
 	Matrix4f matr;
 	triangle tri(0, 5, 0, 5, -5, 0, -5, -5, 0, mm, matr, matr);
 	Vector3f eye(0, 0, -100);
-	Vector3f point(0, 0, 0);
+	Vector3f point(-5, -5, 0);
 	ray r(eye, point);
 	Vector3f pointOfInter;
 	float t;
