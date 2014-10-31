@@ -211,7 +211,7 @@ bool intersect11(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
 		Vector3f side2 = tri.a = tri.c;
 		Vector3f planeNormal = side1.cross(side2);
 		planeNormal = planeNormal / planeNormal.norm();
-		cout << planeNormal << endl << endl;
+		cout << "NORMAL TO PLANE: " << planeNormal << endl << endl;
 		float numerator = planeNormal.dot(tri.a - e);
 		float denominator = planeNormal.dot(sMinusE);
 		cout << "NUMERATOR: " << numerator << endl;
@@ -221,7 +221,7 @@ bool intersect11(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
 			return false;
 		}
 		float r1 = numerator / denominator;
-		cout << "R!: " << r1 << endl;
+		cout << "r1: " << r1 << endl;
 		if(r1 < 0) {
 			// means ray does not intersect plane:
 			return false;
@@ -232,8 +232,16 @@ bool intersect11(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
 		// Now check if the point lies within the triangle:
 		Vector3f u = tri.b - tri.a;
 		Vector3f v = tri.c - tri.a;
-		Vector3f w ;
-
+		Vector3f w = pointToTest - tri.a;
+		float denom1 = u.dot(v) * u.dot(v) - u.dot(u) * v.dot(v);
+		float s1 = u.dot(v) * w.dot(v) - v.dot(v) * w.dot(u);
+		s1 = s1 / denom1;
+		float t1 = u.dot(v) * w.dot(u) - u.dot(u) * w.dot(v);
+		t1 = t1 / denom1;
+		if(s1 < 0 || t1 < 0 || s1 + t1 > 1) {
+			return false;
+		}
+		*point = pointToTest;
 		return true;
 	}
 
@@ -252,7 +260,10 @@ int main(int argc, char* argv[])
 	cout << "RAY START: " << endl << r.e << endl << endl;
 	cout << "RAY DIR  : " << endl << r.sMinusE << endl << endl;
 
-	intersect22(tri, &pointOfInter, r.sMinusE, r.e);
+	bool check = intersect22(tri, &pointOfInter, r.sMinusE, r.e);
+	if(check) {
+		cout << "FINAL POINT: " << endl << pointOfInter << endl << endl;
+	}
 	/*if(intersect11(tri, &pointOfInter, r.sMinusE, r.e)) {
 		//r.intersect(tri, &t);
 		cout << pointOfInter << endl << endl;
