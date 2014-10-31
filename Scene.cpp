@@ -147,6 +147,10 @@ void parseArgs(char* filename) {
 
 }
 
+Vector3f unit(Vector3f v) {
+	return v / v.norm();
+}
+
 Vector3f sphereNormal(Vector3f pointOnShape, sphere shape) {
 	return unit(pointOnShape - shape.center);
 }
