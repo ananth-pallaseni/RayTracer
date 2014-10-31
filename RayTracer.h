@@ -57,7 +57,7 @@ public:
 
 
 	// Simple ray trace function, no shadows or anything fancy
-	color traceRay(ray r, int depth);
+	color traceRay(ray r, int depth, Vector3f source);
 
 	// Combined trace function
 	color trace(Vector3f s);
