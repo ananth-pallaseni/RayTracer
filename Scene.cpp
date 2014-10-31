@@ -152,11 +152,26 @@ int main(int argc, char* argv[])
 {
 
 
+int size = 600;
+
+	char* inFile = "input.txt";
+	parseArgs(inFile);
+
+
+	Sampler s(size, size, LL, LR, UL, UR);
+	Canvas c(size, size);
+	RayTracer rt(eye, spheres, triangles, pointLights, directionalLights, ambientLights);
+	// sph[0] is at -40, 0, -100 with radius 30
+	Vector3f start(-10, 0, -100);
+	Vector3f n = rt.sphereNormal(start, spheres[0]);
+	cout << n << endl;
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// General Purpose - renders input file
 
-	int size = 600;
+	/*int size = 600;
 
 	char* inFile = "input.txt";
 	parseArgs(inFile);
@@ -170,7 +185,7 @@ int main(int argc, char* argv[])
 			c.addPixel(rt.trace(s.getSample()));
 		}
 	}
-	c.encode("image.png");
+	c.encode("image.png");*/
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
