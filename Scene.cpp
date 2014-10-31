@@ -234,6 +234,10 @@ bool intersect11(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
 		Vector3f u = tri.b - tri.a;
 		Vector3f v = tri.c - tri.a;
 		Vector3f w = pointToTest - tri.a;
+		cout << "U: " << endl << u << endl << endl;
+		cout << "V: " << endl << v << endl << endl;
+		cout << "W: " << endl << w << endl << endl;
+
 		float denom1 = u.dot(v) * u.dot(v) - u.dot(u) * v.dot(v);
 		cout << "DENOM1: " << denom1 << endl;
 		float s1 = u.dot(v) * w.dot(v) - v.dot(v) * w.dot(u);
