@@ -118,14 +118,12 @@ bool RayTracer::shadowRay(ray sRay) {
 
 bool RayTracer::pointShadowRay(Vector3f point, Vector3f lightOrigin) {
 	ray r(point, lightOrigin);
-	//return shadowRay(r);
-	return false;
+	return shadowRay(r);
 }
 
 bool RayTracer::directionalShadowRay(Vector3f point, Vector3f directionToLight) {
 	ray r(point, directionToLight, true);
-	//return shadowRay(r);
-	return false;
+	return shadowRay(r);
 }	
 
 Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray incoming, Vector3f k_refl, int depth) {
@@ -157,7 +155,7 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 			rgb = rgb + specular(normalAtPoint, lightDirection, incoming.sMinusE, shape.mat.spec, pl.l(), shape.mat.phongExp);
 		}
 		if(depth < DEPTH_MAX ) {
-			rgb = rgb + reflectionRay(pointOnShape, normalAtPoint, incoming, shape.mat.refl, depth);
+			//rgb = rgb + reflectionRay(pointOnShape, normalAtPoint, incoming, shape.mat.refl, depth);
 		}
 		rgb = rgb + ambient(pl.l(), shape.mat.amb);
 	}
@@ -172,7 +170,7 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 			rgb = rgb + specular(normalAtPoint, lightDirection, incoming.sMinusE, shape.mat.spec, dl.l(), shape.mat.phongExp);
 		}
 		if(depth < DEPTH_MAX) {
-			rgb = rgb + reflectionRay(pointOnShape, normalAtPoint, incoming, shape.mat.refl, depth);
+			//rgb = rgb + reflectionRay(pointOnShape, normalAtPoint, incoming, shape.mat.refl, depth);
 		}
 		rgb = rgb + ambient(dl.l(), shape.mat.amb);
 	}
