@@ -249,39 +249,12 @@ bool intersect11(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
 int main(int argc, char* argv[])
 {
 
-	material mm;
-	Matrix4f matr;
-	triangle tri(0, 5, 0, 5, -5, 0, -5, -5, 0, mm, matr, matr);
-	Vector3f eye(0, 0, -100);
-	Vector3f point(-10, -10, 100);
-	ray r(eye, point);
-	Vector3f pointOfInter;
-	float t;
-	cout << "RAY START: " << endl << r.e << endl << endl;
-	cout << "RAY DIR  : " << endl << r.sMinusE << endl << endl;
-
-	bool check = intersect22(tri, &pointOfInter, r.sMinusE, r.e);
-	if(check) {
-		cout << "FINAL POINT: " << endl << pointOfInter << endl << endl;
-	}
-	/*if(intersect11(tri, &pointOfInter, r.sMinusE, r.e)) {
-		//r.intersect(tri, &t);
-		cout << pointOfInter << endl << endl;
-		//cout << t << endl;
-	}
-	else {
-		cout << "NO INTERSECT" << endl;
-	}*/
-
-
-
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// General Purpose - renders input file
 
-	/*int size = 1000;
+	int size = 1000;
 
 	char* inFile = "input.txt";
 	parseArgs(inFile);
@@ -295,7 +268,7 @@ int main(int argc, char* argv[])
 			c.addPixel(rt.trace(s.getSample()));
 		}
 	}
-	c.encode("image.png");*/
+	c.encode("image.png");
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
