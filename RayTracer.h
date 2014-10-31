@@ -51,6 +51,10 @@ public:
 
 	bool shadowRay(ray sRay);
 
+	bool pointShadowRay(Vector3f point, Vector3f lightOrigin);
+
+	bool directionalShadowRay(Vector3f point, Vector3f directionToLight);
+
 	Vector3f reflectionRay(Vector3f point, Vector3f normalAtPoint, ray incoming, Vector3f k_refl, int depth);
 
 	color shade(Vector3f pointOnShape, Vector3f normalAtPoint, object shape, int depth, ray incoming) ;
