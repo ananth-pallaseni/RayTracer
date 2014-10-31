@@ -150,7 +150,6 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 			// lightDirection is unit vector pointing TO light
 			Vector3f lightDirection = unit(pl.point - pointOnShape);
 	
-			Vector3f ttt(50, 50, 50);
 			rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, pl.l());
 			rgb = rgb + specular(normalAtPoint, lightDirection, incoming.sMinusE, shape.mat.spec, pl.l(), shape.mat.phongExp);
 		}
