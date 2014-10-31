@@ -294,7 +294,9 @@ Vector3f eye(0, 75, 500);
 Vector3f point(50, -95, 50);
 ray r(eye, point);
 Vector3f n = triangleNormal11(point, tri, r);
+
 cout << "NORMAL: " << n(0) << ", " << n(1) << ", " << n(2) << endl;
+
 /*Vector3f eye(0, 0, 150);
 Vector3f point(0, 0, 0);
 // ray should be in 0, 0, -1 direction
@@ -309,8 +311,8 @@ if(check) {
 	cout << "T: " << t << endl;
 }
 else {
-	cout << "NO INTERSECTION" << endl;*/
-}
+	cout << "NO INTERSECTION" << endl;
+}*/
 
 
 
