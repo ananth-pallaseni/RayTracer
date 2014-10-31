@@ -214,8 +214,20 @@ bool intersect11(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
 		cout << planeNormal << endl << endl;
 		float numerator = planeNormal.dot(tri.a - e);
 		float denominator = planeNormal.dot(sMinusE);
-		cout << numerator << endl;
-		cout << denominator << endl;
+		cout << "NUMERATOR: " << numerator << endl;
+		cout << "DENOMINATOR: " << denominator << endl;
+		if(denominator == 0) {
+			// ray is parallel to plane:
+			return false;
+		}
+		float r1 = numerator / denominator;
+		cout << "R!: " << r1 << endl;
+		if(r1 < 0) {
+			// means ray does not intersect plane:
+			return false;
+		}
+		Vector3f pointToTest = p11(r1, sMinusE, e);
+		cout << "POINT TO TEST: " << endl << pointToTest << endl << endl;
 
 		return true;
 	}
