@@ -211,7 +211,11 @@ bool intersect11(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
 		Vector3f side2 = tri.a = tri.c;
 		Vector3f planeNormal = side1.cross(side2);
 		planeNormal = planeNormal / planeNormal.norm();
-		cout << planeNormal;
+		cout << planeNormal << endl << endl;
+		float numerator = planeNormal.dot(tri.a - e);
+		float denominator = planeNormal.dot(sMinusE);
+		cout << numerator << endl;
+		cout << denominator << endl;
 
 		return true;
 	}
