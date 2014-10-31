@@ -271,7 +271,7 @@ Vector3f triangleNormal11(Vector3f pointOnShape, triangle shape, ray r) {
 	}
 	return unitNormal;*/
 	Vector3f side1 = shape.a - shape.b;
-	Vector3f side2 = shape.a - shape.c;
+	Vector3f side2 = shape.a = shape.c;
 	Vector3f planeNormal = side1.cross(side2);
 	if((-r.sMinusE).dot(planeNormal) < 0) {
 		planeNormal = -planeNormal;
@@ -283,14 +283,19 @@ Vector3f triangleNormal11(Vector3f pointOnShape, triangle shape, ray r) {
 
 int main(int argc, char* argv[])
 {
-/*material mm;
+material mm;
 Matrix4f matr;
 matr << 1, 0, 0, 0,
 		0, 1, 0, 0, 
 		0, 0, 1, 0,
 		0, 0, 0, 1;
-triangle tri(0, 50, 0, -50, -50, 0, 50, -50, 0, mm, matr);
-Vector3f eye(0, 0, 150);
+triangle tri(0, -95, 0, -100, -95, 100, 100, -95, 100, mm, matr);
+Vector3f eye(0, 75, 500);
+Vector3f point(50, -95, 50);
+ray r(eye, point);
+Vector3f n = triangleNormal11(point, tri, r);
+cout << "NORMAL: " << n(0) << ", " << n(1) << ", " << n(2) << endl;
+/*Vector3f eye(0, 0, 150);
 Vector3f point(0, 0, 0);
 // ray should be in 0, 0, -1 direction
 ray r(eye, point);
@@ -304,8 +309,8 @@ if(check) {
 	cout << "T: " << t << endl;
 }
 else {
-	cout << "NO INTERSECTION" << endl;
-}*/
+	cout << "NO INTERSECTION" << endl;*/
+}
 
 
 
@@ -313,7 +318,7 @@ else {
 
 	// General Purpose - renders input file
 
-	int size = 500;
+	/*int size = 500;
 
 	char* inFile = "input.txt";
 	clock_t startTime;
@@ -334,7 +339,7 @@ else {
 
 	duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
 	cout << "DONE" << endl;
-	cout << "TIME: " << duration << " seconds" << endl;
+	cout << "TIME: " << duration << " seconds" << endl;*/
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
