@@ -336,7 +336,7 @@ else {
 		for(int j = 0.9*size; j < 0.91*size; j++) {
 			Vector3f tttemp = s.getSample();
 			if(i >= 0.52*size && i <= 0.53*size && j >= 0.9*size && j <= 0.91*size) {
-				c.addPixel(rt.trace(tttemp);
+				c.addPixel(rt.trace(tttemp));
 			}
 			
 		}
