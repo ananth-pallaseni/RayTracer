@@ -108,7 +108,7 @@ bool RayTracer::shadowRay(ray sRay) {
 	}
 	for(int i = 0; i < numTriangles; i++) {
 		if(sRay.intersect(triangles[i], &t)) {
-			if(t > 0.01f) { // only return if the object intersects the ray in the positive direction.
+			if(t > 0.1f) { // only return if the object intersects the ray in the positive direction.
 				return true;
 			}
 		}
