@@ -208,7 +208,7 @@ int main(int argc, char* argv[])
 	Vector3f pointOfInter;
 	float t;
 	intersect11(tri, &pointOfInter, r.sMinusE, r.e);
-	if(intersect11(tri, &pointOfInter, r.sMinusE, r.e);) {
+	if(intersect11(tri, &pointOfInter, r.sMinusE, r.e)) {
 		//r.intersect(tri, &t);
 		cout << pointOfInter << endl << endl;
 		//cout << t << endl;
