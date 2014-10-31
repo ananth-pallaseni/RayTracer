@@ -160,7 +160,7 @@ int main(int argc, char* argv[])
 {
 
 
-/*int size = 600;
+int size = 600;
 
 	char* inFile = "input.txt";
 	parseArgs(inFile);
@@ -170,17 +170,20 @@ int main(int argc, char* argv[])
 	Canvas c(size, size);
 	RayTracer rt(eye, spheres, triangles, pointLights, directionalLights, ambientLights);
 	// sph[0] is at -40, 0, -100 with radius 30
-	Vector3f start(-10, 0, -100);
+	Vector3f start(-14.01924, 0, -85);
 	Vector3f n = sphereNormal11(start, spheres[0]);
-	cout << n << endl << endl;
-	cout << spheres[0].center << endl << endl;*/
+	cout << "NORMAL: " << endl << n << endl << endl;
+	ray inc(eye, start);
+	cout << "INC: " << endl << inc.sMinusE << endl << endl;
+	ray refl(start, inc.sMinusE - 2 * n * (inc.sMinusE.dot(n)));
+	//cout << spheres[0].center << endl << endl;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// General Purpose - renders input file
 
-	int size = 600;
+	/*int size = 600;
 
 	char* inFile = "input.txt";
 	parseArgs(inFile);
@@ -194,7 +197,7 @@ int main(int argc, char* argv[])
 			c.addPixel(rt.trace(s.getSample()));
 		}
 	}
-	c.encode("image.png");
+	c.encode("image.png");*/
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
