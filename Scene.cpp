@@ -55,10 +55,13 @@ void parseObj(char* filename, material mat, Matrix4f objToWorld, Matrix4f worldT
         // array to store memory addresses of the tokens in buf
         const char* token[MAX_TOKENS_PER_LINE] = {}; // initialize to 0
         
+        cout << "3" << endl;
+
         // parse the line
         token[0] = strtok(buf, DELIMITER); // first token
         if (token[0]) // zero if line is blank
         {
+        	cout << "4" << endl;
             for (n = 1; n < MAX_TOKENS_PER_LINE; n++)
             {
                 token[n] = strtok(0, DELIMITER); // subsequent tokens
