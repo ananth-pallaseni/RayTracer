@@ -158,7 +158,7 @@ bool intersect11(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
 		Matrix3f A;
 		A(0, 0) = tri.a(0) - tri.b(0);
 		A(0, 1) = tri.a(0) - tri.c(0);
-		A(0, 2) = tri.a(0) - tri.c(0);
+		A(0, 2) = sMinusE(0);
 		A(1, 0) = tri.a(1) - tri.b(1);
 		A(1, 1) = tri.a(1) - tri.c(1);
 		A(1, 2) = sMinusE(1);
