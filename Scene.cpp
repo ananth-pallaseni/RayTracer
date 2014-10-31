@@ -274,14 +274,14 @@ material mm;
 Matrix4f matr;
 triangle tri(0, 50, 0, -50, -50, 0, 50, -50, 0, mm, matr, matr);
 Vector3f eye(0, 0, 150);
-Vector3f point(0, 0, 0);
+Vector3f point(20, 3, 0);
 // ray should be in 0, 0, -1 direction
 ray r(eye, point);
 Vector3f p;
 bool check = r.intersect(tri, &p);
 if(check) {
-	cout << "POINT: " << endl << endl << endl;
-	cout << "NORMAL" << triangleNormal11(p, tri, r) << endl;
+	cout << "POINT: " << endl << p << endl;
+	cout << "NORMAL" << endl << triangleNormal11(p, tri, r) << endl;
 }
 
 
