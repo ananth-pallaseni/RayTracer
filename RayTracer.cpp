@@ -145,7 +145,7 @@ Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray in
 	else{
 		c = Vector3f(cTemp.r * k_refl(0), cTemp.g * k_refl(1), cTemp.b * k_refl(2) );	
 	}*/
-	c = c / 255; // as color rgb values are (0->255)
+	//c = c / 255; // as color rgb values are (0->255)
 	return c;
 }
 
