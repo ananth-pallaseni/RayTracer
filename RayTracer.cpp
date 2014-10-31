@@ -114,11 +114,11 @@ Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray in
 	color cTemp = traceRay(refl, depth + 1, point);
 	Vector3f c(cTemp.r * k_refl(0), cTemp.g * k_refl(1), cTemp.b * k_refl(2) );
 	c = c / 255; // as color rgb values are (0->255)
-	if((cTemp.b > 0 || cTemp.r > 0 )) {
+	/*if((cTemp.b > 0 || cTemp.r > 0 )) {
 		cout << "SHADE CALC: " << (float) cTemp.r << ", " << (float)cTemp.g << ", " << (float)cTemp.b << endl;
 		cout << "REFL COLOR: " << c(0) << ", " << c(1) << ", " << c(2) << endl;
 		cout << "K_REFL:     " << k_refl(0) << ", " << k_refl(1) << ", " << k_refl(2) << endl << endl;
-	}
+	}*/
 	return c;
 }
 

@@ -13,7 +13,7 @@
 
 using namespace std;
 
-const int DEPTH_MAX = 2;
+const int DEPTH_MAX = 1;
 
 class RayTracer {
 public:

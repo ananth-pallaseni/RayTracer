@@ -159,36 +159,18 @@ Vector3f sphereNormal11(Vector3f pointOnShape, sphere shape) {
 int main(int argc, char* argv[])
 {
 
-
-	/*int size = 600;
-
-	char* inFile = "input.txt";
-	parseArgs(inFile);
-
-
-	Sampler s(size, size, LL, LR, UL, UR);
-	Canvas c(size, size);
-	RayTracer rt(eye, spheres, triangles, pointLights, directionalLights, ambientLights);
-	// sph[0] is at -40, 0, -100 with radius 30
-	Vector3f start(-18.7867966, 0, -78.7867966);
-	Vector3f n = sphereNormal11(start, spheres[0]);
-	cout << "NORMAL: " << endl << n << endl << endl;
-	Vector3f eyeStart(-18.7867966, 0, 0);
-	ray inc(eyeStart, start);
-	cout << "INC: " << endl << inc.sMinusE << endl << endl;
-	ray refl(start, inc.sMinusE - 2 * n * (inc.sMinusE.dot(n)), true);
-	cout << "INTERMEDIATE CALC: " << inc.sMinusE(0) << " - " << (2 * n * (inc.sMinusE.dot(n)))(0) << endl;
-	cout << "INTERMEDIATE CALC: " << inc.sMinusE(1) << " - " << (2 * n * (inc.sMinusE.dot(n)))(1) << endl;
-	cout << "INTERMEDIATE CALC: " << inc.sMinusE(2) << " - " << (2 * n * (inc.sMinusE.dot(n)))(2) << endl;
-	cout << "REFL: " << endl << refl.sMinusE << endl << endl;
-	Vector3f inters;
+	material mm;
+	Matrix4f matr;
+	triangle tri(0, 5, 0, 5, -5, 0, -5, -5, 0, mm, matr, matr);
+	Vector3f eye(0, 0, -100);
+	Vector3f point(0, 0, 0);
+	ray r(eye, point);
+	Vector3f pointOfInter;
 	float t;
-	if(refl.intersect(spheres[1], &inters, &t)) {
-		cout << "HIT" << endl << inters << endl << endl;
+	if(ray.intersect(tri, &pointOfInter, &t)) {
+		cout << pointOfInter << endl << endl;
+		cout << t << endl;
 	}
-	else {
-		cout << "NOO" << endl << endl;
-	}*/
 
 
 
@@ -198,7 +180,7 @@ int main(int argc, char* argv[])
 
 	// General Purpose - renders input file
 
-	int size = 1000;
+	/*int size = 1000;
 
 	char* inFile = "input.txt";
 	parseArgs(inFile);
@@ -212,7 +194,7 @@ int main(int argc, char* argv[])
 			c.addPixel(rt.trace(s.getSample()));
 		}
 	}
-	c.encode("image.png");
+	c.encode("image.png");*/
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
