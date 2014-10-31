@@ -280,7 +280,7 @@ Vector3f point(50, 50, 0);
 // ray should be in 0, 0, -1 direction
 ray r(eye, point);
 Vector3f p;
-bool check = r.intersect22(tri, &p, r.sMinusE, r.e);
+bool check = intersect22(tri, &p, r.sMinusE, r.e);
 if(check) {
 	cout << "POINT: " << endl << p << endl;
 	cout << "NORMAL: " << endl << triangleNormal11(p, tri, r) << endl;
