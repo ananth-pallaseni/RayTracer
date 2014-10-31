@@ -281,7 +281,7 @@ material mm;
 Matrix4f matr;
 triangle tri(0, 50, 0, -50, -50, 0, 50, -50, 0, mm, matr, matr);
 Vector3f eye(0, 0, 150);
-Vector3f point(0, 0, 0);
+Vector3f point(20, 5, 0);
 // ray should be in 0, 0, -1 direction
 ray r(eye, point);
 Vector3f p;
