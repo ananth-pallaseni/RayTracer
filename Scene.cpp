@@ -196,7 +196,7 @@ int size = 600;
 				if(nc(0) == nc(2) && n(1) == 0) {
 					cout << pc << endl << endl;
 				}
-				cout << x << "  " << y << "  " << z << endl << endl;
+				//cout << x << "  " << y << "  " << z << endl << endl;
 		
 	}
 		
