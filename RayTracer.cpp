@@ -130,8 +130,8 @@ Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray in
 	// Reflect ray about normal:
 	ray refl(point, incoming.sMinusE - 2 * normalAtPoint * (incoming.sMinusE.dot(normalAtPoint)), true);
 	color cTemp = traceRay(refl, depth + 1, point);
-	Vector3f c;
-	if(isTriangle) {
+	Vector3f c((float)cTemp.r, (float)cTemp.g, (float)cTemp.b);
+	/*if(isTriangle) {
 		for(int i = 0; i < 3; i++) {
 			if(k_refl(i) == 0) {
 				k_refl(i) = 1;
@@ -144,7 +144,7 @@ Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray in
 	}
 	else{
 		c = Vector3f(cTemp.r * k_refl(0), cTemp.g * k_refl(1), cTemp.b * k_refl(2) );	
-	}
+	}*/
 	c = c / 255; // as color rgb values are (0->255)
 	return c;
 }
@@ -163,7 +163,7 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 			rgb = rgb + specular(normalAtPoint, lightDirection, incoming.sMinusE, shape.mat.spec, pl.l(), shape.mat.phongExp);
 		}
 		if(depth < DEPTH_MAX ) {
-			rgb = rgb + reflectionRay(pointOnShape, normalAtPoint, incoming, shape.mat.refl, depth);
+			rgb = rgb + vMul(shape.mat.refl, reflectionRay(pointOnShape, normalAtPoint, incoming, shape.mat.refl, depth));
 		}
 		rgb = rgb + ambient(pl.l(), shape.mat.amb);
 	}
