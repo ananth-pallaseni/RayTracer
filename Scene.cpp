@@ -147,13 +147,49 @@ void parseArgs(char* filename) {
 
 }
 
-Vector3f unit11(Vector3f v) {
-	return v / v.norm();
-}
+bool intersect11(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
+		cout << "tri a: " << end << tri.a << endl << endl;
+		cout << "tri b: " << end << tri.b << endl << endl;
+		cout << "tri c: " << end << tri.c << endl << endl;
+		Matrix3f A;
+		A(0, 0) = tri.a(0) - tri.b(0);
+		A(0, 1) = tri.a(0) - tri.c(0);
+		A(0, 2) = sMinusE(0);
+		A(1, 0) = tri.a(1) - tri.b(1);
+		A(1, 1) = tri.a(1) - tri.c(1);
+		A(1, 2) = sMinusE(1);
+		A(2, 0) = tri.a(2) - tri.b(2);
+		A(2, 1) = tri.a(2) - tri.c(2);
+		A(2, 2) = sMinusE(2);
+		cout << "A: " << end << A << endl << endl;
 
-Vector3f sphereNormal11(Vector3f pointOnShape, sphere shape) {
-	return unit11(pointOnShape - shape.center);
-}
+		// Setri up matririx B:
+		Vector3f B;
+		B(0) = tri.a(0) - e(0);
+		B(1) = tri.a(1) - e(1);
+		B(2) = tri.a(2) - e(2);
+		cout << "B: " << end << B << endl << endl;
+		// Store these vals to save computation:
+		float eihf = A(1, 1) * A(2, 2) - A(1, 2) * A(2, 1);
+		float gfdi = A(0, 2) * A(2, 1) - A(0, 1) * A(2, 2);
+		float dheg = A(0, 1) * A(1, 2) - A(1, 1) * A(0, 2);
+		float akjb = A(0, 0) * B(1) - B(0) * A(1, 0);
+		float jcal = B(0) * A(2, 0) - A(0, 0) * B(2);
+		float blkc = A(1, 0) * B(2) - B(1) * A(2, 0);
+		// By Cramers Rule:
+		float M = A(0, 0) * eihf + A(1, 0) * gfdi + A(2, 0) * dheg;
+		float gamma = (A(2, 2) * akjb + A(1, 2) * jcal + A(0, 2) * blkc) / M;
+		if (gamma < 0 || gamma > 1) {
+			return false;
+		}
+		float beta = (B(0) * eihf + B(1) * gfdi + B(2) * dheg) / M;
+		if (beta < 0 || beta > 1 - gamma) {
+			return false;
+		}
+		float t = (A(2, 1) * akjb + A(1, 1) * jcal + A(0, 1) * blkc) / M;
+		*point = p(t);
+		return true;
+	}
 
 
 int main(int argc, char* argv[])
@@ -167,10 +203,11 @@ int main(int argc, char* argv[])
 	ray r(eye, point);
 	Vector3f pointOfInter;
 	float t;
-	if(r.intersect(tri, &pointOfInter)) {
-		r.intersect(tri, &t);
+	intersect11(tri, &pointOfInter, r.sMinusE, r.e);
+	if(intersect11(tri, &pointOfInter, r.sMinusE, r.e);) {
+		//r.intersect(tri, &t);
 		cout << pointOfInter << endl << endl;
-		cout << t << endl;
+		//cout << t << endl;
 	}
 
 
