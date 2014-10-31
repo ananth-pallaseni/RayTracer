@@ -283,7 +283,7 @@ Vector3f triangleNormal11(Vector3f pointOnShape, triangle shape, ray r) {
 
 int main(int argc, char* argv[])
 {
-material mm;
+/*material mm;
 Matrix4f matr;
 matr << 1, 0, 0, 0,
 		0, 1, 0, 0, 
@@ -305,7 +305,7 @@ if(check) {
 }
 else {
 	cout << "NO INTERSECTION" << endl;
-}
+}*/
 
 
 
@@ -313,7 +313,7 @@ else {
 
 	// General Purpose - renders input file
 
-	/*int size = 400;
+	int size = 400;
 
 	char* inFile = "input.txt";
 	clock_t startTime;
@@ -334,7 +334,7 @@ else {
 
 	duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
 	cout << "DONE" << endl;
-	cout << "TIME: " << duration << " seconds" << endl;*/
+	cout << "TIME: " << duration << " seconds" << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
