@@ -160,9 +160,9 @@ int main(int argc, char* argv[])
 {
 
 
-int size = 600;
+	/*int size = 600;
 
-	/*char* inFile = "input.txt";
+	char* inFile = "input.txt";
 	parseArgs(inFile);
 
 
