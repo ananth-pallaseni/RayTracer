@@ -126,7 +126,7 @@ bool RayTracer::directionalShadowRay(Vector3f point, Vector3f directionToLight) 
 	return shadowRay(r);
 }	
 
-Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray incoming, Vector3f k_refl, int depth, bool isTriangle) {
+Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray incoming, Vector3f k_refl, int depth) {
 	// Reflect ray about normal:
 	ray refl(point, incoming.sMinusE - 2 * normalAtPoint * (incoming.sMinusE.dot(normalAtPoint)), true);
 	color cTemp = traceRay(refl, depth + 1, point);
