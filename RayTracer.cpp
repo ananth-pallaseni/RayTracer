@@ -132,7 +132,7 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 	
 			Vector3f ttt(50, 50, 50);
 			rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, pl.l());
-			rgb = rgb + specular(normalAtPoint, lightDirection, e, shape.mat.spec, pl.l(), shape.mat.phongExp);
+			rgb = rgb + specular(normalAtPoint, lightDirection, incoming.e, shape.mat.spec, pl.l(), shape.mat.phongExp);
 		}
 		if(depth < DEPTH_MAX ) {
 			rgb = rgb + reflectionRay(pointOnShape, normalAtPoint, incoming, shape.mat.refl, depth);
@@ -147,7 +147,7 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 			Vector3f lightDirection = -unit(dl.direction);
 
 			rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, dl.l());
-			rgb = rgb + specular(normalAtPoint, lightDirection, e, shape.mat.spec, dl.l(), shape.mat.phongExp);
+			rgb = rgb + specular(normalAtPoint, lightDirection, incoming.e, shape.mat.spec, dl.l(), shape.mat.phongExp);
 		}
 		if(depth < DEPTH_MAX) {
 			rgb = rgb + reflectionRay(pointOnShape, normalAtPoint, incoming, shape.mat.refl, depth);
