@@ -213,7 +213,7 @@ color RayTracer::traceRay(ray r, int depth, Vector3f source) {
 		// NEW:
 		color cq = shade(point, normal, shape, depth, r);
 		if ( depth == 1) {
-			cout << "HIT ON RELECTION, POINT: " << point << endl;
+			cout << "HIT ON RELECTION, POINT: " << endl << point << endl << endl;
 		}
 		return cq;
 		// ENDNEW
