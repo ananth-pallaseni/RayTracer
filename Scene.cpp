@@ -158,7 +158,7 @@ bool intersect11(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
 		Matrix3f A;
 		A(0, 0) = tri.a(0) - tri.b(0);
 		A(0, 1) = tri.a(0) - tri.c(0);
-		A(0, 2) = sMinusE(0);
+		A(0, 2) = tri.a(0) - tri.c(0);
 		A(1, 0) = tri.a(1) - tri.b(1);
 		A(1, 1) = tri.a(1) - tri.c(1);
 		A(1, 2) = sMinusE(1);
@@ -207,6 +207,8 @@ int main(int argc, char* argv[])
 	ray r(eye, point);
 	Vector3f pointOfInter;
 	float t;
+	cout << "RAY START: " << endl << r.e << endl << endl:
+	cout << "RAY DIR  : " << endl << r.sMinusE << endl << endl;
 	if(intersect11(tri, &pointOfInter, r.sMinusE, r.e)) {
 		//r.intersect(tri, &t);
 		cout << pointOfInter << endl << endl;
