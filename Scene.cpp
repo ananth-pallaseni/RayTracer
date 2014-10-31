@@ -90,7 +90,7 @@ void parseArgs(char* filename) {
   	  		spheres.push_back(sph);
   	  	}
   	  	else if(strcmp(token[0], "tri") == 0) {
-  	  		triangle tri(atof(token[1]), atof(token[2]), atof(token[3]), atof(token[4]), atof(token[5]), atof(token[6]), atof(token[7]), atof(token[8]), atof(token[9]), mat, inOrder);
+  	  		triangle tri(atof(token[1]), atof(token[2]), atof(token[3]), atof(token[4]), atof(token[5]), atof(token[6]), atof(token[7]), atof(token[8]), atof(token[9]), mat, objToWorld);
   	  		triangles.push_back(tri);
   	  	}
   	  	else if(strcmp(token[0], "ltp") == 0) {
