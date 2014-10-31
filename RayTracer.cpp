@@ -113,10 +113,11 @@ Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray in
 	ray refl(point, incoming.sMinusE - 2 * normalAtPoint * (incoming.sMinusE.dot(normalAtPoint)), true);
 	color cTemp = traceRay(refl, depth + 1, point);
 	Vector3f c(cTemp.r * k_refl(0), cTemp.g * k_refl(1), cTemp.b * k_refl(2) );
-	/*if((cTemp.b > 0 || cTemp.r > 0 || cTemp.g > 0)) {
-		cout << "///////////////// REFL FROM POINT: " << point(0) << ", " << point(1) << ", " << point(2) << endl;
-		cout << "///////////////// REFL USES VALUES: " << k_refl(0) << ", " << k_refl(1) << ", " << k_refl(2) << endl << endl;
-	}*/
+	if((cTemp.b > 0 || cTemp.r > 0 )) {
+		cout << "SHADE CALC: " << cTemp.r << ", " << cTemp.g << ", " << cTemp.b << endl;
+		cout << "REFL COLOR: " << c(0) << ", " << c(1) << ", " << c(2) << endl;
+		cout << "K_REFL:     " << k_refl(0) << ", " << k_refl(1) << ", " << k_refl(2) << endl;
+	}
 	return c;
 }
 
@@ -162,10 +163,10 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 
 	rgb = clamp(rgb);
 	//cout << rgb << endl << endl;
-	if(depth == 1) {
+	/*if(depth == 1) {
 		cout << rgb << endl;
 		cout << pointOnShape << endl << endl;
-	}
+	}*/
 	return color(rgb);
 }
 
