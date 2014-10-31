@@ -129,13 +129,8 @@ bool RayTracer::directionalShadowRay(Vector3f point, Vector3f directionToLight) 
 Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray incoming, Vector3f k_refl, int depth) {
 	// Reflect ray about normal:
 	ray refl(point, incoming.sMinusE - 2 * normalAtPoint * (incoming.sMinusE.dot(normalAtPoint)), true);
-	/*if(point(1) == -95) {
-		cout << "REFL RAY: " << endl << refl.sMinusE << endl ;
-		cout << "NORMAL: " << endl << normalAtPoint << endl ;
-	}*/
 	color cTemp = traceRay(refl, depth + 1, point);
-	cout << "CTEMP: " << (int)cTemp.r << ", " << (int)cTemp.g << ", " << (int)cTemp.b << endl;
-	for(int i = 0; i < 3; i++) {
+	/*for(int i = 0; i < 3; i++) {
 		if(k_refl(i) == 0) {
 			k_refl(i) = 1;
 		}
@@ -143,15 +138,9 @@ Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray in
 			k_refl(i) = 0;
 		}
 	}
-	Vector3f c(cTemp.r * (1 - k_refl(0)), cTemp.g * (1 - k_refl(1)), cTemp.b * (1 - k_refl(2)) );
-	cout << "CTEMP AFER: " << c(0) << ", " << c(1) << ", " << c(2) << endl;
+	Vector3f c(cTemp.r * (1 - k_refl(0)), cTemp.g * (1 - k_refl(1)), cTemp.b * (1 - k_refl(2)) );*/
+	Vector3f c(cTemp.r * k_refl(0), cTemp.g * k_refl(1), cTemp.b * k_refl(2) );
 	c = c / 255; // as color rgb values are (0->255)
-	cout << "REFLECT COEFFICIENTS: " << k_refl(0) << ", " << k_refl(1) << ", " << k_refl(2) << endl;
-	/*if((cTemp.b > 0 || cTemp.r > 0 )) {
-		cout << "SHADE CALC: " << (float) cTemp.r << ", " << (float)cTemp.g << ", " << (float)cTemp.b << endl;
-		cout << "REFL COLOR: " << c(0) << ", " << c(1) << ", " << c(2) << endl;
-		cout << "K_REFL:     " << k_refl(0) << ", " << k_refl(1) << ", " << k_refl(2) << endl << endl;
-	}*/
 	return c;
 }
 
@@ -195,13 +184,6 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 	}
 
 	rgb = clamp(rgb);
-	//cout << rgb << endl << endl;
-	if(depth == 0) {
-		if(pointOnShape(1) == -95) {
-			cout << "INC RAY: " << endl << incoming.sMinusE << endl;
-			cout << "RGB: " << endl << rgb << endl << endl;
-		}
-	}
 	return color(rgb);
 }
 
