@@ -168,7 +168,9 @@ int main(int argc, char* argv[])
 	Vector3f pointOfInter;
 	float t;
 	if(r.intersect(tri, &pointOfInter)) {
+		r.intersect(tri, &t);
 		cout << pointOfInter << endl << endl;
+		cout << t << endl;
 	}
 
 
