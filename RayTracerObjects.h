@@ -456,7 +456,8 @@ struct ray
 		return false;
 	}
 
-	bool intersect(triangle tri, Vector3f* point) {
+	// OLD, doesnt work
+	/*bool intersect(triangle tri, Vector3f* point) {
 		Matrix3f A;
 		A(0, 0) = tri.a(0) - tri.b(0);
 		A(0, 1) = tri.a(0) - tri.c(0);
@@ -492,9 +493,50 @@ struct ray
 		float t = (A(2, 1) * akjb + A(1, 1) * jcal + A(0, 1) * blkc) / M;
 		*point = p(t);
 		return true;
+	}*/
+
+	bool intersect(triangle tri, Vector3f* point) {
+		// check if it intersects a plane:
+		Vector3f side1 = tri.a - tri.b;
+		Vector3f side2 = tri.a = tri.c;
+		Vector3f planeNormal = side1.cross(side2);
+		planeNormal = planeNormal / planeNormal.norm();
+		cout << "NORMAL TO PLANE: " << planeNormal << endl << endl;
+		float numerator = planeNormal.dot(tri.a - e);
+		float denominator = planeNormal.dot(sMinusE);
+		cout << "NUMERATOR: " << numerator << endl;
+		cout << "DENOMINATOR: " << denominator << endl;
+		if(denominator == 0) {
+			// ray is parallel to plane:
+			return false;
+		}
+		float r1 = numerator / denominator;
+		cout << "r1: " << r1 << endl;
+		if(r1 < 0) {
+			// means ray does not intersect plane:
+			return false;
+		}
+		Vector3f pointToTest = p11(r1, sMinusE, e);
+		cout << "POINT TO TEST: " << endl << pointToTest << endl << endl;
+
+		// Now check if the point lies within the triangle:
+		Vector3f u = tri.b - tri.a;
+		Vector3f v = tri.c - tri.a;
+		Vector3f w = pointToTest - tri.a;
+		float denom1 = u.dot(v) * u.dot(v) - u.dot(u) * v.dot(v);
+		float s1 = u.dot(v) * w.dot(v) - v.dot(v) * w.dot(u);
+		s1 = s1 / denom1;
+		float t1 = u.dot(v) * w.dot(u) - u.dot(u) * w.dot(v);
+		t1 = t1 / denom1;
+		if(s1 < 0 || t1 < 0 || s1 + t1 > 1) {
+			return false;
+		}
+		*point = pointToTest;
+		return true;
 	}
 
-	bool intersect(triangle tri, float* t) {
+	// OLD, doesnt work
+	/*bool intersect(triangle tri, float* t) {
 		Matrix3f A;
 		A(0, 0) = tri.a(0) - tri.b(0);
 		A(0, 1) = tri.a(0) - tri.c(0);
@@ -528,6 +570,46 @@ struct ray
 			return false;
 		}
 		*t = (A(2, 1) * akjb + A(1, 1) * jcal + A(0, 1) * blkc) / M;
+		return true;
+	}*/
+
+	bool intersect(triangle tri, float* t) {
+		// check if it intersects a plane:
+		Vector3f side1 = tri.a - tri.b;
+		Vector3f side2 = tri.a = tri.c;
+		Vector3f planeNormal = side1.cross(side2);
+		planeNormal = planeNormal / planeNormal.norm();
+		cout << "NORMAL TO PLANE: " << planeNormal << endl << endl;
+		float numerator = planeNormal.dot(tri.a - e);
+		float denominator = planeNormal.dot(sMinusE);
+		cout << "NUMERATOR: " << numerator << endl;
+		cout << "DENOMINATOR: " << denominator << endl;
+		if(denominator == 0) {
+			// ray is parallel to plane:
+			return false;
+		}
+		float r1 = numerator / denominator;
+		cout << "r1: " << r1 << endl;
+		if(r1 < 0) {
+			// means ray does not intersect plane:
+			return false;
+		}
+		Vector3f pointToTest = p11(r1, sMinusE, e);
+		cout << "POINT TO TEST: " << endl << pointToTest << endl << endl;
+
+		// Now check if the point lies within the triangle:
+		Vector3f u = tri.b - tri.a;
+		Vector3f v = tri.c - tri.a;
+		Vector3f w = pointToTest - tri.a;
+		float denom1 = u.dot(v) * u.dot(v) - u.dot(u) * v.dot(v);
+		float s1 = u.dot(v) * w.dot(v) - v.dot(v) * w.dot(u);
+		s1 = s1 / denom1;
+		float t1 = u.dot(v) * w.dot(u) - u.dot(u) * w.dot(v);
+		t1 = t1 / denom1;
+		if(s1 < 0 || t1 < 0 || s1 + t1 > 1) {
+			return false;
+		}
+		*t = t1;
 		return true;
 	}
 
