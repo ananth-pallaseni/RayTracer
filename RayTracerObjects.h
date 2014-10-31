@@ -254,6 +254,7 @@ struct object
 	material mat;
 	Matrix4f objToWorld;
 	Matrix4f worldToObj;
+	Matrix4f transformsInOrder;
 };
 
 struct sphere : object
@@ -280,18 +281,17 @@ struct triangle : object
 {
 	Vector3f a, b, c;
 
-	triangle(float ax, float ay, float az, float bx, float by, float bz, float cx, float cy, float cz, material m, Matrix4f transMatrix, Matrix4f invTransMatrix) {
+	triangle(float ax, float ay, float az, float bx, float by, float bz, float cx, float cy, float cz, material m, Matrix4f inOrder) {
 		Vector4f a4 = Vector4f(ax, ay, az, 1);
 		Vector4f b4 = Vector4f(bx, by, bz, 1);
 		Vector4f c4 = Vector4f(cx, cy, cz, 1);
 
 		type = TRIANGLE;
 		mat = m;
-		objToWorld = transMatrix;
-		worldToObj = invTransMatrix;
-		a4 = objToWorld * a4;
-		b4 = objToWorld * b4;
-		c4 = objToWorld * c4;
+		transformsInOrder = inOrder;
+		a4 = transformsInOrder * a4;
+		b4 = transformsInOrder * b4;
+		c4 = transformsInOrder * c4;
 	}
 };
 

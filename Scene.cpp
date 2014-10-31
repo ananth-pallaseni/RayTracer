@@ -42,6 +42,7 @@ void parseArgs(char* filename) {
   	material mat;
   	Matrix4f worldToObj;
   	Matrix4f objToWorld;
+  	Matrix4f inOrder;
   	Matrix4f I;
   	I << 1, 0, 0, 0,
 		 0, 1, 0, 0,
@@ -50,6 +51,7 @@ void parseArgs(char* filename) {
 
 	worldToObj = I;
   	objToWorld = I;
+  	inOrder = I;
   	
   	// read each line of the file
   	while (!fin.eof())
@@ -88,7 +90,7 @@ void parseArgs(char* filename) {
   	  		spheres.push_back(sph);
   	  	}
   	  	else if(strcmp(token[0], "tri") == 0) {
-  	  		triangle tri(atof(token[1]), atof(token[2]), atof(token[3]), atof(token[4]), atof(token[5]), atof(token[6]), atof(token[7]), atof(token[8]), atof(token[9]), mat, objToWorld, worldToObj);
+  	  		triangle tri(atof(token[1]), atof(token[2]), atof(token[3]), atof(token[4]), atof(token[5]), atof(token[6]), atof(token[7]), atof(token[8]), atof(token[9]), mat, inOrder);
   	  		triangles.push_back(tri);
   	  	}
   	  	else if(strcmp(token[0], "ltp") == 0) {
@@ -123,21 +125,25 @@ void parseArgs(char* filename) {
   	  		translate tMat(atof(token[1]), atof(token[2]), atof(token[3]));
   	  		worldToObj = tMat.inverse * worldToObj;
   			objToWorld = objToWorld * tMat;
+  			inOrder = tMat * inOrder;
 
   	  	}
   	  	else if(strcmp(token[0], "xfr") == 0) {
   	  		rotation rMat(atof(token[1]), atof(token[2]), atof(token[3]));
   	  		worldToObj = rMat.inverse * worldToObj;
   			objToWorld = objToWorld * rMat;
+  			inOrder = rMat * inOrder;
   	  	}
   	  	else if(strcmp(token[0], "xfs") == 0) {
   	  		scale sMat(atof(token[1]), atof(token[2]), atof(token[3]));
   	  		worldToObj = sMat.inverse * worldToObj;
   			objToWorld = objToWorld * sMat;
+  			inOrder = sMat * inOrder;
   	  	}
   	  	else if(strcmp(token[0], "xfz") == 0) {
   	  		worldToObj = I;
   			objToWorld = I;
+  			inOrder = I;
   	  	}
   	  	else {
   	  		cout << "UNRECOGNIZED TYPE: " << token[0] << endl;
