@@ -134,7 +134,9 @@ void parseArgs(char* filename) {
   	  	const char* token[MAX_TOKENS_PER_LINE] = {}; // initialize to 0
   	  	
   	  	// parse the line
+  	  	cout << "just before" << endl;
   	  	token[0] = strtok(buf, DELIMITER); // first token
+  	  	cout << "just after" << endl;
   	  	if (token[0]) // zero if line is blank
   	  	{
   	  	  	for (n = 1; n < MAX_TOKENS_PER_LINE; n++)
