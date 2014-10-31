@@ -209,7 +209,7 @@ bool intersect11(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
 	bool intersect22(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
 		// check if it intersects a plane:
 		Vector3f side1 = tri.a - tri.b;
-		Vector3f side2 = tri.a = tri.c;
+		Vector3f side2 = tri.a - tri.c;
 		Vector3f planeNormal = side1.cross(side2);
 		planeNormal = planeNormal / planeNormal.norm();
 		cout << "NORMAL TO PLANE: " << planeNormal << endl << endl;
@@ -265,7 +265,7 @@ Vector3f triangleNormal11(Vector3f pointOnShape, triangle shape, ray r) {
 	}
 	return unitNormal;*/
 	Vector3f side1 = shape.a - shape.b;
-	Vector3f side2 = shape.a = shape.c;
+	Vector3f side2 = shape.a - shape.c;
 	Vector3f planeNormal = side1.cross(side2);
 	if((-r.sMinusE).dot(planeNormal) < 0) {
 		planeNormal = -planeNormal;
