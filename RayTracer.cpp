@@ -181,10 +181,12 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 
 	rgb = clamp(rgb);
 	//cout << rgb << endl << endl;
-	/*if(depth == 1) {
-		cout << rgb << endl;
-		cout << pointOnShape << endl << endl;
-	}*/
+	if(depth == 1) {
+		if(pointOnShape(1) == -95) {
+			cout << "INC RAY: " << endl << incoming.sMinusE << endl;
+			cout << "RGB: " << rgb << endl << endl;
+		}
+	}
 	return color(rgb);
 }
 
@@ -237,7 +239,7 @@ color RayTracer::traceRay(ray r, int depth, Vector3f source) {
 	}
 
 	if(hit) {
-		return shade(point, normal, shape, depth, r);;
+		return shade(point, normal, shape, depth, r);
 	}
 	else {
 		return color(); // BLACK

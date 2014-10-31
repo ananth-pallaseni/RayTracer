@@ -285,13 +285,13 @@ struct triangle : object
 		Vector4f a4(ax, ay, az, 1);
 		Vector4f b4(bx, by, bz, 1);
 		Vector4f c4(cx, cy, cz, 1);
-		cout << "init A: " << endl << a4 << endl << endl;
-		cout << "init B: " << endl << b4 << endl << endl;
-		cout << "init C: " << endl << c4 << endl << endl;
+		//cout << "init A: " << endl << a4 << endl << endl;
+		//cout << "init B: " << endl << b4 << endl << endl;
+		//cout << "init C: " << endl << c4 << endl << endl;
 
 		type = TRIANGLE;
 		mat = m;
-		cout << "TRI TRNAS MATRIX: " << endl << inOrder << endl << endl;
+		//cout << "TRI TRNAS MATRIX: " << endl << inOrder << endl << endl;
 		transformsInOrder = inOrder;
 		a4 = transformsInOrder * a4;
 		b4 = transformsInOrder * b4;
