@@ -229,6 +229,11 @@ bool intersect11(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
 		Vector3f pointToTest = p11(r1, sMinusE, e);
 		cout << "POINT TO TEST: " << endl << pointToTest << endl << endl;
 
+		// Now check if the point lies within the triangle:
+		Vector3f u = tri.b - tri.a;
+		Vector3f v = tri.c - tri.a;
+		Vector3f w = 
+
 		return true;
 	}
 
@@ -240,7 +245,7 @@ int main(int argc, char* argv[])
 	Matrix4f matr;
 	triangle tri(0, 5, 0, 5, -5, 0, -5, -5, 0, mm, matr, matr);
 	Vector3f eye(0, 0, -100);
-	Vector3f point(0, 0, 0);
+	Vector3f point(0, 0, 3);
 	ray r(eye, point);
 	Vector3f pointOfInter;
 	float t;
