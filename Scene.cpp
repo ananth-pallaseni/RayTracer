@@ -183,9 +183,26 @@ int size = 600;
 		cout << "HIT" << endl << inters << endl << endl;
 	}
 	else {
-		cout << "NOO" << endl;
+		cout << "NOO" << endl << endl;
 	}
 	//cout << spheres[0].center << endl << endl;
+
+
+	for(float x = -10; x > -40; x = x - 0.01f) {
+		for(float y = 20; y > -20; y = y - 0.01f) {
+			for(float z = -100; z < -70; z = z + 0.01f) {
+				Vector3f pc(x, y, z);
+				Vector3f nc = sphereNormal11(pc, spheres[0]);
+				if(nc(0) == nc(2) && n(1) == 0) {
+					cout << pc << endl << endl;
+				}
+		
+	}
+		
+	}
+	}
+
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
