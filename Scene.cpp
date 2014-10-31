@@ -231,7 +231,7 @@ int main(int argc, char* argv[])
 	cout << "RAY START: " << endl << r.e << endl << endl;
 	cout << "RAY DIR  : " << endl << r.sMinusE << endl << endl;
 
-	intersect22((tri, &pointOfInter, r.sMinusE, r.e));
+	intersect22(tri, &pointOfInter, r.sMinusE, r.e);
 	/*if(intersect11(tri, &pointOfInter, r.sMinusE, r.e)) {
 		//r.intersect(tri, &t);
 		cout << pointOfInter << endl << endl;
