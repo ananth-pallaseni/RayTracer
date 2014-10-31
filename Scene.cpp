@@ -176,6 +176,7 @@ int size = 600;
 	ray inc(eye, start);
 	cout << "INC: " << endl << inc.sMinusE << endl << endl;
 	ray refl(start, inc.sMinusE - 2 * n * (inc.sMinusE.dot(n)));
+	cout << "REFL: " << endl << refl.sMinusE << endl << endl;
 	//cout << spheres[0].center << endl << endl;
 
 
