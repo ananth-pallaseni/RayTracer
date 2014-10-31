@@ -212,6 +212,8 @@ bool intersect11(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
 		Vector3f planeNormal = side1.cross(side2);
 		planeNormal = planeNormal / planeNormal.norm();
 		cout << planeNormal;
+
+		return true;
 	}
 
 
@@ -228,14 +230,16 @@ int main(int argc, char* argv[])
 	float t;
 	cout << "RAY START: " << endl << r.e << endl << endl;
 	cout << "RAY DIR  : " << endl << r.sMinusE << endl << endl;
-	if(intersect11(tri, &pointOfInter, r.sMinusE, r.e)) {
+
+	intersect22((tri, &pointOfInter, r.sMinusE, r.e));
+	/*if(intersect11(tri, &pointOfInter, r.sMinusE, r.e)) {
 		//r.intersect(tri, &t);
 		cout << pointOfInter << endl << endl;
 		//cout << t << endl;
 	}
 	else {
 		cout << "NO INTERSECT" << endl;
-	}
+	}*/
 
 
 
