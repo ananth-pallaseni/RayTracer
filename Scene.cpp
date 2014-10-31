@@ -270,7 +270,7 @@ Vector3f triangleNormal11(Vector3f pointOnShape, triangle shape, ray r) {
 
 int main(int argc, char* argv[])
 {
-0 50 0 -50 -50 0 50 -50 0
+
 triangle tri(0, 50, 0, -50, -50, 0, 50, -50, 0);
 Vector3f eye(0, 0, 150);
 Vector3f point(0, 0, 0);
@@ -279,8 +279,8 @@ ray r(eye, point);
 Vector3f p;
 bool check = r.intersect(tri, &p);
 if(check) {
-	cout << "POINT: " << endl p << endl << endl;
-	cout << "NORMAL" << triangleNormal11(p, tri, r); << endl;
+	cout << "POINT: " << endl << endl << endl;
+	cout << "NORMAL" << triangleNormal11(p, tri, r) << endl;
 }
 
 
