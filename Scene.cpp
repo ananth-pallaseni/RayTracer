@@ -169,9 +169,9 @@ bool intersect11(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
 
 		// Setri up matririx B:
 		Vector3f B;
-		B(0) = tri.a(0) - e(0);
-		B(1) = tri.a(1) - e(1);
-		B(2) = tri.a(2) - e(2);
+		B(0) = tri.a(0) - sMinusE(0);
+		B(1) = tri.a(1) - sMinusE(1);
+		B(2) = tri.a(2) - sMinusE(2);
 		cout << "B: " << endl << B << endl << endl;
 		// Store these vals to save computation:
 		float eihf = A(1, 1) * A(2, 2) - A(1, 2) * A(2, 1);
