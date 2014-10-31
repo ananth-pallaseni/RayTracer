@@ -4,6 +4,7 @@
 #include <fstream>
 #include <string.h>
 #include <cmath>
+#include <ctime>
 
 #include "Sampler.h"
 #include "Canvas.h"
@@ -254,11 +255,14 @@ int main(int argc, char* argv[])
 
 	// General Purpose - renders input file
 
-	int size = 100;
+	int size = 400;
 
 	char* inFile = "input.txt";
-	parseArgs(inFile);
+	clock_t startTime;
+	double duration;
+	start = clock();
 
+	parseArgs(inFile);
 
 	Sampler s(size, size, LL, LR, UL, UR);
 	Canvas c(size, size);
@@ -269,6 +273,10 @@ int main(int argc, char* argv[])
 		}
 	}
 	c.encode("image.png");
+
+	duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
+	cout << "DONE" << endl;
+	cout << "TIME: " << duration << " seconds" << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
