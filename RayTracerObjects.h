@@ -266,7 +266,6 @@ struct sphere : object
 		Vector4f tmpCenter(cx, cy, cz, 1);
 		tmpCenter = objectToWorld * tmpCenter;
 		center = Vector3f(tmpCenter(0), tmpCenter(1), tmpCenter(2));
-		center << cx, cy, cz;
 		type = SPHERE;
 		mat = m;
 		translate initTrans(cx, cy, cz);
