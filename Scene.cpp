@@ -207,7 +207,6 @@ int main(int argc, char* argv[])
 	ray r(eye, point);
 	Vector3f pointOfInter;
 	float t;
-	intersect11(tri, &pointOfInter, r.sMinusE, r.e);
 	if(intersect11(tri, &pointOfInter, r.sMinusE, r.e)) {
 		//r.intersect(tri, &t);
 		cout << pointOfInter << endl << endl;
