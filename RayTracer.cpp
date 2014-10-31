@@ -163,7 +163,8 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 	rgb = clamp(rgb);
 	//cout << rgb << endl << endl;
 	if(depth == 1) {
-		cout << rgb << endl << endl;
+		cout << rgb << endl;
+		cout << pointOnShape << endl << endl;
 	}
 	return color(rgb);
 }
