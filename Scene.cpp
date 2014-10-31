@@ -271,7 +271,7 @@ Vector3f triangleNormal11(Vector3f pointOnShape, triangle shape, ray r) {
 	}
 	return unitNormal;*/
 	Vector3f side1 = shape.a - shape.b;
-	Vector3f side2 = shape.a = shape.c;
+	Vector3f side2 = shape.a - shape.c;
 	Vector3f planeNormal = side1.cross(side2);
 	/*if((-r.sMinusE).dot(planeNormal) < 0) {
 		planeNormal = -planeNormal;
