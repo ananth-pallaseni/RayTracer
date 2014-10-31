@@ -126,20 +126,25 @@ bool RayTracer::directionalShadowRay(Vector3f point, Vector3f directionToLight) 
 	return shadowRay(r);
 }	
 
-Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray incoming, Vector3f k_refl, int depth) {
+Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray incoming, Vector3f k_refl, int depth, bool isTriangle) {
 	// Reflect ray about normal:
 	ray refl(point, incoming.sMinusE - 2 * normalAtPoint * (incoming.sMinusE.dot(normalAtPoint)), true);
 	color cTemp = traceRay(refl, depth + 1, point);
-	/*for(int i = 0; i < 3; i++) {
-		if(k_refl(i) == 0) {
-			k_refl(i) = 1;
+	Vector3f c;
+	if(isTriangle) {
+		for(int i = 0; i < 3; i++) {
+			if(k_refl(i) == 0) {
+				k_refl(i) = 1;
+			}
+			else if(k_refl(i) == 1) {
+				k_refl(i) = 0;
+			}
 		}
-		else if(k_refl(i) == 1) {
-			k_refl(i) = 0;
-		}
+		c = Vector3f(cTemp.r * (1 - k_refl(0)), cTemp.g * (1 - k_refl(1)), cTemp.b * (1 - k_refl(2)) );
 	}
-	Vector3f c(cTemp.r * (1 - k_refl(0)), cTemp.g * (1 - k_refl(1)), cTemp.b * (1 - k_refl(2)) );*/
-	Vector3f c(cTemp.r * k_refl(0), cTemp.g * k_refl(1), cTemp.b * k_refl(2) );
+	else{
+		c = Vector3f(cTemp.r * k_refl(0), cTemp.g * k_refl(1), cTemp.b * k_refl(2) );	
+	}
 	c = c / 255; // as color rgb values are (0->255)
 	return c;
 }
