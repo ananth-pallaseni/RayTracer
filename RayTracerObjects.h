@@ -297,8 +297,8 @@ struct triangle : object
 		b4 = transformsInOrder * b4;
 		c4 = transformsInOrder * c4;
 		a << a4(0), a4(1), a4(2);
-		a << b4(0), b4(1), b4(2);
-		a << c4(0), c4(1), c4(2);
+		b << b4(0), b4(1), b4(2);
+		c << c4(0), c4(1), c4(2);
 		cout << "A: " << endl << a << endl << endl;
 		cout << "B: " << endl << b << endl << endl;
 		cout << "C: " << endl << c << endl << endl;
