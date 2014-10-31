@@ -162,6 +162,9 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 
 	rgb = clamp(rgb);
 	//cout << rgb << endl << endl;
+	if(depth == 1) {
+		cout << rgb << endl << endl;
+	}
 	return color(rgb);
 }
 
@@ -215,8 +218,8 @@ color RayTracer::traceRay(ray r, int depth, Vector3f source) {
 
 	if(hit) {
 		// NEW:
-		color cq = shade(point, normal, shape, depth, r);
-		if ( depth == 1) {
+		//color cq = shade(point, normal, shape, depth, r);
+		/*if ( depth == 1) {
 			string hitcol = "RED";
 			float refl1, refl2, refl3;
 			refl1 = 0;
@@ -234,10 +237,10 @@ color RayTracer::traceRay(ray r, int depth, Vector3f source) {
 			cout << "MATERIAL REFL PROPS: " << refl1 << ", " << refl2 << ", " << refl3 << endl;
 			cout << "RAW COLOR: " << cq << endl << "FINAL COLOR: " << adjC << endl;
 			cout << "RAY START: " << endl << r.e << endl << "RAY DIR: " << endl << r.sMinusE << endl << endl; 
-		}
+		}*/
 		// ENDNEW
 
-		return cq;
+		return shade(point, normal, shape, depth, r);;
 	}
 	else {
 		return color(); // BLACK
