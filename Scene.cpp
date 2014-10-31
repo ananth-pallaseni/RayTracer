@@ -238,6 +238,8 @@ bool intersect11(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
 		float s1 = u.dot(v) * w.dot(v) - v.dot(v) * w.dot(u);
 		s1 = s1 / denom1;
 		float t1 = u.dot(v) * w.dot(u) - u.dot(u) * w.dot(v);
+		cout << "S1: " << s1 << endl;
+		cout << "T1: " << t1 << endl;
 		t1 = t1 / denom1;
 		if(s1 < 0 || t1 < 0 || s1 + t1 > 1) {
 			return false;
@@ -278,7 +280,7 @@ Vector3f point(50, 50, 0);
 // ray should be in 0, 0, -1 direction
 ray r(eye, point);
 Vector3f p;
-bool check = r.intersect(tri, &p);
+bool check = r.intersect22(tri, &p, r.sMinusE, r.e);
 if(check) {
 	cout << "POINT: " << endl << p << endl;
 	cout << "NORMAL: " << endl << triangleNormal11(p, tri, r) << endl;
