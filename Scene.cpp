@@ -39,11 +39,12 @@ void parseObj(char* filename, material mat, Matrix4f objToWorld, Matrix4f worldT
     Vector3f first;
     vertices.push_back(first);
 
-    cout << "!" << endl;
+    cout << "1" << endl;
     
     // read each line of the file
     while (!fin.eof())
     {
+    	cout << "2" << endl;
         // read an entire line into memory
         char buf[MAX_CHARS_PER_LINE];
         fin.getline(buf, MAX_CHARS_PER_LINE);
