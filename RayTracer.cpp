@@ -16,9 +16,9 @@ ray RayTracer::createRay(Vector3f s) {
 	return ray(e, s);
 }
 
-Vector3f RayTracer::closest(Vector3f v1, Vector3f v2) {
-	float d1 = (v1 - e).norm();
-	float d2 = (v2 - e).norm();
+Vector3f RayTracer::closest(Vector3f v1, Vector3f v2, Vector3f p) {
+	float d1 = (v1 - p).norm();
+	float d2 = (v2 - p).norm();
 	if(d1 < d2) {
 		return v1;
 	}
@@ -111,7 +111,7 @@ bool RayTracer::shadowRay(Vector3f point, Vector3f lightOrigin) {
 Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray incoming, Vector3f k_refl, int depth) {
 	// Reflect ray about normal:
 	ray refl(point, incoming.sMinusE - 2 * normalAtPoint * (incoming.sMinusE.dot(normalAtPoint)));
-	color cTemp = traceRay(refl, depth + 1);
+	color cTemp = traceRay(refl, depth + 1, point);
 	Vector3f c(cTemp.r * k_refl(0), cTemp.g * k_refl(1), cTemp.b * k_refl(2) );
 	if((cTemp.b > 0 || cTemp.r > 0 || cTemp.g > 0) && k_refl(2) > 0) {
 		cout << cTemp << endl << c << endl << k_refl << endl << endl;
@@ -166,7 +166,7 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 
 
 // Simple ray trace function, no shadows or anything fancy
-color RayTracer::traceRay(ray r, int depth) {
+color RayTracer::traceRay(ray r, int depth, Vector3f source) {
 	Vector3f point(std::numeric_limits<float>::max(), std::numeric_limits<float>::max(), std::numeric_limits<float>::max()); // init to max value
 	Vector3f temp;
 	bool hit = false;
@@ -177,11 +177,11 @@ color RayTracer::traceRay(ray r, int depth) {
 
 	// Check all Spheres
 	for(int i = 0; i < numSpheres; i++) {
-		if(r.intersect(spheres[i], &temp)) {
+		if(r.intersect(spheres[i], &temp, true)) {
 			hit = true;
 			//point = closest(point, temp); OLD
 			///////////////////////new
-			temp = closest(point, temp);
+			temp = closest(point, temp, source);
 			if(point != temp) {
 				normal = sphereNormal(temp, spheres[i]);
 				shape = spheres[i];
@@ -198,7 +198,7 @@ color RayTracer::traceRay(ray r, int depth) {
 			hit = true;
 			//point = closest(point, temp); OLD
 			///////////////////////new
-			temp = closest(point, temp);
+			temp = closest(point, temp, source);
 			if(point != temp) {
 				normal = triangleNormal(temp, triangles[i], r);
 				shape = triangles[i];
@@ -219,6 +219,6 @@ color RayTracer::traceRay(ray r, int depth) {
 
 color RayTracer::trace(Vector3f s) {
 	ray r = createRay(s);
-	return traceRay(r, 0);
+	return traceRay(r, 0, e);
 }
 

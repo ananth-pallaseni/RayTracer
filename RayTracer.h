@@ -47,7 +47,7 @@ public:
 
 	ray createRay(Vector3f s);
 
-	Vector3f closest(Vector3f v1, Vector3f v2);
+	Vector3f closest(Vector3f v1, Vector3f v2, Vector3f p);
 
 	bool shadowRay(Vector3f point, Vector3f light);
 
