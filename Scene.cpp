@@ -147,10 +147,14 @@ void parseArgs(char* filename) {
 
 }
 
+Vector3f p11(float t, Vector3f sMinusE, Vector3f e) {
+		return e + t * (sMinusE);
+	}
+
 bool intersect11(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
-		cout << "tri a: " << end << tri.a << endl << endl;
-		cout << "tri b: " << end << tri.b << endl << endl;
-		cout << "tri c: " << end << tri.c << endl << endl;
+		cout << "tri a: " << endl	 << tri.a << endl << endl;
+		cout << "tri b: " << endl	 << tri.b << endl << endl;
+		cout << "tri c: " << endl	 << tri.c << endl << endl;
 		Matrix3f A;
 		A(0, 0) = tri.a(0) - tri.b(0);
 		A(0, 1) = tri.a(0) - tri.c(0);
@@ -187,7 +191,7 @@ bool intersect11(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
 			return false;
 		}
 		float t = (A(2, 1) * akjb + A(1, 1) * jcal + A(0, 1) * blkc) / M;
-		*point = p(t);
+		*point = p11(t, sMinusE, e);
 		return true;
 	}
 
