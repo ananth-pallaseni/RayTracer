@@ -285,6 +285,10 @@ int main(int argc, char* argv[])
 {
 material mm;
 Matrix4f matr;
+matr << 1, 0, 0, 0,
+		0, 1, 0, 0, 
+		0, 0, 1, 0,
+		0, 0, 0, 1;
 triangle tri(0, 50, 0, -50, -50, 0, 50, -50, 0, mm, matr);
 Vector3f eye(0, 0, 150);
 Vector3f point(0, 0, 0);
