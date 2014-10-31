@@ -134,8 +134,11 @@ Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray in
 		cout << "NORMAL: " << endl << normalAtPoint << endl ;
 	}
 	color cTemp = traceRay(refl, depth + 1, point);
+	cout << "CTEMP: " << cTemp(0) << ", " << cTemp(1) << ", " << cTemp(2) << endl;
 	Vector3f c(cTemp.r * k_refl(0), cTemp.g * k_refl(1), cTemp.b * k_refl(2) );
+	cout << "CTEMP AFER: " << c(0) << ", " << c(1) << ", " << c(2) << endl;
 	c = c / 255; // as color rgb values are (0->255)
+	cout << "REFLECT COEFFICIENTS: " << k_refl(0) << ", " << k_refl(1) << ", " << k_refl(2) << endl;
 	/*if((cTemp.b > 0 || cTemp.r > 0 )) {
 		cout << "SHADE CALC: " << (float) cTemp.r << ", " << (float)cTemp.g << ", " << (float)cTemp.b << endl;
 		cout << "REFL COLOR: " << c(0) << ", " << c(1) << ", " << c(2) << endl;
@@ -173,7 +176,7 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 			rgb = rgb + specular(normalAtPoint, lightDirection, incoming.sMinusE, shape.mat.spec, dl.l(), shape.mat.phongExp);
 		}
 		if(depth < DEPTH_MAX) {
-			//rgb = rgb + reflectionRay(pointOnShape, normalAtPoint, incoming, shape.mat.refl, depth);
+			rgb = rgb + reflectionRay(pointOnShape, normalAtPoint, incoming, shape.mat.refl, depth);
 		}
 		rgb = rgb + ambient(dl.l(), shape.mat.amb);
 	}
