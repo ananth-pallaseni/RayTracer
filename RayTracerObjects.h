@@ -282,9 +282,9 @@ struct triangle : object
 	Vector3f a, b, c;
 
 	triangle(float ax, float ay, float az, float bx, float by, float bz, float cx, float cy, float cz, material m, Matrix4f inOrder) {
-		Vector4f a4 = Vector4f(ax, ay, az, 1);
-		Vector4f b4 = Vector4f(bx, by, bz, 1);
-		Vector4f c4 = Vector4f(cx, cy, cz, 1);
+		Vector4f a4(ax, ay, az, 1);
+		Vector4f b4(bx, by, bz, 1);
+		Vector4f c4(cx, cy, cz, 1);
 
 		type = TRIANGLE;
 		mat = m;
@@ -295,6 +295,9 @@ struct triangle : object
 		a << a4(0), a4(1), a4(2);
 		a << b4(0), b4(1), b4(2);
 		a << c4(0), c4(1), c4(2);
+		cout << "A: " << endl << a;
+		cout << "B: " << endl << b;
+		cout << "C: " << endl << c;
 	}
 };
 
