@@ -214,6 +214,9 @@ int main(int argc, char* argv[])
 		cout << pointOfInter << endl << endl;
 		//cout << t << endl;
 	}
+	else {
+		cout << "NO INTERSECT" << endl;
+	}
 
 
 
