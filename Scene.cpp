@@ -254,7 +254,7 @@ int main(int argc, char* argv[])
 
 	// General Purpose - renders input file
 
-	int size = 1;
+	int size = 100;
 
 	char* inFile = "input.txt";
 	parseArgs(inFile);
