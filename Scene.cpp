@@ -189,9 +189,9 @@ int size = 600;
 
 
 	for(float x = -10; x > -40; x = x - 0.1f) {
-		for(float y = 20; y > -20; y = y - 0.1f) {
+		//for(float y = 20; y > -20; y = y - 0.1f) {
 			for(float z = -100; z < -70; z = z + 0.1f) {
-				Vector3f pc(x, y, z);
+				Vector3f pc(x, 0, z);
 				Vector3f nc = sphereNormal11(pc, spheres[0]);
 				if(nc(0) == nc(2) && n(1) == 0) {
 					cout << pc << endl << endl;
@@ -200,7 +200,7 @@ int size = 600;
 		
 	}
 		
-	}
+	//}
 	}
 
 
