@@ -174,10 +174,13 @@ color RayTracer::traceRay(ray r, int depth, Vector3f source) {
 	Vector3f normal;
 	object shape;
 	////// endnew
+	
+	// REMOVE THIS:
+	float tempT;
 
 	// Check all Spheres
 	for(int i = 0; i < numSpheres; i++) {
-		if(r.intersect(spheres[i], &temp)) {
+		if(r.intersect(spheres[i], &temp, &tempT)) {
 			hit = true;
 			//point = closest(point, temp); OLD
 			///////////////////////new
@@ -194,7 +197,7 @@ color RayTracer::traceRay(ray r, int depth, Vector3f source) {
 
 	// Check all Triangles
 	for(int i = 0; i < numTriangles; i++) {
-		if(r.intersect(triangles[i], &temp)) {
+		if(r.intersect(triangles[i], &temp, &tempT)) {
 			hit = true;
 			//point = closest(point, temp); OLD
 			///////////////////////new
@@ -213,7 +216,7 @@ color RayTracer::traceRay(ray r, int depth, Vector3f source) {
 		// NEW:
 		color cq = shade(point, normal, shape, depth, r);
 		if ( depth == 1) {
-			cout << "HIT ON RELECTION, POINT: " << endl << point << endl << endl;
+			cout << "HIT ON RELECTION, POINT: " << endl << point << endl << "t : " << tempT << endl << endl;;
 		}
 		return cq;
 		// ENDNEW

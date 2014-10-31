@@ -343,7 +343,7 @@ struct ray
 	}
 
 	// NEW:
-	bool intersect(sphere sph, Vector3f* point) {
+	bool intersect(sphere sph, Vector3f* point, float* tempT) {
 		// Check Discriminant:
 		// A = sMinusE . sMinusE
 		Matrix4f trans = sph.worldToObj;
@@ -375,6 +375,9 @@ struct ray
 			if(t < EPSILON) {
 				return false;
 			}
+
+			// REMOVE THIS:
+			*tempT = t;
 
 			eObj(3) = 1;
 			Vector4f pointInWorldSpace = inv * ( eObj + t * sMinusEObj); // take point to world space
