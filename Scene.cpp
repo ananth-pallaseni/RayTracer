@@ -246,16 +246,50 @@ bool intersect11(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
 		return true;
 	}
 
+Vector3f triangleNormal11(Vector3f pointOnShape, triangle shape, ray r) {
+	/*Vector3f side1 = shape.a - shape.b;
+	Vector3f side2 = shape.a - shape.c;
+	Vector3f normal(side1(1) * side2(2) - side1(2) * side2(1), 
+					side1(2) * side2(0) - side1(0) * side2(2),
+					side1(0) * side2(1) - side1(1) * side2(0));
+	Vector3f unitNormal = unit(normal);
+	if(unit(r.sMinusE).dot(unitNormal) < 0) {
+		unitNormal = -unitNormal;
+	}
+	return unitNormal;*/
+	Vector3f side1 = shape.a - shape.b;
+	Vector3f side2 = shape.a = shape.c;
+	Vector3f planeNormal = side1.cross(side2);
+	if((-r.sMinusE).dot(planeNormal) < 0) {
+		planeNormal = -planeNormal;
+	}
+	planeNormal = planeNormal / planeNormal.norm();
+	return planeNormal;
+
+}
 
 int main(int argc, char* argv[])
 {
+0 50 0 -50 -50 0 50 -50 0
+triangle tri(0, 50, 0, -50, -50, 0, 50, -50, 0);
+Vector3f eye(0, 0, 150);
+Vector3f point(0, 0, 0);
+// ray should be in 0, 0, -1 direction
+ray r(eye, point);
+Vector3f p;
+bool check = r.intersect(tri, &p);
+if(check) {
+	cout << "POINT: " << endl p << endl << endl;
+	cout << "NORMAL" << triangleNormal11(p, tri, r); << endl;
+}
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// General Purpose - renders input file
 
-	int size = 400;
+	/*int size = 400;
 
 	char* inFile = "input.txt";
 	clock_t startTime;
@@ -276,7 +310,7 @@ int main(int argc, char* argv[])
 
 	duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
 	cout << "DONE" << endl;
-	cout << "TIME: " << duration << " seconds" << endl;
+	cout << "TIME: " << duration << " seconds" << endl;*/
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
