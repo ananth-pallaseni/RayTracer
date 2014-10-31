@@ -114,9 +114,10 @@ Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray in
 	color cTemp = traceRay(refl, depth + 1, point);
 	Vector3f c(cTemp.r * k_refl(0), cTemp.g * k_refl(1), cTemp.b * k_refl(2) );
 	if((cTemp.b > 0 || cTemp.r > 0 || cTemp.g > 0)) {
-		cout << "///////////////// REFL FROM POINT: " << point(0) << ", " << point(1) << ", " << point(2) << endl;
-		cout << "///////////////// REFL USES VALUES: " << k_refl(0) << ", " << k_refl(1) << ", " << k_refl(2) << endl << endl;
+		
 	}
+	cout << "///////////////// REFL FROM POINT: " << point(0) << ", " << point(1) << ", " << point(2) << endl;
+		cout << "///////////////// REFL USES VALUES: " << k_refl(0) << ", " << k_refl(1) << ", " << k_refl(2) << endl << endl;
 	return c;
 }
 
