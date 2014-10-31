@@ -180,6 +180,12 @@ bool intersect11(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
 		float akjb = A(0, 0) * B(1) - B(0) * A(1, 0);
 		float jcal = B(0) * A(2, 0) - A(0, 0) * B(2);
 		float blkc = A(1, 0) * B(2) - B(1) * A(2, 0);
+		cout << "eihf: " << eihf << endl;
+		cout << "gfdi: " << gfdi << endl;
+		cout << "dheg: " << dheg << endl;
+		cout << "akjb: " << akjb << endl;
+		cout << "jcal: " << jcal << endl;
+		cout << "blkc: " << blkc << endl;
 		// By Cramers Rule:
 		float M = A(0, 0) * eihf + A(1, 0) * gfdi + A(2, 0) * dheg;
 		cout << "M: " << endl << M << endl << endl;
