@@ -170,10 +170,11 @@ int size = 600;
 	Canvas c(size, size);
 	RayTracer rt(eye, spheres, triangles, pointLights, directionalLights, ambientLights);
 	// sph[0] is at -40, 0, -100 with radius 30
-	Vector3f start(-14.01924, 0, -85);
+	Vector3f start(-18.7867966, 0, -78.7867966);
 	Vector3f n = sphereNormal11(start, spheres[0]);
 	cout << "NORMAL: " << endl << n << endl << endl;
-	ray inc(eye, start);
+	Vector3f eyeStart(-18.7867966, 0, 0);
+	ray inc(eyeStart, start);
 	cout << "INC: " << endl << inc.sMinusE << endl << endl;
 	ray refl(start, inc.sMinusE - 2 * n * (inc.sMinusE.dot(n)));
 	cout << "REFL: " << endl << refl.sMinusE << endl << endl;
@@ -187,21 +188,6 @@ int size = 600;
 	}
 	//cout << spheres[0].center << endl << endl;
 
-
-	for(float x = -10; x > -40; x = x - 0.1f) {
-		for(float y = 5; y > -5; y = y - 0.1f) {
-			for(float z = -100; z < -70; z = z + 0.1f) {
-				Vector3f pc(x, y, z);
-				Vector3f nc = sphereNormal11(pc, spheres[0]);
-				if(nc(0) == nc(2) && n(1) == 0) {
-					cout << pc << endl << endl;
-				}
-				//cout << x << "  " << y << "  " << z << endl << endl;
-		
-	}
-		
-	}
-	}
 
 
 
