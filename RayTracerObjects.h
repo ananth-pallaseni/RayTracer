@@ -288,6 +288,7 @@ struct triangle : object
 
 		type = TRIANGLE;
 		mat = m;
+		cout << "TRI TRNAS MATRIX: " << endl << inOrder << endl << endl;
 		transformsInOrder = inOrder;
 		a4 = transformsInOrder * a4;
 		b4 = transformsInOrder * b4;
