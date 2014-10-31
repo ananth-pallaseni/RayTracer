@@ -79,7 +79,7 @@ Vector3f ambient(Vector3f k_light, Vector3f k_ambient) {
 Vector3f specular(Vector3f n, Vector3f l, Vector3f e, Vector3f k_specular, Vector3f k_light, float p) {
 	Vector3f notL = -l;
 	Vector3f r = notL + (2 * n.dot(l) * n);
-	float dotRE = r.dot(unit(e));
+	float dotRE = r.dot(unit(-e));
 	if(dotRE < 0) {
 		dotRE = 0;
 	}
