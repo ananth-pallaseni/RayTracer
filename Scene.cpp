@@ -176,7 +176,7 @@ int size = 600;
 	Vector3f eyeStart(-18.7867966, 0, 0);
 	ray inc(eyeStart, start);
 	cout << "INC: " << endl << inc.sMinusE << endl << endl;
-	ray refl(start, inc.sMinusE - 2 * n * (inc.sMinusE.dot(n)));
+	ray refl(start, inc.sMinusE - 2 * n * (inc.sMinusE.dot(n)), true);
 	cout << "INTERMEDIATE CALC: " << inc.sMinusE(0) << " - " << (2 * n * (inc.sMinusE.dot(n)))(0) << endl;
 	cout << "INTERMEDIATE CALC: " << inc.sMinusE(1) << " - " << (2 * n * (inc.sMinusE.dot(n)))(1) << endl;
 	cout << "INTERMEDIATE CALC: " << inc.sMinusE(2) << " - " << (2 * n * (inc.sMinusE.dot(n)))(2) << endl;
