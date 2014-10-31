@@ -177,6 +177,13 @@ int size = 600;
 	cout << "INC: " << endl << inc.sMinusE << endl << endl;
 	ray refl(start, inc.sMinusE - 2 * n * (inc.sMinusE.dot(n)));
 	cout << "REFL: " << endl << refl.sMinusE << endl << endl;
+	Vector3f inters;
+	if(refl.intersect(spheres[1], &inters)) {
+		cout << "HIT" << endl << inters << endl << endl;
+	}
+	else {
+		cout << "NOO" << endl;
+	}
 	//cout << spheres[0].center << endl << endl;
 
 
