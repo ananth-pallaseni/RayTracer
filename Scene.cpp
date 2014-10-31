@@ -313,7 +313,7 @@ else {
 
 	// General Purpose - renders input file
 
-	int size = 1000;
+	int size = 500;
 
 	char* inFile = "input.txt";
 	clock_t startTime;
