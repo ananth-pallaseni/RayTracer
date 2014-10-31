@@ -135,6 +135,14 @@ Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray in
 	}*/
 	color cTemp = traceRay(refl, depth + 1, point);
 	cout << "CTEMP: " << (int)cTemp.r << ", " << (int)cTemp.g << ", " << (int)cTemp.b << endl;
+	for(int i = 0; i < 3; i++) {
+		if(k_refl(i) == 0) {
+			k_refl(i) = 1;
+		}
+		else if(k_refl(i) == 1) {
+			k_refl(i) = 0;
+		}
+	}
 	Vector3f c(cTemp.r * (1 - k_refl(0)), cTemp.g * (1 - k_refl(1)), cTemp.b * (1 - k_refl(2)) );
 	cout << "CTEMP AFER: " << c(0) << ", " << c(1) << ", " << c(2) << endl;
 	c = c / 255; // as color rgb values are (0->255)
