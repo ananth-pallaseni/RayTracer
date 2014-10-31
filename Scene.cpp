@@ -232,7 +232,7 @@ bool intersect11(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
 		// Now check if the point lies within the triangle:
 		Vector3f u = tri.b - tri.a;
 		Vector3f v = tri.c - tri.a;
-		Vector3f w = 
+		Vector3f w ;
 
 		return true;
 	}
