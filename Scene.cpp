@@ -38,6 +38,7 @@ void parseObj(char* filename, material mat, Matrix4f objToWorld, Matrix4f worldT
 
     while(getline(fin, line)) {
     	cout << line << endl;
+ 		cout << line[0] << endl;
     }
 
     vector<Vector3f> vertices;
