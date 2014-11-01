@@ -252,7 +252,7 @@ void parseArgs(char* filename) {
   			inOrder = I;
   	  	}
   	  	else if(strcmp(token[0], "obj") == 0) {
-  			parseObj(token[1], mat, objToWorld);
+  			//parseObj(token[1], mat, objToWorld);
   	  	}
   	  	else {
   	  		cout << "UNRECOGNIZED TYPE: " << token[0] << endl;
