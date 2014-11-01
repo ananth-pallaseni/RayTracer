@@ -24,6 +24,24 @@ Vector3f eye;
 // Coordinates of the image plane
 Vector3f LL, LR, UL, UR;
 
+int filler(string s, int i, int max) {
+	while(strcmp(s[i], " ") == 0) {
+		i++;
+		if(i > max) {
+			return max;
+		}
+	}
+	return i;
+}
+
+int reader(string s, int i, int max, vector<string>* word) {
+	while(strcmp(s[i], " ") != 0) {
+		(*word).push_back(s[i]);
+		i++;
+	}
+	return i;
+}
+
   // Read Arguments and do something with them
 void parseObj(char* filename, material mat, Matrix4f objToWorld, Matrix4f worldToObj) {
 
@@ -35,11 +53,21 @@ void parseObj(char* filename, material mat, Matrix4f objToWorld, Matrix4f worldT
     ifstream fin;
     fin.open("scene12.obj.txt"); // open a file
     string line;
+    int length;
 
-    while(getline(fin, line)) {
-    	cout << line << endl;
- 		cout << line[0] << endl;
-    }
+    /*while(getline(fin, line)) {
+    	max = line.length()
+    	int i = 0;
+    	while(i < max) {
+    		vector<string> word;
+    		i = filler(i, i, max);
+    		i = reader(s, i, max, word);
+    		int l = word.size();
+    		char s[l]
+    	}
+
+
+    }*/
 
     vector<Vector3f> vertices;
     Vector3f first;
@@ -47,7 +75,7 @@ void parseObj(char* filename, material mat, Matrix4f objToWorld, Matrix4f worldT
 
  
     
-    /*// read each line of the file
+    // read each line of the file
     while (!fin.eof())
     {
     	cout << "2" << endl;
@@ -97,7 +125,7 @@ void parseObj(char* filename, material mat, Matrix4f objToWorld, Matrix4f worldT
 
     }
 
-*/
+
 }
 
 
