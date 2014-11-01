@@ -42,11 +42,7 @@ int reader(string s, int i, int max, vector<string>* word) {
 	return i;
 }*/
 
-
-    /** Boilerplate C++ string manipulation routines from the following sources:
- *      http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring
- *      http://stackoverflow.com/questions/236129/how-to-split-a-string-in-c
- */
+// Begin Code from stackOVerflow for parsing input:
 static inline string &ltrim(string &s) {
     s.erase(s.begin(), find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace))));
     return s;
@@ -73,8 +69,9 @@ vector<string> split(const string& str, const string& delimiter = " ") {
     tokens.push_back(str.substr(lastPos, str.size() - lastPos));
     return tokens;
 }
+// End code from stackoverflow
 
-  // Read Arguments and do something with them
+ // Read Arguments and do something with them
 void parseObj(const char* filename, material mat, Matrix4f objToWorld) {
 
   const int MAX_CHARS_PER_LINE = 512;
@@ -94,9 +91,15 @@ void parseObj(const char* filename, material mat, Matrix4f objToWorld) {
 
     while(getline(fin, line)) {
     	vector<string> words = split(line);
-    	int q = words.size();
-    	for(int i = 0; i < q; i++) {
-    		cout << words[i] << endl;
+    	if(words[0] == "v") {
+    		fstream f1(words[1]);
+    		fstream f2(words[2]);
+    		fstream f3(words[3]);
+    		float p1 << f1;
+    		float p2 << f2;
+    		float p3 << f3;
+    		Vector3f vertex(p1, p2, p3);
+          	vertices.push_back(vertex);
     	}
     }
 
