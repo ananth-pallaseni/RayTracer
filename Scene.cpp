@@ -24,7 +24,7 @@ Vector3f eye;
 // Coordinates of the image plane
 Vector3f LL, LR, UL, UR;
 
-int filler(string s, int i, int max) {
+/*int filler(string s, int i, int max) {
 	while(strcmp(s[i], " ") == 0) {
 		i++;
 		if(i > max) {
@@ -40,7 +40,7 @@ int reader(string s, int i, int max, vector<string>* word) {
 		i++;
 	}
 	return i;
-}
+}*/
 
   // Read Arguments and do something with them
 void parseObj(char* filename, material mat, Matrix4f objToWorld, Matrix4f worldToObj) {
