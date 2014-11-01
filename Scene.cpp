@@ -34,21 +34,15 @@ void parseObj(char* filename, material mat, Matrix4f objToWorld, Matrix4f worldT
   // create a file-reading object
     ifstream fin;
     fin.open("scene12.obj"); // open a file
+    string line;
+    getline(fin, line);
+    cout << line << endl;
 
     vector<Vector3f> vertices;
     Vector3f first;
     vertices.push_back(first);
 
-    cout << "1" << endl;
-
-string line;
-    while (getline(fin, line)) {
-    	cout << "loop" << endl;
-    	
-    	cout << line << endl;
-    }
-
-    cout << "2" << endl;
+ 
     
     /*// read each line of the file
     while (!fin.eof())
