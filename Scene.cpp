@@ -44,7 +44,7 @@ void parseObj(char* filename, material mat, Matrix4f objToWorld, Matrix4f worldT
     while (fin.good()) {
     	string line;
     	char line[256];
-    	fin.getline(line, 256);
+    	getline(fin, line);
     	cout << line << endl;
     }
 
