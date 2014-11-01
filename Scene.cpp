@@ -53,27 +53,13 @@ void parseObj(char* filename, material mat, Matrix4f objToWorld) {
     ifstream fin;
     fin.open("scene12.obj.txt"); // open a file
     string line;
-    int length;
 
-    /*while(getline(fin, line)) {
-    	max = line.length()
-    	int i = 0;
-    	while(i < max) {
-    		vector<string> word;
-    		i = filler(i, i, max);
-    		i = reader(s, i, max, word);
-    		int l = word.size();
-    		char s[l]
-    	}
-
-
-    }*/
 
     vector<Vector3f> vertices;
     Vector3f first;
     vertices.push_back(first);
 
-    while(getline(fin, line, ' ')) {
+  /*  while(getline(fin, line, ' ')) {
     	cout << line << endl;
     	if(line == "v") {
     		getline(fin, line, ' ');
@@ -97,11 +83,11 @@ void parseObj(char* filename, material mat, Matrix4f objToWorld) {
     		Vector3f v3 = vertices[a3];
     		triangle tri(v1(0), v1(1), v1(2), v2(0), v2(1), v2(2), v3(0), v3(1), v3(2), mat, objToWorld);
     	}
-    }
+    }*/
 
  
     
-    /*// read each line of the file
+    // read each line of the file
     while (!fin.eof())
     {
     	cout << "2" << endl;
@@ -150,7 +136,7 @@ void parseObj(char* filename, material mat, Matrix4f objToWorld) {
         }
 
     }
-*/
+
 
 }
 
