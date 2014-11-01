@@ -2,7 +2,7 @@
 #include <iostream>
 #include "Eigen/Dense"
 #include <fstream>
-#include <string.h>
+#include <string>
 #include <cmath>
 #include <ctime>
 
