@@ -2,7 +2,7 @@
 #include <iostream>
 #include "Eigen/Dense"
 #include <fstream>
-#include <string>
+#include <string.h>
 #include <cmath>
 #include <ctime>
 
@@ -77,21 +77,21 @@ void parseObj(char* filename, material mat, Matrix4f objToWorld) {
     	cout << line << endl;
     	if(line == "v") {
     		getline(fin, line, ' ');
-    		float a1 = stof(line);
+    		float a1 = atof(line.cstring());
     		getline(fin, line, ' ');
-    		float a2 = stof(line);
+    		float a2 = atof(line.cstring());
     		getline(fin, line, ' ');
-    		float a3 = stof(line);
+    		float a3 = atof(line.cstring());
     		Vector3f vert(a1, a2, a3);
     		vertices.push_back(vert);
     	}
     	if(line == "f") {
     		getline(fin, line, ' ');
-    		float a1 = stof(line);
+    		float a1 = atof(line.cstring());
     		getline(fin, line, ' ');
-    		float a2 = stof(line);
+    		float a2 = atof(line.cstring());
     		getline(fin, line, ' ');
-    		float a3 = stof(line);
+    		float a3 = atof(line.cstring());
     		Vector3f v1 = vertices[a1];
     		Vector3f v2 = vertices[a2];
     		Vector3f v3 = vertices[a3];
