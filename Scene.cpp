@@ -105,6 +105,21 @@ void parseObj(const char* filename, material mat, Matrix4f objToWorld) {
     		cout << vertex << endl << endl;
           	vertices.push_back(vertex);
     	}
+    	if(words[0] == "f") {
+    		stringstream f1(words[1]);
+    		stringstream f2(words[2]);
+    		stringstream f3(words[3]);
+    		float p1;
+    		f1 >> p1;
+    		float p2;
+    		f2 >> p2;
+    		float p3;
+    		f3 >> p3;
+    		Vector3f v1 = vertices[p1];
+    		Vector3f v2 = vertices[p2];
+    		Vector3f v3 = vertices[p3];
+    		triangle tri(v1(0), v1(1), v1(2), v2(0), v2(1), v2(2), v3(0), v3(1), v3(2), mat, objToWorld);
+    	}
     }
 
 
