@@ -35,8 +35,10 @@ void parseObj(char* filename, material mat, Matrix4f objToWorld, Matrix4f worldT
     ifstream fin;
     fin.open("scene12.obj.txt"); // open a file
     string line;
-    getline(fin, line);
-    cout << line << endl;
+
+    while(getline(fin, line)) {
+    	cout << line << endl;
+    }
 
     vector<Vector3f> vertices;
     Vector3f first;
