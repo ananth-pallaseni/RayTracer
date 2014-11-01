@@ -102,7 +102,6 @@ void parseObj(const char* filename, material mat, Matrix4f objToWorld) {
     		float p3;
     		f3 >> p3;
     		Vector3f vertex(p1, p2, p3);
-    		cout << vertex << endl << endl;
           	vertices.push_back(vertex);
     	}
     	if(words[0] == "f") {
