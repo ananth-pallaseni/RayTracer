@@ -326,6 +326,7 @@ void parseArgs(char* filename) {
   			inOrder = I;
   	  	}
   	  	else if(strcmp(token[0], "obj") == 0) {
+  	  		cout << "token: " <<  token[1] << endl;
   			parseObj(token[1], mat, objToWorld);
   	  	}
   	  	else {
