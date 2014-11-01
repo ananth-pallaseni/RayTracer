@@ -33,7 +33,7 @@ void parseObj(char* filename, material mat, Matrix4f objToWorld, Matrix4f worldT
 
   // create a file-reading object
     ifstream fin;
-    fin.open("input.txt"); // open a file
+    fin.open(filename); // open a file
 
     vector<Vector3f> vertices;
     Vector3f first;
