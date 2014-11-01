@@ -95,9 +95,12 @@ void parseObj(const char* filename, material mat, Matrix4f objToWorld) {
     		fstream f1(words[1]);
     		fstream f2(words[2]);
     		fstream f3(words[3]);
-    		float p1 << f1;
-    		float p2 << f2;
-    		float p3 << f3;
+    		float p1;
+    		p1 << f1;
+    		float p2;
+    		p2 << f2;
+    		float p3;
+    		p3 << f3;
     		Vector3f vertex(p1, p2, p3);
           	vertices.push_back(vertex);
     	}
