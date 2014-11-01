@@ -43,7 +43,7 @@ int reader(string s, int i, int max, vector<string>* word) {
 }*/
 
   // Read Arguments and do something with them
-void parseObj(char* filename, material mat, Matrix4f objToWorld) {
+void parseObj(const char* filename, material mat, Matrix4f objToWorld) {
 
   const int MAX_CHARS_PER_LINE = 512;
   const int MAX_TOKENS_PER_LINE = 20;
@@ -51,7 +51,7 @@ void parseObj(char* filename, material mat, Matrix4f objToWorld) {
 
   // create a file-reading object
     ifstream fin;
-    fin.open("scene12.obj.txt"); // open a file
+    fin.open(filename); // open a file
     string line;
 
 
@@ -260,7 +260,7 @@ void parseArgs(char* filename) {
   			inOrder = I;
   	  	}
   	  	else if(strcmp(token[0], "obj") == 0) {
-  			//parseObj(token[1], mat, objToWorld);
+  			parseObj(token[1], mat, objToWorld);
   	  	}
   	  	else {
   	  		cout << "UNRECOGNIZED TYPE: " << token[0] << endl;
