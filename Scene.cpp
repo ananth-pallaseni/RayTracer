@@ -274,7 +274,7 @@ void parseArgs(char* filename) {
 int main(int argc, char* argv[])
 {
 
-	material mm;
+/*	material mm;
 	Matrix4f matr;
 matr << 1, 0, 0, 0,
 		0, 1, 0, 0, 
@@ -282,7 +282,7 @@ matr << 1, 0, 0, 0,
 		0, 0, 0, 1;
 
 	char* name = "scene12.obj";
-	parseObj(name, mm, matr);
+	parseObj(name, mm, matr);*/
 
 /*material mm;
 Matrix4f matr;
@@ -321,7 +321,7 @@ else {
 
 	// General Purpose - renders input file
 
-	/*int size = 500;
+	int size = 500;
 
 	char* inFile = "input.txt";
 	clock_t startTime;
@@ -343,7 +343,7 @@ else {
 
 	duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
 	cout << "DONE" << endl;
-	cout << "TIME: " << duration << " seconds" << endl;*/
+	cout << "TIME: " << duration << " seconds" << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
