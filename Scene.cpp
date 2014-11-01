@@ -75,23 +75,23 @@ void parseObj(char* filename, material mat, Matrix4f objToWorld) {
 
     while(getline(fin, line, ' ')) {
     	cout << line << endl;
-    	if(strcmp(line, "v") == 0) {
+    	if(line == "v") {
     		getline(fin, line, ' ');
-    		float a1 = atof(line);
+    		float a1 = stof(line);
     		getline(fin, line, ' ');
-    		float a2 = atof(line);
+    		float a2 = stof(line);
     		getline(fin, line, ' ');
-    		float a3 = atof(line);
+    		float a3 = stof(line);
     		Vector3f vert(a1, a2, a3);
     		vertices.push_back(vert);
     	}
-    	if(strcmp(line, "f") == 0) {
+    	if(line == "f") {
     		getline(fin, line, ' ');
-    		float a1 = atof(line);
+    		float a1 = stof(line);
     		getline(fin, line, ' ');
-    		float a2 = atof(line);
+    		float a2 = stof(line);
     		getline(fin, line, ' ');
-    		float a3 = atof(line);
+    		float a3 = stof(line);
     		Vector3f v1 = vertices[a1];
     		Vector3f v2 = vertices[a2];
     		Vector3f v3 = vertices[a3];
