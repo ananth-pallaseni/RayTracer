@@ -40,8 +40,15 @@ void parseObj(char* filename, material mat, Matrix4f objToWorld, Matrix4f worldT
     vertices.push_back(first);
 
     cout << "1" << endl;
+
+    while (fin.good()) {
+    	string line;
+    	fin.getline(line);
+    	cout << line << endl;
+    }
+
     
-    // read each line of the file
+    /*// read each line of the file
     while (!fin.eof())
     {
     	cout << "2" << endl;
@@ -91,7 +98,7 @@ void parseObj(char* filename, material mat, Matrix4f objToWorld, Matrix4f worldT
 
     }
 
-
+*/
 }
 
 
