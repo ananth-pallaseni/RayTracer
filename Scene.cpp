@@ -41,10 +41,10 @@ void parseObj(char* filename, material mat, Matrix4f objToWorld, Matrix4f worldT
 
     cout << "1" << endl;
 
-    while (fin.is_open()) {
+string line;
+    while (getline(fin, line)) {
     	cout << "loop" << endl;
-    	string line;
-    	getline(fin, line);
+    	
     	cout << line << endl;
     }
 
