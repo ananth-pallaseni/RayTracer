@@ -42,12 +42,44 @@ int reader(string s, int i, int max, vector<string>* word) {
 	return i;
 }*/
 
+
+    /** Boilerplate C++ string manipulation routines from the following sources:
+ *      http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring
+ *      http://stackoverflow.com/questions/236129/how-to-split-a-string-in-c
+ */
+static inline string &ltrim(string &s) {
+    s.erase(s.begin(), find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace))));
+    return s;
+}
+
+static inline string &rtrim(string &s) {
+    s.erase(find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(), s.end());
+    return s;
+}
+
+static inline string &trim(string &s) {
+    return ltrim(rtrim(s));
+}
+
+vector<string> split(const string& str, const string& delimiter = " ") {
+    vector <string> tokens;
+    string::size_type lastPos = 0;
+    string::size_type pos = str.find(delimiter, lastPos);
+    while (string::npos != pos) {
+        tokens.push_back(str.substr(lastPos, pos - lastPos));
+        lastPos = pos + delimiter.size();
+        pos = str.find(delimiter, lastPos);
+    }
+    tokens.push_back(str.substr(lastPos, str.size() - lastPos));
+    return tokens;
+}
+
   // Read Arguments and do something with them
 void parseObj(const char* filename, material mat, Matrix4f objToWorld) {
 
   const int MAX_CHARS_PER_LINE = 512;
   const int MAX_TOKENS_PER_LINE = 20;
-  const char* const DELIMITER = " ";
+  const char* DELIMITER = " ";
 
   // create a file-reading object
     ifstream fin;
@@ -58,6 +90,18 @@ void parseObj(const char* filename, material mat, Matrix4f objToWorld) {
     vector<Vector3f> vertices;
     Vector3f first;
     vertices.push_back(first);
+
+
+    while(getline(fin, line)) {
+    	vector<string> words = split(line);
+    	int q = words.size();
+    	for(int i = 0; i < q; i++) {
+    		cout << words[i] << endl;
+    	}
+    }
+
+
+/** End code that I didn't write. */
 
   /*  while(getline(fin, line, ' ')) {
     	cout << line << endl;
@@ -86,7 +130,7 @@ void parseObj(const char* filename, material mat, Matrix4f objToWorld) {
     }*/
 
  
-    
+    /*
     // read each line of the file
     while (!fin.eof())
     {
@@ -136,7 +180,7 @@ void parseObj(const char* filename, material mat, Matrix4f objToWorld) {
         }
 
     }
-
+*/
 
 }
 
