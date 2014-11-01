@@ -92,9 +92,9 @@ void parseObj(const char* filename, material mat, Matrix4f objToWorld) {
     while(getline(fin, line)) {
     	vector<string> words = split(line);
     	if(words[0] == "v") {
-    		fstream f1(words[1]);
-    		fstream f2(words[2]);
-    		fstream f3(words[3]);
+    		stringstream f1(words[1]);
+    		stringstream f2(words[2]);
+    		stringstream f3(words[3]);
     		float p1;
     		p1 << f1;
     		float p2;
