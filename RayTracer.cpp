@@ -147,7 +147,7 @@ Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray in
 	}*/
 	c = c / 255; // as color rgb values are (0->255)
 	if(depth == 0) {
-	if(c(0) > 0.4 || c(1) > 0.4 || c(2) > 0.4) {
+	if(c(0) > 0.5 && c(1) > 0.5 && c(2) > 0.5) {
 	cout << "REFL COLOR: " << c(0) << ", " << c(1) << ", " << c(2) << endl << endl;
 
 	}
@@ -169,7 +169,7 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 			rgb = rgb + specular(normalAtPoint, lightDirection, incoming.sMinusE, shape.mat.spec, pl.l(), shape.mat.phongExp);
 		}
 		if(depth < DEPTH_MAX ) {
-			rgb = rgb + vMul(shape.mat.refl, reflectionRay(pointOnShape, normalAtPoint, incoming, shape.mat.refl, depth));
+			rgb = rgb + reflectionRay(pointOnShape, normalAtPoint, incoming, shape.mat.refl, depth);
 		}
 		rgb = rgb + ambient(pl.l(), shape.mat.amb);
 	}
