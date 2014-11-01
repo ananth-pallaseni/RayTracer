@@ -223,137 +223,10 @@ void parseArgs(char* filename) {
 
 }
 
-Vector3f p11(float t, Vector3f sMinusE, Vector3f e) {
-		return e + t * (sMinusE);
-	}
-
-bool intersect11(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
-		cout << "tri a: " << endl	 << tri.a << endl << endl;
-		cout << "tri b: " << endl	 << tri.b << endl << endl;
-		cout << "tri c: " << endl	 << tri.c << endl << endl;
-		Matrix3f A;
-		A(0, 0) = tri.a(0) - tri.b(0);
-		A(0, 1) = tri.a(0) - tri.c(0);
-		A(0, 2) = sMinusE(0);
-		A(1, 0) = tri.a(1) - tri.b(1);
-		A(1, 1) = tri.a(1) - tri.c(1);
-		A(1, 2) = sMinusE(1);
-		A(2, 0) = tri.a(2) - tri.b(2);
-		A(2, 1) = tri.a(2) - tri.c(2);
-		A(2, 2) = sMinusE(2);
-		cout << "A: " << endl << A << endl << endl;
-
-		// Setri up matririx B:
-		Vector3f B;
-		B(0) = tri.a(0) - sMinusE(0);
-		B(1) = tri.a(1) - sMinusE(1);
-		B(2) = tri.a(2) - sMinusE(2);
-		cout << "B: " << endl << B << endl << endl;
-		// Store these vals to save computation:
-		float eihf = A(1, 1) * A(2, 2) - A(1, 2) * A(2, 1);
-		float gfdi = A(0, 2) * A(2, 1) - A(0, 1) * A(2, 2);
-		float dheg = A(0, 1) * A(1, 2) - A(1, 1) * A(0, 2);
-		float akjb = A(0, 0) * B(1) - B(0) * A(1, 0);
-		float jcal = B(0) * A(2, 0) - A(0, 0) * B(2);
-		float blkc = A(1, 0) * B(2) - B(1) * A(2, 0);
-		cout << "eihf: " << eihf << endl;
-		cout << "gfdi: " << gfdi << endl;
-		cout << "dheg: " << dheg << endl;
-		cout << "akjb: " << akjb << endl;
-		cout << "jcal: " << jcal << endl;
-		cout << "blkc: " << blkc << endl;
-		// By Cramers Rule:
-		float M = A(0, 0) * eihf + A(1, 0) * gfdi + A(2, 0) * dheg;
-		cout << "M: " << endl << M << endl << endl;
-		float gamma = (A(2, 2) * akjb + A(1, 2) * jcal + A(0, 2) * blkc) / M;
-		cout << "GAMMA: " << endl << gamma << endl << endl;
-		if (gamma < 0 || gamma > 1) {
-			return false;
-		}
-		float beta = (B(0) * eihf + B(1) * gfdi + B(2) * dheg) / M;
-		cout << "BETA: " << endl << beta << endl << endl;
-		if (beta < 0 || beta > 1 - gamma) {
-			return false;
-		}
-		float t = (A(2, 1) * akjb + A(1, 1) * jcal + A(0, 1) * blkc) / M;
-		cout << "T: " << endl << t << endl << endl;
-		*point = p11(t, sMinusE, e);
-		return true;
-	}
-
-	bool intersect22(triangle tri, Vector3f* point, Vector3f sMinusE, Vector3f e) {
-		// check if it intersects a plane:
-		Vector3f side1 = tri.a - tri.b;
-		Vector3f side2 = tri.a - tri.c;
-		Vector3f planeNormal = side1.cross(side2);
-		planeNormal = planeNormal / planeNormal.norm();
-		cout << "NORMAL TO PLANE: " << planeNormal << endl << endl;
-		float numerator = planeNormal.dot(tri.a - e);
-		float denominator = planeNormal.dot(sMinusE);
-		cout << "NUMERATOR: " << numerator << endl;
-		cout << "DENOMINATOR: " << denominator << endl;
-		if(denominator == 0) {
-			// ray is parallel to plane:
-			return false;
-		}
-		float r1 = numerator / denominator;
-		cout << "r1: " << r1 << endl;
-		if(r1 < 0) {
-			// means ray does not intersect plane:
-			return false;
-		}
-		Vector3f pointToTest = p11(r1, sMinusE, e);
-		cout << "POINT TO TEST: " << endl << pointToTest << endl << endl;
-
-		// Now check if the point lies within the triangle:
-		Vector3f u = tri.b - tri.a;
-		Vector3f v = tri.c - tri.a;
-		Vector3f w = pointToTest - tri.a;
-		cout << "U: " << endl << u << endl << endl;
-		cout << "V: " << endl << v << endl << endl;
-		cout << "W: " << endl << w << endl << endl;
-
-		float denom1 = u.dot(v) * u.dot(v) - u.dot(u) * v.dot(v);
-		cout << "DENOM1: " << denom1 << endl;
-		float s1 = u.dot(v) * w.dot(v) - v.dot(v) * w.dot(u);
-		s1 = s1 / denom1;
-		float t1 = u.dot(v) * w.dot(u) - u.dot(u) * w.dot(v);
-		t1 = t1 / denom1;
-		cout << "S1: " << s1 << endl;
-		cout << "T1: " << t1 << endl;
-		if(s1 < 0 || t1 < 0 || s1 + t1 > 1) {
-			return false;
-		}
-		*point = pointToTest;
-		return true;
-	}
-
-Vector3f triangleNormal11(Vector3f pointOnShape, triangle shape, ray r) {
-	/*Vector3f side1 = shape.a - shape.b;
-	Vector3f side2 = shape.a - shape.c;
-	Vector3f normal(side1(1) * side2(2) - side1(2) * side2(1), 
-					side1(2) * side2(0) - side1(0) * side2(2),
-					side1(0) * side2(1) - side1(1) * side2(0));
-	Vector3f unitNormal = unit(normal);
-	if(unit(r.sMinusE).dot(unitNormal) < 0) {
-		unitNormal = -unitNormal;
-	}
-	return unitNormal;*/
-	Vector3f side1 = shape.a - shape.b;
-	Vector3f side2 = shape.a - shape.c;
-	Vector3f planeNormal = side1.cross(side2);
-	if((-r.sMinusE).dot(planeNormal) < 0) {
-		planeNormal = -planeNormal;
-	}
-	planeNormal = planeNormal / planeNormal.norm();
-	return planeNormal;
-
-}
-
 int main(int argc, char* argv[])
 {
 
-	/*material mm;
+	material mm;
 	Matrix4f matr;
 matr << 1, 0, 0, 0,
 		0, 1, 0, 0, 
@@ -361,7 +234,7 @@ matr << 1, 0, 0, 0,
 		0, 0, 0, 1;
 
 	char* name = "scene12.obj";
-	parseObj(name, mm, matr, matr);*/
+	parseObj(name, mm, matr, matr);
 
 /*material mm;
 Matrix4f matr;
@@ -400,7 +273,7 @@ else {
 
 	// General Purpose - renders input file
 
-	int size = 500;
+	/*int size = 500;
 
 	char* inFile = "input.txt";
 	clock_t startTime;
@@ -418,7 +291,7 @@ else {
 			
 		}
 	}
-	c.encode("image.png");
+	c.encode("image.png");*/
 
 	duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
 	cout << "DONE" << endl;
