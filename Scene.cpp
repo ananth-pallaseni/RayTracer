@@ -43,7 +43,7 @@ int reader(string s, int i, int max, vector<string>* word) {
 }*/
 
   // Read Arguments and do something with them
-void parseObj(char* filename, material mat, Matrix4f objToWorld, Matrix4f worldToObj) {
+void parseObj(char* filename, material mat, Matrix4f objToWorld) {
 
   const int MAX_CHARS_PER_LINE = 512;
   const int MAX_TOKENS_PER_LINE = 20;
@@ -169,9 +169,7 @@ void parseArgs(char* filename) {
   	  	const char* token[MAX_TOKENS_PER_LINE] = {}; // initialize to 0
   	  	
   	  	// parse the line
-  	  	cout << "just before" << endl;
   	  	token[0] = strtok(buf, DELIMITER); // first token
-  	  	cout << "just after" << endl;
   	  	if (token[0]) // zero if line is blank
   	  	{
   	  	  	for (n = 1; n < MAX_TOKENS_PER_LINE; n++)
@@ -248,6 +246,9 @@ void parseArgs(char* filename) {
   	  		worldToObj = I;
   			objToWorld = I;
   			inOrder = I;
+  	  	}
+  	  	else if(strcmp(token[0], "obj") == 0) {
+  			parseObj(token[1], mat, objToWorld);
   	  	}
   	  	else {
   	  		cout << "UNRECOGNIZED TYPE: " << token[0] << endl;
