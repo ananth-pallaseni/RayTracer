@@ -33,7 +33,7 @@ void parseObj(char* filename, material mat, Matrix4f objToWorld, Matrix4f worldT
 
   // create a file-reading object
     ifstream fin;
-    fin.open("scene12.obj"); // open a file
+    fin.open("scene12.obj.txt"); // open a file
     string line;
     getline(fin, line);
     cout << line << endl;
