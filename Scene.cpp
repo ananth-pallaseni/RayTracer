@@ -382,6 +382,10 @@ boundingBox distill(vector<boundingBox> boxIn) {
   if(length == 1) {
     cout << "SIZE 1: RETURNING" << endl;
     cout << "root: " << boxIn[0].minX << endl;
+    cout << "0, LEFT " <<  boxIn[0].left -> minX << endl;
+    cout << "0, RIGHT " <<  boxIn[0].right -> minX << endl;
+    cout << "1, LEFT " <<  boxIn[1].left -> minX << endl;
+    cout << "1, RIGHT " <<  boxIn[1].right -> minX << endl;
     return boxIn[0];
   }
 
