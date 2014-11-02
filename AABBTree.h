@@ -29,19 +29,33 @@ struct box
 
 struct boundingBox
 {
+	object* obj;
 	float minX, maxX, minY, maxY, minZ, maxZ;
-	bool final;
+	bool leaf;
+	float volume;
+
+	boundingBox* left;
+	boundingBox* right;
+
+	float volCalc() {
+		volume = (maxX - minX) * (maxY - minY) * (maxZ - minZ);
+	}
 
 	boundingBox(boundingBox* b1, boundingBox* b2) {
+		leaf = false;
 		minX = min(b1->minX, b2->minX);
 		minY = min(b1->minY, b2->minY);
 		minZ = min(b1->minZ, b2->minZ);
 		maxX = max(b1->maxX, b2->maxX);
 		maxY = max(b1->maxY, b2->maxY);
 		maxZ = max(b1->maxZ, b2->maxZ);
+		volCalc();
+		left = b1;
+		right = b2;
 	}
 
 	boundingBox(sphere* sph) {
+		leaf = true;
 		Vector3f center = sph->center;
 		float radius = sph->radius;
 		minX = min(center(0) + radius, center(0) - radius);
@@ -52,9 +66,12 @@ struct boundingBox
 
 		minZ = min(center(2) + radius, center(2) - radius);
 		maxZ = max(center(0) + radius, center(2) - radius);
+		volCalc();
+		obj = sph;
 	}
 
 	boundingBox(triangle* tri) {
+		leaf = true;
 		Vector3f v1 = tri->a;
 		Vector3f v2 = tri->b;
 		Vector3f v3 = tri->c;
@@ -72,6 +89,8 @@ struct boundingBox
 		minZ = min(minZ, v3(2));
 		maxZ = max(v1(2), v2(2));
 		maxZ = max(maxZ, v3(2));
+		volCalc();
+		obj = tri;
 	}
 
 
@@ -132,17 +151,21 @@ struct boundingBox
 		}
 
 		return setIntersect(txMin, txMax, tyMin, tyMax, tzMin, tzMax);
-
 	}
 
 };
 
 struct aabbNode
 {
+	float minX, maxX, minY, maxY, minZ, maxZ;
 	object* obj;
+	bool leaf;
+
 
 	aabbNode(object* o) {
 		obj = o;
+		leaf = true;
+
 	}
 
 	object* contains() {

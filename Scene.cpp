@@ -337,31 +337,27 @@ int main(int argc, char* argv[])
   boundingBox b2(&tri);
   cout << "B1: " << endl << "minX: " << b1.minX << "    maxX: " << b1.maxX << endl;
   cout << "minY: " << b1.minY << "    maxY: " << b1.maxY << endl;
-  cout << "minZ: " << b1.minZ << "    maxZ: " << b1.maxZ << endl << endl;
+  cout << "minZ: " << b1.minZ << "    maxZ: " << b1.maxZ << endl << "VOL: " << b1.volume << endl << endl;
 
   cout << "B2: " << endl << "minX: " << b2.minX << "    maxX: " << b2.maxX << endl;
   cout << "minY: " << b2.minY << "    maxY: " << b2.maxY << endl;
-  cout << "minZ: " << b2.minZ << "    maxZ: " << b2.maxZ << endl << endl;
+  cout << "minZ: " << b2.minZ << "    maxZ: " << b2.maxZ << endl << "VOL: " << b2.volume << endl << endl;
 
   Vector3f e(-1, -1, -1);
   Vector3f d(1, 1, 1);
   ray r(e, d);
-  cout << "RAY HITS B1: " << b1.hit(&r) << endl;
-  cout << "RAY HITS B2: " << b2.hit(&r) << endl;
-
-  cout << endl;
-
-  aabbNode q(&sph);
-  object* qq = q.obj;
-  sphere* qs = (sphere*) q.obj;
-  cout << "QS RADIUS: " << qs->radius << endl << endl;
-
+  
   boundingBox b3(&b1, &b2);
   cout << "B1: " << endl << "minX: " << b3.minX << "    maxX: " << b3.maxX << endl;
   cout << "minY: " << b3.minY << "    maxY: " << b3.maxY << endl;
-  cout << "minZ: " << b3.minZ << "    maxZ: " << b3.maxZ << endl << endl;
+  cout << "minZ: " << b3.minZ << "    maxZ: " << b3.maxZ << endl << "VOL: " << b3.volume << endl << endl;
 
+  cout << "RAY HITS B1: " << b1.hit(&r) << endl;
+  cout << "RAY HITS B2: " << b2.hit(&r) << endl;
   cout << "RAY HITS B3: " << b3.hit(&r) << endl;
+
+  cout << "SPHERE RADIUS FROM B1: " << ((sphere*) b1.obj)->radius << endl;
+  cout << "TRI A FROM B2: " << ((triangle*) b1.obj)->a << endl;
 
 
 
