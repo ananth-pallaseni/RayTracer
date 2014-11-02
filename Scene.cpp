@@ -395,11 +395,18 @@ boundingBox distill(vector<boundingBox> boxIn) {
     if(active[i]) {
       for(int j = i+1; j < length; j++) {
         if(active[j]) {
+          cout << "joining pair" << endl;
           boundingBox b(&boxIn[i], &boxIn[j]);
           distilledBox.push_back(b);
+          active[j] = false;
         }
       }
+      if(i == length-1) {
+        boundingBox.push_back(boxIn[i]);
+      }
+      active[i] = false;
     }
+
   }
 
   return distill(distilledBox);
