@@ -158,7 +158,7 @@ struct boundingBox
 			txMax = (minX - xe) * ax;
 		}
 		if(ay >= 0) {
-			tyMin = (minY - ye) * ay;
+			tyMin = (minY - ye) * ay; cout << "MINY: " << minY << "  YE: " << ye << endl;
 			tyMax = (maxY - ye) * ay;
 		}
 		else {
