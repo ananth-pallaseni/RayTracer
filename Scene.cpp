@@ -455,33 +455,29 @@ boundingBox buildTree(vector<boundingBox> *list) {
 */
 
 bool rayTraverse(ray* r, boundingBox* b, hitResult* result) {
-  if(b->hit(r, result)) {
+  if(b->hit(t, result)) {
     if(b->leaf) {
       return true;
     }
-    hitResult r1;
-    hitResult r2;
-    bool check1 = rayTraverse(r, b->left, &r1);
-    bool check2 = rayTraverse(r, b->right, &r2);
-    if(check1 && check2) {
-      if(r1.t < r2.t) {
-        result = &r1;
+    hitResult r1, r2;
+    bool c1 = b->left->hit(r, r1);
+    bool c2 = b->right->hit(r, r2);
+    if(c1 && c2) {
+      if(r1->t < r2 -> t) {
+        return r1;
       }
-      else {
-        result = &r2;
-      }
-      return true;
+      return r2;
     }
-    else if(check1) {
-      result = &r1;
-      return true;
+    else if(c1) {
+      return r1;
     }
-    else if(check2) {
-      result = &r2;
-      return true;
+    else if(c2) {
+      return r2;
     }
   }
-  return false;
+  else {
+    return false;
+  }
 }
 
 
