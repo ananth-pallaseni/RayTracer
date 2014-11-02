@@ -572,15 +572,14 @@ int main(int argc, char* argv[])
     cout << "NO HIT" << endl;
   }
 
-    cout << "r hits sph0: " << r1.intersect(spheres[0], &result) << endl;
+   /* cout << "r hits sph0: " << r1.intersect(spheres[0], &result) << endl;
 
   //traverse(&tree);
 
   cout << "HITS OUTER: " << tree.hit(&r1, &result) << endl;
   cout << "HITS OUTER->LEFT: " << (*(tree.left)).hit(&r1, &result) << endl;
   cout << "OUTER-> LEFT: " << endl << (*(tree.left)) . minX << endl;
-
-  //cout << "HITS OUTER->RIGHT: " << (*(tree.right)).hit(&r, &result) << endl;
+*/
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

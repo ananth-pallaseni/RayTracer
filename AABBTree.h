@@ -57,6 +57,11 @@ struct boundingBox
 		left = b1;
 		right = b2;
 		type = AABB_BOX;
+		cout << endl << "CREATING BB" << endl;
+		cout << "minX: " << minX << "   maxX: " << maxX << endl;
+		cout << "minY: " << minY << "   maxY: " << maxY << endl;
+		cout << "minZ: " << minZ << "   maxZ: " << maxZ << endl;
+		cout << "END CREATE BB" << endl << endl;
 	}
 
 	boundingBox(sphere* sph) {
