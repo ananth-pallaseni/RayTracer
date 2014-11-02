@@ -150,28 +150,28 @@ struct boundingBox
 		float ay = 1 / yd; cout << "yd: " << yd << endl; cout << "ay: " << ay << endl;
 		float az = 1 / zd; cout << "za: " << zd << endl; cout << "az: " << az << endl;
 		if(ax >= 0) {
-			txMin = (minX - xe) / xd;
-			txMax = (maxX - xe) / xd;
+			txMin = (minX - xe) * ax;
+			txMax = (maxX - xe) * ax;
 		}
 		else {
-			txMin = (maxX - xe) / xd;
-			txMax = (minX - xe) / xd;
+			txMin = (maxX - xe) * ax;
+			txMax = (minX - xe) * ax;
 		}
 		if(ay >= 0) {
-			tyMin = (minY - ye) / yd;
-			tyMax = (maxY - ye) / yd;
+			tyMin = (minY - ye) * ay;
+			tyMax = (maxY - ye) * ay;
 		}
 		else {
-			tyMin = (maxY - ye) / yd;
-			tyMax = (minY - ye) / yd;
+			tyMin = (maxY - ye) * ay;
+			tyMax = (minY - ye) * ay;
 		}
 		if(az >= 0) {
-			tzMin = (minZ- ze) / zd;
-			tzMax = (maxZ- ze) / zd;
+			tzMin = (minZ- ze) * az;
+			tzMax = (maxZ- ze) * az;
 		}
 		else {
-			tzMin = (maxZ - ze) / zd;
-			tzMax = (minZ - ze) / zd;
+			tzMin = (maxZ - ze) * az;
+			tzMax = (minZ - ze) * az;
 		}
 
 		
