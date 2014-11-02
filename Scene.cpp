@@ -377,6 +377,36 @@ void traverse(boundingBox* root) {
   }
 }
 
+bool rayTraverse(ray* r, boundingBox* b, hitResult* result) {
+  if(b->hit(r, result)) {
+    if(b->leaf) {
+      return true;
+    }
+    hitResult r1;
+    hitResult r2;
+    bool check1 = rayTraverse(r, b->left, &r1);
+    bool check2 = rayTraverse(r, b->right, &r2);
+    if(check1 && check2) {
+      if(r1->t < r2->t) {
+        result = r1;
+      }
+      else {
+        result = r2;
+      }
+      return true;
+    }
+    else if(check1) {
+      result = r1;
+      return true;
+    }
+    else if(check2) {
+      result = check2;
+      return true;
+    }
+  }
+  return false;
+}
+
 int main(int argc, char* argv[])
 {
 
@@ -429,8 +459,19 @@ int main(int argc, char* argv[])
   }
 
   boundingBox tree = distill(boxes);
-  cout << "1st LEFT: " << tree.left->volume << endl;   cout << "1st RIGHT: " << tree.left->volume << endl << endl;
-  traverse(&tree);
+  
+  Vector3f e1(-30, 20, 0);
+  Vector3f d1(1, 0, 0);
+  ray r1(e1, d1);
+  hitResult result;
+  if(rayTraverse(&r, &b, &result)) {
+    cout << "RAY HIT" << endl;
+    cout << result.point; << endl << endl;
+  }
+  else {
+    cout << "NO HIT" << endl;
+  }
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// General Purpose - renders input file

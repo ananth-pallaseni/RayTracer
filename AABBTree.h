@@ -5,6 +5,7 @@
 
 using namespace std;
 
+const int AABB_BOX = 0;
 const int AABB_SPHERE = 1;
 const int AABB_TRI = 2;
 
@@ -32,6 +33,7 @@ struct boundingBox
 	object* obj;
 	float minX, maxX, minY, maxY, minZ, maxZ;
 	bool leaf;
+	int type;
 	float volume;
 
 	boundingBox* left;
@@ -54,6 +56,7 @@ struct boundingBox
 		volCalc();
 		left = b1;
 		right = b2;
+		type = AABB_BOX;
 	}
 
 	boundingBox(sphere* sph) {
@@ -70,6 +73,7 @@ struct boundingBox
 		maxZ = max(center(0) + radius, center(2) - radius);
 		volCalc();
 		obj = sph;
+		type = AABB_SPHERE;
 	}
 
 	boundingBox(triangle* tri) {
@@ -93,6 +97,7 @@ struct boundingBox
 		maxZ = max(maxZ, v3(2));
 		volCalc();
 		obj = tri;
+		type = AABB_TRI;
 	}
 
 
@@ -114,7 +119,7 @@ struct boundingBox
 	}
 
 
-	bool hit(ray* r) {
+	bool hit(ray* r, hitResult* result) {
 		float xe = r->e(0);
 		float ye = r->e(1);
 		float ze = r->e(2);
@@ -152,8 +157,21 @@ struct boundingBox
 			tzMax = (minZ - ze) / zd;
 		}
 
-		return setIntersect(txMin, txMax, tyMin, tyMax, tzMin, tzMax);
+		bool check = setIntersect(txMin, txMax, tyMin, tyMax, tzMin, tzMax);
+		if(leaf && check) {
+			switch (type) {
+				case AABB_SPHERE:
+					r.intersect( *( (sphere*) obj ), result);
+
+				case AABB_TRI:
+					r.intersect( *( (triangle*) obj ), result);
+			}
+		}
+		else {
+			return check;
+		}
 	}
+
 
 };
 

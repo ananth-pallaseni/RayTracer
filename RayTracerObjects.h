@@ -417,6 +417,54 @@ struct ray
 		return false;
 	}
 
+	bool intersect(sphere sph, hitResult* result) {
+		// Check Discriminant:
+		// A = sMinusE . sMinusE
+		Matrix4f trans = sph.worldToObj;
+		Matrix4f inv = sph.objToWorld;
+		Vector4f eObj(e(0), e(1), e(2), 1); // eye in homogenized coords
+		Vector4f sMinusEObj(sMinusE(0), sMinusE(1), sMinusE(2), 0); // sMinusE in homogenized coords, last val is 0 as it is a scalar
+		eObj = trans * eObj; // take ray to obj space
+		sMinusEObj = trans * sMinusEObj; // take ray to obj space
+		eObj(3) = 0;
+		sMinusEObj(3) = 0;
+
+		float A = sMinusEObj.dot(sMinusEObj);
+		// B = 2 * sMinusEObj . (eObj - c)
+		float B = 2 * sMinusEObj .dot(( eObj ));
+		// C = (eObj - c) . (eObj - c) - r^2
+		float C = ( eObj ).dot( ( eObj ) ) - 1;
+		float discriminant = B*B - 4*A*C;
+		if (discriminant >= 0) {
+			// Use positive or negative value of discriminant depending on which results in the smallest t.
+			float t;
+			if(B < 0) {
+				t = (-B - sqrt(discriminant)) / (2 * A);
+			}
+			else {
+				t = (-B + sqrt(discriminant)) / (2 * A);
+			}
+
+			// BIAS
+			if(t < EPSILON) {
+				return false;
+			}
+
+			// REMOVE THIS:
+			result->t = t;
+
+			eObj(3) = 1;
+			Vector4f pointInWorldSpace = inv * ( eObj + t * sMinusEObj); // take point to world space
+
+			(result->point)(0) = pointInWorldSpace(0); // transform back into world coordinates
+			(result->point)(1) = pointInWorldSpace(1);
+			(result->point)(2) = pointInWorldSpace(2);
+
+			return true;
+		}
+		return false;
+	}
+
 	// OLD
 	bool intersect(sphere sph, float* t, bool temptemp) {
 		// Check Discriminant:
