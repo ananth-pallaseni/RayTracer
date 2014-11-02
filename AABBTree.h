@@ -194,6 +194,7 @@ struct boundingBox
 		
 
 		if(leaf) {
+			cout << "FINAL LAYER" << endl;
 			switch (type) {
 				case AABB_SPHERE:
 					return r->intersect( *( (sphere*) obj ), result);
