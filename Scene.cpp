@@ -530,7 +530,7 @@ int main(int argc, char* argv[])
   boundingBox test = root;
   while(!test.leaf) {
     cout << test.minX << endl;
-    test = *(test.right);
+    test = *(test.left);
   }
   /*object* obj = test.obj;
   cout << ( (sphere*) obj )->center << endl << endl;*/
