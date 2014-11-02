@@ -508,8 +508,19 @@ int main(int argc, char* argv[])
      0, 1, 0, 0,
      0, 0, 1, 0,
      0, 0, 0, 1;
+
+     sphere sph(0, 0, 0, 50, mm, I, I);
+
+     boundingBox bb(&sph);
+
+     Vector3f e(0, 100, 0);
+     Vector3f d(1, 0, 0);
+     ray r(e, d);
+     hitResult result;
+
+     cout << "HIT: " << bb.hit(r, result) << endl;
   
-  for(int i = 0; i < 5; i++) {
+  /*for(int i = 0; i < 5; i++) {
     sphere sph(i * 50, i * 50, i*50, 20, mm, I, I);
     spheres.push_back(sph);
   }
@@ -532,9 +543,9 @@ int main(int argc, char* argv[])
     cout << test.minX << endl;
     test = *(test.left);
   }
-  /*object* obj = test.obj;
-  cout << ( (sphere*) obj )->center << endl << endl;*/
-  cout << test.minX << endl;
+  object* obj = test.obj;
+  cout << ( (sphere*) obj )->center << endl << endl;
+  cout << test.minX << endl;*/
 
 
 

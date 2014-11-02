@@ -152,7 +152,6 @@ struct boundingBox
 		
 
 		bool check = setIntersect(txMin, txMax, tyMin, tyMax, tzMin, tzMax);
-		cout << "r hits box: " << check << endl;
 		if(leaf && check) {
 			switch (type) {
 				case AABB_SPHERE:
