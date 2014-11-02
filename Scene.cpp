@@ -370,6 +370,7 @@ boundingBox distill(vector<boundingBox> boxIn) {
 void traverse(boundingBox* root) {
   if(root->leaf) {
     cout << "IS LEAF" << endl;
+    cout << (((sphere*) root->obj)->center)(0) << endl;
   }
   else {
     cout << "T" << endl;
