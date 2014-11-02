@@ -15,7 +15,7 @@ const int AABB_TRI = 2;
 
 struct boundingBox
 {
-	object obj;
+	object* obj;
 	float minX, maxX, minY, maxY, minZ, maxZ;
 	bool leaf;
 	int type;
@@ -62,7 +62,7 @@ struct boundingBox
 		minZ = min(center(2) + radius, center(2) - radius);
 		maxZ = max(center(0) + radius, center(2) - radius);
 		volCalc();
-		obj = *sph;
+		obj = sph;
 		type = AABB_SPHERE;
 	}
 
@@ -86,7 +86,7 @@ struct boundingBox
 		maxZ = max(v1(2), v2(2));
 		maxZ = max(maxZ, v3(2));
 		volCalc();
-		obj = *tri;
+		obj = tri;
 		type = AABB_TRI;
 	}
 
@@ -139,7 +139,7 @@ struct boundingBox
 		cout << "Txmin : " << txMin << "   TxMax: " << txMax << endl;
 		cout << "Txyin : " << tyMin << "   TyMax: " << tyMax << endl;
 		cout << "Tzmin : " << tzMin << "   TzMax: " << tzMax << endl;
-
+		
 		// checks for nans
 		if(	!(txMin == txMin) ) {txMin = 0;};
 		if(	!(txMax == txMax) ) {txMax = 0;};

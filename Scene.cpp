@@ -325,59 +325,67 @@ void parseArgs(char* filename) {
 
 
 
-/*boundingBox distill(vector<boundingBox*> boxIn) {
-  vector<boundingBox*> distilledBoxes;
-  int length = boxIn.size();
+boundingBox buildTree(vector<boundingBox> *list) {
 
-  cout << endl << "NEW ROUND, size: " << length << endl;
-  if(length == 1) {
-    cout << "LENGTH IS 1, RETURNING" << endl;
-    cout << "Size: " << boxIn[0]->volume << "   minX: " << boxIn[0]->minX << endl;
-    return *boxIn[0];
-  }
+  // If the list has only one element, were done, return it
+  int length = 0;
+  int start = -1;
 
-  bool active[length];
-  for(int i = 0; i < length; i++) {
+  bool active[2*(list->size())];
+  for(int i = 0; i < 2*(list->size()); i++) {
     active[i] = true;
   }
 
-  for(int i = 0; i < length; i++) {
-    cout << "looking at new i = " << i << endl;
-    if(active[i]) {
-      cout << "NEW ITEM FOUND: " << boxIn[i]->volume <<  endl;
-      int index = -1;
-      boundingBox best;
-      float minVol = std::numeric_limits<float>::max();
-      for(int j = i + 1; j < length; j++) {
-        cout << "looking at new j = " << j << endl;
-        if(active[j]) {
-          boundingBox combined(boxIn[i], boxIn[j]);
-          cout << "NEW J FOUND: " << boxIn[j]->minX << ", " << boxIn[j]->maxX << "   v: " << combined.volume << "  comb minX: " << combined.minX <<  endl;
-          if(combined.volume < minVol) {
-            cout << "choosing this j" << endl;
-            best = combined;
-            index = j;
-            minVol = combined.volume;
+  while(start != length) {
+    start = length;
+    length = list->size();
+    for(int i = start; i < length; i++) {
+      // For each bb in the list:
+      if(active[i]) {
+        // If the bb has not been used before:
+        // Search for another bb that would minimize the volume, starting at i + 1 
+
+        // Maintain a record of the smallest combined bb and its volume:
+        float bestVol = std::numeric_limits<float>::max(); // Initialize to max value
+        int index = i; // Index of the element we evenetually choose:
+        for(int j = i + 1; i < length; i++) {
+          if(active[j]) {
+            // If both bounding boxes are active:
+            // Create the combined box:
+            boundingBox combined(&(*list)[i], &(*list)[j]);
+
+            // If the volume of the new box is smaller than the best we have, then replace the best with this one:
+            if(combined.volume < bestVol) {
+              bestVol = combined.volume;
+              index = j;
+            }
+
           }
         }
-      }
-      if(index >= 0) {
-        cout << "setting j value to false" << endl;
+
+        // Add the combined box to the list
+        // (If i = length - 1, then no j can be chosen and i must be returned on its own. )
+        if(index == i) {
+          list->push_back((*list)[index]);
+        }
+        else {
+          boundingBox newBox(&(*list)[i], &(*list)[j]);
+          list->push_back(newBox);
+        }
+
+        // Disable the indices we use:
+        active[i] = false;
         active[index] = false;
+
       }
-      else {
-        cout << "NO BEST FOUND" << endl;
-        best = *boxIn[i];
-      }
-      
-      distilledBoxes.push_back(&best);
     }
-
   }
-  return distill(distilledBoxes);
-}*/
 
-boundingBox distill(vector<boundingBox> boxIn) {
+  return list[start - 1]; // Return the last element, which will be the largest bb and the root in the tree
+
+}
+
+/*boundingBox distill(vector<boundingBox> boxIn) {
   int length = boxIn.size();
   if(length == 1) {
     cout << "SIZE 1: RETURNING" << endl;
@@ -436,7 +444,7 @@ boundingBox distill(vector<boundingBox> boxIn) {
 
   return distill(distilledBox);
 }
-
+*/
 
 bool rayTraverse(ray* r, boundingBox* b, hitResult* result) {
   if(b->hit(r, result)) {
@@ -625,7 +633,7 @@ material mm;
   }
 
   for(int i = 0; i < triangles.size() ; i++) {
-    boundingBox b(&triangles[i]);
+    boundingBox b(triangles[i]);
     boxes.push_back(b);
   }
 
