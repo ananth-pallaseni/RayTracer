@@ -501,7 +501,7 @@ int main(int argc, char* argv[])
   Vector3f d1(1, 0, 0);
   ray r1(e1, d1);
   hitResult result;
-  if(rayTraverse(&r, &tree, &result)) {
+  if(rayTraverse(&r1, &tree, &result)) {
     cout << "RAY HIT" << endl;
     cout << result.point << endl << endl;
   }
