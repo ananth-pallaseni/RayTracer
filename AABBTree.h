@@ -24,9 +24,6 @@ struct box
 		tri = t;
 	}
 
-	object contains() {
-		return 
-	}
 
 };
 
@@ -129,11 +126,6 @@ struct boundingBox
 
 	}
 
-	bool in(boundingBox* b) {
-		if(minX >= b->minX && minY >= b->minY && minZ >= b->minZ) {
-			if(maxX <= b->maxX && )
-		}
-	}
 };
 
 struct aabbNode
@@ -141,7 +133,7 @@ struct aabbNode
 	object* obj;
 
 	aabbNode(object* o) {
-		obj* = o;
+		obj = o;
 	}
 
 	object* contains() {
