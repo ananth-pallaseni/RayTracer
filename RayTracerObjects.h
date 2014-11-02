@@ -616,6 +616,12 @@ struct pointLight : light
 		g = rgb(1);
 		b = rgb(2);
 	}
+
+	Vector3f l(float dist) {
+		float denom = pow(dist, falloff);
+		Vector3f v(r / denom, g / denom, b / denom);
+		return v;
+	}
 };
 
 struct directionalLight : light

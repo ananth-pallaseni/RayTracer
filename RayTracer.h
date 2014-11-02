@@ -52,7 +52,7 @@ public:
 
 	bool shadowRay(ray sRay);
 
-	bool pointShadowRay(Vector3f point, Vector3f lightOrigin);
+	bool pointShadowRay(Vector3f point, Vector3f lightOrigin, float* dist);
 
 	bool directionalShadowRay(Vector3f point, Vector3f directionToLight);
 

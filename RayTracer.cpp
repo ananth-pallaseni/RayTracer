@@ -116,8 +116,9 @@ bool RayTracer::shadowRay(ray sRay) {
 	return false;
 }
 
-bool RayTracer::pointShadowRay(Vector3f point, Vector3f lightOrigin) {
+bool RayTracer::pointShadowRay(Vector3f point, Vector3f lightOrigin, float* dist) {
 	ray r(point, lightOrigin);
+	*dist = (point - lightOrigin).norm();
 	return shadowRay(r);
 }
 
@@ -158,11 +159,12 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 	Vector3f rgb(0, 0, 0);
 	for(int i = 0; i < numPointLights; i++) {
 		pointLight pl = pointLights[i];
-		if(!pointShadowRay(pointOnShape, pl.point)) {
+		float dist;
+		if(!pointShadowRay(pointOnShape, pl.point, &dist)) {
 			// lightDirection is unit vector pointing TO light
 			Vector3f lightDirection = unit(pl.point - pointOnShape);
 	
-			rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, pl.l());
+			rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, pl.l(dist));
 			rgb = rgb + specular(normalAtPoint, lightDirection, incoming.sMinusE, shape.mat.spec, pl.l(), shape.mat.phongExp);
 		}
 		if(depth < DEPTH_MAX && !(shape.mat.refl(0) ==  0 && shape.mat.refl(1) == 0 && shape.mat.refl(2) == 0)) {
