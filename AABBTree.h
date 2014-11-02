@@ -208,6 +208,39 @@ struct boundingBox
 		}
 	}
 
+	bool rayTraverse(ray* r, hitResult* result) {
+	  if(hit(r, result)) {
+	    cout << "HIT" << endl;
+	    if(leaf) {
+	      cout << "FINAL LAYER" << endl;
+	      return true;
+	    }
+	    cout << "NOT A LEAF" << endl;
+	    hitResult r1, r2;
+	    bool c1 = rayTraverse(r, left, &r1);
+	    bool c2 = rayTraverse(r, right, &r2);
+	    if(c1 && c2) {
+	      if(r1.t < r2.t) {
+	        *result = r1;
+	        return true;
+	      }
+	      *result = r2;
+	      return true;
+	    }
+	    else if(c1) {
+	      *result = r1;
+	      return true;
+	    }
+	    else if(c2) {
+	      *result = r2;
+	      return true;
+	    }
+	  }
+	  else {
+	    return false;
+	  }
+	}
+
 
 };
 

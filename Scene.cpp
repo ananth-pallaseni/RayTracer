@@ -454,38 +454,38 @@ boundingBox buildTree(vector<boundingBox> *list) {
 }
 */
 
-bool rayTraverse(ray* r, boundingBox* b, hitResult* result) {
-  if(b->hit(r, result)) {
-    cout << "HIT" << endl;
-    if(b->leaf) {
-      cout << "FINAL LAYER" << endl;
-      return true;
-    }
-    cout << "NOT A LEAF" << endl;
-    hitResult r1, r2;
-    bool c1 = rayTraverse(r, b-> left, &r1);
-    bool c2 = rayTraverse(r, b-> right, &r2);
-    if(c1 && c2) {
-      if(r1.t < r2.t) {
+bool rayTraverse1(ray* r, boundingBox* b, hitResult* result) {
+    if(b->hit(r, result)) {
+      cout << "HIT" << endl;
+      if(b->leaf) {
+        cout << "FINAL LAYER" << endl;
+        return true;
+      }
+      cout << "NOT A LEAF" << endl;
+      hitResult r1, r2;
+      bool c1 = rayTraverse(r, b-> left, &r1);
+      bool c2 = rayTraverse(r, b-> right, &r2);
+      if(c1 && c2) {
+        if(r1.t < r2.t) {
+          *result = r1;
+          return true;
+        }
+        *result = r2;
+        return true;
+      }
+      else if(c1) {
         *result = r1;
         return true;
       }
-      *result = r2;
-      return true;
+      else if(c2) {
+        *result = r2;
+        return true;
+      }
     }
-    else if(c1) {
-      *result = r1;
-      return true;
-    }
-    else if(c2) {
-      *result = r2;
-      return true;
+    else {
+      return false;
     }
   }
-  else {
-    return false;
-  }
-}
 
 
 
@@ -513,10 +513,20 @@ int main(int argc, char* argv[])
      0, 0, 0, 1;
 
   
-  for(int i = 0; i < 5; i++) {
-    sphere sph(i * 50, i * 50, i*50, 20, mm, I, I);
-    spheres.push_back(sph);
-  }
+  sphere sph(0, 0, 0, 20, mm, I, I);
+  spheres.push_back(sph);
+
+  sphere sph1(100, 0, 0, 20, mm, I, I);
+  spheres.push_back(sph1);
+
+  sphere sph2(50, 50, 50, 20, mm, I, I);
+  spheres.push_back(sph2);
+
+  sphere sph3(100, 100, 100, 20, mm, I, I);
+  spheres.push_back(sph3);
+
+  sphere sph3(150, 150, 150, 20, mm, I, I);
+  spheres.push_back(sph3);
 
   for(int i = 0; i < 5; i++) {
     boundingBox b(&spheres[i]);
@@ -561,7 +571,7 @@ int main(int argc, char* argv[])
 
 	// General Purpose - renders input file
 
-	/*int size = 1000;
+	int size = 1000;
 
 	char* inFile = "input.txt";
 	clock_t startTime;
@@ -581,7 +591,11 @@ int main(int argc, char* argv[])
     boxes.push_back(b);
   }
 
-  cout << "ADDED BOXES, BEGINNING TRACE" << endl;
+  cout << "ADDED BOXES, CREATING TREE" << endl;
+
+  boundingBox root = buildTree(&boxes);
+
+  cout << "TREE COMPLETE, BEGINNING TRACE" << endl;
 
 	Sampler s(size, size, LL, LR, UL, UR);
 	Canvas c(size, size);
@@ -597,7 +611,7 @@ int main(int argc, char* argv[])
 	duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
 	cout << "DONE" << endl;
 	cout << "TIME: " << duration << " seconds" << endl;
-*/
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	return 0;

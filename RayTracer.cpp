@@ -216,7 +216,7 @@ color RayTracer::traceRay(ray r, int depth, Vector3f source) {
 	// REMOVE THIS:
 	float tempT;
 
-	// Check all Spheres
+	/*// Check all Spheres
 	for(int i = 0; i < numSpheres; i++) {
 		if(r.intersect(spheres[i], &temp, &tempT)) {
 			hit = true;
@@ -241,6 +241,11 @@ color RayTracer::traceRay(ray r, int depth, Vector3f source) {
 			}
 			
 		}
+	}*/
+
+	hitResult result;
+	if(AABBRoot.rayTraverse(&r, result)) {
+		
 	}
 
 	if(hit) {
