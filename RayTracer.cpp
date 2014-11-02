@@ -147,7 +147,6 @@ Vector3f RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, materia
 		rgb = rgb + ambient(al.l(), mat.amb);
 	}
 
-	rgb = clamp(rgb);
 	return rgb;
 }
 
@@ -226,6 +225,7 @@ color RayTracer::trace(Vector3f s) {
 			rgb = rgb + reflectionRay(result.point, result.normal, refl, result.mat.refl, DEPTH_MAX);
 		}
 	}
-	return traceRay(r, 0, e);
+	rgb = clamp(rgb);
+	return color(rgb);
 }
 
