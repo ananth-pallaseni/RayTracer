@@ -491,47 +491,10 @@ Vector3f sphereNormal1(Vector3f pointOnShape, sphere shape) {
 
 int main(int argc, char* argv[])
 {
-material mm;
-
-  /*material mm;
-  Matrix4f I;
-    I << 1, 0, 0, 0,
-     0, 1, 0, 0,
-     0, 0, 1, 0,
-     0, 0, 0, 1;
-
-  sphere s1(0, 0, 0, 20, mm, I, I);
-  sphere s2(50, 50, 50, 20, mm, I, I);
-  sphere s3(100, 100, 100, 20, mm, I, I);
-  sphere s4(150, 150, 150, 20, mm, I, I);
-  sphere s5(200, 200, 200, 20, mm, I, I);
-  boundingBox b1(&s1);
-  boundingBox b2(&s2);
-  boundingBox b3(&s3);
-  boundingBox b4(&s4);
-  boundingBox b5(&s5);
-  boundingBox b11(&b1, &b2);
-  boundingBox b22(&b3, &b4);
-  boundingBox b33(&b11, &b22);
-  boundingBox b44(&b33, &b5);
-
-  cout << "B1 MINX: " << b44.left->left->left->minX << endl;
-
-  Vector3f e1(-30, -20, 0);
-  Vector3f d1(1, 0, 0);
-  ray r1(e1, d1);
-  hitResult result;
-  if(rayTraverse(&r1, &b44, &result)) {
-    cout << "RAY HIT" << endl;
-    cout << result.point << endl << endl;
-  }
-  else {
-    cout << "NO HIT" << endl;
-  }*/
 
 
 
-  /*material mm;
+  material mm;
   Matrix4f I;
     I << 1, 0, 0, 0,
      0, 1, 0, 0,
@@ -541,68 +504,18 @@ material mm;
   for(int i = 0; i < 5; i++) {
     sphere sph(i * 50, i * 50, i*50, 20, mm, I, I);
     spheres.push_back(sph);
-  }*/
+  }
 
-  /*for(int i = 0; i < 5; i++) {
+  for(int i = 0; i < 5; i++) {
     boundingBox b(&spheres[i]);
-    cout << "BOX " << i << endl;
-    cout << "minx: " << b.minX << " maxx: " << b.maxX << endl;
-    cout << "minY: " << b.minY << " maxy: " << b.maxY << endl;
-    cout << "minZ: " << b.minZ << " maxZ: " << b.maxZ << endl;
     boxes.push_back(b);
   }
+
+  boundingBox root = buildTree(*boxes);
 
   cout << endl;
 
 
-  boundingBox tree = distill(boxes);
-  cout << "AFTER FUNC, root: minx " << tree.minX << endl;
-  cout << "AFTER FUNC, root: maxx " << tree.maxX << endl;
-  cout << "AFTER FUNC, root: miny " << tree.minY << endl;
-  cout << "AFTER FUNC, root: maxy " << tree.maxY << endl;
-  cout << "AFTER FUNC, root: minz " << tree.minZ << endl;
-  cout << "AFTER FUNC, root: maxz " << tree.maxZ << endl;
-
-  cout << "AFTER FUNC, root -> left: minx " << tree.left -> minX << endl;
-  cout << "AFTER FUNC, root -> left: maxx " << tree.left -> maxX << endl;
-  cout << "AFTER FUNC, root -> left: miny " << tree.left -> minY << endl;
-  cout << "AFTER FUNC, root -> left: maxy " << tree.left -> maxY << endl;
-  cout << "AFTER FUNC, root -> left: minz " << tree.left -> minZ << endl;
-  cout << "AFTER FUNC, root -> left: maxz " << tree.left -> maxZ << endl;
-
-  cout << "AFTER FUNC, root -> left -> left: minx " << tree.left -> left -> minX << endl;
-  cout << "AFTER FUNC, root -> left -> left: maxx " << tree.left -> left -> maxX << endl;
-  cout << "AFTER FUNC, root -> left -> left: miny " << tree.left -> left -> minY << endl;
-  cout << "AFTER FUNC, root -> left -> left: maxy " << tree.left -> left -> maxY << endl;
-  cout << "AFTER FUNC, root -> left -> left: minz " << tree.left -> left -> minZ << endl;
-  cout << "AFTER FUNC, root -> left -> left: maxz " << tree.left -> left -> maxZ << endl;
-
-  cout << "AFTER FUNC, root -> left -> right: minx " << tree.left -> right -> minX << endl;
-  cout << "AFTER FUNC, root -> left -> right: maxx " << tree.left -> right -> maxX << endl;
-  cout << "AFTER FUNC, root -> left -> right: miny " << tree.left -> right -> minY << endl;
-  cout << "AFTER FUNC, root -> left -> right: maxy " << tree.left -> right -> maxY << endl;
-  cout << "AFTER FUNC, root -> left -> right: minz " << tree.left -> right -> minZ << endl;
-  cout << "AFTER FUNC, root -> left -> right: maxz " << tree.left -> right -> maxZ << endl;
-
-  cout << "AFTER FUNC, root -> left -> left -> left: minx " << tree.left -> left -> left -> minX << endl;
-  cout << "AFTER FUNC, root -> left -> left -> left: maxx " << tree.left -> left -> left -> maxX << endl;
-  cout << "AFTER FUNC, root -> left -> left -> left: miny " << tree.left -> left -> left -> minY << endl;
-  cout << "AFTER FUNC, root -> left -> left -> left: maxy " << tree.left -> left -> left -> maxY << endl;
-  cout << "AFTER FUNC, root -> left -> left -> left: minz " << tree.left -> left -> left -> minZ << endl;
-  cout << "AFTER FUNC, root -> left -> left -> left: maxz " << tree.left -> left -> left -> maxZ << endl;
-
-  
-  Vector3f e1(-30, -20, 0);
-  Vector3f d1(1, 0, 0);
-  ray r1(e1, d1);
-  hitResult result;
-  if(rayTraverse(&r1, &tree, &result)) {
-    cout << "RAY HIT" << endl;
-    cout << result.point << endl << endl;
-  }
-  else {
-    cout << "NO HIT" << endl;
-  }*/
 
    /* cout << "r hits sph0: " << r1.intersect(spheres[0], &result) << endl;
 
@@ -617,7 +530,7 @@ material mm;
 
 	// General Purpose - renders input file
 
-	int size = 1000;
+	/*int size = 1000;
 
 	char* inFile = "input.txt";
 	clock_t startTime;
@@ -653,7 +566,7 @@ material mm;
 	duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
 	cout << "DONE" << endl;
 	cout << "TIME: " << duration << " seconds" << endl;
-
+*/
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	return 0;
