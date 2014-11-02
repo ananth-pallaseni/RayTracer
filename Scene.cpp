@@ -532,7 +532,8 @@ int main(int argc, char* argv[])
     test = *(test.left);
     cout << "LEVEL" << endl;
   }
-  cout << ((*sphere) (test.obj))->center << endl << endl;
+  object obj = test.obj;
+  cout << ( (sphere*) obj )->center << endl << endl;
 
 
 
