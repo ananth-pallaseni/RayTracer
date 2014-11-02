@@ -157,6 +157,8 @@ struct boundingBox
 			tzMax = (minZ - ze) / zd;
 		}
 		cout << "Txmin : " << txMin << "   TxMax: " << txMax << endl;
+		cout << "Txyin : " << tyMin << "   TyMax: " << tyMax << endl;
+		cout << "Tzmin : " << tzMin << "   TzMax: " << tzMax << endl;
 
 		bool check = setIntersect(txMin, txMax, tyMin, tyMax, tzMin, tzMax);
 		cout << "r hits box: " << check << endl;
