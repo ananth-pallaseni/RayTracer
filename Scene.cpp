@@ -471,6 +471,32 @@ bool rayTraverse(ray* r, boundingBox* b, hitResult* result) {
 int main(int argc, char* argv[])
 {
 
+  material mm;
+  Matrix4f I;
+    I << 1, 0, 0, 0,
+     0, 1, 0, 0,
+     0, 0, 1, 0,
+     0, 0, 0, 1;
+
+  sphere s1(0, 0, 0, 20, mm, I, I);
+  sphere s2(50, 50, 50, 20, mm, I, I);
+  sphere s3(100, 100, 100, 20, mm, I, I);
+  sphere s4(150, 150, 150, 20, mm, I, I);
+  sphere s5(200, 200, 200, 20, mm, I, I);
+  boundingBox b1(s1);
+  boundingBox b2(s2);
+  boundingBox b3(s3);
+  boundingBox b4(s4);
+  boundingBox b5(s5);
+  boundingBox b11(b1, b2);
+  boundingBox b22(b3, b4);
+  boundingBox b33(b11, b22);
+  boundingBox b44(b33, b5);
+
+  cout << "B1 MINX: " b44.left->left->left->minX << endl;
+
+
+
   /*material mm;
   Matrix4f I;
     I << 1, 0, 0, 0,
@@ -557,42 +583,42 @@ int main(int argc, char* argv[])
 
 	// General Purpose - renders input file
 
-	int size = 1000;
+	// int size = 1000;
 
-	char* inFile = "input.txt";
-	clock_t startTime;
-	double duration;
-	startTime = clock();
+	// char* inFile = "input.txt";
+	// clock_t startTime;
+	// double duration;
+	// startTime = clock();
 
-	parseArgs(inFile);
-  cout << "PARSED INPUTS, Adding Boxes";
+	// parseArgs(inFile);
+ //  cout << "PARSED INPUTS, Adding Boxes" << endl;
 
-  for(int i = 0; i < spheres.size() ; i++) {
-    boundingBox b(&spheres[i]);
-    boxes.push_back(b);
-  }
+ //  for(int i = 0; i < spheres.size() ; i++) {
+ //    boundingBox b(&spheres[i]);
+ //    boxes.push_back(b);
+ //  }
 
-  for(int i = 0; i < triangles.size() ; i++) {
-    boundingBox b(&triangles[i]);
-    boxes.push_back(b);
-  }
+ //  for(int i = 0; i < triangles.size() ; i++) {
+ //    boundingBox b(&triangles[i]);
+ //    boxes.push_back(b);
+ //  }
 
-  cout << "ADDED BOXES, BEGINNING TRACE" << endl;
+ //  cout << "ADDED BOXES, BEGINNING TRACE" << endl;
 
-	Sampler s(size, size, LL, LR, UL, UR);
-	Canvas c(size, size);
-	RayTracer rt(eye, spheres, triangles, pointLights, directionalLights, ambientLights);
-	for(int i = 0 ; i < size; i++) {
-		for(int j = 0 ; j < size; j++) {
-			c.addPixel(rt.trace(s.getSample()));
+	// Sampler s(size, size, LL, LR, UL, UR);
+	// Canvas c(size, size);
+	// RayTracer rt(eye, spheres, triangles, pointLights, directionalLights, ambientLights);
+	// for(int i = 0 ; i < size; i++) {
+	// 	for(int j = 0 ; j < size; j++) {
+	// 		c.addPixel(rt.trace(s.getSample()));
 			
-		}
-	}
-	c.encode("image.png");
+	// 	}
+	// }
+	// c.encode("image.png");
 
-	duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
-	cout << "DONE" << endl;
-	cout << "TIME: " << duration << " seconds" << endl;
+	// duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
+	// cout << "DONE" << endl;
+	// cout << "TIME: " << duration << " seconds" << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

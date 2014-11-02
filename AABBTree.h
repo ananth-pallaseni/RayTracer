@@ -12,24 +12,6 @@ const int AABB_BOX = 0;
 const int AABB_SPHERE = 1;
 const int AABB_TRI = 2;
 
-struct box
-{
-	sphere* sph;
-	triangle* tri;
-	int type;
-
-	box(sphere* s) {
-		type = AABB_SPHERE;
-		sph = s;
-	}
-
-	box(triangle* t) {
-		type = AABB_TRI;
-		tri = t;
-	}
-
-
-};
 
 struct boundingBox
 {
@@ -183,24 +165,6 @@ struct boundingBox
 	}
 
 
-};
-
-struct aabbNode
-{
-	float minX, maxX, minY, maxY, minZ, maxZ;
-	object* obj;
-	bool leaf;
-
-
-	aabbNode(object* o) {
-		obj = o;
-		leaf = true;
-
-	}
-
-	object* contains() {
-		return obj;
-	}
 };
 
 
