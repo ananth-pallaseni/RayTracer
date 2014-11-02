@@ -465,27 +465,6 @@ struct ray
 		return false;
 	}
 
-	// OLD
-	bool intersect(sphere sph, float* t, bool temptemp) {
-		// Check Discriminant:
-		// A = sMinusE . sMinusE
-		float A = sMinusE.dot(sMinusE);
-		// B = 2 * sMinusE . (e - c)
-		float B = 2 * sMinusE .dot(( e - sph.center ));
-		// C = (e - c) . (e - c) - r^2
-		float C = ( e - sph.center ).dot( ( e - sph.center ) ) - ( sph.radius * sph.radius );
-		float discriminant = B*B - 4*A*C;
-		if (discriminant >= 0) {
-			if(B < 0) {
-				*t = (-B - sqrt(discriminant)) / (2 * A);
-			}
-			else {
-				*t = (-B + sqrt(discriminant)) / (2 * A);
-			}
-			return true;
-		}
-		return false;
-	}
 
 	bool intersect(sphere sph) {
 		// Check Discriminant:
@@ -525,44 +504,6 @@ struct ray
 		return false;
 	}
 
-	// OLD, doesnt work
-	/*bool intersect(triangle tri, Vector3f* point) {
-		Matrix3f A;
-		A(0, 0) = tri.a(0) - tri.b(0);
-		A(0, 1) = tri.a(0) - tri.c(0);
-		A(0, 2) = sMinusE(0);
-		A(1, 0) = tri.a(1) - tri.b(1);
-		A(1, 1) = tri.a(1) - tri.c(1);
-		A(1, 2) = sMinusE(1);
-		A(2, 0) = tri.a(2) - tri.b(2);
-		A(2, 1) = tri.a(2) - tri.c(2);
-		A(2, 2) = sMinusE(2);
-		// Setri up matririx B:
-		Vector3f B;
-		B(0) = tri.a(0) - e(0);
-		B(1) = tri.a(1) - e(1);
-		B(2) = tri.a(2) - e(2);
-		// Store these vals to save computation:
-		float eihf = A(1, 1) * A(2, 2) - A(1, 2) * A(2, 1);
-		float gfdi = A(0, 2) * A(2, 1) - A(0, 1) * A(2, 2);
-		float dheg = A(0, 1) * A(1, 2) - A(1, 1) * A(0, 2);
-		float akjb = A(0, 0) * B(1) - B(0) * A(1, 0);
-		float jcal = B(0) * A(2, 0) - A(0, 0) * B(2);
-		float blkc = A(1, 0) * B(2) - B(1) * A(2, 0);
-		// By Cramers Rule:
-		float M = A(0, 0) * eihf + A(1, 0) * gfdi + A(2, 0) * dheg;
-		float gamma = (A(2, 2) * akjb + A(1, 2) * jcal + A(0, 2) * blkc) / M;
-		if (gamma < 0 || gamma > 1) {
-			return false;
-		}
-		float beta = (B(0) * eihf + B(1) * gfdi + B(2) * dheg) / M;
-		if (beta < 0 || beta > 1 - gamma) {
-			return false;
-		}
-		float t = (A(2, 1) * akjb + A(1, 1) * jcal + A(0, 1) * blkc) / M;
-		*point = p(t);
-		return true;
-	}*/
 
 	bool intersect(triangle tri, Vector3f* point) {
 		// check if it intersects a plane:
@@ -599,43 +540,41 @@ struct ray
 		return true;
 	}
 
-	// OLD, doesnt work
-	/*bool intersect(triangle tri, float* t) {
-		Matrix3f A;
-		A(0, 0) = tri.a(0) - tri.b(0);
-		A(0, 1) = tri.a(0) - tri.c(0);
-		A(0, 2) = sMinusE(0);
-		A(1, 0) = tri.a(1) - tri.b(1);
-		A(1, 1) = tri.a(1) - tri.c(1);
-		A(1, 2) = sMinusE(1);
-		A(2, 0) = tri.a(2) - tri.b(2);
-		A(2, 1) = tri.a(2) - tri.c(2);
-		A(2, 2) = sMinusE(2);
-		// Setri up matririx B:
-		Vector3f B;
-		B(0) = tri.a(0) - e(0);
-		B(1) = tri.a(1) - e(1);
-		B(2) = tri.a(2) - e(2);
-		// Store these vals to save computation:
-		float eihf = A(1, 1) * A(2, 2) - A(1, 2) * A(2, 1);
-		float gfdi = A(0, 2) * A(2, 1) - A(0, 1) * A(2, 2);
-		float dheg = A(0, 1) * A(1, 2) - A(1, 1) * A(0, 2);
-		float akjb = A(0, 0) * B(1) - B(0) * A(1, 0);
-		float jcal = B(0) * A(2, 0) - A(0, 0) * B(2);
-		float blkc = A(1, 0) * B(2) - B(1) * A(2, 0);
-		// By Cramers Rule:
-		float M = A(0, 0) * eihf + A(1, 0) * gfdi + A(2, 0) * dheg;
-		float gamma = (A(2, 2) * akjb + A(1, 2) * jcal + A(0, 2) * blkc) / M;
-		if (gamma < 0 || gamma > 1) {
+	bool intersect(triangle tri, hitResult* result) {
+		// check if it intersects a plane:
+		Vector3f side1 = tri.a - tri.b;
+		Vector3f side2 = tri.a - tri.c;
+		Vector3f planeNormal = side1.cross(side2);
+		planeNormal = planeNormal / planeNormal.norm();
+		float numerator = planeNormal.dot(tri.a - e);
+		float denominator = planeNormal.dot(sMinusE);
+		if(denominator == 0) {
+			// ray is parallel to plane:
 			return false;
 		}
-		float beta = (B(0) * eihf + B(1) * gfdi + B(2) * dheg) / M;
-		if (beta < 0 || beta > 1 - gamma) {
+		float r1 = numerator / denominator;
+		if(r1 < EPSILON) {
+			// means ray does not intersect plane:
 			return false;
 		}
-		*t = (A(2, 1) * akjb + A(1, 1) * jcal + A(0, 1) * blkc) / M;
+		Vector3f pointToTest = p(r1);
+
+		// Now check if the point lies within the triangle:
+		Vector3f u = tri.b - tri.a;
+		Vector3f v = tri.c - tri.a;
+		Vector3f w = pointToTest - tri.a;
+		float denom1 = u.dot(v) * u.dot(v) - u.dot(u) * v.dot(v);
+		float s1 = u.dot(v) * w.dot(v) - v.dot(v) * w.dot(u);
+		s1 = s1 / denom1;
+		float t1 = u.dot(v) * w.dot(u) - u.dot(u) * w.dot(v);
+		t1 = t1 / denom1;
+		if(s1 < 0 || t1 < 0 || s1 + t1 > 1) {
+			return false;
+		}
+		result->point = pointToTest;
+		result->t = r1;
 		return true;
-	}*/
+	}
 
 	bool intersect(triangle tri, float* t) {
 		// check if it intersects a plane:
