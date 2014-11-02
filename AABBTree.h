@@ -189,18 +189,17 @@ struct boundingBox
 		cout << "Tzmin : " << tzMin << "   TzMax: " << tzMax << endl;
 		
 
-		bool check = setIntersect(txMin, txMax, tyMin, tyMax, tzMin, tzMax);
-		if(leaf && check) {
+		if(leaf) {
 			switch (type) {
 				case AABB_SPHERE:
-					r->intersect( *( (sphere*) obj ), result);
+					return r->intersect( *( (sphere*) obj ), result);
 
 				case AABB_TRI:
-					r->intersect( *( (triangle*) obj ), result);
+					return r->intersect( *( (triangle*) obj ), result);
 			}
 		}
 		else {
-			return check;
+			return setIntersect(txMin, txMax, tyMin, tyMax, tzMin, tzMax);;
 		}
 	}
 
