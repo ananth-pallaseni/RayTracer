@@ -463,7 +463,7 @@ bool rayTraverse(ray* r, boundingBox* b, hitResult* result) {
     bool c1 = b->left->hit(r, &r1);
     bool c2 = b->right->hit(r, &r2);
     if(c1 && c2) {
-      if(r1->t < r2 -> t) {
+      if(r1.t < r2.t) {
         result = &r1;
         return true;
       }
