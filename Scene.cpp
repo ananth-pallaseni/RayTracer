@@ -358,6 +358,8 @@ int main(int argc, char* argv[])
 
   cout << "SPHERE RADIUS FROM B1: " << ((sphere*) b1.obj)->radius << endl;
   cout << "TRI A FROM B2: " << ((triangle*) b1.obj)->a << endl;
+  cout << "B3 LEFT: " << b3.left->volume << endl;
+  cout << "B3 RIGHT: " << b3.right->volume << endl;
 
 
 
