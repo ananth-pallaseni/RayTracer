@@ -633,7 +633,7 @@ material mm;
   }
 
   for(int i = 0; i < triangles.size() ; i++) {
-    boundingBox b(triangles[i]);
+    boundingBox b(&triangles[i]);
     boxes.push_back(b);
   }
 
