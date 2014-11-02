@@ -325,54 +325,23 @@ void parseArgs(char* filename) {
 int main(int argc, char* argv[])
 {
 
-/*	material mm;
-	Matrix4f matr;
-matr << 1, 0, 0, 0,
-		0, 1, 0, 0, 
-		0, 0, 1, 0,
-		0, 0, 0, 1;
+  sphere sph(0, 0, 0, 20);
+  triangle tri(0, 18, 0, 0, 50, 5, 10, 30, 50);
+  boundingBox b1(&sph);
+  boundingBox b2(&tri);
+  cout << "B1: " << endl << "minX: " << b1.minX << "    maxX: " << b1.maxX << endl;
+  cout << "minY: " << b1.minY << "    maxY: " << b1.maxY << endl;
+  cout << "minZ: " << b1.minZ << "    maxZ: " << b1.maxZ << endl << endl;
 
-	char* name = "scene12.obj";
-	parseObj(name, mm, matr);*/
-
-  /*material mm;
-  Matrix4f matr;
-  matr << 1, 0, 0, 0,
-  		0, 1, 0, 0, 
-  		0, 0, 1, 0,
-  		0, 0, 0, 1;
-  triangle tri(0, -95, 0, -100, -95, 100, 100, -95, 100, mm, matr);
-  Vector3f eye(0, 75, 500);
-  Vector3f point(50, -95, 50);
-  ray r(eye, point);
-  Vector3f n = triangleNormal11(point, tri, r);
-
-  cout << "NORMAL: " << n(0) << ", " << n(1) << ", " << n(2) << endl;*/
-
-  /*Vector3f eye(0, 0, 150);
-  Vector3f point(0, 0, 0);
-  // ray should be in 0, 0, -1 direction
-  ray r(eye, point);
-  Vector3f p;
-  float t;
-  bool check = intersect22(tri, &p, r.sMinusE, r.e);
-  bool check2 = r.intersect(tri, &t);
-  if(check) {
-  	cout << "POINT: " << endl << p << endl;
-  	cout << "NORMAL: " << endl << triangleNormal11(p, tri, r) << endl;
-  	cout << "T: " << t << endl;
-  }
-  else {
-  	cout << "NO INTERSECTION" << endl;
-  }*/
-
-
+  cout << "B2: " << endl << "minX: " << b2.minX << "    maxX: " << b2.maxX << endl;
+  cout << "minY: " << b2.minY << "    maxY: " << b2.maxY << endl;
+  cout << "minZ: " << b2.minZ << "    maxZ: " << b2.maxZ << endl << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// General Purpose - renders input file
 
-	int size = 1000;
+	/*int size = 1000;
 
 	char* inFile = "input.txt";
 	clock_t startTime;
@@ -380,6 +349,7 @@ matr << 1, 0, 0, 0,
 	startTime = clock();
 
 	parseArgs(inFile);
+  cout << "PARSED INPUTS, STARTING TRACE";
 
 	Sampler s(size, size, LL, LR, UL, UR);
 	Canvas c(size, size);
@@ -394,7 +364,7 @@ matr << 1, 0, 0, 0,
 
 	duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
 	cout << "DONE" << endl;
-	cout << "TIME: " << duration << " seconds" << endl;
+	cout << "TIME: " << duration << " seconds" << endl;*/
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
