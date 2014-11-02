@@ -326,9 +326,13 @@ int main(int argc, char* argv[])
 {
 
   material mm;
-  Matrix4f mmm;
-  sphere sph(0, 0, 0, 20, mm, mmm, mmm);
-  triangle tri(0, 18, 0, 0, 50, 5, 10, 30, 50, mm, mmm);
+  Matrix4f I;
+    I << 1, 0, 0, 0,
+     0, 1, 0, 0,
+     0, 0, 1, 0,
+     0, 0, 0, 1;
+  sphere sph(0, 0, 0, 20, mm, I, I);
+  triangle tri(0, 18, 0, 0, 50, 5, 10, 30, 50, mm, I);
   boundingBox b1(&sph);
   boundingBox b2(&tri);
   cout << "B1: " << endl << "minX: " << b1.minX << "    maxX: " << b1.maxX << endl;
