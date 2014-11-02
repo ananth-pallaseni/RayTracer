@@ -1,6 +1,6 @@
 CC = g++
 RM = /bin/rm -f
-CFLAGS = -g
+CFLAGS = -g -o2
 
 
 all: main
