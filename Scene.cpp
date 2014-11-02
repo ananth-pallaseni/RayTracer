@@ -392,9 +392,13 @@ boundingBox distill(vector<boundingBox> boxIn) {
   }
 
   for(int i = 0; i < length; i++) {
+    cout << "new i: " << i << endl;
     if(active[i]) {
+      cout << "i was active" << endl;
       for(int j = i+1; j < length; j++) {
+        cout << "new j: " << j << endl;
         if(active[j]) {
+          cout << "j was active" << endl;
           cout << "joining pair" << endl;
           boundingBox b(&boxIn[i], &boxIn[j]);
           distilledBox.push_back(b);
@@ -402,6 +406,7 @@ boundingBox distill(vector<boundingBox> boxIn) {
         }
       }
       if(i == length-1) {
+        cout << "i was last" << endl;
         distilledBox.push_back(boxIn[i]);
       }
       active[i] = false;
