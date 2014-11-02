@@ -373,7 +373,7 @@ void traverse(boundingBox* root) {
   }
   else {
     cout << "T" << endl;
-    traverse(root.left);
+    traverse(root->left);
   }
 }
 
