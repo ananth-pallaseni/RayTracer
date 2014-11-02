@@ -508,9 +508,14 @@ int main(int argc, char* argv[])
 
   for(int i = 0; i < 5; i++) {
     boundingBox b(&spheres[i]);
+    cout << "BOX " << i << endl;
+    cout << "minx: " << b.minX << " maxx: " << b.maxX << endl;
+    cout << "minY: " << b.minY << " maxy: " << b.maxY << endl;
+    cout << "minZ: " << b.minZ << " maxZ: " << b.maxZ << endl;
     boxes.push_back(b);
   }
 
+  cout << endl;
 
 
   boundingBox tree = distill(boxes);
