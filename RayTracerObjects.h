@@ -429,13 +429,13 @@ struct ray
 				return false;
 			}
 
-			// REMOVE THIS:
 			result->t = t;
 
 			eObj(3) = 1;
 			Vector4f pointInWorldSpace = inv * ( eObj + t * sMinusEObj); // take point to world space
 
 			(result->point)(0) = pointInWorldSpace(0); // transform back into world coordinates
+			cout << "SPHERE INT X: " << (result->point)(0) << endl;
 			(result->point)(1) = pointInWorldSpace(1);
 			(result->point)(2) = pointInWorldSpace(2);
 
