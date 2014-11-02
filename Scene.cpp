@@ -471,47 +471,19 @@ bool rayTraverse(ray* r, boundingBox* b, hitResult* result) {
 int main(int argc, char* argv[])
 {
 
-  material mm;
+  /*material mm;
   Matrix4f I;
     I << 1, 0, 0, 0,
      0, 1, 0, 0,
      0, 0, 1, 0,
      0, 0, 0, 1;
-  sphere sph(0, 0, 0, 20, mm, I, I);
-  triangle tri(0, 18, 0, 0, 50, 5, 10, 30, 50, mm, I);
-  /*boundingBox b1(&sph);
-  boundingBox b2(&tri);
-  cout << "B1: " << endl << "minX: " << b1.minX << "    maxX: " << b1.maxX << endl;
-  cout << "minY: " << b1.minY << "    maxY: " << b1.maxY << endl;
-  cout << "minZ: " << b1.minZ << "    maxZ: " << b1.maxZ << endl << "VOL: " << b1.volume << endl << endl;
-
-  cout << "B2: " << endl << "minX: " << b2.minX << "    maxX: " << b2.maxX << endl;
-  cout << "minY: " << b2.minY << "    maxY: " << b2.maxY << endl;
-  cout << "minZ: " << b2.minZ << "    maxZ: " << b2.maxZ << endl << "VOL: " << b2.volume << endl << endl;
-
-  Vector3f e(-1, -1, -1);
-  Vector3f d(1, 1, 1);
-  ray r(e, d);
-  
-  boundingBox b3(&b1, &b2);
-  cout << "B1: " << endl << "minX: " << b3.minX << "    maxX: " << b3.maxX << endl;
-  cout << "minY: " << b3.minY << "    maxY: " << b3.maxY << endl;
-  cout << "minZ: " << b3.minZ << "    maxZ: " << b3.maxZ << endl << "VOL: " << b3.volume << endl << endl;
-
-
-  cout << "SPHERE RADIUS FROM B1: " << ((sphere*) b1.obj)->radius << endl;
-  cout << "TRI A FROM B2: " << ((triangle*) b1.obj)->a << endl;
-  cout << "B3 LEFT: " << b3.left->volume << endl;
-  cout << "B3 RIGHT: " << b3.right->volume << endl;*/
-
-
   
   for(int i = 0; i < 5; i++) {
     sphere sph(i * 50, i * 50, i*50, 20, mm, I, I);
     spheres.push_back(sph);
-  }
+  }*/
 
-  for(int i = 0; i < 5; i++) {
+  /*for(int i = 0; i < 5; i++) {
     boundingBox b(&spheres[i]);
     cout << "BOX " << i << endl;
     cout << "minx: " << b.minX << " maxx: " << b.maxX << endl;
@@ -570,7 +542,7 @@ int main(int argc, char* argv[])
   }
   else {
     cout << "NO HIT" << endl;
-  }
+  }*/
 
    /* cout << "r hits sph0: " << r1.intersect(spheres[0], &result) << endl;
 
@@ -593,7 +565,19 @@ int main(int argc, char* argv[])
 	startTime = clock();
 
 	parseArgs(inFile);
-  cout << "PARSED INPUTS, STARTING TRACE";
+  cout << "PARSED INPUTS, Adding Boxes";
+
+  for(int i = 0; i < spheres.size() ; i++) {
+    boundingBox b(&spheres[i]);
+    boxes.push_back(b);
+  }
+
+  for(int i = 0; i < triangles.size() ; i++) {
+    boundingBox b(&triangles[i]);
+    boxes.push_back(b);
+  }
+
+  cout << "ADDED BOXES, BEGINNING TRACE" << endl;
 
 	Sampler s(size, size, LL, LR, UL, UR);
 	Canvas c(size, size);
@@ -608,8 +592,8 @@ int main(int argc, char* argv[])
 
 	duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
 	cout << "DONE" << endl;
-	cout << "TIME: " << duration << " seconds" << endl;*/
-
+	cout << "TIME: " << duration << " seconds" << endl;
+*/
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	return 0;

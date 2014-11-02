@@ -48,6 +48,16 @@ Vector3f sphereNormal(Vector3f pointOnShape, sphere shape) {
 
 // Flat Shading:
 Vector3f triangleNormal(Vector3f pointOnShape, triangle shape, ray r) {
+	/*Vector3f side1 = shape.a - shape.b;
+	Vector3f side2 = shape.a - shape.c;
+	Vector3f normal(side1(1) * side2(2) - side1(2) * side2(1), 
+					side1(2) * side2(0) - side1(0) * side2(2),
+					side1(0) * side2(1) - side1(1) * side2(0));
+	Vector3f unitNormal = unit(normal);
+	if(unit(r.sMinusE).dot(unitNormal) < 0) {
+		unitNormal = -unitNormal;
+	}
+	return unitNormal;*/
 	Vector3f side1 = shape.a - shape.b;
 	Vector3f side2 = shape.a - shape.c;
 	Vector3f planeNormal = side1.cross(side2);
@@ -86,9 +96,10 @@ Vector3f specular(Vector3f n, Vector3f l, Vector3f e, Vector3f k_specular, Vecto
 }
 
 // Creates a shadow ray, and compares it with all objects 
+//bool RayTracer::shadowRay(Vector3f point, Vector3f lightOrigin) {
 bool RayTracer::shadowRay(ray sRay) {
 	// ray from point -> lightOrigin
-	// ray r(point, lightOrigin);
+	//ray r(point, lightOrigin);
 	float t;
 	for(int i = 0; i < numSpheres; i++) {
 		if(sRay.intersect(spheres[i])) {
@@ -115,8 +126,35 @@ bool RayTracer::directionalShadowRay(Vector3f point, Vector3f directionToLight) 
 	return shadowRay(r);
 }	
 
+Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray incoming, Vector3f k_refl, int depth) {
+	// Reflect ray about normal:
+	ray refl(point, incoming.sMinusE - 2 * normalAtPoint * (incoming.sMinusE.dot(normalAtPoint)), true);
+	color cTemp = traceRay(refl, depth + 1, point);
+	Vector3f c(cTemp.r * k_refl(0), cTemp.g * k_refl(1), cTemp.b * k_refl(2));
+	/*if(isTriangle) {
+		for(int i = 0; i < 3; i++) {
+			if(k_refl(i) == 0) {
+				k_refl(i) = 1;
+			}
+			else if(k_refl(i) == 1) {
+				k_refl(i) = 0;
+			}
+		}
+		c = Vector3f(cTemp.r * (1 - k_refl(0)), cTemp.g * (1 - k_refl(1)), cTemp.b * (1 - k_refl(2)) );
+	}
+	else{
+		c = Vector3f(cTemp.r * k_refl(0), cTemp.g * k_refl(1), cTemp.b * k_refl(2) );	
+	}*/
+	c = c / 255; // as color rgb values are (0->255)
+	
+	cout << "DEPTH: " << depth << endl;
 
-Vector3f RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, material mat) {
+	return c;
+}
+
+
+
+color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object shape, int depth, ray incoming) {
 	Vector3f rgb(0, 0, 0);
 	for(int i = 0; i < numPointLights; i++) {
 		pointLight pl = pointLights[i];
@@ -124,10 +162,13 @@ Vector3f RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, materia
 			// lightDirection is unit vector pointing TO light
 			Vector3f lightDirection = unit(pl.point - pointOnShape);
 	
-			rgb = rgb + diffuse(normalAtPoint, lightDirection, mat.diff, pl.l());
-			rgb = rgb + specular(normalAtPoint, lightDirection, incoming.sMinusE, mat.spec, pl.l(), shape.mat.phongExp);
+			rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, pl.l());
+			rgb = rgb + specular(normalAtPoint, lightDirection, incoming.sMinusE, shape.mat.spec, pl.l(), shape.mat.phongExp);
 		}
-		rgb = rgb + ambient(pl.l(), mat.amb);
+		if(depth < DEPTH_MAX && !(shape.mat.refl(0) ==  0 && shape.mat.refl(1) == 0 && shape.mat.refl(2) == 0)) {
+			rgb = rgb + reflectionRay(pointOnShape, normalAtPoint, incoming, shape.mat.refl, depth);
+		}
+		rgb = rgb + ambient(pl.l(), shape.mat.amb);
 	}
 
 	for(int i = 0; i < numDirectionalLights; i++) {
@@ -136,59 +177,52 @@ Vector3f RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, materia
 			// lightDirection is unit vector pointing TO light
 			Vector3f lightDirection = -unit(dl.direction);
 
-			rgb = rgb + diffuse(normalAtPoint, lightDirection, mat.diff, dl.l());
-			rgb = rgb + specular(normalAtPoint, lightDirection, incoming.sMinusE, mat.spec, dl.l(), mat.phongExp);
+			rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, dl.l());
+			rgb = rgb + specular(normalAtPoint, lightDirection, incoming.sMinusE, shape.mat.spec, dl.l(), shape.mat.phongExp);
 		}
-		rgb = rgb + ambient(dl.l(), mat.amb);
+		if(depth < DEPTH_MAX && !(shape.mat.refl(0) ==  0 && shape.mat.refl(1) == 0 && shape.mat.refl(2) == 0)) {
+			rgb = rgb + reflectionRay(pointOnShape, normalAtPoint, incoming, shape.mat.refl, depth);
+		}
+		rgb = rgb + ambient(dl.l(), shape.mat.amb);
 	}
 
 	for(int i = 0; i < numAmbientLights; i++) {
 		ambientLight al = ambientLights[i];
-		rgb = rgb + ambient(al.l(), mat.amb);
+		rgb = rgb + ambient(al.l(), shape.mat.amb);
 	}
 
 	rgb = clamp(rgb);
-	return rgb;
+	return color(rgb);
 }
 
-
-Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray incoming, Vector3f k_refl, int depth) {
-	// Reflect ray about normal:
-	ray refl(point, incoming.sMinusE - 2 * normalAtPoint * (incoming.sMinusE.dot(normalAtPoint)), true);
-	Vector3f rgb(0, 0, 0);
-	while(depth > 0) {
-		depth--;
-		hitResult result;
-		if(traceRay(refl, point, &result)) {
-			rgb = rgb + shade(result.point, result.point, result.mat);
-			if(!(result.mat.refl(0) == 0 && result.mat.refl(1) == 0 && result.mat.refl(2) == 0)) {
-				rgb = rgb + reflectionRay(result.point, result.normal, refl, result.mat.refl, depth);
-			}
-		}
-	}
-	
-
-	return vMul(k_refl, rgb);
-}
 
 // Simple ray trace function, no shadows or anything fancy
-bool RayTracer::traceRay(ray r, Vector3f source, hitResult* result) {
+color RayTracer::traceRay(ray r, int depth, Vector3f source) {
 	Vector3f point(std::numeric_limits<float>::max(), std::numeric_limits<float>::max(), std::numeric_limits<float>::max()); // init to max value
 	Vector3f temp;
 	bool hit = false;
+	////// new
 	Vector3f normal;
 	object shape;
+	////// endnew
+	
+	// REMOVE THIS:
+	float tempT;
 
 	// Check all Spheres
 	for(int i = 0; i < numSpheres; i++) {
 		if(r.intersect(spheres[i], &temp, &tempT)) {
 			hit = true;
+			//point = closest(point, temp); OLD
+			///////////////////////new
 			temp = closest(point, temp, source);
 			if(point != temp) {
 				normal = sphereNormal(temp, spheres[i]);
 				shape = spheres[i];
 				point = temp;
 			}
+			
+			//////////////////////endnew
 		}
 	}
 
@@ -196,36 +230,29 @@ bool RayTracer::traceRay(ray r, Vector3f source, hitResult* result) {
 	for(int i = 0; i < numTriangles; i++) {
 		if(r.intersect(triangles[i], &temp)) {
 			hit = true;
+			//point = closest(point, temp); OLD
+			///////////////////////new
 			temp = closest(point, temp, source);
 			if(point != temp) {
 				normal = triangleNormal(temp, triangles[i], r);
 				shape = triangles[i];
 				point = temp;
 			}
+			
+			//////////////////////endnew
 		}
 	}
 
 	if(hit) {
-		result->point = point;
-		result->normal = normal;
-		result->mat = shape.mat;
-		return true;
+		return shade(point, normal, shape, depth, r);
 	}
 	else {
-		return false; 
+		return color(); // BLACK
 	}
 }
 
 color RayTracer::trace(Vector3f s) {
-	color rgb(0, 0, 0);
 	ray r = createRay(s);
-	hitResult result;
-	if( traceRay(r, 0, e, &result)) {
-		rgb = rgb + shade(result.point, result.point, result.mat);
-		if(!(result.mat.refl(0) == 0 && result.mat.refl(1) == 0 && result.mat.refl(2) == 0)) {
-			rgb = rgb + reflectionRay(result.point, result.normal, refl, result.mat.refl, DEPTH_MAX);
-		}
-	}
 	return traceRay(r, 0, e);
 }
 

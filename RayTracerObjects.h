@@ -32,11 +32,7 @@ struct camera {
 	}
 };
 
-struct hitResult
-{
-	Vector3f point;
-	float t;
-};
+
 
 struct transform
 {
@@ -249,6 +245,14 @@ struct material
 		phongExp = phongExponent;
 	}
 
+};
+
+struct hitResult
+{
+	Vector3f point;
+	Vector3f normal;
+	float t;
+	material mat;
 };
 
 // Objects : //////////////////////////////////////////////////////////////////////////////
