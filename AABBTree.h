@@ -41,6 +41,8 @@ struct boundingBox
 		volume = (maxX - minX) * (maxY - minY) * (maxZ - minZ);
 	}
 
+	boundingBox() {};
+
 	boundingBox(boundingBox* b1, boundingBox* b2) {
 		leaf = false;
 		minX = min(b1->minX, b2->minX);
