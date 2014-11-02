@@ -325,15 +325,15 @@ void parseArgs(char* filename) {
 
 
 
-boundingBox distill(vector<boundingBox> boxIn) {
-  vector<boundingBox> distilledBoxes;
+boundingBox distill(vector<boundingBox*> boxIn) {
+  vector<boundingBox*> distilledBoxes;
   int length = boxIn.size();
 
   cout << endl << "NEW ROUND, size: " << length << endl;
   if(length == 1) {
     cout << "LENGTH IS 1, RETURNING" << endl;
-    cout << "Size: " << boxIn[0].volume << "   minX: " << boxIn[0].minX << endl;
-    return boxIn[0];
+    cout << "Size: " << *boxIn[0].volume << "   minX: " << *boxIn[0].minX << endl;
+    return *boxIn[0];
   }
 
   bool active[length];
@@ -370,7 +370,7 @@ boundingBox distill(vector<boundingBox> boxIn) {
         best = boxIn[i];
       }
       
-      distilledBoxes.push_back(best);
+      distilledBoxes.push_back(&best);
     }
 
   }
