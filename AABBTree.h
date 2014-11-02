@@ -1,3 +1,6 @@
+#ifndef AABBTREE_H
+#define AABBTREE_H
+
 #include <iostream>
 #include "Eigen/Dense"
 #include <cmath>
@@ -199,3 +202,6 @@ struct aabbNode
 		return obj;
 	}
 };
+
+
+#endif /* AABBTREE_H */

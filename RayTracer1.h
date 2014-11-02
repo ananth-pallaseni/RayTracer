@@ -1,3 +1,6 @@
+#ifndef RAYTRACER_H
+#define RAYTRACER_H
+
 #include <fstream>
 #include <string>
 
@@ -44,4 +47,6 @@ public:
 		numDirectionalLights = directionalLights.size(); 
 		numAmbientLights = ambientLights.size();
 	}
-}
+};
+
+#endif /* RAYTRACER_H */
