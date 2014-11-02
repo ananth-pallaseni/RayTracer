@@ -148,7 +148,7 @@ Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray in
 	c = c / 255; // as color rgb values are (0->255)
 	
 	cout << "DEPTH: " << depth << endl;
-}
+
 	return c;
 }
 
