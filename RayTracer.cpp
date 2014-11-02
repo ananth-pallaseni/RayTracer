@@ -45,7 +45,7 @@ Vector3f clamp(Vector3f v) {
 Vector3f sphereNormal(Vector3f pointOnShape, sphere shape) {
 	Vector3f normal = pointOnShape - shape.center;
 	Matrix4f m = shape.objToWorld;
-	Matrix4f normTransform;
+	Matrix3f normTransform;
 	normTransform << m(1, 1) * m(2, 2) - m(1, 2) * m(2 , 1), m(1, 2) * m(31) - m(1, 0) * m(2 ,2), m(1,0)*m(2,1) - m(1,1)*m(2,0),
 					 m(0,2)*m(2,1) - m(0,1)*m(2,2), m(0,0)*m(2,2)-m(0,2)*m(2,0), m(0,1)*m(2,0)-m(0,0)*m(2,1),
 					 m(0,1)*m(1,2)-m(0,1)*m(1,1), m(0,2)*m(1,0)-m(0,0)*m(1,2), m(0,0)*m(1,1)-m(0,1)*m(1,0);
