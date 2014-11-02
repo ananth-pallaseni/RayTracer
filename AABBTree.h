@@ -129,9 +129,9 @@ struct boundingBox
 		float zd = r->direction(2);
 
 		float txMin, txMax, tyMin, tyMax, tzMin, tzMax;
-		float ax = 1 / xd; cout << "xd: " << xd << endl;
-		float ay = 1 / yd; cout << "yd: " << yd << endl;
-		float az = 1 / zd; cout << "za: " << zd << endl;
+		float ax = 1 / xd; cout << "xd: " << xd << endl; cout << "ax: " << ax << endl;
+		float ay = 1 / yd; cout << "yd: " << yd << endl; cout << "ay: " << ay << endl;
+		float az = 1 / zd; cout << "za: " << zd << endl; cout << "az: " << az << endl;
 		if(ax >= 0) {
 			txMin = (minX - xe) / xd;
 			txMax = (maxX - xe) / xd;
