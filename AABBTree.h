@@ -144,6 +144,10 @@ struct boundingBox
 		float xd = r->direction(0);
 		float yd = r->direction(1);
 		float zd = r->direction(2);
+		cout << "minX: " << minX << "  XE: " << xe << endl; cout << "maxX: " << maxX << "  XE: " << xe << endl;
+		cout << "MINY: " << minY << "  YE: " << ye << endl; cout << "maxY: " << maxY << "  YE: " << ye << endl;
+		cout << "minZ: " << minZ << "  ZE: " << ze << endl; cout << "maxZ: " << maxZ << "  ZE: " << ze << endl;
+
 
 		float txMin, txMax, tyMin, tyMax, tzMin, tzMax;
 		float ax = 1 / xd; cout << "xd: " << xd << endl; cout << "ax: " << ax << endl;
@@ -158,7 +162,7 @@ struct boundingBox
 			txMax = (minX - xe) * ax;
 		}
 		if(ay >= 0) {
-			tyMin = (minY - ye) * ay; cout << "MINY: " << minY << "  YE: " << ye << endl;
+			tyMin = (minY - ye) * ay; 
 			tyMax = (maxY - ye) * ay;
 		}
 		else {
