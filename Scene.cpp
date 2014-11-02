@@ -518,7 +518,7 @@ int main(int argc, char* argv[])
      ray r(e, d);
      hitResult result;
 
-     cout << "HIT: " << bb.hit(r, &result) << endl;
+     cout << "HIT: " << bb.hit(&r, &result) << endl;
   
   /*for(int i = 0; i < 5; i++) {
     sphere sph(i * 50, i * 50, i*50, 20, mm, I, I);
