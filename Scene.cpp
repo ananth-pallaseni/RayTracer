@@ -557,7 +557,7 @@ int main(int argc, char* argv[])
 
 	// General Purpose - renders input file
 
-	/*int size = 1000;
+	int size = 1000;
 
 	char* inFile = "input.txt";
 	clock_t startTime;
@@ -593,7 +593,7 @@ int main(int argc, char* argv[])
 	duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
 	cout << "DONE" << endl;
 	cout << "TIME: " << duration << " seconds" << endl;
-*/
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	return 0;
