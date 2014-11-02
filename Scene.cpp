@@ -343,11 +343,12 @@ boundingBox buildTree(vector<boundingBox> *list) {
     cout << "RUN NUM: " << runNum << endl;
     start = length;
     length = list->size();
-    
+
     cout << "START: " << start <<"   LENGTH: " << length << endl;
     for(int i = start; i < length; i++) {
       // For each bb in the list:
       if(active[i]) {
+        cout << "CURRENT ACTIVE i: " << i << endl;
         // If the bb has not been used before:
         // Search for another bb that would minimize the volume, starting at i + 1 
 
