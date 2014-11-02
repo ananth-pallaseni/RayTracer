@@ -137,6 +137,6 @@ struct aabbNode
 	}
 
 	object contains() {
-		return *obj;
+		return obj;
 	}
 };

@@ -351,9 +351,9 @@ int main(int argc, char* argv[])
 
   cout << endl;
 
-  aabbNode q(&sph);
-  sphere qs = (sphere) q;
-  cout << "QS RADIUS: " << qs.radius << endl;
+  aabbNode q(sph);
+  sphere* qs = (sphere*) (q.obj);
+  cout << "QS RADIUS: " << qs->radius << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
