@@ -149,8 +149,8 @@ struct boundingBox
 			tyMax = (minY - ye) / yd;
 		}
 		if(az >= 0) {
-			tzMin = (minX - ze) / zd;
-			tzMax = (maxX - ze) / zd;
+			tzMin = (minZ- ze) / zd;
+			tzMax = (maxZ- ze) / zd;
 		}
 		else {
 			tzMin = (maxZ - ze) / zd;
