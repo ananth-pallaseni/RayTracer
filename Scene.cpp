@@ -470,7 +470,7 @@ bool rayTraverse(ray* r, boundingBox* b, hitResult* result) {
 
 
 
-Vector3f sphereNormal(Vector3f pointOnShape, sphere shape) {
+Vector3f sphereNormal1(Vector3f pointOnShape, sphere shape) {
   Vector3f normal = pointOnShape - shape.center;
   Matrix4f m = shape.objToWorld;
   Matrix3f normTransform;
@@ -492,7 +492,7 @@ material mm;
 
      Vector3f p(10, 0, 0);
      sphere sph(0, 0, 0, 10, mm, I, I);
-     cout << sphereNormal(p, sph);
+     cout << sphereNormal1(p, sph);
 
   /*material mm;
   Matrix4f I;
