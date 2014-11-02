@@ -387,20 +387,20 @@ bool rayTraverse(ray* r, boundingBox* b, hitResult* result) {
     bool check1 = rayTraverse(r, b->left, &r1);
     bool check2 = rayTraverse(r, b->right, &r2);
     if(check1 && check2) {
-      if(r1->t < r2->t) {
-        result = r1;
+      if(r1.t < r2.t) {
+        result = &r1;
       }
       else {
-        result = r2;
+        result = &r2;
       }
       return true;
     }
     else if(check1) {
-      result = r1;
+      result = &r1;
       return true;
     }
     else if(check2) {
-      result = check2;
+      result = &r2;
       return true;
     }
   }
@@ -437,9 +437,6 @@ int main(int argc, char* argv[])
   cout << "minY: " << b3.minY << "    maxY: " << b3.maxY << endl;
   cout << "minZ: " << b3.minZ << "    maxZ: " << b3.maxZ << endl << "VOL: " << b3.volume << endl << endl;
 
-  cout << "RAY HITS B1: " << b1.hit(&r) << endl;
-  cout << "RAY HITS B2: " << b2.hit(&r) << endl;
-  cout << "RAY HITS B3: " << b3.hit(&r) << endl;
 
   cout << "SPHERE RADIUS FROM B1: " << ((sphere*) b1.obj)->radius << endl;
   cout << "TRI A FROM B2: " << ((triangle*) b1.obj)->a << endl;
@@ -464,7 +461,7 @@ int main(int argc, char* argv[])
   Vector3f d1(1, 0, 0);
   ray r1(e1, d1);
   hitResult result;
-  if(rayTraverse(&r, &b, &result)) {
+  if(rayTraverse(&r, &tree, &result)) {
     cout << "RAY HIT" << endl;
     cout << result.point; << endl << endl;
   }
