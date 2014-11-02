@@ -20,7 +20,7 @@ vector<triangle> triangles;
 vector<pointLight> pointLights;
 vector<directionalLight> directionalLights;
 vector<ambientLight> ambientLights;
-vector<boundingBox*> boxes;
+vector<boundingBox> boxes;
 
 Vector3f eye;
 // Coordinates of the image plane
@@ -325,7 +325,7 @@ void parseArgs(char* filename) {
 
 
 
-boundingBox distill(vector<boundingBox*> boxIn) {
+/*boundingBox distill(vector<boundingBox*> boxIn) {
   vector<boundingBox*> distilledBoxes;
   int length = boxIn.size();
 
@@ -375,18 +375,36 @@ boundingBox distill(vector<boundingBox*> boxIn) {
 
   }
   return distill(distilledBoxes);
+}*/
+
+boundingBox distill(vector<boundingBox> boxIn) {
+  int length = boxIn.size();
+  if(length == 1) {
+    cout << "SIZE 1: RETURNING" << endl;
+    return boxIn[0];
+  }
+
+  vector<boundingBox> distilledBox;
+
+  bool active[length];
+  for(int i = 0; i < length; i++) {
+    active[i] = true;
+  }
+
+  for(int i = 0; i < length; i++) {
+    if(active[i]) {
+      for(int j = i+1; j < length; j++) {
+        if(active[j]) {
+          boundingBox b(i, j);
+          distilledBoxes.push_back(b);
+        }
+      }
+    }
+  }
+
+  return distill(distilledBox);
 }
 
-void traverse(boundingBox* root) {
-  if(root->leaf) {
-    cout << "IS LEAF" << endl;
-    cout << (((sphere*) root->obj)->center)(0) << endl;
-  }
-  else {
-    cout << "T" << endl;
-    traverse(root->right);
-  }
-}
 
 bool rayTraverse(ray* r, boundingBox* b, hitResult* result) {
   if(b->hit(r, result)) {
@@ -429,7 +447,7 @@ int main(int argc, char* argv[])
      0, 0, 0, 1;
   sphere sph(0, 0, 0, 20, mm, I, I);
   triangle tri(0, 18, 0, 0, 50, 5, 10, 30, 50, mm, I);
-  boundingBox b1(&sph);
+  /*boundingBox b1(&sph);
   boundingBox b2(&tri);
   cout << "B1: " << endl << "minX: " << b1.minX << "    maxX: " << b1.maxX << endl;
   cout << "minY: " << b1.minY << "    maxY: " << b1.maxY << endl;
@@ -452,7 +470,7 @@ int main(int argc, char* argv[])
   cout << "SPHERE RADIUS FROM B1: " << ((sphere*) b1.obj)->radius << endl;
   cout << "TRI A FROM B2: " << ((triangle*) b1.obj)->a << endl;
   cout << "B3 LEFT: " << b3.left->volume << endl;
-  cout << "B3 RIGHT: " << b3.right->volume << endl;
+  cout << "B3 RIGHT: " << b3.right->volume << endl;*/
 
 
   
@@ -463,8 +481,10 @@ int main(int argc, char* argv[])
 
   for(int i = 0; i < 5; i++) {
     boundingBox b(&spheres[i]);
-    boxes.push_back(&b);
+    boxes.push_back(b);
   }
+
+
 
   boundingBox tree = distill(boxes);
   
@@ -480,11 +500,11 @@ int main(int argc, char* argv[])
     cout << "NO HIT" << endl;
   }
 
-  traverse(&tree);
+  //traverse(&tree);
 
-  cout << "HITS OUTER: " << tree.hit(&r, &result) << endl;
+  /*cout << "HITS OUTER: " << tree.hit(&r, &result) << endl;
   cout << "HITS OUTER->LEFT: " << (*(tree.left)).hit(&r, &result) << endl;
-  cout << "OUTER-> LEFT: " << endl << (*(tree.left)) . minX << endl;
+  cout << "OUTER-> LEFT: " << endl << (*(tree.left)) . minX << endl;*/
 
   //cout << "HITS OUTER->RIGHT: " << (*(tree.right)).hit(&r, &result) << endl;
 
