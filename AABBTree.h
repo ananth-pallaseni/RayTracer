@@ -84,7 +84,7 @@ struct boundingBox
 	}
 
 
-	bool hit(ray* r, hitResult* h) {
+	bool hit(ray* r) {
 		float xe = r->e(0);
 		float ye = r->e(1);
 		float ze = r->e(2);
@@ -122,7 +122,7 @@ struct boundingBox
 			tzMax = (minZ - ze) / zd;
 		}
 
-		bool result = setIntersect(txMin, txMax, tyMin, tyMax, tzMin, tzMax);
+		return setIntersect(txMin, txMax, tyMin, tyMax, tzMin, tzMax);
 
 	}
 
