@@ -369,7 +369,7 @@ boundingBox buildTree(vector<boundingBox> *list) {
           list->push_back((*list)[index]);
         }
         else {
-          boundingBox newBox(&(*list)[i], &(*list)[j]);
+          boundingBox newBox(&(*list)[i], &(*list)[index]);
           list->push_back(newBox);
         }
 
@@ -381,7 +381,7 @@ boundingBox buildTree(vector<boundingBox> *list) {
     }
   }
 
-  return list[start - 1]; // Return the last element, which will be the largest bb and the root in the tree
+  return (*list)[start - 1]; // Return the last element, which will be the largest bb and the root in the tree
 
 }
 
