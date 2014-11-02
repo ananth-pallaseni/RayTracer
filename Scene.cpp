@@ -482,6 +482,8 @@ int main(int argc, char* argv[])
 
   traverse(&tree);
 
+  cout << "HITS OUTER: " << tree.hit(&r, &result) << endl;
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// General Purpose - renders input file
