@@ -429,7 +429,8 @@ int main(int argc, char* argv[])
   }
 
   boundingBox tree = distill(boxes);
-  cout << "1st LEFT: " << tree.left->volume << endl;   cout << "1st RIGHT: " << tree.left->volume << endl;
+  cout << "1st LEFT: " << tree.left->volume << endl;   cout << "1st RIGHT: " << tree.left->volume << endl << endl;
+  traverse(&tree);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// General Purpose - renders input file
