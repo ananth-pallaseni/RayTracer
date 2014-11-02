@@ -381,6 +381,7 @@ boundingBox distill(vector<boundingBox> boxIn) {
   int length = boxIn.size();
   if(length == 1) {
     cout << "SIZE 1: RETURNING" << endl;
+    cout << "root: " << boxIn[0].minX << endl;
     return boxIn[0];
   }
 
