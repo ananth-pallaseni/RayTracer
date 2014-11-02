@@ -356,7 +356,7 @@ int main(int argc, char* argv[])
   sphere* qs = (sphere*) q.obj;
   cout << "QS RADIUS: " << qs->radius << endl << endl;
 
-  boundingBox b3(b1, b2);
+  boundingBox b3(&b1, &b2);
   cout << "B1: " << endl << "minX: " << b3.minX << "    maxX: " << b3.maxX << endl;
   cout << "minY: " << b3.minY << "    maxY: " << b3.maxY << endl;
   cout << "minZ: " << b3.minZ << "    maxZ: " << b3.maxZ << endl << endl;
