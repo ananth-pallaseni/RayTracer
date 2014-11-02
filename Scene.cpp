@@ -352,7 +352,7 @@ int main(int argc, char* argv[])
   cout << endl;
 
   aabbNode q(sph);
-  sphere qs = q.contains();
+  sphere qs = (sphere)q.contains();
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
