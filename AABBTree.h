@@ -19,7 +19,7 @@ struct box
 		sph = s;
 	}
 
-	box(triangle t) {
+	box(triangle* t) {
 		type = AABB_TRI;
 		tri = t;
 	}
