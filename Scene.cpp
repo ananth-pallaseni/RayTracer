@@ -355,7 +355,7 @@ boundingBox buildTree(vector<boundingBox> *list) {
         // Maintain a record of the smallest combined bb and its volume:
         float bestVol = std::numeric_limits<float>::max(); // Initialize to max value
         int index = i; // Index of the element we evenetually choose:
-        for(int j = i + 1; i < length; i++) {
+        for(int j = i + 1; j < length; j++) {
           if(active[j]) {
             // If both bounding boxes are active:
             // Create the combined box:
