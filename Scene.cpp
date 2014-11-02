@@ -461,6 +461,7 @@ bool rayTraverse(ray* r, boundingBox* b, hitResult* result) {
       cout << "FINAL LAYER" << endl;
       return true;
     }
+    cout << "NOT A LEAF" << endl;
     hitResult r1, r2;
     bool c1 = b->left->hit(r, &r1);
     bool c2 = b->right->hit(r, &r2);
