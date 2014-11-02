@@ -328,7 +328,10 @@ void parseArgs(char* filename) {
 boundingBox distill(vector<boundingBox> boxIn) {
   vector<boundingBox> distilledBoxes;
   int length = boxIn.size();
+
+  cout << "NEW ROUND, size: " << length << endl;
   if(length == 1) {
+    cout << "LENGTH IS 1, RETURNING" << endl;
     return boxIn[0];
   }
 
@@ -339,6 +342,7 @@ boundingBox distill(vector<boundingBox> boxIn) {
 
   for(int i = 0; i < length; i++) {
     if(active[i]) {
+      cout << "NEW ITEM: " << boxIn[i].volume <<  endl;
       int index = -1;
       boundingBox best;
       float minVol = std::numeric_limits<float>::max();
