@@ -35,9 +35,9 @@ struct boundingBox
 	float minX, maxX, minY, maxY, minZ, maxZ;
 	bool final;
 
-	boundingBox(sphere sph) {
-		float center = sph.c;
-		float radius = sph.radius;
+	boundingBox(sphere* sph) {
+		Vector3f center = sph->center;
+		float radius = sph->radius;
 		minX = min(center(0) + radius, center(0) - radius);
 		maxX = max(center(0) + radius, center(0) - radius);
 
@@ -48,7 +48,7 @@ struct boundingBox
 		maxZ = max(center(0) + radius, center(2) - radius);
 	}
 
-	boundingBox(triangle tri) {
+	boundingBox(triangle* tri) {
 		Vector3f v1 = tri->a;
 		Vector3f v2 = tri->b;
 		Vector3f v3 = tri->c;
