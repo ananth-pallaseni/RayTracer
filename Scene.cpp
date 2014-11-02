@@ -514,7 +514,12 @@ int main(int argc, char* argv[])
 
 
   boundingBox tree = distill(boxes);
-  cout << "AFTER FUNC, root: " << tree.minX << endl;
+  cout << "AFTER FUNC, root: minx " << tree.minX << endl;
+  cout << "AFTER FUNC, root: maxx " << tree.maxX << endl;
+  cout << "AFTER FUNC, root: miny " << tree.minY << endl;
+  cout << "AFTER FUNC, root: maxy " << tree.maxY << endl;
+  cout << "AFTER FUNC, root: minz " << tree.minZ << endl;
+  cout << "AFTER FUNC, root: maxz " << tree.maxZ << endl;
   
   Vector3f e1(-30, 20, 0);
   Vector3f d1(1, 0, 0);
