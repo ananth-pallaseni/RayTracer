@@ -495,6 +495,18 @@ int main(int argc, char* argv[])
 
   cout << "B1 MINX: " << b44.left->left->left->minX << endl;
 
+  Vector3f e1(-30, -20, 0);
+  Vector3f d1(1, 0, 0);
+  ray r1(e1, d1);
+  hitResult result;
+  if(rayTraverse(&r1, &b44, &result)) {
+    cout << "RAY HIT" << endl;
+    cout << result.point << endl << endl;
+  }
+  else {
+    cout << "NO HIT" << endl;
+  }
+
 
 
   /*material mm;
