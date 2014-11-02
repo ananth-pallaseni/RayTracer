@@ -325,8 +325,10 @@ void parseArgs(char* filename) {
 int main(int argc, char* argv[])
 {
 
-  sphere sph(0, 0, 0, 20);
-  triangle tri(0, 18, 0, 0, 50, 5, 10, 30, 50);
+  material mm;
+  Matrix4f mmm;
+  sphere sph(0, 0, 0, 20, mm, mmm, mmm);
+  triangle tri(0, 18, 0, 0, 50, 5, 10, 30, 50, mm, mmm);
   boundingBox b1(&sph);
   boundingBox b2(&tri);
   cout << "B1: " << endl << "minX: " << b1.minX << "    maxX: " << b1.maxX << endl;
