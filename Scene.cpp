@@ -529,7 +529,7 @@ int main(int argc, char* argv[])
   cout<< "/////////////////////////////////////////////////////" << endl;
   boundingBox test = root;
   while(!test.leaf) {
-    test = *(test.left);
+    test = *(test.right);
     cout << "LEVEL" << endl;
   }
   object* obj = test.obj;
