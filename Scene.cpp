@@ -402,7 +402,7 @@ boundingBox distill(vector<boundingBox> boxIn) {
         }
       }
       if(i == length-1) {
-        boundingBox.push_back(boxIn[i]);
+        distilledBox.push_back(boxIn[i]);
       }
       active[i] = false;
     }
