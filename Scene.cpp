@@ -493,7 +493,7 @@ int main(int argc, char* argv[])
   boundingBox b33(&b11, &b22);
   boundingBox b44(&b33, &b5);
 
-  cout << "B1 MINX: " b44.left->left->left->minX << endl;
+  cout << "B1 MINX: " << b44.left->left->left->minX << endl;
 
 
 
