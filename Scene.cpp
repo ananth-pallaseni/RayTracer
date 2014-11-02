@@ -226,7 +226,7 @@ void parseArgs(char* filename) {
   	  	
   	  	// array to store memory addresses of the tokens in buf
   	  	const char* token[MAX_TOKENS_PER_LINE] = {}; // initialize to 0
-  	  	
+  	  	cout << "CO" << endl;
   	  	// parse the line
   	  	token[0] = strtok(buf, DELIMITER); // first token
   	  	if (token[0]) // zero if line is blank
