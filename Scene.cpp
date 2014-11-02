@@ -511,7 +511,7 @@ int main(int argc, char* argv[])
     boxes.push_back(b);
   }
 
-  boundingBox root = buildTree(*boxes);
+  boundingBox root = buildTree(&boxes);
 
   cout << endl;
 
