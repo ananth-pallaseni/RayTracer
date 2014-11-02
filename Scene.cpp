@@ -521,17 +521,19 @@ int main(int argc, char* argv[])
   cout << "AFTER FUNC, root: minz " << tree.minZ << endl;
   cout << "AFTER FUNC, root: maxz " << tree.maxZ << endl;
   
-  Vector3f e1(-30, 20, 0);
+  Vector3f e1(-30, -20, 0);
   Vector3f d1(1, 0, 0);
   ray r1(e1, d1);
   hitResult result;
-  if(rayTraverse(&r1, &tree, &result)) {
+  /*if(rayTraverse(&r1, &tree, &result)) {
     cout << "RAY HIT" << endl;
     cout << result.point << endl << endl;
   }
   else {
     cout << "NO HIT" << endl;
-  }
+  }*/
+
+    cout << "r hits sph0: " << r1.intersect(spheres[0], result) << endl;
 
   //traverse(&tree);
 
