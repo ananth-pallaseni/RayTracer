@@ -384,6 +384,10 @@ boundingBox distill(vector<boundingBox> boxIn) {
     return boxIn[0];
   }
 
+  if(length == 3) {
+    cout << ((sphere*)((boxIn[0]left)->obj))->center(0) << endl;
+  }
+
   vector<boundingBox> distilledBox;
 
   bool active[length];
