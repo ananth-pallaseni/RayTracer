@@ -32,6 +32,11 @@ struct camera {
 	}
 };
 
+struct hitResult
+{
+	Vector3f point;
+	float t;
+};
 
 struct transform
 {
@@ -255,6 +260,7 @@ struct object
 	Matrix4f objToWorld;
 	Matrix4f worldToObj;
 	Matrix4f transformsInOrder;
+	boundingBox bb;
 };
 
 struct sphere : object
@@ -273,6 +279,7 @@ struct sphere : object
 		scale initScale(r, r, r);
 		objToWorld =   objectToWorld * initTrans * initScale ; // takes a sphere from obj space to world space
 		worldToObj = initScale.inverse * initTrans.inverse * worldToObject; // takes a sphere from world space to obj space
+		bb = boundingBox(center, radius);
 	}
 
 };
@@ -302,6 +309,8 @@ struct triangle : object
 		//cout << "A: " << endl << a << endl << endl;
 		//cout << "B: " << endl << b << endl << endl;
 		//cout << "C: " << endl << c << endl << endl;
+
+		bb = boundingBox(a, b, c);
 	}
 };
 
@@ -311,11 +320,13 @@ struct ray
 {
 	Vector3f e;
 	//Vector3f sample;
+	Vector3f direction;
 	Vector3f sMinusE;
 
 	ray(Vector3f eye, Vector3f s) {
 		e = eye;
 		//sample = s;
+		direction = s;
 		sMinusE = s - e;
 		sMinusE = sMinusE / sMinusE.norm(); // normalize the direction
 	}

@@ -10,6 +10,7 @@
 #include "Canvas.h"
 #include "RayTracer.h"
 #include "RayTracerObjects.h"
+#include "AABBTree.h"
 
 using namespace std;
 
