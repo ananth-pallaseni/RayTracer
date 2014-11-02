@@ -29,7 +29,6 @@ public:
 	int numPointLights;
 	int numDirectionalLights;
 	int numAmbientLights;
-	vector<bo
 
 	RayTracer() {}
 	RayTracer(Vector3f eye, vector<sphere> sphList, vector<triangle> triList, vector<pointLight> plList, vector<directionalLight> dlList,
