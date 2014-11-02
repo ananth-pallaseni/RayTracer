@@ -20,7 +20,7 @@ vector<triangle> triangles;
 vector<pointLight> pointLights;
 vector<directionalLight> directionalLights;
 vector<ambientLight> ambientLights;
-vector<boundingBox> boxes;
+vector<boundingBox*> boxes;
 
 Vector3f eye;
 // Coordinates of the image plane
@@ -463,7 +463,7 @@ int main(int argc, char* argv[])
 
   for(int i = 0; i < 5; i++) {
     boundingBox b(&spheres[i]);
-    boxes.push_back(b);
+    boxes.push_back(&b);
   }
 
   boundingBox tree = distill(boxes);
