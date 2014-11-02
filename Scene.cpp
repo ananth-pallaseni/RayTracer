@@ -401,12 +401,15 @@ boundingBox distill(vector<boundingBox> boxIn) {
       }
       else {
         boundingBox b(&boxIn[i], &boxIn[i+1]);
+        distilledBox.push_back(b);
       }
       active[i] = false;
       active[i+1] = false;
     }
 
   }
+
+  for(int i = 0; i <)
 
   return distill(distilledBox);
 }
