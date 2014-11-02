@@ -24,25 +24,7 @@ Vector3f eye;
 // Coordinates of the image plane
 Vector3f LL, LR, UL, UR;
 
-/*int filler(string s, int i, int max) {
-	while(strcmp(s[i], " ") == 0) {
-		i++;
-		if(i > max) {
-			return max;
-		}
-	}
-	return i;
-}
-
-int reader(string s, int i, int max, vector<string>* word) {
-	while(strcmp(s[i], " ") != 0) {
-		(*word).push_back(s[i]);
-		i++;
-	}
-	return i;
-}*/
-
-// Begin Code from stackOVerflow for parsing input:
+// Code from stackOVerflow for parsing input:
 static inline string &ltrim(string &s) {
     s.erase(s.begin(), find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace))));
     return s;
@@ -123,7 +105,6 @@ void parseObj(const char* filename, material mat, Matrix4f objToWorld) {
     }
 
 
-/** End code that I didn't write. */
 
   /*  while(getline(fin, line, ' ')) {
     	cout << line << endl;
@@ -351,36 +332,36 @@ matr << 1, 0, 0, 0,
 	char* name = "scene12.obj";
 	parseObj(name, mm, matr);*/
 
-/*material mm;
-Matrix4f matr;
-matr << 1, 0, 0, 0,
-		0, 1, 0, 0, 
-		0, 0, 1, 0,
-		0, 0, 0, 1;
-triangle tri(0, -95, 0, -100, -95, 100, 100, -95, 100, mm, matr);
-Vector3f eye(0, 75, 500);
-Vector3f point(50, -95, 50);
-ray r(eye, point);
-Vector3f n = triangleNormal11(point, tri, r);
+  /*material mm;
+  Matrix4f matr;
+  matr << 1, 0, 0, 0,
+  		0, 1, 0, 0, 
+  		0, 0, 1, 0,
+  		0, 0, 0, 1;
+  triangle tri(0, -95, 0, -100, -95, 100, 100, -95, 100, mm, matr);
+  Vector3f eye(0, 75, 500);
+  Vector3f point(50, -95, 50);
+  ray r(eye, point);
+  Vector3f n = triangleNormal11(point, tri, r);
 
-cout << "NORMAL: " << n(0) << ", " << n(1) << ", " << n(2) << endl;*/
+  cout << "NORMAL: " << n(0) << ", " << n(1) << ", " << n(2) << endl;*/
 
-/*Vector3f eye(0, 0, 150);
-Vector3f point(0, 0, 0);
-// ray should be in 0, 0, -1 direction
-ray r(eye, point);
-Vector3f p;
-float t;
-bool check = intersect22(tri, &p, r.sMinusE, r.e);
-bool check2 = r.intersect(tri, &t);
-if(check) {
-	cout << "POINT: " << endl << p << endl;
-	cout << "NORMAL: " << endl << triangleNormal11(p, tri, r) << endl;
-	cout << "T: " << t << endl;
-}
-else {
-	cout << "NO INTERSECTION" << endl;
-}*/
+  /*Vector3f eye(0, 0, 150);
+  Vector3f point(0, 0, 0);
+  // ray should be in 0, 0, -1 direction
+  ray r(eye, point);
+  Vector3f p;
+  float t;
+  bool check = intersect22(tri, &p, r.sMinusE, r.e);
+  bool check2 = r.intersect(tri, &t);
+  if(check) {
+  	cout << "POINT: " << endl << p << endl;
+  	cout << "NORMAL: " << endl << triangleNormal11(p, tri, r) << endl;
+  	cout << "T: " << t << endl;
+  }
+  else {
+  	cout << "NO INTERSECTION" << endl;
+  }*/
 
 
 
