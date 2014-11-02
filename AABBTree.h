@@ -92,10 +92,47 @@ struct boundingBox
 
 
 	bool setIntersect(float x1, float x2, float y1, float y2, float z1, float z2) {
-		float smallest = min(x1, y1);
-		smallest = min(smallest, z1);
-		cout << "SMALLEST: " << smallest << endl;
-		return (smallest == x1 && y1 <= x2 && z1 <= x2) || (smallest == y1 && x1 <= y2 && z1 <= y2) || (smallest == z1 && x1 <= z2 && y1 <= z2);
+		// find interval x -> y:
+		float i1, i2;
+		if(x1 <= y1) {
+			// x1 < y1
+			if(y1 <= x2) {
+				// x1 < y1 < x2 ... y2
+				i1 = y1;
+				i2 = min(x2, y2);
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			// y1 < x1
+			if(x1 <= y2) {
+				i1 = x1;
+				i2 = min(x2, y2);
+			}
+			else {
+				return false;
+			}
+
+		}
+
+		if(z1 <= i1) {
+			if(i1 <= z2) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			if(z1 <= i2) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
 	}
 
 
@@ -146,7 +183,7 @@ struct boundingBox
 		if(	!(tzMin == tzMin) ) {tzMin = 0;};
 		if(	!(tzMax == tzMax) ) {tzMax = 0;};
 
-		
+
 		cout << "Txmin : " << txMin << "   TxMax: " << txMax << endl;
 		cout << "Txyin : " << tyMin << "   TyMax: " << tyMax << endl;
 		cout << "Tzmin : " << tzMin << "   TzMax: " << tzMax << endl;
