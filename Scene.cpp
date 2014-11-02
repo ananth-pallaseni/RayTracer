@@ -354,7 +354,16 @@ int main(int argc, char* argv[])
   aabbNode q(&sph);
   object* qq = q.obj;
   sphere* qs = (sphere*) q.obj;
-  cout << "QS RADIUS: " << qs->radius << endl;
+  cout << "QS RADIUS: " << qs->radius << endl << endl;
+
+  boundingBox b3(b1, b2);
+  cout << "B1: " << endl << "minX: " << b3.minX << "    maxX: " << b3.maxX << endl;
+  cout << "minY: " << b3.minY << "    maxY: " << b3.maxY << endl;
+  cout << "minZ: " << b3.minZ << "    maxZ: " << b3.maxZ << endl << endl;
+
+  cout << "RAY HITS B3: " << b3.hit(&r) << endl;
+
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
