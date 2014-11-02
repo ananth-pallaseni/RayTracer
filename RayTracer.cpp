@@ -174,6 +174,7 @@ Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray in
 bool RayTracer::traceRay(ray r, Vector3f source, hitResult* result) {
 	Vector3f point(std::numeric_limits<float>::max(), std::numeric_limits<float>::max(), std::numeric_limits<float>::max()); // init to max value
 	Vector3f temp;
+	float tempT;
 	bool hit = false;
 	Vector3f normal;
 	object shape;
@@ -219,10 +220,10 @@ color RayTracer::trace(Vector3f s) {
 	color rgb(0, 0, 0);
 	ray r = createRay(s);
 	hitResult result;
-	if( traceRay(r, 0, e, &result)) {
+	if( traceRay(r, e, &result)) {
 		rgb = rgb + shade(result.point, result.point, result.mat, r);
 		if(!(result.mat.refl(0) == 0 && result.mat.refl(1) == 0 && result.mat.refl(2) == 0)) {
-			rgb = rgb + reflectionRay(result.point, result.normal, refl, result.mat.refl, DEPTH_MAX);
+			rgb = rgb + reflectionRay(result.point, result.normal, r, result.mat.refl, DEPTH_MAX);
 		}
 	}
 	rgb = clamp(rgb);

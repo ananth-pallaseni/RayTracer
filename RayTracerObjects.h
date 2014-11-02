@@ -346,31 +346,6 @@ struct ray
 		return eye + t * sMinE;
 	}
 
-	// OLD:
-	bool intersect(sphere sph, Vector3f* point, bool qqq) {
-		// Check Discriminant:
-		// A = sMinusE . sMinusE
-		float A = sMinusE.dot(sMinusE);
-		// B = 2 * sMinusE . (e - c)
-		float B = 2 * sMinusE .dot(( e - sph.center ));
-		// C = (e - c) . (e - c) - r^2
-		float C = ( e - sph.center ).dot( ( e - sph.center ) ) - ( sph.radius * sph.radius );
-		float discriminant = B*B - 4*A*C;
-		if (discriminant >= 0) {
-			// Use positive or negative value of discriminant depending on which results in the smallest t.
-			float t;
-			if(B < 0) {
-				t = (-B - sqrt(discriminant)) / (2 * A);
-			}
-			else {
-				t = (-B + sqrt(discriminant)) / (2 * A);
-			}
-			
-			*point = p(t);
-			return true;
-		}
-		return false;
-	}
 
 	// NEW:
 	bool intersect(sphere sph, Vector3f* point, float* tempT) {
