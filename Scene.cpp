@@ -484,7 +484,7 @@ int main(int argc, char* argv[])
 
   cout << "HITS OUTER: " << tree.hit(&r, &result) << endl;
   cout << "HITS OUTER->LEFT: " << (*(tree.left)).hit(&r, &result) << endl;
-  cout << "OUTER-> LEFT: " << endl << tree.left . minX << endl;
+  cout << "OUTER-> LEFT: " << endl << *(tree.left) . minX << endl;
 
   //cout << "HITS OUTER->RIGHT: " << (*(tree.right)).hit(&r, &result) << endl;
 
