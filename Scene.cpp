@@ -329,7 +329,7 @@ boundingBox distill(vector<boundingBox> boxIn) {
   vector<boundingBox> distilledBoxes;
   int length = boxIn.size();
 
-  cout << "NEW ROUND, size: " << length << endl;
+  cout << endl << "NEW ROUND, size: " << length << endl;
   if(length == 1) {
     cout << "LENGTH IS 1, RETURNING" << endl;
     cout << "Size: " << boxIn[0].volume << endl;
@@ -351,7 +351,7 @@ boundingBox distill(vector<boundingBox> boxIn) {
       for(int j = i + 1; j < length; j++) {
         cout << "looking at new j = " << j << endl;
         if(active[j]) {
-          cout << "NEW J FOUND" << boxIn[j].volume <<  endl;
+          cout << "NEW J FOUND: " << boxIn[j].volume <<  endl;
           boundingBox combined(&boxIn[i], &boxIn[j]);
           if(combined.volume < minVol) {
             cout << "choosing this j" << endl;
@@ -367,7 +367,7 @@ boundingBox distill(vector<boundingBox> boxIn) {
       }
       else {
         cout << "NO BEST FOUND" << endl;
-        best = boxIn[index];
+        best = boxIn[i];
       }
       
       distilledBoxes.push_back(best);
