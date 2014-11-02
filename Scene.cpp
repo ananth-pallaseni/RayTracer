@@ -391,6 +391,7 @@ boundingBox distill(vector<boundingBox> boxIn) {
     active[i] = true;
   }
 
+
   for(int i = 0; i < length; i++) {
     cout << "new i: " << i << endl;
     if(active[i]) {
@@ -496,7 +497,7 @@ int main(int argc, char* argv[])
 
   boundingBox tree = distill(boxes);
   
-  /*Vector3f e1(-30, 20, 0);
+  Vector3f e1(-30, 20, 0);
   Vector3f d1(1, 0, 0);
   ray r1(e1, d1);
   hitResult result;
@@ -506,13 +507,13 @@ int main(int argc, char* argv[])
   }
   else {
     cout << "NO HIT" << endl;
-  }*/
+  }
 
   //traverse(&tree);
 
-  /*cout << "HITS OUTER: " << tree.hit(&r, &result) << endl;
-  cout << "HITS OUTER->LEFT: " << (*(tree.left)).hit(&r, &result) << endl;
-  cout << "OUTER-> LEFT: " << endl << (*(tree.left)) . minX << endl;*/
+  cout << "HITS OUTER: " << tree.hit(&r1, &result) << endl;
+  cout << "HITS OUTER->LEFT: " << (*(tree.left)).hit(&r1, &result) << endl;
+  cout << "OUTER-> LEFT: " << endl << (*(tree.left)) . minX << endl;
 
   //cout << "HITS OUTER->RIGHT: " << (*(tree.right)).hit(&r, &result) << endl;
 
