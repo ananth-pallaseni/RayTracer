@@ -351,8 +351,8 @@ boundingBox distill(vector<boundingBox> boxIn) {
       for(int j = i + 1; j < length; j++) {
         cout << "looking at new j = " << j << endl;
         if(active[j]) {
-          cout << "NEW J FOUND: " << boxIn[j].volume <<  endl;
           boundingBox combined(&boxIn[i], &boxIn[j]);
+          cout << "NEW J FOUND: " << boxIn[j].minX << ", " << boxIn[j].maxX << "   v: " << combined.volume <<  endl;
           if(combined.volume < minVol) {
             cout << "choosing this j" << endl;
             best = combined;
