@@ -363,6 +363,7 @@ boundingBox buildTree(vector<boundingBox> *list) {
 
             // If the volume of the new box is smaller than the best we have, then replace the best with this one:
             if(combined.volume < bestVol) {
+              cout << "FOUND BETTER VOLUME WITH index: " << j << endl;
               bestVol = combined.volume;
               index = j;
             }
