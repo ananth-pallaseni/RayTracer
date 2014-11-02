@@ -483,15 +483,15 @@ int main(int argc, char* argv[])
   sphere s3(100, 100, 100, 20, mm, I, I);
   sphere s4(150, 150, 150, 20, mm, I, I);
   sphere s5(200, 200, 200, 20, mm, I, I);
-  boundingBox b1(s1);
-  boundingBox b2(s2);
-  boundingBox b3(s3);
-  boundingBox b4(s4);
-  boundingBox b5(s5);
-  boundingBox b11(b1, b2);
-  boundingBox b22(b3, b4);
-  boundingBox b33(b11, b22);
-  boundingBox b44(b33, b5);
+  boundingBox b1(&s1);
+  boundingBox b2(&s2);
+  boundingBox b3(&s3);
+  boundingBox b4(&s4);
+  boundingBox b5(&s5);
+  boundingBox b11(&b1, &b2);
+  boundingBox b22(&b3, &b4);
+  boundingBox b33(&b11, &b22);
+  boundingBox b44(&b33, &b5);
 
   cout << "B1 MINX: " b44.left->left->left->minX << endl;
 
