@@ -391,6 +391,13 @@ boundingBox distill(vector<boundingBox> boxIn) {
     cout << "1, RIGHT " <<  boxIn[1].right -> minX << endl;
   }
 
+  if(length == 2) {
+    cout << "root -> left -> left: " <<  boxIn[0].left -> left -> minX << endl;
+    cout << "root -> left -> right: " <<  boxIn[0].left -> right -> minX << endl;
+    cout << "root -> right -> left: " <<  boxIn[0].right -> left -> minX << endl;
+    cout << "root -> right -> right: " <<  boxIn[0].right -> right -> minX << endl;
+  }
+
   vector<boundingBox> distilledBox;
 
   bool active[length];
