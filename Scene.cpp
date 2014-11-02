@@ -349,6 +349,11 @@ int main(int argc, char* argv[])
   cout << "RAY HITS B1: " << b1.hit(&r) << endl;
   cout << "RAY HITS B2: " << b2.hit(&r) << endl;
 
+  cout << endl;
+
+  aabbNode q(sph);
+  sphere qs = q.contains();
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// General Purpose - renders input file
