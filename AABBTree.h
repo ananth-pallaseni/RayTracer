@@ -94,6 +94,7 @@ struct boundingBox
 	bool setIntersect(float x1, float x2, float y1, float y2, float z1, float z2) {
 		float smallest = min(x1, y1);
 		smallest = min(smallest, z1);
+		cout << "SMALLEST: " < smallest << endl;
 		return (smallest == x1 && y1 <= x2 && z1 <= x2) || (smallest == y1 && x1 <= y2 && z1 <= y2) || (smallest == z1 && x1 <= z2 && y1 <= z2);
 	}
 
