@@ -419,7 +419,9 @@ boundingBox distill(vector<boundingBox> boxIn) {
         distilledBox.push_back(boxIn[i]);
       }
       else {
+        cout << "i min: " << boxIn[i].minX << " i+1 min: " << boxIn[i+1].minX << endl;
         boundingBox b(&boxIn[i], &boxIn[i+1]);
+        cout << "comb min: " << b.minX << endl;
         distilledBox.push_back(b);
       }
       active[i] = false;
