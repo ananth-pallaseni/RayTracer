@@ -386,6 +386,7 @@ boundingBox distill(vector<boundingBox> boxIn) {
 
   if(length == 3) {
     cout << ((sphere*) ( ( boxIn[0].left )->obj ) )->center(0) << endl;
+    cout << "0, RIGHT" <<  boxIn[0].right -> minX << endl;
   }
 
   vector<boundingBox> distilledBox;
