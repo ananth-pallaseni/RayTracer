@@ -217,7 +217,7 @@ bool RayTracer::traceRay(ray r, Vector3f source, hitResult* result) {
 }
 
 color RayTracer::trace(Vector3f s) {
-	color rgb(0, 0, 0);
+	Vector3f rgb(0, 0, 0);
 	ray r = createRay(s);
 	hitResult result;
 	if( traceRay(r, e, &result)) {
