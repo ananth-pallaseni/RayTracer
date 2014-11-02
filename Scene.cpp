@@ -332,7 +332,7 @@ boundingBox distill(vector<boundingBox> boxIn) {
   cout << endl << "NEW ROUND, size: " << length << endl;
   if(length == 1) {
     cout << "LENGTH IS 1, RETURNING" << endl;
-    cout << "Size: " << boxIn[0].volume << endl;
+    cout << "Size: " << boxIn[0].volume << "   minX: " << boxIn[0].minX << endl;
     return boxIn[0];
   }
 
