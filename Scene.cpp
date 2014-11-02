@@ -532,6 +532,7 @@ int main(int argc, char* argv[])
     test = *(test.left);
     cout << "LEVEL" << endl;
   }
+  cout << test.obj->center << endl << endl;
 
 
 
