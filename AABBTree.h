@@ -159,7 +159,12 @@ struct boundingBox
 		cout << "Txmin : " << txMin << "   TxMax: " << txMax << endl;
 		cout << "Txyin : " << tyMin << "   TyMax: " << tyMax << endl;
 		cout << "Tzmin : " << tzMin << "   TzMax: " << tzMax << endl;
-
+		if(	isnan(txMin) ) {txMin = 0};
+		if(	isnan(txMax) ) {txMax = 0};
+		if(	isnan(tyMin) ) {tyMin = 0};
+		if(	isnan(tyMax) ) {tyMax = 0};
+		if(	isnan(tzMin) ) {tzMin = 0};
+		if(	isnan(tzMax) ) {tzMax = 0};
 		bool check = setIntersect(txMin, txMax, tyMin, tyMax, tzMin, tzMax);
 		cout << "r hits box: " << check << endl;
 		if(leaf && check) {
