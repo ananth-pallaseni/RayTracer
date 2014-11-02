@@ -492,7 +492,7 @@ material mm;
 
      Vector3f p(10, 10, 0);
      sphere sph(0, 50, 0, 10, mm, I, I);
-     cout << sphereNormal1(p, sph);
+     cout << pointOnShape - shape.center << endl;
 
   /*material mm;
   Matrix4f I;
