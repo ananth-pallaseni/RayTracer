@@ -31,6 +31,21 @@ public:
 		unitY = (lly - uly) / pixY;
 	}
 
+	Sampler(int pixX, int pixY, Vector3f ll, Vector3f lr, Vector3f ul, Vector3f ur) {  
+		numPixX = pixX;
+		numPixY = pixY;
+		LL = ll;
+		LR = lr;
+		UL = ul;
+		UR = ur;
+		currX = -1;
+		currY = 0;
+		unitX = (UR(0) - UL(0)) / pixX;
+		unitY = (LL(1) - UL(1)) / pixY;
+	}
+
+
+
 	// Returns a point representing a sample for pixel at currX, currY
 	Vector3f getSample();
 
