@@ -352,7 +352,8 @@ int main(int argc, char* argv[])
   cout << endl;
 
   aabbNode q(sph);
-  sphere qs = (sphere)q.contains();
+  sphere* qs = &q.contains();
+  cout << "QS RADIUS: " << qs.radius << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
