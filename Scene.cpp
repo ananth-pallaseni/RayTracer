@@ -367,6 +367,16 @@ boundingBox distill(vector<boundingBox> boxIn) {
   return distill(distilledBoxes);
 }
 
+void traverse(boundingBox* root) {
+  if(root.leaf) {
+    cout << "IS LEAF" << endl;
+  }
+  else {
+    cout << "T" << endl;
+    traverse(root.left);
+  }
+}
+
 int main(int argc, char* argv[])
 {
 
@@ -419,7 +429,7 @@ int main(int argc, char* argv[])
   }
 
   boundingBox tree = distill(boxes);
-
+  cout << "1st LEFT: " << tree.left->volume << endl;   cout << "1st RIGHT: " << tree.left->volume << endl;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// General Purpose - renders input file
