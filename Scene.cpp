@@ -521,12 +521,12 @@ int main(int argc, char* argv[])
   cout << "AFTER FUNC, root: minz " << tree.minZ << endl;
   cout << "AFTER FUNC, root: maxz " << tree.maxZ << endl;
 
-  cout << "AFTER FUNC, root -> left: minx " << tree.left - > minX << endl;
-  cout << "AFTER FUNC, root -> left: maxx " << tree.left - > maxX << endl;
-  cout << "AFTER FUNC, root -> left: miny " << tree.left - > minY << endl;
-  cout << "AFTER FUNC, root -> left: maxy " << tree.left - > maxY << endl;
-  cout << "AFTER FUNC, root -> left: minz " << tree.left - > minZ << endl;
-  cout << "AFTER FUNC, root -> left: maxz " << tree.left - > maxZ << endl;
+  cout << "AFTER FUNC, root -> left: minx " << tree.left -> minX << endl;
+  cout << "AFTER FUNC, root -> left: maxx " << tree.left -> maxX << endl;
+  cout << "AFTER FUNC, root -> left: miny " << tree.left -> minY << endl;
+  cout << "AFTER FUNC, root -> left: maxy " << tree.left -> maxY << endl;
+  cout << "AFTER FUNC, root -> left: minz " << tree.left -> minZ << endl;
+  cout << "AFTER FUNC, root -> left: maxz " << tree.left -> maxZ << endl;
   
   Vector3f e1(-30, -20, 0);
   Vector3f d1(1, 0, 0);
