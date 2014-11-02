@@ -116,7 +116,7 @@ bool RayTracer::directionalShadowRay(Vector3f point, Vector3f directionToLight) 
 }	
 
 
-Vector3f RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, material mat) {
+Vector3f RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, material mat, ray incoming) {
 	Vector3f rgb(0, 0, 0);
 	for(int i = 0; i < numPointLights; i++) {
 		pointLight pl = pointLights[i];
@@ -125,7 +125,7 @@ Vector3f RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, materia
 			Vector3f lightDirection = unit(pl.point - pointOnShape);
 	
 			rgb = rgb + diffuse(normalAtPoint, lightDirection, mat.diff, pl.l());
-			rgb = rgb + specular(normalAtPoint, lightDirection, incoming.sMinusE, mat.spec, pl.l(), shape.mat.phongExp);
+			rgb = rgb + specular(normalAtPoint, lightDirection, incoming.sMinusE, mat.spec, pl.l(), mat.phongExp);
 		}
 		rgb = rgb + ambient(pl.l(), mat.amb);
 	}
@@ -159,7 +159,7 @@ Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray in
 		depth--;
 		hitResult result;
 		if(traceRay(refl, point, &result)) {
-			rgb = rgb + shade(result.point, result.point, result.mat);
+			rgb = rgb + shade(result.point, result.point, result.mat, refl);
 			if(!(result.mat.refl(0) == 0 && result.mat.refl(1) == 0 && result.mat.refl(2) == 0)) {
 				rgb = rgb + reflectionRay(result.point, result.normal, refl, result.mat.refl, depth);
 			}
@@ -220,7 +220,7 @@ color RayTracer::trace(Vector3f s) {
 	ray r = createRay(s);
 	hitResult result;
 	if( traceRay(r, 0, e, &result)) {
-		rgb = rgb + shade(result.point, result.point, result.mat);
+		rgb = rgb + shade(result.point, result.point, result.mat, r);
 		if(!(result.mat.refl(0) == 0 && result.mat.refl(1) == 0 && result.mat.refl(2) == 0)) {
 			rgb = rgb + reflectionRay(result.point, result.normal, refl, result.mat.refl, DEPTH_MAX);
 		}

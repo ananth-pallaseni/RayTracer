@@ -63,7 +63,7 @@ public:
 
 	Vector3f reflectionRay(Vector3f point, Vector3f normalAtPoint, ray incoming, Vector3f k_refl, int depth);
 
-	Vector3f shade(Vector3f pointOnShape, Vector3f normalAtPoint, material mat) ;
+	Vector3f shade(Vector3f pointOnShape, Vector3f normalAtPoint, material mat, ray incoming) ;
 
 
 	// Simple ray trace function, no shadows or anything fancy
