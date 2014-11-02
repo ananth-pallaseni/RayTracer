@@ -456,7 +456,9 @@ boundingBox buildTree(vector<boundingBox> *list) {
 
 bool rayTraverse(ray* r, boundingBox* b, hitResult* result) {
   if(b->hit(r, result)) {
+    cout << "HIT" << endl;
     if(b->leaf) {
+      cout << "FINAL LAYER" << endl;
       return true;
     }
     hitResult r1, r2;

@@ -144,15 +144,15 @@ struct boundingBox
 		float xd = r->direction(0);
 		float yd = r->direction(1);
 		float zd = r->direction(2);
-		cout << "minX: " << minX << "  XE: " << xe << endl; cout << "maxX: " << maxX << "  XE: " << xe << endl;
-		cout << "MINY: " << minY << "  YE: " << ye << endl; cout << "maxY: " << maxY << "  YE: " << ye << endl;
-		cout << "minZ: " << minZ << "  ZE: " << ze << endl; cout << "maxZ: " << maxZ << "  ZE: " << ze << endl;
+		//cout << "minX: " << minX << "  XE: " << xe << endl; cout << "maxX: " << maxX << "  XE: " << xe << endl;
+		//cout << "MINY: " << minY << "  YE: " << ye << endl; cout << "maxY: " << maxY << "  YE: " << ye << endl;
+		//cout << "minZ: " << minZ << "  ZE: " << ze << endl; cout << "maxZ: " << maxZ << "  ZE: " << ze << endl;
 
 
 		float txMin, txMax, tyMin, tyMax, tzMin, tzMax;
-		float ax = 1 / xd; cout << "xd: " << xd << endl; cout << "ax: " << ax << endl;
-		float ay = 1 / yd; cout << "yd: " << yd << endl; cout << "ay: " << ay << endl;
-		float az = 1 / zd; cout << "za: " << zd << endl; cout << "az: " << az << endl;
+		float ax = 1 / xd; //cout << "xd: " << xd << endl; cout << "ax: " << ax << endl;
+		float ay = 1 / yd; //cout << "yd: " << yd << endl; cout << "ay: " << ay << endl;
+		float az = 1 / zd; //cout << "za: " << zd << endl; cout << "az: " << az << endl;
 		if(ax >= 0) {
 			txMin = (minX - xe) * ax;
 			txMax = (maxX - xe) * ax;
@@ -188,13 +188,13 @@ struct boundingBox
 		if(	!(tzMax == tzMax) ) {tzMax = 0;};
 
 
-		cout << "Txmin : " << txMin << "   TxMax: " << txMax << endl;
-		cout << "Txyin : " << tyMin << "   TyMax: " << tyMax << endl;
-		cout << "Tzmin : " << tzMin << "   TzMax: " << tzMax << endl;
+		//cout << "Txmin : " << txMin << "   TxMax: " << txMax << endl;
+		//cout << "Txyin : " << tyMin << "   TyMax: " << tyMax << endl;
+		//cout << "Tzmin : " << tzMin << "   TzMax: " << tzMax << endl;
 		
 
 		if(leaf) {
-			cout << "FINAL LAYER" << endl;
+			cout << "IN FINAL LAYER" << endl;
 			switch (type) {
 				case AABB_SPHERE:
 					return r->intersect( *( (sphere*) obj ), result);
