@@ -159,12 +159,13 @@ struct boundingBox
 		cout << "Txmin : " << txMin << "   TxMax: " << txMax << endl;
 		cout << "Txyin : " << tyMin << "   TyMax: " << tyMax << endl;
 		cout << "Tzmin : " << tzMin << "   TzMax: " << tzMax << endl;
-		if(	isnan(txMin) ) {txMin = 0;};
-		if(	isnan(txMax) ) {txMax = 0;};
-		if(	isnan(tyMin) ) {tyMin = 0;};
-		if(	isnan(tyMax) ) {tyMax = 0;};
-		if(	isnan(tzMin) ) {tzMin = 0;};
-		if(	isnan(tzMax) ) {tzMax = 0;};
+		// checks for nans
+		if(	!(txMin == txMin) ) {txMin = 0;};
+		if(	!(txMax == txMax) ) {txMax = 0;};
+		if(	!(tyMin == tyMin) ) {tyMin = 0;};
+		if(	!(tyMax == tyMax) ) {tyMax = 0;};
+		if(	!(tzMin == tzMin) ) {tzMin = 0;};
+		if(	!(tzMax == tzMax) ) {tzMax = 0;};
 		bool check = setIntersect(txMin, txMax, tyMin, tyMax, tzMin, tzMax);
 		cout << "r hits box: " << check << endl;
 		if(leaf && check) {
