@@ -75,7 +75,6 @@ void parseObj(const char* filename, material mat, Matrix4f objToWorld) {
       cout << line << endl;
     	vector<string> words = split(line);
     	if(words[0] == "v") {
-        cout 
     		stringstream f1(words[1]);
     		stringstream f2(words[2]);
     		stringstream f3(words[3]);
