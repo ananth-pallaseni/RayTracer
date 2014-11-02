@@ -513,6 +513,11 @@ int main(int argc, char* argv[])
 
   boundingBox root = buildTree(&boxes);
 
+  for(int i = 0; i < boxes.size(); i++) {
+    cout << i << endl;
+    cout << boxes[i].volume << endl;
+  }
+
   cout << endl;
 
 
