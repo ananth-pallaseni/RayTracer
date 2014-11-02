@@ -416,6 +416,7 @@ boundingBox distill(vector<boundingBox> boxIn) {
       cout << "i was active" << endl;
       if(i == length-1) {
         cout << "i was last" << endl;
+        cout << "i min: " << boxIn[i].minX << endl;
         distilledBox.push_back(boxIn[i]);
       }
       else {
