@@ -29,13 +29,9 @@ public:
 	int numPointLights;
 	int numDirectionalLights;
 	int numAmbientLights;
-	vector<boundingBox> *boxes;
+	vector<bo
 
 	RayTracer() {}
-	RayTracer(Vector3f eye, vector<boundingBox>* b) {
-		e = eye;
-		boxes = b;
-	}
 	RayTracer(Vector3f eye, vector<sphere> sphList, vector<triangle> triList, vector<pointLight> plList, vector<directionalLight> dlList,
 			  vector<ambientLight> alList ) {
 		e = eye;
@@ -63,11 +59,11 @@ public:
 
 	Vector3f reflectionRay(Vector3f point, Vector3f normalAtPoint, ray incoming, Vector3f k_refl, int depth);
 
-	Vector3f shade(Vector3f pointOnShape, Vector3f normalAtPoint, material mat, ray incoming) ;
+	color shade(Vector3f pointOnShape, Vector3f normalAtPoint, object shape, int depth, ray incoming) ;
 
 
 	// Simple ray trace function, no shadows or anything fancy
-	bool traceRay(ray r, Vector3f source, hitResult* result);
+	color traceRay(ray r, int depth, Vector3f source);
 
 	// Combined trace function
 	color trace(Vector3f s);
