@@ -484,15 +484,6 @@ Vector3f sphereNormal1(Vector3f pointOnShape, sphere shape) {
 int main(int argc, char* argv[])
 {
 material mm;
-  Matrix4f I;
-    I << 1, 0, 0, 0,
-     0, 1, 0, 0,
-     0, 0, 1, 0,
-     0, 0, 0, 1;
-
-     Vector3f p(10, 60, 0);
-     sphere sph(0, 50, 0, 10, mm, I, I);
-     cout << sphereNormal1(p, sph) << endl;
 
   /*material mm;
   Matrix4f I;
@@ -618,7 +609,7 @@ material mm;
 
 	// General Purpose - renders input file
 
-	/*int size = 1000;
+	int size = 1000;
 
 	char* inFile = "input.txt";
 	clock_t startTime;
@@ -653,7 +644,7 @@ material mm;
 
 	duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
 	cout << "DONE" << endl;
-	cout << "TIME: " << duration << " seconds" << endl;*/
+	cout << "TIME: " << duration << " seconds" << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
