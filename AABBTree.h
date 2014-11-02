@@ -37,7 +37,7 @@ struct boundingBox
 	boundingBox* left;
 	boundingBox* right;
 
-	float volCalc() {
+	void volCalc() {
 		volume = (maxX - minX) * (maxY - minY) * (maxZ - minZ);
 	}
 

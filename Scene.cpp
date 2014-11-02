@@ -20,6 +20,7 @@ vector<triangle> triangles;
 vector<pointLight> pointLights;
 vector<directionalLight> directionalLights;
 vector<ambientLight> ambientLights;
+vector<boundingBox> boxes;
 
 Vector3f eye;
 // Coordinates of the image plane
@@ -322,6 +323,50 @@ void parseArgs(char* filename) {
 
 }
 
+
+
+boundingBox distill(vector<boundingBox> boxIn) {
+  vector<boundingBox> distilledBoxes;
+  int length = boxIn.size();
+  if(length == 1) {
+    return boxIn[0];
+  }
+
+  bool active[length];
+  for(int i = 0; i < length; i++) {
+    active[i] = true;
+  }
+
+  for(int i = 0; i < length; i++) {
+    if(active[i]) {
+      int index = -1;
+      boundingBox best;
+      float minVol = std::numeric_limits<float>::max()
+      for(j = i + 1; j < length; j++) {
+        if(active[j]) {
+          boundingBox combined(boxIn[i], boxIn[j]);
+          if(combined.volume < vol) {
+            best = combined;
+            index = j;
+            minVol = combined.volume;
+          }
+        }
+      }
+      if(index >= 0) {
+        active[index] = false;
+      }
+      else {
+        cout << "NO BEST FOUND" << endl;
+        best = index[i];
+      }
+      
+      distilledBoxes.push_back(best);
+    }
+
+  }
+  return distill(distilledBoxes);
+}
+
 int main(int argc, char* argv[])
 {
 
@@ -362,6 +407,18 @@ int main(int argc, char* argv[])
   cout << "B3 RIGHT: " << b3.right->volume << endl;
 
 
+  
+  for(int i = 0; i < 5; i++) {
+    sphere sph(i * 50, i * 50, i*50, mm, I, I);
+    spheres.push_back(sph);
+  }
+
+  for(int i = 0; i < 5; i++) {
+    boundingBox b(spheres[i]);
+    boxes.push_back(b);
+  }
+
+  boundingBox tree = distill(boxes);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
