@@ -72,8 +72,10 @@ void parseObj(const char* filename, material mat, Matrix4f objToWorld) {
 
 
     while(getline(fin, line)) {
+      cout << line << endl;
     	vector<string> words = split(line);
     	if(words[0] == "v") {
+        cout 
     		stringstream f1(words[1]);
     		stringstream f2(words[2]);
     		stringstream f3(words[3]);
@@ -84,7 +86,8 @@ void parseObj(const char* filename, material mat, Matrix4f objToWorld) {
     		float p3;
     		f3 >> p3;
     		Vector3f vertex(p1, p2, p3);
-          	vertices.push_back(vertex);
+        vertices.push_back(vertex);
+        cout << "Vertex at : " << p1 << ", " << p2 << ", " << p3 << endl; 
     	}
     	if(words[0] == "f") {
     		stringstream f1(words[1]);
@@ -101,7 +104,7 @@ void parseObj(const char* filename, material mat, Matrix4f objToWorld) {
     		Vector3f v3 = vertices[p3];
     		triangle tri(v1(0), v1(1), v1(2), v2(0), v2(1), v2(2), v3(0), v3(1), v3(2), mat, objToWorld);
     		triangles.push_back(tri);
-        cout << "triangle" << endl;
+        cout << "Triangle" << endl;
     	}
     }
 
@@ -227,7 +230,6 @@ void parseArgs(char* filename) {
   	  	
   	  	// array to store memory addresses of the tokens in buf
   	  	const char* token[MAX_TOKENS_PER_LINE] = {}; // initialize to 0
-  	  	cout << "CO" << endl;
   	  	// parse the line
   	  	token[0] = strtok(buf, DELIMITER); // first token
   	  	if (token[0]) // zero if line is blank
