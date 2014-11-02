@@ -161,10 +161,10 @@ struct boundingBox
 		if(leaf && check) {
 			switch (type) {
 				case AABB_SPHERE:
-					r.intersect( *( (sphere*) obj ), result);
+					r->intersect( *( (sphere*) obj ), result);
 
 				case AABB_TRI:
-					r.intersect( *( (triangle*) obj ), result);
+					r->intersect( *( (triangle*) obj ), result);
 			}
 		}
 		else {
