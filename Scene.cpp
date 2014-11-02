@@ -341,7 +341,7 @@ boundingBox distill(vector<boundingBox> boxIn) {
     if(active[i]) {
       int index = -1;
       boundingBox best;
-      float minVol = std::numeric_limits<float>::max()
+      float minVol = std::numeric_limits<float>::max();
       for(j = i + 1; j < length; j++) {
         if(active[j]) {
           boundingBox combined(boxIn[i], boxIn[j]);
