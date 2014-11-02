@@ -102,20 +102,9 @@ struct boundingBox
 
 
 	bool setIntersect(float x1, float x2, float y1, float y2, float z1, float z2) {
-		float upper = min(x2, y2);
-		// x1 < y1 < x2
-		if(y1 >= x1 && y1 <= x2) {
-			if(z1 >= y1 && z1 <= upper) {
-				return true;
-			}
-		}
-		// y1 < x1 < y2 <  x2
-		else if(y2 >= x1 && y2 <= x2) {
-			if(z1 >= y2 && z2 <= upper) {
-				return true;
-			}
-		}
-		return false;
+		float smallest = min(x1, y1);
+		smallest = min(smallest, z1);
+		return (smallest == x1 && y1 <= x2 && z1 <= x2) || (smallest == y1 && x1 <= y2 && z1 <= y2) || (smallest == z1 && x1 <= z2 && y1 <= z2);
 	}
 
 
@@ -164,11 +153,11 @@ struct boundingBox
 		if(	!(tzMin == tzMin) ) {tzMin = 0;};
 		if(	!(tzMax == tzMax) ) {tzMax = 0;};
 
-		
+
 		cout << "Txmin : " << txMin << "   TxMax: " << txMax << endl;
 		cout << "Txyin : " << tyMin << "   TyMax: " << tyMax << endl;
 		cout << "Tzmin : " << tzMin << "   TzMax: " << tzMax << endl;
-		
+
 		bool check = setIntersect(txMin, txMax, tyMin, tyMax, tzMin, tzMax);
 		cout << "r hits box: " << check << endl;
 		if(leaf && check) {
