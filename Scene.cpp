@@ -529,11 +529,12 @@ int main(int argc, char* argv[])
   cout<< "/////////////////////////////////////////////////////" << endl;
   boundingBox test = root;
   while(!test.leaf) {
+    cout << test.minX << endl;
     test = *(test.right);
-    cout << "LEVEL" << endl;
   }
-  object* obj = test.obj;
-  cout << ( (sphere*) obj )->center << endl << endl;
+  /*object* obj = test.obj;
+  cout << ( (sphere*) obj )->center << endl << endl;*/
+  cout << test.minX << endl;
 
 
 
