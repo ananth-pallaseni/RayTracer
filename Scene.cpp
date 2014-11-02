@@ -367,7 +367,7 @@ boundingBox distill(vector<boundingBox*> boxIn) {
       }
       else {
         cout << "NO BEST FOUND" << endl;
-        best = boxIn[i];
+        best = *boxIn[i];
       }
       
       distilledBoxes.push_back(&best);
