@@ -332,7 +332,7 @@ boundingBox distill(vector<boundingBox*> boxIn) {
   cout << endl << "NEW ROUND, size: " << length << endl;
   if(length == 1) {
     cout << "LENGTH IS 1, RETURNING" << endl;
-    cout << "Size: " << *boxIn[0].volume << "   minX: " << *boxIn[0].minX << endl;
+    cout << "Size: " << boxIn[0]->volume << "   minX: " << boxIn[0]->minX << endl;
     return *boxIn[0];
   }
 
@@ -344,15 +344,15 @@ boundingBox distill(vector<boundingBox*> boxIn) {
   for(int i = 0; i < length; i++) {
     cout << "looking at new i = " << i << endl;
     if(active[i]) {
-      cout << "NEW ITEM FOUND: " << boxIn[i].volume <<  endl;
+      cout << "NEW ITEM FOUND: " << boxIn[i]->volume <<  endl;
       int index = -1;
       boundingBox best;
       float minVol = std::numeric_limits<float>::max();
       for(int j = i + 1; j < length; j++) {
         cout << "looking at new j = " << j << endl;
         if(active[j]) {
-          boundingBox combined(&boxIn[i], &boxIn[j]);
-          cout << "NEW J FOUND: " << boxIn[j].minX << ", " << boxIn[j].maxX << "   v: " << combined.volume << "  comb minX: " << combined.minX <<  endl;
+          boundingBox combined(boxIn[i], boxIn[j]);
+          cout << "NEW J FOUND: " << boxIn[j]->minX << ", " << boxIn[j]->maxX << "   v: " << combined.volume << "  comb minX: " << combined.minX <<  endl;
           if(combined.volume < minVol) {
             cout << "choosing this j" << endl;
             best = combined;
