@@ -340,6 +340,7 @@ int main(int argc, char* argv[])
   cout << "minZ: " << b2.minZ << "    maxZ: " << b2.maxZ << endl << endl;
 
   cout << min(1, 2) << endl;
+  cout << tri.a << " " << tri.b << " " << tri.c << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
