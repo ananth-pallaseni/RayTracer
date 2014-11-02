@@ -526,7 +526,12 @@ int main(int argc, char* argv[])
     cout << boxes[i].volume << endl;
   }
 
-  cout << endl;
+  cout<< "/////////////////////////////////////////////////////" << endl;
+  boundingBox test = root;
+  while(!test.leaf) {
+    test = *(test.left);
+    cout << "LEVEL" << endl;
+  }
 
 
 
