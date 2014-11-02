@@ -156,9 +156,6 @@ struct boundingBox
 			tzMin = (maxZ - ze) / zd;
 			tzMax = (minZ - ze) / zd;
 		}
-		cout << "Txmin : " << txMin << "   TxMax: " << txMax << endl;
-		cout << "Txyin : " << tyMin << "   TyMax: " << tyMax << endl;
-		cout << "Tzmin : " << tzMin << "   TzMax: " << tzMax << endl;
 		// checks for nans
 		if(	!(txMin == txMin) ) {txMin = 0;};
 		if(	!(txMax == txMax) ) {txMax = 0;};
@@ -166,6 +163,12 @@ struct boundingBox
 		if(	!(tyMax == tyMax) ) {tyMax = 0;};
 		if(	!(tzMin == tzMin) ) {tzMin = 0;};
 		if(	!(tzMax == tzMax) ) {tzMax = 0;};
+
+		
+		cout << "Txmin : " << txMin << "   TxMax: " << txMax << endl;
+		cout << "Txyin : " << tyMin << "   TyMax: " << tyMax << endl;
+		cout << "Tzmin : " << tzMin << "   TzMax: " << tzMax << endl;
+		
 		bool check = setIntersect(txMin, txMax, tyMin, tyMax, tzMin, tzMax);
 		cout << "r hits box: " << check << endl;
 		if(leaf && check) {
