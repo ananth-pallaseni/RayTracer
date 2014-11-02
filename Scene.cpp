@@ -346,8 +346,8 @@ int main(int argc, char* argv[])
   Vector3f e(-1, -1, -1);
   Vector3f d(1, 1, 1);
   ray r(e, d);
-  cout << "RAY HITS B1: " << b1.hit(r) << endl;
-  cout << "RAY HITS B2: " << b2.hit(r) << endl;
+  cout << "RAY HITS B1: " << b1.hit(&r) << endl;
+  cout << "RAY HITS B2: " << b2.hit(&r) << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
