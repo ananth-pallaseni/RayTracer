@@ -342,15 +342,19 @@ boundingBox distill(vector<boundingBox> boxIn) {
   }
 
   for(int i = 0; i < length; i++) {
+    cout << "looking at new i = " << i << endl;
     if(active[i]) {
-      cout << "NEW ITEM: " << boxIn[i].volume <<  endl;
+      cout << "NEW ITEM FOUND: " << boxIn[i].volume <<  endl;
       int index = -1;
       boundingBox best;
       float minVol = std::numeric_limits<float>::max();
       for(int j = i + 1; j < length; j++) {
+        cout << "looking at new j = " << j << endl;
         if(active[j]) {
+          cout << "NEW J FOUND" << boxIn[j].volume <<  endl;
           boundingBox combined(&boxIn[i], &boxIn[j]);
           if(combined.volume < minVol) {
+            cout << "choosing this j" << endl;
             best = combined;
             index = j;
             minVol = combined.volume;
@@ -358,6 +362,7 @@ boundingBox distill(vector<boundingBox> boxIn) {
         }
       }
       if(index >= 0) {
+        cout << "setting j value to false" << endl;
         active[index] = false;
       }
       else {
