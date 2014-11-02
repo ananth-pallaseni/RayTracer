@@ -468,8 +468,31 @@ bool rayTraverse(ray* r, boundingBox* b, hitResult* result) {
   return false;
 }
 
+
+
+Vector3f sphereNormal(Vector3f pointOnShape, sphere shape) {
+  Vector3f normal = pointOnShape - shape.center;
+  Matrix4f m = shape.objToWorld;
+  Matrix3f normTransform;
+  normTransform << m(1, 1) * m(2, 2) - m(1, 2) * m(2 , 1), m(1, 2) * m(3,1) - m(1, 0) * m(2 ,2), m(1,0)*m(2,1) - m(1,1)*m(2,0),
+           m(0,2)*m(2,1) - m(0,1)*m(2,2), m(0,0)*m(2,2)-m(0,2)*m(2,0), m(0,1)*m(2,0)-m(0,0)*m(2,1),
+           m(0,1)*m(1,2)-m(0,1)*m(1,1), m(0,2)*m(1,0)-m(0,0)*m(1,2), m(0,0)*m(1,1)-m(0,1)*m(1,0);
+  normal = normTransform * normal;
+  return unit(normal);
+}
+
 int main(int argc, char* argv[])
 {
+material mm;
+  Matrix4f I;
+    I << 1, 0, 0, 0,
+     0, 1, 0, 0,
+     0, 0, 1, 0,
+     0, 0, 0, 1;
+
+     Vector3f p(10, 0, 0);
+     sphere sph(0, 0, 0, 10, mm, I, I);
+     cout << sphereNormal(p, sph);
 
   /*material mm;
   Matrix4f I;
@@ -595,7 +618,7 @@ int main(int argc, char* argv[])
 
 	// General Purpose - renders input file
 
-	int size = 1000;
+	/*int size = 1000;
 
 	char* inFile = "input.txt";
 	clock_t startTime;
@@ -630,7 +653,7 @@ int main(int argc, char* argv[])
 
 	duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
 	cout << "DONE" << endl;
-	cout << "TIME: " << duration << " seconds" << endl;
+	cout << "TIME: " << duration << " seconds" << endl;*/
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
