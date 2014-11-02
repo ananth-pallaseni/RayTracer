@@ -490,7 +490,7 @@ material mm;
      0, 0, 1, 0,
      0, 0, 0, 1;
 
-     Vector3f p(10, 0, 0);
+     Vector3f p(10, 10, 0);
      sphere sph(0, 0, 0, 10, mm, I, I);
      cout << sphereNormal1(p, sph);
 
