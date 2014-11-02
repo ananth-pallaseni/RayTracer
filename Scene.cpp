@@ -463,7 +463,7 @@ int main(int argc, char* argv[])
   hitResult result;
   if(rayTraverse(&r, &tree, &result)) {
     cout << "RAY HIT" << endl;
-    cout << result.point; << endl << endl;
+    cout << result.point << endl << endl;
   }
   else {
     cout << "NO HIT" << endl;
