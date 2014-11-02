@@ -471,7 +471,7 @@ bool rayTraverse(ray* r, boundingBox* b, hitResult* result) {
 int main(int argc, char* argv[])
 {
 
-  material mm;
+  /*material mm;
   Matrix4f I;
     I << 1, 0, 0, 0,
      0, 1, 0, 0,
@@ -505,7 +505,7 @@ int main(int argc, char* argv[])
   }
   else {
     cout << "NO HIT" << endl;
-  }
+  }*/
 
 
 
@@ -595,42 +595,42 @@ int main(int argc, char* argv[])
 
 	// General Purpose - renders input file
 
-	// int size = 1000;
+	int size = 1000;
 
-	// char* inFile = "input.txt";
-	// clock_t startTime;
-	// double duration;
-	// startTime = clock();
+	char* inFile = "input.txt";
+	clock_t startTime;
+	double duration;
+	startTime = clock();
 
-	// parseArgs(inFile);
- //  cout << "PARSED INPUTS, Adding Boxes" << endl;
+	parseArgs(inFile);
+  cout << "PARSED INPUTS, Adding Boxes" << endl;
 
- //  for(int i = 0; i < spheres.size() ; i++) {
- //    boundingBox b(&spheres[i]);
- //    boxes.push_back(b);
- //  }
+  for(int i = 0; i < spheres.size() ; i++) {
+    boundingBox b(&spheres[i]);
+    boxes.push_back(b);
+  }
 
- //  for(int i = 0; i < triangles.size() ; i++) {
- //    boundingBox b(&triangles[i]);
- //    boxes.push_back(b);
- //  }
+  for(int i = 0; i < triangles.size() ; i++) {
+    boundingBox b(&triangles[i]);
+    boxes.push_back(b);
+  }
 
- //  cout << "ADDED BOXES, BEGINNING TRACE" << endl;
+  cout << "ADDED BOXES, BEGINNING TRACE" << endl;
 
-	// Sampler s(size, size, LL, LR, UL, UR);
-	// Canvas c(size, size);
-	// RayTracer rt(eye, spheres, triangles, pointLights, directionalLights, ambientLights);
-	// for(int i = 0 ; i < size; i++) {
-	// 	for(int j = 0 ; j < size; j++) {
-	// 		c.addPixel(rt.trace(s.getSample()));
+	Sampler s(size, size, LL, LR, UL, UR);
+	Canvas c(size, size);
+	RayTracer rt(eye, spheres, triangles, pointLights, directionalLights, ambientLights);
+	for(int i = 0 ; i < size; i++) {
+		for(int j = 0 ; j < size; j++) {
+			c.addPixel(rt.trace(s.getSample()));
 			
-	// 	}
-	// }
-	// c.encode("image.png");
+		}
+	}
+	c.encode("image.png");
 
-	// duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
-	// cout << "DONE" << endl;
-	// cout << "TIME: " << duration << " seconds" << endl;
+	duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
+	cout << "DONE" << endl;
+	cout << "TIME: " << duration << " seconds" << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
