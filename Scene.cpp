@@ -483,8 +483,8 @@ int main(int argc, char* argv[])
   traverse(&tree);
 
   cout << "HITS OUTER: " << tree.hit(&r, &result) << endl;
-  cout << "HITS OUTER->LEFT: " << (tree->left).hit(&r, &result) << endl;
-  cout << "HITS OUTER->RIGHT: " << (tree->right).hit(&r, &result) << endl;
+  cout << "HITS OUTER->LEFT: " << *(tree->left).hit(&r, &result) << endl;
+  cout << "HITS OUTER->RIGHT: " << *(tree->right).hit(&r, &result) << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
