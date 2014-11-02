@@ -336,7 +336,11 @@ boundingBox buildTree(vector<boundingBox> *list) {
     active[i] = true;
   }
 
+  int runNum = 0;
+
   while(start != length) {
+    runNum++;
+    cout << "RUN NUM: " << runNum << endl;
     start = length;
     length = list->size();
     for(int i = start; i < length; i++) {
