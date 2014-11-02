@@ -342,10 +342,10 @@ boundingBox distill(vector<boundingBox> boxIn) {
       int index = -1;
       boundingBox best;
       float minVol = std::numeric_limits<float>::max();
-      for(j = i + 1; j < length; j++) {
+      for(int j = i + 1; j < length; j++) {
         if(active[j]) {
-          boundingBox combined(boxIn[i], boxIn[j]);
-          if(combined.volume < vol) {
+          boundingBox combined(&boxIn[i], &boxIn[j]);
+          if(combined.volume < minVol) {
             best = combined;
             index = j;
             minVol = combined.volume;
@@ -357,7 +357,7 @@ boundingBox distill(vector<boundingBox> boxIn) {
       }
       else {
         cout << "NO BEST FOUND" << endl;
-        best = index[i];
+        best = boxIn[index];
       }
       
       distilledBoxes.push_back(best);
@@ -409,12 +409,12 @@ int main(int argc, char* argv[])
 
   
   for(int i = 0; i < 5; i++) {
-    sphere sph(i * 50, i * 50, i*50, mm, I, I);
+    sphere sph(i * 50, i * 50, i*50, 20, mm, I, I);
     spheres.push_back(sph);
   }
 
   for(int i = 0; i < 5; i++) {
-    boundingBox b(spheres[i]);
+    boundingBox b(&spheres[i]);
     boxes.push_back(b);
   }
 
