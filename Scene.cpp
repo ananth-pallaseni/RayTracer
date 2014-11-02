@@ -455,7 +455,7 @@ boundingBox buildTree(vector<boundingBox> *list) {
 */
 
 bool rayTraverse(ray* r, boundingBox* b, hitResult* result) {
-  if(b->hit(t, result)) {
+  if(b->hit(r, result)) {
     if(b->leaf) {
       return true;
     }
