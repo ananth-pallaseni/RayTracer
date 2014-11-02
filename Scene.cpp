@@ -534,7 +534,7 @@ int main(int argc, char* argv[])
   ray r(e, d);
   hitResult result;
 
-  check = rayTraverse(&r,  &root, &result);
+  bool check = rayTraverse(&r,  &root, &result);
 
   if(check) {
     cout << "HIT AT: " << result.point << endl << endl;
