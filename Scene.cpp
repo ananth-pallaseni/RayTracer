@@ -353,7 +353,7 @@ int main(int argc, char* argv[])
 
   aabbNode q(&sph);
   object* qq = q.obj;
-  sphere* qs = (sphere*) (q.obj);
+  sphere* qs = q.obj;
   cout << "QS RADIUS: " << qs->radius << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
