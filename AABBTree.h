@@ -11,7 +11,7 @@ const int AABB_TRI = 2;
 struct box
 {
 	sphere* sph;
-	triangle* tri:
+	triangle* tri;
 	int type;
 
 	box(sphere* s) {
