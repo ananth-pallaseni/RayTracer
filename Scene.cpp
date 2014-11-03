@@ -513,49 +513,29 @@ int main(int argc, char* argv[])
      0, 0, 0, 1;
 
   
-  sphere sph(0, 0, 0, 20, mm, I, I);
-  spheres.push_back(sph);
+  int size = 1000;
 
-  sphere sph1(100, 0, 0, 20, mm, I, I);
-  spheres.push_back(sph1);
+  char* inFile = "input.txt";
+  clock_t startTime;
+  double duration;
+  startTime = clock();
 
-  sphere sph2(50, 50, 50, 20, mm, I, I);
-  spheres.push_back(sph2);
+  parseArgs(inFile);
+  cout << "PARSED INPUTS, Adding Boxes" << endl;
 
-  sphere sph3(100, 100, 100, 20, mm, I, I);
-  spheres.push_back(sph3);
-
-  sphere sph4(150, 150, 150, 20, mm, I, I);
-  spheres.push_back(sph4);
-
-  for(int i = 0; i < 5; i++) {
+  for(int i = 0; i < spheres.size() ; i++) {
     boundingBox b(&spheres[i]);
     boxes.push_back(b);
   }
 
-  boundingBox tree = buildTree(&boxes);
-
-  for(int i = 0; i < boxes.size(); i++) {
-    cout << i << endl;
-    cout << boxes[i].volume << endl;
+  for(int i = 0; i < triangles.size() ; i++) {
+    boundingBox b(&triangles[i]);
+    boxes.push_back(b);
   }
 
-  cout<< "/////////////////////////////////////////////////////" << endl;
-  
-  Vector3f e(-100, 0, 0);
-  Vector3f d(1, 0, 0);
-  ray r(e, d);
-  hitResult result;
+  cout << "ADDED BOXES, CREATING TREE" << endl;
 
-  bool check = tree.rayTraverse(&r, &result);
-
-  if(check) {
-    cout << "HIT AT: " << result.point << endl << endl;
-  }
-  else {
-    cout << "NO HIT" << endl;
-  }
-
+  boundingBox root = buildTree(&boxes);
 
 
    /* cout << "r hits sph0: " << r1.intersect(spheres[0], &result) << endl;
@@ -571,7 +551,7 @@ int main(int argc, char* argv[])
 
 	// General Purpose - renders input file
 
-	int size = 1000;
+	/*int size = 1000;
 
 	char* inFile = "input.txt";
 	clock_t startTime;
@@ -610,7 +590,7 @@ int main(int argc, char* argv[])
 
 	duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
 	cout << "DONE" << endl;
-	cout << "TIME: " << duration << " seconds" << endl;
+	cout << "TIME: " << duration << " seconds" << endl;*/
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

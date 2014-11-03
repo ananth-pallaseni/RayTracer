@@ -205,58 +205,14 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, material m
 
 // Simple ray trace function, no shadows or anything fancy
 color RayTracer::traceRay(ray r, int depth, Vector3f source) {
-	Vector3f point(std::numeric_limits<float>::max(), std::numeric_limits<float>::max(), std::numeric_limits<float>::max()); // init to max value
-	Vector3f temp;
-	bool hit = false;
-	////// new
-	Vector3f normal;
-	object shape;
-	////// endnew
-	
-	// REMOVE THIS:
-	float tempT;
-
-	/*// Check all Spheres
-	for(int i = 0; i < numSpheres; i++) {
-		if(r.intersect(spheres[i], &temp, &tempT)) {
-			hit = true;
-			temp = closest(point, temp, source);
-			if(point != temp) {
-				normal = sphereNormal(temp, spheres[i]);
-				shape = spheres[i];
-				point = temp;
-			}
-		}
-	}
-
-	// Check all Triangles
-	for(int i = 0; i < numTriangles; i++) {
-		if(r.intersect(triangles[i], &temp)) {
-			hit = true;
-			temp = closest(point, temp, source);
-			if(point != temp) {
-				normal = triangleNormal(temp, triangles[i], r);
-				shape = triangles[i];
-				point = temp;
-			}
-			
-		}
-	}*/
 
 	hitResult result;
 	if(AABBRoot->rayTraverse(&r, &result)) {
-		shade(result.point, result.normal, result.mat, depth, r);
+		return shade(result.point, result.normal, result.mat, depth, r);
 	}
 	else {
 		return color();
 	}
-
-	/*if(hit) {
-		return shade(point, normal, shape, depth, r);
-	}
-	else {
-		return color(); // BLACK
-	}*/
 }
 
 color RayTracer::trace(Vector3f s) {
