@@ -208,6 +208,7 @@ color RayTracer::traceRay(ray r, int depth, Vector3f source) {
 
 	hitResult result;
 	if(AABBRoot->rayTraverse(&r, &result)) {
+		cout << "SHADE" << endl;
 		return shade(result.point, result.normal, result.mat, depth, r);
 	}
 	else {
