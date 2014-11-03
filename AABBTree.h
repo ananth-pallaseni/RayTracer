@@ -141,7 +141,7 @@ struct boundingBox
 		float xe = r->e(0);
 		float ye = r->e(1);
 		float ze = r->e(2);
-
+		cout << "ASSIGNED EYE VALUES" << endl;
 		float xd = r->direction(0);
 		float yd = r->direction(1);
 		float zd = r->direction(2);
@@ -149,6 +149,7 @@ struct boundingBox
 		//cout << "MINY: " << minY << "  YE: " << ye << endl; cout << "maxY: " << maxY << "  YE: " << ye << endl;
 		//cout << "minZ: " << minZ << "  ZE: " << ze << endl; cout << "maxZ: " << maxZ << "  ZE: " << ze << endl;
 
+		cout << "ADDIGNED DIRECTION VALUES" << endl;
 
 		float txMin, txMax, tyMin, tyMax, tzMin, tzMax;
 		float ax = 1 / xd; //cout << "xd: " << xd << endl; cout << "ax: " << ax << endl;
@@ -179,7 +180,7 @@ struct boundingBox
 			tzMax = (minZ - ze) * az;
 		}
 
-		
+		cout << "END COMPARISONS" << endl;
 		// checks for nans
 		if(	!(txMin == txMin) ) {txMin = 0;};
 		if(	!(txMax == txMax) ) {txMax = 0;};
@@ -205,6 +206,7 @@ struct boundingBox
 			}
 		}
 		else {
+			cout << "STILL IN HIT, NOT A LEAF" << endl;
 			return setIntersect(txMin, txMax, tyMin, tyMax, tzMin, tzMax);;
 		}
 	}
