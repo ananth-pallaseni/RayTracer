@@ -19,7 +19,7 @@ const int TRIANGLE = 1;
 //const float EPSILON = 0.025f;
 const float EPSILON = 0.2f;
 
-ray;
+struct ray;
 
 
 
