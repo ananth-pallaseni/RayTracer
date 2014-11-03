@@ -374,6 +374,9 @@ matr << 1, 0, 0, 0,
 	int size = 1000;
 
 	char* inFile = "input.txt";
+  if(argc == 2) {
+    inFile = argv[1];
+  }
 	clock_t startTime;
 	double duration;
 	startTime = clock();
