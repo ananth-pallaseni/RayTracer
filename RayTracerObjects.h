@@ -314,11 +314,11 @@ struct triangle : object
 	}
 
 	// Flat Shading:
-	Vector3f normal(Vector3f pointOnShape, ray r) {
+	Vector3f normal(Vector3f pointOnShape, Vector3f rayDirection) {
 		Vector3f side1 = a - b;
 		Vector3f side2 = a - c;
 		Vector3f planeNormal = side1.cross(side2);
-		if((-r.sMinusE).dot(planeNormal) < 0) {
+		if((-rayDirection).dot(planeNormal) < 0) {
 			planeNormal = -planeNormal;
 		}
 		planeNormal = planeNormal / planeNormal.norm();
@@ -566,7 +566,7 @@ struct ray
 		result->point = pointToTest;
 		result->t = r1;
 		result->mat = tri.mat;
-		result->normal = tri.normal(result->point, this);
+		result->normal = tri.normal(result->point, sMinusE);
 		return true;
 	}
 
