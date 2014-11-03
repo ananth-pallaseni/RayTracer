@@ -1,0 +1,6 @@
+Command Line: ./as2 input-4.txt
+
+Took a few hours to run at 1000x1000
+
+Demonstrates:
+-	Reading from obj files

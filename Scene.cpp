@@ -108,86 +108,6 @@ void parseObj(const char* filename, material mat, Matrix4f objToWorld) {
     }
 
 
-
-  /*  while(getline(fin, line, ' ')) {
-    	cout << line << endl;
-    	if(line == "v") {
-    		getline(fin, line, ' ');
-    		float a1 = atof(line.cstring());
-    		getline(fin, line, ' ');
-    		float a2 = atof(line.cstring());
-    		getline(fin, line, ' ');
-    		float a3 = atof(line.cstring());
-    		Vector3f vert(a1, a2, a3);
-    		vertices.push_back(vert);
-    	}
-    	if(line == "f") {
-    		getline(fin, line, ' ');
-    		float a1 = atof(line.cstring());
-    		getline(fin, line, ' ');
-    		float a2 = atof(line.cstring());
-    		getline(fin, line, ' ');
-    		float a3 = atof(line.cstring());
-    		Vector3f v1 = vertices[a1];
-    		Vector3f v2 = vertices[a2];
-    		Vector3f v3 = vertices[a3];
-    		triangle tri(v1(0), v1(1), v1(2), v2(0), v2(1), v2(2), v3(0), v3(1), v3(2), mat, objToWorld);
-    	}
-    }*/
-
- 
-    /*
-    // read each line of the file
-    while (!fin.eof())
-    {
-    	cout << "2" << endl;
-        // read an entire line into memory
-        char buf[MAX_CHARS_PER_LINE];
-        fin.getline(buf, MAX_CHARS_PER_LINE);
-        
-        cout << "BUF: " << buf << endl;
-        // parse the line into blank-delimited tokens
-        int n = 0; // a for-loop index
-        
-        // array to store memory addresses of the tokens in buf
-        const char* token[MAX_TOKENS_PER_LINE] = {}; // initialize to 0
-        
-        cout << "3" << endl;
-
-        // parse the line
-        token[0] = strtok(buf, DELIMITER); // first token
-        if (token[0]) // zero if line is blank
-        {
-        	cout << "4" << endl;
-            for (n = 1; n < MAX_TOKENS_PER_LINE; n++)
-            {
-                token[n] = strtok(0, DELIMITER); // subsequent tokens
-                if (!token[n]) break; // no more tokens
-            }
-        }
-    
-
-        if(strcmp(token[0], "v") == 0) {
-          Vector3f vertex(atof(token[1]), atof(token[2]), atof(token[3]));
-          vertices.push_back(vertex); // assuming push back adds to end
-          cout << vertex << endl << endl << endl;
-        }
-        else if(strcmp(token[0], "f") == 0) {
-          Vector3f v1 = vertices[atoi(token[1])];
-          Vector3f v2 = vertices[atoi(token[2])];
-          Vector3f v3 = vertices[atoi(token[3])];
-          cout << v1 << endl << endl << v2 << endl << endl << v3 << endl << endl << endl;
-          triangle tri(v1(0), v1(1), v1(2), v2(0), v2(1), v2(2), v3(0), v3(1), v3(2), mat, objToWorld);
-          triangles.push_back(tri);
-        }
-        
-        else {
-          cout << "UNRECOGNIZED TYPE: " << token[0] << endl;
-        }
-
-    }
-*/
-
 }
 
 
@@ -323,49 +243,6 @@ void parseArgs(char* filename) {
 
 int main(int argc, char* argv[])
 {
-
-/*	material mm;
-	Matrix4f matr;
-matr << 1, 0, 0, 0,
-		0, 1, 0, 0, 
-		0, 0, 1, 0,
-		0, 0, 0, 1;
-
-	char* name = "scene12.obj";
-	parseObj(name, mm, matr);*/
-
-  /*material mm;
-  Matrix4f matr;
-  matr << 1, 0, 0, 0,
-  		0, 1, 0, 0, 
-  		0, 0, 1, 0,
-  		0, 0, 0, 1;
-  triangle tri(0, -95, 0, -100, -95, 100, 100, -95, 100, mm, matr);
-  Vector3f eye(0, 75, 500);
-  Vector3f point(50, -95, 50);
-  ray r(eye, point);
-  Vector3f n = triangleNormal11(point, tri, r);
-
-  cout << "NORMAL: " << n(0) << ", " << n(1) << ", " << n(2) << endl;*/
-
-  /*Vector3f eye(0, 0, 150);
-  Vector3f point(0, 0, 0);
-  // ray should be in 0, 0, -1 direction
-  ray r(eye, point);
-  Vector3f p;
-  float t;
-  bool check = intersect22(tri, &p, r.sMinusE, r.e);
-  bool check2 = r.intersect(tri, &t);
-  if(check) {
-  	cout << "POINT: " << endl << p << endl;
-  	cout << "NORMAL: " << endl << triangleNormal11(p, tri, r) << endl;
-  	cout << "T: " << t << endl;
-  }
-  else {
-  	cout << "NO INTERSECTION" << endl;
-  }*/
-
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
