@@ -244,8 +244,7 @@ color RayTracer::traceRay(ray r, int depth, Vector3f source) {
 	}*/
 
 	hitResult result;
-	if(AABBRoot.rayTraverse(&r, &result)) {
-		Vector3f n = 
+	if(AABBRoot->rayTraverse(&r, &result)) {
 		shade(result.point, result.normal, result.mat, depth, r);
 	}
 

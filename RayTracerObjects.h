@@ -19,18 +19,7 @@ const int TRIANGLE = 1;
 //const float EPSILON = 0.025f;
 const float EPSILON = 0.2f;
 
-struct camera {
-	Vector3d e;
-	Vector2d ll, lr, ul, ur;
-
-	camera(int x, int y, int z, int llx, int lly, int lrx, int lry, int ulx, int uly, int urx, int ury) {
-		e = Vector3d(x, y, z);
-		ll = Vector2d(llx, lly);
-		lr = Vector2d(lrx, lry);
-		ul = Vector2d(ulx, uly);
-		ur = Vector2d(urx, ury);
-	}
-};
+ray;
 
 
 
