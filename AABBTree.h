@@ -155,6 +155,8 @@ struct boundingBox
 		float ax = 1 / xd; //cout << "xd: " << xd << endl; cout << "ax: " << ax << endl;
 		float ay = 1 / yd; //cout << "yd: " << yd << endl; cout << "ay: " << ay << endl;
 		float az = 1 / zd; //cout << "za: " << zd << endl; cout << "az: " << az << endl;
+
+		cout << "CREATED AX, AY, AZ VALUES" << endl;
 		if(ax >= 0) {
 			txMin = (minX - xe) * ax;
 			txMax = (maxX - xe) * ax;
