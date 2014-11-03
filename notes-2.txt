@@ -1,0 +1,10 @@
+Command Line: ./as2 input-2.txt
+
+At 1000x1000 it took about a minute to run
+
+Features Demonstrated:
+- 	Phong Shading with diffuse, ambient and specular components
+- 	Directional and point lights, as well as falloff to one point light
+- 	Basic reflections in spheres
+- 	Arbitrary transformations: rotations, scales and translates
+- 	Ellipses
