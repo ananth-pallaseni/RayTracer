@@ -211,10 +211,12 @@ struct boundingBox
 
 	bool rayTraverse(ray* r, hitResult* result) {
 	  cout << "START TRAVERSE" << endl;
-	  if(hit(r, result)) {
+	  bool hitsBox = hit(r, result);
+	  cout << "CHECKING IF HIT BOX: " << endl;
+	  if(hitsBox) {
 	    cout << "HIT" << endl;
 	    if(leaf) {
-	      cout << "FINAL LAYER" << endl;
+	      cout << "IS A LEAF" << endl;
 	      return true;
 	    }
 	    cout << "NOT A LEAF" << endl;
@@ -239,7 +241,7 @@ struct boundingBox
 	    }
 	  }
 	  else {
-	  	cout << "TRAVERSE FOUND NO INTERSECTIONS" << endl;
+	  	cout << "NO HIT" << endl;
 	    return false;
 	  }
 	}
