@@ -158,12 +158,12 @@ struct boundingBox
 
 		cout << "CREATED AX, AY, AZ VALUES" << endl;
 		if(ax >= 0) {
-			cout << "ASSIGN TMINX AND TMAXX" << endl;
+			cout << "AX MORE THAN 0 ,   ASSIGN TMINX AND TMAXX" << endl;
 			txMin = (minX - xe) * ax;
 			txMax = (maxX - xe) * ax;
 		}
 		else {
-			cout << "ASSIGN TMINX AND TMAXX" << endl;
+			cout << "AX LESS THAN 0 ,   ASSIGN TMINX AND TMAXX" << endl;
 			txMin = (maxX - xe) * ax;
 			txMax = (minX - xe) * ax;
 		}
