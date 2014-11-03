@@ -50,6 +50,7 @@ struct boundingBox
 	}
 
 	boundingBox(sphere* sph) {
+		cout << "Added sphere BB" << endl;
 		leaf = true;
 		Vector3f center = sph->center;
 		float radius = sph->radius;
@@ -67,6 +68,7 @@ struct boundingBox
 	}
 
 	boundingBox(triangle* tri) {
+		cout << "Added triangle bb" << endl;
 		leaf = true;
 		Vector3f v1 = tri->a;
 		Vector3f v2 = tri->b;
