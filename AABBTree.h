@@ -217,8 +217,8 @@ struct boundingBox
 	    }
 	    cout << "NOT A LEAF" << endl;
 	    hitResult r1, r2;
-	    bool c1 = rayTraverse(r, left, &r1);
-	    bool c2 = rayTraverse(r, right, &r2);
+	    bool c1 = left->rayTraverse(r, left, &r1);
+	    bool c2 = right->rayTraverse(r, right, &r2);
 	    if(c1 && c2) {
 	      if(r1.t < r2.t) {
 	        *result = r1;

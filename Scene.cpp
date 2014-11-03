@@ -525,15 +525,15 @@ int main(int argc, char* argv[])
   sphere sph3(100, 100, 100, 20, mm, I, I);
   spheres.push_back(sph3);
 
-  sphere sph3(150, 150, 150, 20, mm, I, I);
-  spheres.push_back(sph3);
+  sphere sph4(150, 150, 150, 20, mm, I, I);
+  spheres.push_back(sph4);
 
   for(int i = 0; i < 5; i++) {
     boundingBox b(&spheres[i]);
     boxes.push_back(b);
   }
 
-  boundingBox root = buildTree(&boxes);
+  boundingBox tree = buildTree(&boxes);
 
   for(int i = 0; i < boxes.size(); i++) {
     cout << i << endl;
@@ -547,7 +547,7 @@ int main(int argc, char* argv[])
   ray r(e, d);
   hitResult result;
 
-  bool check = rayTraverse(&r,  &root, &result);
+  bool check = tree.rayTraverse(&r, &result);
 
   if(check) {
     cout << "HIT AT: " << result.point << endl << endl;
