@@ -206,6 +206,7 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, material m
 // Simple ray trace function, no shadows or anything fancy
 color RayTracer::traceRay(ray r, int depth, Vector3f source) {
 	hitResult result;
+	bool temp = (*AABB).rayTraverse(&r, &result);
 	/*if(AABBRoot->rayTraverse(&r, &result)) {
 		cout << "SHADE" << endl;
 		return shade(result.point, result.normal, result.mat, depth, r);
