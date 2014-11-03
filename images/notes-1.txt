@@ -1,0 +1,8 @@
+Command Line: ./as2 input-1.txt
+
+Takes about 30 seconds to run at 1000x1000
+
+Demonstrates:
+-	Basic Sphere
+- 	Point Lights
+-	Phong Shading
