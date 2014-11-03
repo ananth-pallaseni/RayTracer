@@ -371,7 +371,7 @@ matr << 1, 0, 0, 0,
 
 	// General Purpose - renders input file
 
-	int size = 50;
+	int size = 500;
 
 	char* inFile = "input.txt";
 	clock_t startTime;
