@@ -1,1 +1,8 @@
 Command Line: ./as2 input-3.txt
+
+Takes about 5 minutes to run at 1000x1000
+
+Demonstrates:
+-	Shadows
+- 	Rotations on triangles
+- 	Reflections
