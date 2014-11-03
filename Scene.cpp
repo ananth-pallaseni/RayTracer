@@ -505,37 +505,39 @@ int main(int argc, char* argv[])
 
 
 
-  material mm;
-  Matrix4f I;
-    I << 1, 0, 0, 0,
-     0, 1, 0, 0,
-     0, 0, 1, 0,
-     0, 0, 0, 1;
+  // material mm;
+  // Matrix4f I;
+  //   I << 1, 0, 0, 0,
+  //    0, 1, 0, 0,
+  //    0, 0, 1, 0,
+  //    0, 0, 0, 1;
 
   
-  int size = 1000;
+  // int size = 1000;
 
-  char* inFile = "input.txt";
-  clock_t startTime;
-  double duration;
-  startTime = clock();
+  // char* inFile = "input.txt";
+  // clock_t startTime;
+  // double duration;
+  // startTime = clock();
 
-  parseArgs(inFile);
-  cout << "PARSED INPUTS, Adding Boxes" << endl;
+  // parseArgs(inFile);
+  // cout << "PARSED INPUTS, Adding Boxes" << endl;
 
-  for(int i = 0; i < spheres.size() ; i++) {
-    boundingBox b(&spheres[i]);
-    boxes.push_back(b);
-  }
+  // for(int i = 0; i < spheres.size() ; i++) {
+  //   boundingBox b(&spheres[i]);
+  //   boxes.push_back(b);
+  // }
 
-  for(int i = 0; i < triangles.size() ; i++) {
-    boundingBox b(&triangles[i]);
-    boxes.push_back(b);
-  }
+  // for(int i = 0; i < triangles.size() ; i++) {
+  //   boundingBox b(&triangles[i]);
+  //   boxes.push_back(b);
+  // }
 
-  cout << "ADDED BOXES, CREATING TREE" << endl;
+  // cout << "ADDED BOXES, CREATING TREE" << endl;
 
-  boundingBox root = buildTree(&boxes);
+  // boundingBox root = buildTree(&boxes);
+
+  
 
 
    /* cout << "r hits sph0: " << r1.intersect(spheres[0], &result) << endl;
@@ -551,7 +553,7 @@ int main(int argc, char* argv[])
 
 	// General Purpose - renders input file
 
-	/*int size = 1000;
+	int size = 1000;
 
 	char* inFile = "input.txt";
 	clock_t startTime;
@@ -590,7 +592,7 @@ int main(int argc, char* argv[])
 
 	duration = (clock() - startTime) / (double) CLOCKS_PER_SEC;
 	cout << "DONE" << endl;
-	cout << "TIME: " << duration << " seconds" << endl;*/
+	cout << "TIME: " << duration << " seconds" << endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
