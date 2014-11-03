@@ -247,13 +247,16 @@ color RayTracer::traceRay(ray r, int depth, Vector3f source) {
 	if(AABBRoot->rayTraverse(&r, &result)) {
 		shade(result.point, result.normal, result.mat, depth, r);
 	}
+	else {
+		return color();
+	}
 
-	if(hit) {
+	/*if(hit) {
 		return shade(point, normal, shape, depth, r);
 	}
 	else {
 		return color(); // BLACK
-	}
+	}*/
 }
 
 color RayTracer::trace(Vector3f s) {
