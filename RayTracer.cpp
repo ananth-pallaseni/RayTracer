@@ -211,7 +211,7 @@ color RayTracer::traceRay(ray r, int depth, Vector3f source) {
 		return shade(result.point, result.normal, result.mat, depth, r);
 	}
 	else {
-		cut << "NO SHADE, no intersection" << endl;
+		cout << "NO SHADE, no intersection" << endl;
 		return color();
 	}
 }
