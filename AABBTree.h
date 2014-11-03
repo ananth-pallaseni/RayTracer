@@ -137,6 +137,7 @@ struct boundingBox
 
 
 	bool hit(ray* r, hitResult* result) {
+		cout << "CALL TO HIT" << endl;
 		float xe = r->e(0);
 		float ye = r->e(1);
 		float ze = r->e(2);
@@ -194,7 +195,7 @@ struct boundingBox
 		
 
 		if(leaf) {
-			cout << "IN FINAL LAYER" << endl;
+			cout << "STILL IN HIT, IS A LEAF" << endl;
 			switch (type) {
 				case AABB_SPHERE:
 					return r->intersect( *( (sphere*) obj ), result);
@@ -209,6 +210,7 @@ struct boundingBox
 	}
 
 	bool rayTraverse(ray* r, hitResult* result) {
+	  cout << "START TRAVERSE" << endl;
 	  if(hit(r, result)) {
 	    cout << "HIT" << endl;
 	    if(leaf) {
