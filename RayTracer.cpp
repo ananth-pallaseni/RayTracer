@@ -205,19 +205,19 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, material m
 
 // Simple ray trace function, no shadows or anything fancy
 color RayTracer::traceRay(ray r, int depth, Vector3f source) {
-	cout << "START TRAVERSE" << endl;
 	hitResult result;
 	if(AABBRoot->rayTraverse(&r, &result)) {
 		cout << "SHADE" << endl;
 		return shade(result.point, result.normal, result.mat, depth, r);
 	}
 	else {
+		cut << "NO SHADE, no intersection" << endl;
 		return color();
 	}
 }
 
 color RayTracer::trace(Vector3f s) {
-	cout << "NEW CAMERA RAY" << endl;
+	cout << endl << "NEW CAMERA RAY" << endl << endl;
 	ray r = createRay(s);
 	return traceRay(r, 0, e);
 }
