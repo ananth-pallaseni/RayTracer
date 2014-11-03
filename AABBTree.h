@@ -239,6 +239,7 @@ struct boundingBox
 	    }
 	  }
 	  else {
+	  	cout << "TRAVERSE FOUND NO INTERSECTIONS" << endl;
 	    return false;
 	  }
 	}

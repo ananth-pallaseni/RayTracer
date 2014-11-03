@@ -217,7 +217,7 @@ color RayTracer::traceRay(ray r, int depth, Vector3f source) {
 }
 
 color RayTracer::trace(Vector3f s) {
-	cout << endl << "NEW CAMERA RAY" << endl << endl;
+	cout << "/////////////////////////////////////////////" << endl << "NEW CAMERA RAY" << endl << "------------------------------------" << endl;
 	ray r = createRay(s);
 	return traceRay(r, 0, e);
 }
