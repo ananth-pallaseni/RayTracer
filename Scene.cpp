@@ -537,7 +537,7 @@ int main(int argc, char* argv[])
 
   // boundingBox root = buildTree(&boxes);
 
-  
+
 
 
    /* cout << "r hits sph0: " << r1.intersect(spheres[0], &result) << endl;
@@ -582,6 +582,7 @@ int main(int argc, char* argv[])
 	Sampler s(size, size, LL, LR, UL, UR);
 	Canvas c(size, size);
 	RayTracer rt(eye, spheres, triangles, pointLights, directionalLights, ambientLights);
+  cout << "INSTAINTIATED CLASSES" << endl;
 	for(int i = 0 ; i < size; i++) {
 		for(int j = 0 ; j < size; j++) {
 			c.addPixel(rt.trace(s.getSample()));
