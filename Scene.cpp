@@ -463,8 +463,8 @@ bool rayTraverse1(ray* r, boundingBox* b, hitResult* result) {
       }
       cout << "NOT A LEAF" << endl;
       hitResult r1, r2;
-      bool c1 = rayTraverse(r, b-> left, &r1);
-      bool c2 = rayTraverse(r, b-> right, &r2);
+      bool c1 = rayTraverse1(r, b-> left, &r1);
+      bool c2 = rayTraverse1(r, b-> right, &r2);
       if(c1 && c2) {
         if(r1.t < r2.t) {
           *result = r1;
