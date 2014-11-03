@@ -371,7 +371,7 @@ matr << 1, 0, 0, 0,
 
 	// General Purpose - renders input file
 
-	int size = 300;
+	int size = 1000;
 
 	char* inFile = "input.txt";
   if(argc == 2) {
