@@ -160,7 +160,7 @@ Vector3f RayTracer::reflectionRay(Vector3f point, Vector3f normalAtPoint, ray in
 
 
 
-color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object shape, int depth, ray incoming) {
+color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, material mat, int depth, ray incoming) {
 	Vector3f rgb(0, 0, 0);
 	for(int i = 0; i < numPointLights; i++) {
 		pointLight pl = pointLights[i];
@@ -169,13 +169,13 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 			// lightDirection is unit vector pointing TO light
 			Vector3f lightDirection = unit(pl.point - pointOnShape);
 	
-			rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, pl.l(dist));
-			rgb = rgb + specular(normalAtPoint, lightDirection, incoming.sMinusE, shape.mat.spec, pl.l(), shape.mat.phongExp);
+			rgb = rgb + diffuse(normalAtPoint, lightDirection, mat.diff, pl.l(dist));
+			rgb = rgb + specular(normalAtPoint, lightDirection, incoming.sMinusE, mat.spec, pl.l(), mat.phongExp);
 		}
-		if(depth < DEPTH_MAX && !(shape.mat.refl(0) ==  0 && shape.mat.refl(1) == 0 && shape.mat.refl(2) == 0)) {
-			rgb = rgb + reflectionRay(pointOnShape, normalAtPoint, incoming, shape.mat.refl, depth);
+		if(depth < DEPTH_MAX && !(mat.refl(0) ==  0 && mat.refl(1) == 0 && mat.refl(2) == 0)) {
+			rgb = rgb + reflectionRay(pointOnShape, normalAtPoint, incoming, mat.refl, depth);
 		}
-		rgb = rgb + ambient(pl.l(), shape.mat.amb);
+		rgb = rgb + ambient(pl.l(), mat.amb);
 	}
 
 	for(int i = 0; i < numDirectionalLights; i++) {
@@ -184,18 +184,18 @@ color RayTracer::shade(Vector3f pointOnShape, Vector3f normalAtPoint, object sha
 			// lightDirection is unit vector pointing TO light
 			Vector3f lightDirection = -unit(dl.direction);
 
-			rgb = rgb + diffuse(normalAtPoint, lightDirection, shape.mat.diff, dl.l());
-			rgb = rgb + specular(normalAtPoint, lightDirection, incoming.sMinusE, shape.mat.spec, dl.l(), shape.mat.phongExp);
+			rgb = rgb + diffuse(normalAtPoint, lightDirection, mat.diff, dl.l());
+			rgb = rgb + specular(normalAtPoint, lightDirection, incoming.sMinusE, mat.spec, dl.l(), mat.phongExp);
 		}
-		if(depth < DEPTH_MAX && !(shape.mat.refl(0) ==  0 && shape.mat.refl(1) == 0 && shape.mat.refl(2) == 0)) {
-			rgb = rgb + reflectionRay(pointOnShape, normalAtPoint, incoming, shape.mat.refl, depth);
+		if(depth < DEPTH_MAX && !(mat.refl(0) ==  0 && mat.refl(1) == 0 && mat.refl(2) == 0)) {
+			rgb = rgb + reflectionRay(pointOnShape, normalAtPoint, incoming, mat.refl, depth);
 		}
-		rgb = rgb + ambient(dl.l(), shape.mat.amb);
+		rgb = rgb + ambient(dl.l(), mat.amb);
 	}
 
 	for(int i = 0; i < numAmbientLights; i++) {
 		ambientLight al = ambientLights[i];
-		rgb = rgb + ambient(al.l(), shape.mat.amb);
+		rgb = rgb + ambient(al.l(), mat.amb);
 	}
 
 	rgb = clamp(rgb);
@@ -245,7 +245,8 @@ color RayTracer::traceRay(ray r, int depth, Vector3f source) {
 
 	hitResult result;
 	if(AABBRoot.rayTraverse(&r, &result)) {
-
+		Vector3f n = 
+		shade(result.point, result.normal, result.mat, depth, r);
 	}
 
 	if(hit) {

@@ -284,6 +284,17 @@ struct sphere : object
 		worldToObj = initScale.inverse * initTrans.inverse * worldToObject; // takes a sphere from world space to obj space
 	}
 
+	Vector3f normal(Vector3f pointOnShape) {
+		Vector3f normal = pointOnShape - center;
+		Matrix4f m = objToWorld;
+		Matrix3f normTransform;
+		normTransform << m(1, 1) * m(2, 2) - m(1, 2) * m(2 , 1), m(1, 2) * m(3,1) - m(1, 0) * m(2 ,2), m(1,0)*m(2,1) - m(1,1)*m(2,0),
+						 m(0,2)*m(2,1) - m(0,1)*m(2,2), m(0,0)*m(2,2)-m(0,2)*m(2,0), m(0,1)*m(2,0)-m(0,0)*m(2,1),
+						 m(0,1)*m(1,2)-m(0,1)*m(1,1), m(0,2)*m(1,0)-m(0,0)*m(1,2), m(0,0)*m(1,1)-m(0,1)*m(1,0);
+		normal = normTransform * normal;
+		return normal / normal.norm();
+	}
+
 };
 
 struct triangle : object
@@ -311,6 +322,18 @@ struct triangle : object
 		//cout << "A: " << endl << a << endl << endl;
 		//cout << "B: " << endl << b << endl << endl;
 		//cout << "C: " << endl << c << endl << endl;
+	}
+
+	// Flat Shading:
+	Vector3f normal(Vector3f pointOnShape, ray r) {
+		Vector3f side1 = a - b;
+		Vector3f side2 = a - c;
+		Vector3f planeNormal = side1.cross(side2);
+		if((-r.sMinusE).dot(planeNormal) < 0) {
+			planeNormal = -planeNormal;
+		}
+		planeNormal = planeNormal / planeNormal.norm();
+		return planeNormal;
 	}
 };
 
@@ -435,9 +458,10 @@ struct ray
 			Vector4f pointInWorldSpace = inv * ( eObj + t * sMinusEObj); // take point to world space
 
 			(result->point)(0) = pointInWorldSpace(0); // transform back into world coordinates
-			cout << "SPHERE INT X: " << (result->point)(0) << endl;
 			(result->point)(1) = pointInWorldSpace(1);
 			(result->point)(2) = pointInWorldSpace(2);
+			result->normal = sph.normal(result->point);
+			result->mat = sph.mat;
 
 			return true;
 		}
@@ -552,6 +576,8 @@ struct ray
 		}
 		result->point = pointToTest;
 		result->t = r1;
+		result->mat = tri.mat;
+		result->normal = tri.normal(result->point, this);
 		return true;
 	}
 

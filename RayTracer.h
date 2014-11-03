@@ -29,13 +29,15 @@ public:
 	int numPointLights;
 	int numDirectionalLights;
 	int numAmbientLights;
-	vector<boundingBox> AABBRoot;
+	vector<boundingBox>* AABBTree;
+	boundingBox* AABBRoot;
 
 	RayTracer() {}
 
-	RayTracer(Vector3f eye, vector<boundingBox> root, vector<pointLight> plList, vector<directionalLight> dlList,
+	RayTracer(Vector3f eye, vector<boundingBox>* tree, boundingBox* root, vector<pointLight> plList, vector<directionalLight> dlList,
 			  vector<ambientLight> alList) {
 		e = eye;
+		AABBTree = tree;
 		AABBRoot = root;
 		pointLights = plList;
 		directionalLights = dlList;
@@ -72,7 +74,7 @@ public:
 
 	Vector3f reflectionRay(Vector3f point, Vector3f normalAtPoint, ray incoming, Vector3f k_refl, int depth);
 
-	color shade(Vector3f pointOnShape, Vector3f normalAtPoint, object shape, int depth, ray incoming) ;
+	color shade(Vector3f pointOnShape, Vector3f normalAtPoint, material mat, int depth, ray incoming) ;
 
 
 	// Simple ray trace function, no shadows or anything fancy
